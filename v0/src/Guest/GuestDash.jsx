@@ -9,7 +9,7 @@ class GuestDash extends Component {
   render() {
     console.log(this.cookies.get('name'));
     return (
-      <h1>{this.cookies.get('name')}</h1>
+      <h1>Guest { this.props.name }!</h1>
     );
   }
 }
