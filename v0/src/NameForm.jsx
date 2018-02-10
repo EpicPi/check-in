@@ -17,13 +17,11 @@ class NameForm extends Component {
   }
 
   enterHost() {
-    // document.location.href = '/host';
-    console.log('entered host');
+    this.props.handleName(this.state.name, 'host');
   }
 
   enterGuest() {
-    // document.location.href = '/guest';
-    console.log('entered guest');
+    this.props.handleName(this.state.name, 'guest');
   }
 
   render() {
@@ -44,10 +42,5 @@ class NameForm extends Component {
     );
   }
 }
-
-// NameForm.propTypes = {
-//   handleName: React.PropTypes.func.isRequired,
-// };
-
 
 export default NameForm;

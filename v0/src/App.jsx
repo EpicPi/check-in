@@ -9,29 +9,44 @@ class App extends Component {
     super(props);
     this.state = {
       name: '',
-      type: ''
+      type: '',
     };
 
     this.handleNameInput = this.handleNameInput.bind(this);
   }
 
   handleNameInput(name, type) {
-    console.log(name, type);
+    this.setState({
+      name,
+      type,
+    });
   }
 
   render() {
+    const hostPage = (
+      <HostDash name={this.state.name} />
+    );
+
+    const guestPage = (
+      <GuestDash name={this.state.name} />
+    );
+
+    const namePage = (
+      <NameForm handleName={this.handleNameInput} />
+    );
+
     return (
       <div>
         <h1>Welcome to Check-in!</h1>
-        <NameForm />
-        <BrowserRouter>
-          <div>
-            <Switch>
-              <Route exact path="/host" component={HostDash} />
-              <Route exact path="/guest" component={GuestDash} />
-            </Switch>
-          </div>
-        </BrowserRouter>
+        { !this.state.name ? namePage : this.state.type === 'host' ? hostPage : guestPage }
+        {/* <BrowserRouter> */}
+        {/* <div> */}
+        {/* <Switch> */}
+        {/* <Route exact path="/host" component={HostDash} /> */}
+        {/* <Route exact path="/guest" component={GuestDash} /> */}
+        {/* </Switch> */}
+        {/* </div> */}
+        {/* </BrowserRouter> */}
       </div>
     );
   }
