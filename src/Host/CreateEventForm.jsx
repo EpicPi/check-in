@@ -27,7 +27,6 @@ class CreateEventForm extends Component {
       code: this.state.code
     };
     this.props.addEvent(event);
-    // alert(`${this.state.eventName} ${this.state.code}`);
     this.setState({
       eventName: '',
       code: '',

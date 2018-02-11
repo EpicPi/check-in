@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Router } from 'react-router-dom';
 
-import HostHome from './HostHome';
 import CreateEventForm from './CreateEventForm';
 import ViewEvents from './ViewEvents';
 
