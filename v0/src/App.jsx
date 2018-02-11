@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import GuestDash from './Guest/GuestDash';
 import HostDash from './Host/HostDash';
+import fire from './firebase';
 
 import NameForm from './NameForm';
 
@@ -12,6 +13,7 @@ class App extends Component {
       name: '',
       type: '',
     };
+      fire.database();
 
     this.handleNameInput = this.handleNameInput.bind(this);
   }

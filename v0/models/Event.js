@@ -1,5 +1,5 @@
 class Event{
-    constructor(nome,code){
+    constructor(name,code){
         this.name = name;
         this.code = code;
         this.attendees = [];
