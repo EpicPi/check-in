@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
 
 class NameForm extends Component {
   constructor(props) {
@@ -24,7 +25,9 @@ class NameForm extends Component {
     this.props.handleName(this.state.name, 'guest');
   }
 
+
   render() {
+
     return (
       <div>
         <input
@@ -35,8 +38,12 @@ class NameForm extends Component {
           onChange={this.handleNameInput}
         />
         <div>
-          <button onClick={this.enterHost}>Host</button>
-          <button onClick={this.enterGuest}>Guest</button>
+          <Link to="/host">
+            <button onClick={this.enterHost} disabled={!this.state.name}>Host</button>
+          </Link>
+          <Link to="/guest">
+            <button onClick={this.enterGuest} disabled={!this.state.name}>Guest</button>
+          </Link>
         </div>
       </div>
     );
