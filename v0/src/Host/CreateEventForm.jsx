@@ -22,20 +22,34 @@ class CreateEventForm extends Component {
   }
 
   handleSubmit(e) {
-      alert(this.state.eventName + " " + this.state.code);
-      e.preventDefault();
+    const event = {
+      name: this.state.eventName,
+      code: this.state.code
+    };
+    this.props.addEvent(event);
+    // alert(`${this.state.eventName} ${this.state.code}`);
+    this.setState({
+      eventName: '',
+      code: '',
+    });
+    e.preventDefault();
   }
 
   render() {
     return (
-      <form action="">
+      <form action="" id="create-form">
         <label>
-                Event Name:
-                <input type="text" name="eventName" value={this.state.eventName} onChange={this.handleNameInput} />
+          Event Name:
+          <input
+            type="text"
+            name="eventName"
+            value={this.state.eventName}
+            onChange={this.handleNameInput}
+          />
         </label>
         <label>
-                Code:
-                <input type="text" name="code" value={this.state.code} onChange={this.handleCodeInput}/>
+          Code:
+          <input type="text" name="code" value={this.state.code} onChange={this.handleCodeInput} />
         </label>
         <button type="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
       </form>
