@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class NameForm extends Component {
   constructor(props) {
@@ -18,32 +18,52 @@ class NameForm extends Component {
   }
 
   enterHost() {
-    this.props.handleName(this.state.name, 'host');
+    this.props.handleName(this.state.name);
   }
 
   enterGuest() {
-    this.props.handleName(this.state.name, 'guest');
+    this.props.handleName(this.state.name);
   }
 
-
   render() {
-
     return (
-      <div>
-        <input
-          type="text"
-          name="name"
-          value={this.state.name}
-          placeholder="enter your name..."
-          onChange={this.handleNameInput}
-        />
-        <div>
-          <Link to="/host">
-            <button onClick={this.enterHost} disabled={!this.state.name}>Host</button>
-          </Link>
-          <Link to="/guest">
-            <button onClick={this.enterGuest} disabled={!this.state.name}>Guest</button>
-          </Link>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              placeholder="enter your name..."
+              onChange={this.handleNameInput}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-2">
+            <Link to="/host">
+              <button
+                className="btn"
+                onClick={this.enterHost}
+                disabled={!this.state.name}
+              >
+                Host
+              </button>
+            </Link>
+          </div>
+          <div className="col-md-2">
+            <Link to="/guest">
+              <button
+                className="btn"
+                onClick={this.enterGuest}
+                disabled={!this.state.name}
+              >
+                Guest
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     );

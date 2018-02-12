@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import GuestDash from './Guest/GuestDash';
@@ -9,63 +10,47 @@ class App extends Component {
     super(props);
     this.state = {
       name: '',
-      type: '',
     };
 
     this.handleNameInput = this.handleNameInput.bind(this);
   }
 
-  handleNameInput(name, type) {
+  handleNameInput(name) {
     this.setState({
       name,
-      type,
     });
   }
 
   render() {
-    const hostPage = (
-      <HostDash name={this.state.name} />
+    const GuestPage = props => (
+      <GuestDash name={this.state.name} {...props} />
     );
 
-    const guestPage = (
-      <GuestDash name={this.state.name} />
+    const NamePage = props => (
+      <NameForm handleName={this.handleNameInput} {...props} />
     );
 
-    const namePage = (
-      <NameForm handleName={this.handleNameInput} />
+    const HostPage = props => (
+      <HostDash
+        name={this.state.name}
+        {...props}
+      />
     );
-
-    const myGuestPage = (props) => {
-      return (
-          <GuestDash name={this.state.name}/>
-      );
-    };
-
-    const myNamePage = (props) => {
-      return(
-          <NameForm handleName={this.handleNameInput} {...props}/>
-      );
-    };
-
-    const myHostPage = (props) => {
-      return(
-          <HostDash
-            name={this.state.name}
-            {...props}
-          />
-      );
-    };
 
     return (
-      <div>
-        <h1>Welcome to Check-in!</h1>
-        <BrowserRouter>
-           <Switch>
-             <Route exact path="/" render={myNamePage}/>
-             <Route exact path="/host" render={myHostPage} />
-             <Route exact path="/guest" render={myGuestPage} />
-           </Switch>
-         </BrowserRouter>
+      <div className="container container-fluid">
+        <div className="row">
+          <div className="col-sm-8 col-sm-offset-2">
+            <h1>Welcome to Check-in!</h1>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" render={NamePage} />
+                <Route exact path="/host" render={HostPage} />
+                <Route exact path="/guest" render={GuestPage} />
+              </Switch>
+            </BrowserRouter>
+          </div>
+        </div>
       </div>
     );
   }
