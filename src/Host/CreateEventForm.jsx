@@ -22,21 +22,21 @@ class CreateEventForm extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     const event = {
       name: this.state.eventName,
-      code: this.state.code
+      code: this.state.code,
     };
     this.props.addEvent(event);
     this.setState({
       eventName: '',
       code: '',
     });
-    e.preventDefault();
   }
 
   render() {
     return (
-      <form action="" id="create-form">
+      <form onSubmit={this.handleSubmit} id="create-form">
         <label>
           Event Name:
           <input
@@ -44,13 +44,24 @@ class CreateEventForm extends Component {
             name="eventName"
             value={this.state.eventName}
             onChange={this.handleNameInput}
+            required
           />
         </label>
         <label>
           Code:
-          <input type="text" name="code" value={this.state.code} onChange={this.handleCodeInput} />
+          <input
+            type="text"
+            name="code"
+            value={this.state.code}
+            onChange={this.handleCodeInput}
+            required
+          />
         </label>
-        <button type="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
+        <div className="row">
+          <div className="col">
+            <button type="submit" value="Submit">Submit</button>
+          </div>
+        </div>
       </form>
     );
   }
