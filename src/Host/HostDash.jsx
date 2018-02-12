@@ -15,6 +15,7 @@ class HostDash extends Component {
 
   addEvent(event) {
     const prevEvents = this.state.events;
+
     prevEvents.push(event);
     this.setState({ events: prevEvents });
     console.log(this.state.events);
