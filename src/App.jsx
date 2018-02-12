@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import GuestDash from './Guest/GuestDash';
 import HostDash from './Host/HostDash';
 import NameForm from './NameForm';
@@ -17,58 +19,49 @@ class App extends Component {
         this.handleNameInput = this.handleNameInput.bind(this);
     }
 
-    handleNameInput(name, type) {
-        let id = this.fb.login(name, type);
-        this.setState({id: id});
-    }
 
-    render() {
-        const hostPage = (
-            <HostDash name={this.state.name}/>
-        );
+  handleNameInput(name) {
+    let type = "host";
+    let id = this.fb.login(name, type);
+    this.setState({
+      name: name,
+      id: id,
+    });
+  }
 
-        const guestPage = (
-            <GuestDash name={this.state.name}/>
-        );
+  render() {
+    const GuestPage = props => (
+      <GuestDash name={this.state.name} {...props} />
+    );
 
-        const namePage = (
-            <NameForm handleName={this.handleNameInput}/>
-        );
+    const NamePage = props => (
+      <NameForm handleName={this.handleNameInput} {...props} />
+    );
 
-        const myGuestPage = (props) => {
-            return (
-                <GuestDash name={this.state.name}/>
-            );
-        };
+    const HostPage = props => (
+      <HostDash
+        name={this.state.name}
+        {...props}
+      />
+    );
 
-        const myNamePage = (props) => {
-            return (
-                <NameForm handleName={this.handleNameInput} {...props}/>
-            );
-        };
-
-        const myHostPage = (props) => {
-            return (
-                <HostDash
-                    name={this.state.name}
-                    {...props}
-                />
-            );
-        };
-
-        return (
-            <div>
-                <h1>Welcome to Check-in!</h1>
-                <BrowserRouter>
-                    <Switch>
-                        <Route exact path="/" render={myNamePage}/>
-                        <Route exact path="/host" render={myHostPage}/>
-                        <Route exact path="/guest" render={myGuestPage}/>
-                    </Switch>
-                </BrowserRouter>
-            </div>
-        );
-    }
+    return (
+      <div className="container container-fluid">
+        <div className="row">
+          <div className="col-sm-8 col-sm-offset-2">
+            <h1>Welcome to Check-in!</h1>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" render={NamePage} />
+                <Route exact path="/host" render={HostPage} />
+                <Route exact path="/guest" render={GuestPage} />
+              </Switch>
+            </BrowserRouter>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
