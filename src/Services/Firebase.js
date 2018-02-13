@@ -1,37 +1,52 @@
 import {FireBaseConfig} from "../Config/Config";
 import firebase from "firebase/app/index";
 import 'firebase/database';
+import cookie from 'react-cookies';
 
 export default class Firebase {
     constructor() {
         this.app = firebase.initializeApp(FireBaseConfig);
-        this.db = this.app.database().ref('/users');
+        this.useresDB = this.app.database().ref('/users');
+        this.eventsDB = this.app.database().ref('/events');
+        this.cookie = cookie;
     }
 
     login(name, type) {
-        let id = null;
         firebase.database().ref('/users').orderByChild('name').equalTo(name).once("value", snapshot => {
             const userData = snapshot.val();
             if (userData) {
-                id = Object.keys(snapshot.val())[0];
-                console.log(Object.keys(snapshot.val())[0]);
+                var id = Object.keys(snapshot.val())[0];
+                this.cookie.save("id",id,{ path: '/' });
             } else {
-                this.db.on('child_added', (data) => {
-                    id = data.key;
-                    console.log(id);
-                });
-                this.addPerson({name: name, type: type});
+                var newUserRef = this.useresDB.push();
+                this.cookie.save('id',newUserRef.path.pieces_[1])
+                newUserRef.set({name: name, type: type});
             }
+        }).then(this.setUpEvents());
+    }
+    setUpEvents(){
+        // this.app.database().ref('/users').child('/'+cookie.load('id')+'/events')
+        //     .on('value',(snapshot)=> console.log(snapshot));
+        return null;
+    }
+
+    addEvent(event){
+        console.log("adding");
+        var newPostRef = this.eventsDB.push();
+        let newEventId = newPostRef.path.pieces_[1];
+        this.useresDB.child('/'+cookie.load('id')+'/events').push({
+            eventid: newEventId,
+            name: event.name,
+            code: event.code
         });
-        return id;
-    }
+        newPostRef.set({
+            name: event.name,
+            code: event.code
+        });
 
-    addPerson(person) {
-        console.log("added person");
-        this.db.push().set({name: person.name, type: person.type}).then(this.db.off('child_added'));
     }
-
     removeEvent(id) {
-        this.db.child(id).remove();
+        this.useresDB.child(id).remove();
     }
+
 }

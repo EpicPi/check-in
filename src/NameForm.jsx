@@ -18,11 +18,11 @@ class NameForm extends Component {
   }
 
   enterHost() {
-    this.props.handleName(this.state.name);
+    this.props.handleName(this.state.name, 'host');
   }
 
   enterGuest() {
-    this.props.handleName(this.state.name);
+    this.props.handleName(this.state.name, 'guest');
   }
 
   render() {
