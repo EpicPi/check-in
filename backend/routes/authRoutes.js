@@ -11,11 +11,11 @@ module.exports = (router) => {
         passport.authenticate('google')
     );
 
-    router.use('/api/current_user', (req, res) => {
+    router.use('/current_user', (req, res) => {
         res.send(req.user);
     });
 
-    router.use('/api/logout', (req, res) => {
+    router.use('/logout', (req, res) => {
         req.logout();
         res.send(req.user);
     });
