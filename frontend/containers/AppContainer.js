@@ -6,7 +6,8 @@ import * as actions from '../actions';
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
 
-const Dash = () => <h2>Dash</h2>;
+import Dash from "./dash/dash";
+
 const New = () => <h2>New</h2>;
 const Land = () => <h2>Land</h2>;
 
@@ -40,6 +41,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
+
     };
 };
 
