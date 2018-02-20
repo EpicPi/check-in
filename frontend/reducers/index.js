@@ -1,8 +1,6 @@
-function rootReducer(state = {name: 'Check in'}, action) {
-    switch (action.type) {
-        default:
-            return state;
-    }
-}
+import {combineReducers} from 'redux';
+import authreducer from './authreducer';
 
-export default rootReducer;
+export default combineReducers({
+    auth:authreducer,
+})
