@@ -4,4 +4,3 @@ module.exports = {
     mongoUri: 'mongodb://epicpi:DasOlfOjEiljic7@ds231658.mlab.com:31658/mern-dev',
     cookieKey: 'werghewregehrghrh'
 };
-//TODO make new keys

@@ -21,7 +21,7 @@ class AppContainer extends Component{
                     <Header/>
                     <Route exact path='/' component={Land}/>
                     <Route path='/dash' component={Dash}/>
-                    <Route path='/#/new' component={New}/>
+                    <Route path='/new' component={New}/>
                 </div>
             </BrowserRouter>
         );
