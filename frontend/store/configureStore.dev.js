@@ -1,7 +1,6 @@
 import { compose } from 'redux';
-import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
-// import {applyMiddleware} from "redux/index";;
+
 import {createStore, applyMiddleware} from 'redux';
 import reduxThunk from 'redux-thunk';
 import reducers from '../reducers';
