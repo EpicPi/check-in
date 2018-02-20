@@ -20,7 +20,7 @@ class App extends Component {
                 <div>
                     <Header/>
                     <Route exact path='/' component={Land}/>
-                    <Route exact path='/dash' component={Dash}/>
+                    <Route path='/dash' component={Dash}/>
                     <Route path='/new' component={New}/>
                 </div>
             </BrowserRouter>

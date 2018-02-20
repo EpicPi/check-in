@@ -12,8 +12,9 @@ export function configureStore(initialState) {
         reducers,
         initialState,
         compose(
-            DevTools.instrument()
-        ),
-        applyMiddleware(reduxThunk)
+            applyMiddleware(reduxThunk),
+            DevTools.instrument(),
+        )
+
     );
 }
