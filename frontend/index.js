@@ -14,14 +14,14 @@ import App from "./components/App";
 
 // const store = configureStore(); this is the correct way but i cant get it to work
 const store = createStore(reducers ,{}, applyMiddleware(reduxThunk));
-// render(
-//     <Root store={store} history={history} />,
-//     document.getElementById('root')
-// );
 render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
-    document.getElementById('root'));
+    <Root store={store} history={history} />,
+    document.getElementById('root')
+);
+// render(
+//     <Provider store={store}>
+//         <App/>
+//     </Provider>,
+//     document.getElementById('root'));
 
 
