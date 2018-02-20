@@ -1,13 +1,19 @@
-import { createStore, compose } from 'redux';
+import { compose } from 'redux';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
+// import {applyMiddleware} from "redux/index";;
+import {createStore, applyMiddleware} from 'redux';
+import reduxThunk from 'redux-thunk';
+import reducers from '../reducers';
+
 
 export function configureStore(initialState) {
     return createStore(
-        rootReducer,
+        reducers,
         initialState,
         compose(
             DevTools.instrument()
-        )
+        ),
+        applyMiddleware(reduxThunk)
     );
 }
