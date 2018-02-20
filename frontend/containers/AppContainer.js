@@ -19,7 +19,7 @@ class AppContainer extends Component{
             <BrowserRouter>
                 <div>
                     <Header/>
-                    <Route exact path='a' component={Land}/>
+                    <Route exact path='/' component={Land}/>
                     <Route path='/dash' component={Dash}/>
                     <Route path='/#/new' component={New}/>
                 </div>

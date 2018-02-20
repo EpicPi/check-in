@@ -21,12 +21,12 @@ app.use(cookieSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api', api);
 
-app.get('/', (request, response) => {
+app.use('/', (request, response) => {
     response.sendFile(__dirname + '/public/index.html'); // For React/Redux
 });
 
-app.use('/api', api);
 
 
 mongoose.connect(keys.mongoUri);

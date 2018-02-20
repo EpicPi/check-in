@@ -10,8 +10,7 @@ module.exports = (router) => {
     router.use('/auth/google/callback',
         passport.authenticate('google',{ failureRedirect: '#/signIn' }),
         (req, res) => {
-            // console.log('redirecting?');
-            res.redirect('/#/dash');
+            res.redirect('/dash');
         }
     );
 
@@ -20,6 +19,7 @@ module.exports = (router) => {
     });
 
     router.use('/logout', (req, res) => {
+        console.log('redirecting?');
         req.logout();
         res.redirect('/');
     });
