@@ -22,7 +22,7 @@ class Header extends Component {
         return (
             <nav>
                 <Link to={
-                    this.props.auth? '/#/dash': '/'
+                    this.props.auth? '/dash': '/'
                 }>
                     Home
                 </Link>
