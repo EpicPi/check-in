@@ -19,18 +19,18 @@ app.use(cookieSession({
     keys: [keys.cookieKey]
 }));
 
+//authentication
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/api', api);
 
-app.use('/', (request, response) => {
+//api and frontend routes
+app.use('/api', api);
+app.get('/', (request, response) => {
     response.sendFile(__dirname + '/public/index.html'); // For React/Redux
 });
 
-
-
+//mongo
 mongoose.connect(keys.mongoUri);
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, error => {

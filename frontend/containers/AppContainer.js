@@ -13,7 +13,7 @@ const Land = () => <h2>Land</h2>;
 
 class AppContainer extends Component{
     componentDidMount(){
-        this.props.fetchUser();
+        // this.props.fetchUser();
     }
     render(){
         return (
@@ -45,7 +45,4 @@ const mapDispatchToProps = (/* dispatch */) => {
     };
 };
 
-export default connect(
-    null,
-    actions
-)(AppContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(AppContainer);
