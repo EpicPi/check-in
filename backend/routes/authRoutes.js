@@ -10,7 +10,7 @@ module.exports = (router) => {
     router.use('/auth/google/callback',
         passport.authenticate('google'),
         (req, res) => {
-            res.redirect('/');
+            res.redirect('/dash');
         }
     );
 
