@@ -9,6 +9,7 @@ module.exports = (router) => {
     router.use('/add_event', async(req,res) =>{
             const event = await Event({name:req.body.name, code:req.body.code}).save();
             const user = await User.findById(req.user.id);
+            // user.events = [];
             user.events.push(event);
             user.save();
             res.send('true');
@@ -24,10 +25,10 @@ module.exports = (router) => {
     router.use('/get_events', async(req, res) => {
         const user = await User.findById(req.user.id);
         // const out = [];
-        // for(let event in user.events){
-        //
-        //     out.push(await Event.findById(event.id));
+        // for(let event of user.events){
+        //     out.push(await Event.findById(event));
         // }
+        // res.send(out);
         res.send(user.events);
     });
 };

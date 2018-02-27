@@ -7,9 +7,9 @@ export const fetchUser = () => async dispatch => {
 };
 var qs = require('qs');
 
-export const addEvent = (event) => dispatch => {
+export const addEvent = (event) => async dispatch => {
     var qs = require('qs');
-    axios.post('/api/add_event', qs.stringify(event));
+    await axios.post('/api/add_event', qs.stringify(event));
     dispatch({type: ADD_EVENT, payload: event});
 };
 

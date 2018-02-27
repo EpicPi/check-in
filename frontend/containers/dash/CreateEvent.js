@@ -36,6 +36,8 @@ class CreateEvent extends Component {
             eventName: '',
             code: '',
         });
+
+        this.props.history.push('/dash');
     }
 
     render() {

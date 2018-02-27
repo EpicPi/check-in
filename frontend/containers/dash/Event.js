@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Event extends Component {
     render() {
         return (
             <div>
+                hiii
                 <div>
-                    Name: {this.props.name}
+                    Name: {this.props.event.name}
                 </div>
                 <div>
-                    Code: {this.props.code}
+                    Code: {this.props.event.code}
                 </div>
             </div>
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        event : state.eve.selectedEvent,
+    };
+};
 
-export default Event;
+const mapDispatchToProps = (/* dispatch */) => {
+    return {
+    };
+};
+export default connect(mapStateToProps,mapDispatchToProps())(Event);
