@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
 
-import Dash from "./dash/dash";
+import Dash from "./dash/Dash";
+import {fetchUser} from "../actions";
 
 const New = () => <h2>New</h2>;
 const Land = () => <h2>Land</h2>;
@@ -35,7 +35,7 @@ AppContainer.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.name
+
     };
 };
 
@@ -45,4 +45,4 @@ const mapDispatchToProps = (/* dispatch */) => {
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(AppContainer);
+export default connect(mapStateToProps,mapDispatchToProps())(AppContainer);

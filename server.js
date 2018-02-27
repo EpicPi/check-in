@@ -25,7 +25,7 @@ app.use(passport.session());
 
 //api and frontend routes
 app.use('/api', api);
-app.get('/', (request, response) => {
+app.use('/', (request, response) => {
     response.sendFile(__dirname + '/public/index.html'); // For React/Redux
 });
 
