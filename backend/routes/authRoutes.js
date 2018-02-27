@@ -8,9 +8,9 @@ module.exports = (router) => {
     );
 
     router.use('/auth/google/callback',
-        passport.authenticate('google',{ failureRedirect: '#/signIn' }),
+        passport.authenticate('google'),
         (req, res) => {
-            res.redirect('/dash');
+            res.redirect('/');
         }
     );
 
@@ -19,7 +19,6 @@ module.exports = (router) => {
     });
 
     router.use('/logout', (req, res) => {
-        console.log('redirecting?');
         req.logout();
         res.redirect('/');
     });

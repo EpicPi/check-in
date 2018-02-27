@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {fetchUser} from "../actions";
 
 class Header extends Component {
+    componentDidMount(){
+        this.props.fetchUser();
+    }
+
     renderContent(){
         console.log(this.props.auth);
         switch (this.props.auth){
@@ -36,5 +41,10 @@ class Header extends Component {
 function mapStateToProps(state){
     return {auth: state.auth};
 }
+function mapDispathToProps(props) {
+    return{
+        fetchUser: fetchUser
+    };
+}
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps,mapDispathToProps())(Header);

@@ -2,17 +2,18 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
 
-const Dash = () => <h2>Dash</h2>;
+import Dash from "./dash/Dash";
+import {fetchUser} from "../actions";
+
 const New = () => <h2>New</h2>;
 const Land = () => <h2>Land</h2>;
 
 class AppContainer extends Component{
     componentDidMount(){
-        this.props.fetchUser();
+        // this.props.fetchUser();
     }
     render(){
         return (
@@ -34,16 +35,14 @@ AppContainer.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        name: state.name
+
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
+
     };
 };
 
-export default connect(
-    null,
-    actions
-)(AppContainer);
+export default connect(mapStateToProps,mapDispatchToProps())(AppContainer);
