@@ -9,13 +9,13 @@ var qs = require('qs');
 
 export const addEvent = (event) => async dispatch => {
     var qs = require('qs');
-    await axios.post('/api/add_event', qs.stringify(event));
+    axios.post('/api/add_event', qs.stringify(event));
     dispatch({type: ADD_EVENT, payload: event});
 };
 
 export const getEvents = () => async dispatch=>{
     const res = await axios.get('/api/get_events');
-    console.log(res.data);
+    // console.log(res.data);
     dispatch({type:GET_EVENTS, payload: res.data});
 };
 

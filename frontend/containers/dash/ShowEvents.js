@@ -7,6 +7,7 @@ import Link from "react-router-dom/es/Link";
 
 class ShowEvents extends Component {
     componentDidMount() {
+        if(this.props.events.length==0)
         this.props.getEvents();
         console.log('mounted');
     }
