@@ -3,6 +3,7 @@ const {Schema} = mongoose;
 
 const eventSchema = new Schema({
     name: String,
+    code: String
 });
 
-mongoose.model('users',eventSchema);
+mongoose.model('events',eventSchema);

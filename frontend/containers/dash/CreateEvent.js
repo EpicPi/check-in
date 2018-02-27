@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {addEvent} from "../../actions";
 
 class CreateEvent extends Component {
 
@@ -72,18 +73,16 @@ class CreateEvent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        eve: state.eve,
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
+        addEvent: addEvent,
     };
 };
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(CreateEvent);
+export default connect(mapStateToProps,mapDispatchToProps())(CreateEvent);
 
-export default CreateEvent;
+

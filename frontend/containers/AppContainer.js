@@ -8,13 +8,9 @@ import Header from "../components/Header";
 import Dash from "./dash/Dash";
 import {fetchUser} from "../actions";
 
-const New = () => <h2>New</h2>;
 const Land = () => <h2>Land</h2>;
 
 class AppContainer extends Component{
-    componentDidMount(){
-        // this.props.fetchUser();
-    }
     render(){
         return (
             <BrowserRouter>
@@ -22,7 +18,6 @@ class AppContainer extends Component{
                     <Header/>
                     <Route exact path='/' component={Land}/>
                     <Route path='/dash' component={Dash}/>
-                    <Route path='/new' component={New}/>
                 </div>
             </BrowserRouter>
         );
@@ -45,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps())(AppContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(AppContainer);
