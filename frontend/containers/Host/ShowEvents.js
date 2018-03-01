@@ -14,7 +14,7 @@ class ShowEvents extends Component {
 
     handleClick(event) {
         this.props.selectEvent(event);
-        this.props.history.push('/dash/event');
+        this.props.history.push('/Host/event');
     }
     handleRemove(event){
         this.props.removeEvent(event);
@@ -32,7 +32,7 @@ class ShowEvents extends Component {
         ));
         return (
             <div>
-                <Link to={'/dash/create'}>create</Link>
+                <Link to={'/Host/create'}>create</Link>
                 <ul>
                     {events}
                 </ul>

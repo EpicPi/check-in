@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
 
-import Dash from "./dash/Dash";
-import {fetchUser} from "../actions";
+import Dash from "./Host/HostDash";
 
 const Land = () => <h2>Land</h2>;
 

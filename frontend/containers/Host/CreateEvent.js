@@ -37,7 +37,7 @@ class CreateEvent extends Component {
             code: '',
         });
 
-        this.props.history.push('/dash');
+        this.props.history.push('/Host');
     }
 
     render() {
