@@ -8,11 +8,22 @@ class Land extends Component {
     componentDidMount() {
     }
 
+    handleClick(type){
+        if(this.props.auth.user)
+        if(type === USER.HOST){
+            this.props.setUserType(USER.HOST);
+            this.props.history.push('/host');
+        }else{
+            this.props.setUserType(USER.GUEST);
+            this.props.history.push('/host');
+        }
+    }
+
     render() {
         return (
             <div>
-                <button onClick={()=>this.props.setUserType(USER.HOST)}>host</button>
-                <button onClick={()=>this.props.setUserType(USER.GUEST)}>guest</button>
+                <button onClick={()=>this.handleClick(USER.HOST)}>host</button>
+                <button onClick={()=>this.handleClick(USER.GUEST)}>guest</button>
             </div>
         );
     }
