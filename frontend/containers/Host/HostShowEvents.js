@@ -13,7 +13,6 @@ class HostShowEvents extends Component {
     componentDidMount() {
         if (this.props.events.length === 0)
             this.props.getEvents();
-        console.log('mounted');
     }
 
 

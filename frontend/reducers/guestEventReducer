@@ -1,7 +1,14 @@
-import {HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_SELECT_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE} from '../actions/types';
+import {
+    HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_SELECT_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE,
+    GUEST_GET_EVENTS, GUEST_JOIN_EVENT
+} from '../actions/types';
 
 export default function (state = null,action) {
     switch (action.type) {
+        case GUEST_GET_EVENTS:
+            return;
+        case GUEST_JOIN_EVENT:
+            return;
         default:
             return state;
     }

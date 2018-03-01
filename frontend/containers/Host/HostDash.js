@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {Route} from "react-router-dom";
-import HostCreateEvent from './CreateEvent';
+import HostCreateEvent from './HostCreateEvent';
 import HostShowEvents from './HostShowEvents';
-import HostEventDetail from './EventDetail';
+import HostEventDetail from './HostEventDetail';
 
 class HostDash extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
                 <div>
@@ -19,7 +15,5 @@ class HostDash extends Component {
         );
     }
 }
-
-
 export default HostDash;
 
