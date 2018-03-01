@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {guestJoinEvent, hostAddEvent} from "../../actions";
+import {guestFindEvent, guestJoinEvent, hostAddEvent} from "../../actions";
 import {JOIN_FIND} from "../../helpers";
 
 class GuestJoinEvent extends Component {

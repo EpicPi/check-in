@@ -7,7 +7,7 @@ const Event = mongoose.model('events');
 
 module.exports = (router) => {
 
-    //TODO
+
     router.get('/guest/get_events', async (req, res) => {
         const user = await User.findById(req.user.id);
         const out = [];
@@ -18,9 +18,20 @@ module.exports = (router) => {
         res.send(out);
     });
 
-    //TODO
     router.post('/guest/join',async(req,res)=>{
-        res.send(req.user);
+        const event= await Event.findById(req.body.id);
+        if(event){
+            const user = await User.findById(req.user.id);
+            user.guestEvents.push(event.id);
+            user.save();
+            event.guestsRSVP.push(user.id);
+            event.save();
+        }
+    });
+
+    router.post('/guest/find',async(req,res)=>{
+        const event = await Event.findOne({'code':req.body.code});
+        res.send(event);
     });
 
     //TODO

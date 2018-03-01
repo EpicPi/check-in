@@ -6,13 +6,13 @@ import {
 } from "./types";
 
 export const guestJoinEvent = (event) => dispatch => {
-    axios.post('/api/guest/join', qs.stringify(event.id));
+    axios.post('/api/guest/join', qs.stringify({id:event._id}));
     dispatch({type: GUEST_JOIN_EVENT, payload: event});
 };
 
 export const guestFindEvent = (code) => async dispatch => {
     dispatch({type: GUEST_FIND_EVENT});
-    const res = await axios.post('/api/guest/find', qs.stringify(code));
+    const res = await axios.post('/api/guest/find', qs.stringify({code:code}));
     dispatch({type: GUEST_FOUND_EVENT, payload: res.data});
 };
 
