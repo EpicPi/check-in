@@ -3,6 +3,6 @@ const router = express.Router();
 
 
 require('./authRoutes')(router);
-require('./eventRoutes')(router);
+require('./hostEventRoutes')(router);
 
 module.exports = router;

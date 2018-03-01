@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
 
-import Dash from "./Host/HostDash";
+import HostDash from "./Host/HostDash";
 
 const Land = () => <h2>Land</h2>;
 
@@ -16,7 +16,7 @@ class AppContainer extends Component{
                 <div>
                     <Header/>
                     <Route exact path='/' component={Land}/>
-                    <Route path='/dash' component={Dash}/>
+                    <Route path='/host' component={HostDash}/>
                 </div>
             </BrowserRouter>
         );

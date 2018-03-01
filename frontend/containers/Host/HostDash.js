@@ -4,7 +4,7 @@ import CreateEvent from './CreateEvent';
 import ShowEvents from './ShowEvents';
 import EventDetail from './EventDetail';
 
-class Dash extends Component {
+class HostDash extends Component {
     constructor(props) {
         super(props);
     }
@@ -12,14 +12,14 @@ class Dash extends Component {
     render() {
         return (
                 <div>
-                    <Route exact path='/dash' component={ShowEvents}/>
-                    <Route exact path='/dash/create' component={CreateEvent}/>
-                    <Route exact path='/dash/event' component={EventDetail}/>
+                    <Route exact path='/host' component={ShowEvents}/>
+                    <Route exact path='/host/create' component={CreateEvent}/>
+                    <Route exact path='/host/event' component={EventDetail}/>
                 </div>
         );
     }
 }
 
 
-export default Dash;
+export default HostDash;
 

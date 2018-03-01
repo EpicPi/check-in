@@ -19,7 +19,7 @@ class Header extends Component {
                 );
             default:
                 return (
-                    <a href={'/api/logout'}>log out</a>
+                    <a href={'/api/auth/logout'}>log out</a>
                 );
         }
     }
@@ -27,7 +27,7 @@ class Header extends Component {
         return (
             <nav>
                 <Link to={
-                    this.props.auth? '/dash': '/'
+                    this.props.auth? '/host': '/'
                 }>
                     Home
                 </Link>

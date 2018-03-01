@@ -14,11 +14,11 @@ module.exports = (router) => {
         }
     );
 
-    router.use('/current_user', (req, res) => {
+    router.get('/auth/current_user', (req, res) => {
         res.send(req.user);
     });
 
-    router.use('/logout', (req, res) => {
+    router.post('/auth/logout', (req, res) => {
         req.logout();
         res.redirect('/');
     });

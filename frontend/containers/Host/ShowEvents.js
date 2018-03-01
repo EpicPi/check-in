@@ -19,11 +19,11 @@ class ShowEvents extends Component {
 
     render() {
         const events = this.props.events.map((event, i) => (
-            <EventItem key={i} event={event}></EventItem>
+            <EventItem history ={this.props.history} key={i} event={event}></EventItem>
         ));
         return (
             <div>
-                <Link to={'/Host/create'}>create</Link>
+                <Link to={'/host/create'}>create</Link>
                 <ul>
                     {events}
                 </ul>
