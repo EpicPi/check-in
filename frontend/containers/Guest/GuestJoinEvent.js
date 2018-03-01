@@ -15,6 +15,7 @@ class GuestJoinEvent extends Component {
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleCodeInput = this.handleCodeInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleConfirm = this.handleConfirm.bind(this);
     }
 
 
@@ -30,9 +31,15 @@ class GuestJoinEvent extends Component {
         e.preventDefault();
         this.props.findEvent(this.state.code);
         this.setState({
-            code: '',
             loading:<h3>Checking</h3>
         });
+    }
+    handleConfirm(e){
+        this.setState({
+            code:''
+        });
+        this.props.joinEvent(this.props.eventToJoin);
+        this.props.history.push('/guest/');
     }
 
     render() {
@@ -43,7 +50,7 @@ class GuestJoinEvent extends Component {
             result= (
                 <div>
                     <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-                    <button onClick={()=>this.props.joinEvent(this.props.eventToJoin)}>confirm</button>
+                    <button onClick={this.handleConfirm}>confirm</button>
                 </div>)
         }else if(this.props.joinFind === JOIN_FIND.CHECKING){
             result = <h3>Checking code</h3>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {hostGetEvents, hostRemoveEvent, hostSelectEvent} from "../../actions";
 import Link from "react-router-dom/es/Link";
-import EventItem from "./HostEventItem";
+import HostEventItem from "./HostEventItem";
 
 
 class HostShowEvents extends Component {
@@ -18,7 +18,7 @@ class HostShowEvents extends Component {
 
     render() {
         const events = this.props.events.map((event, i) => (
-            <EventItem history ={this.props.history} key={i} event={event}></EventItem>
+            <HostEventItem history ={this.props.history} key={i} event={event}></HostEventItem>
         ));
         return (
             <div>
