@@ -1,9 +1,11 @@
 import {
     HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_SELECT_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE,
-    GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_RESET_JOIN_FIND
+    GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_RESET_JOIN_FIND, GUEST_CHECKIN,
+    GUEST_SELECT_EVENT
 } from '../actions/types';
 import {JOIN_FIND} from "../helpers";
 import {guestInitial} from "./initialState";
+import {guestSelectEvent} from "../actions";
 
 export default function (state = guestInitial, action) {
     switch (action.type) {
@@ -32,6 +34,10 @@ export default function (state = guestInitial, action) {
             return {...state, joinFind: jf, eventToJoin: toJoin};
         case GUEST_RESET_JOIN_FIND:
             return {...state, joinFind: JOIN_FIND.NOTHING_TO_CHECK};
+        case GUEST_SELECT_EVENT:
+            return {...state, selectedEvent: action.payload};
+        case GUEST_CHECKIN:
+            return state;
         default:
             return state;
     }

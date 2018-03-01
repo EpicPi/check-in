@@ -6,7 +6,7 @@ import React from "react";
 class GuestEventItem extends Component {
     handleClick(event) {
         this.props.selectEvent(event);
-        this.props.history.push('/host/event');
+        this.props.history.push('/guest/event');
     }
     handleRemove(event){
         this.props.removeEvent(event);
