@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {fetchUser} from "../actions";
+import {fetchUser, login} from "../actions";
+import {USER} from "../helpers";
 
 class Header extends Component {
     componentDidMount(){
@@ -10,7 +11,7 @@ class Header extends Component {
 
     renderContent(){
         console.log(this.props.auth);
-        switch (this.props.auth){
+        switch (this.props.user){
             case null:
                 return 'stil deciding';
             case false:
@@ -27,7 +28,7 @@ class Header extends Component {
         return (
             <nav>
                 <Link to={
-                    this.props.auth? '/host': '/'
+                    this.props.user? (this.props.type? (this.props.type===USER.HOST?'/host':'/guest'):'/'):'/'
                 }>
                     Home
                 </Link>
@@ -39,11 +40,14 @@ class Header extends Component {
     }
 }
 function mapStateToProps(state){
-    return {auth: state.auth};
+    return {
+        user: state.auth.user,
+        type: state.auth.userType,
+    };
 }
-function mapDispathToProps(props) {
+function mapDispathToProps() {
     return{
-        fetchUser: fetchUser
+        fetchUser: fetchUser,
     };
 }
 

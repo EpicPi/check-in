@@ -6,8 +6,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
 
 import HostDash from "./Host/HostDash";
-
-const Land = () => <h2>Land</h2>;
+import Land from "../components/Land";
 
 class AppContainer extends Component{
     render(){
