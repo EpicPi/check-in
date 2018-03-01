@@ -8,8 +8,12 @@ const Event = mongoose.model('events');
 router.get('/get_events', async (req, res) => {
     const user = await User.findById(req.user.id);
     const out = [];
+    // this cannot be a map function cause js is trippy about async
     for (let i = 0; i < user.guestEvents.length; i++) {
         const a = await Event.findById(user.guestEvents[i]);
+        if(!a){
+            //what do we do when host deletes events but ppl already signed up???
+        }else
         out.push(a);
     }
     res.send(out);

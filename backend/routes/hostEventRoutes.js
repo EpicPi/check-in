@@ -34,4 +34,5 @@ const Event = mongoose.model('events');
         }
         res.send(out);
     });
+
 module.exports = router;

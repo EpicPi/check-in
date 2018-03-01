@@ -22,7 +22,7 @@ export default function (state = guestInitial, action) {
             let jf = JOIN_FIND.FAIL;
             let toJoin = null;
             if (action.payload) {
-                if (state.events.filter(event => action.payload._id === event._id))
+                if (state.events.filter(event => action.payload._id === event._id).length > 0)
                     jf = JOIN_FIND.ALREADY_JOINED;
                 else {
                     jf = JOIN_FIND.SUCCESS;
