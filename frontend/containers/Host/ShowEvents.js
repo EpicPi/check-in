@@ -1,34 +1,25 @@
 import React, {Component} from 'react';
-import Event from './EventDetail';
 import {connect} from 'react-redux';
 import {getEvents, removeEvent, selectEvent} from "../../actions";
 import Link from "react-router-dom/es/Link";
+import EventItem from "./EventItem";
 
 
 class ShowEvents extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
-        if(this.props.events.length==0)
-        this.props.getEvents();
+        if (this.props.events.length === 0)
+            this.props.getEvents();
         console.log('mounted');
     }
 
-    handleClick(event) {
-        this.props.selectEvent(event);
-        this.props.history.push('/Host/event');
-    }
-    handleRemove(event){
-        this.props.removeEvent(event);
-    }
 
     render() {
         const events = this.props.events.map((event, i) => (
-            <div key={i}>
-                <div>
-                    Name: {event.name}
-                </div>
-                <button onClick={() => this.handleClick(event)}>more info</button>
-                <button onClick={()=>this.handleRemove(event)}>Remove</button>
-            </div>
+            <EventItem key={i} event={event}></EventItem>
         ));
         return (
             <div>
@@ -50,8 +41,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (/* dispatch */) => {
     return {
         getEvents: getEvents,
-        selectEvent: selectEvent,
-        removeEvent: removeEvent
     };
 };
 

@@ -5,7 +5,6 @@ class EventDetail extends Component {
     render() {
         return (
             <div>
-                hiii
                 <div>
                     Name: {this.props.event.name}
                 </div>

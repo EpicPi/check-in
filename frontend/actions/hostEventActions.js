@@ -1,5 +1,6 @@
 import {ADD_EVENT, GET_EVENTS, REMOVE_EVENT, SELECT_EVENT} from "./types";
 import axios from "axios/index";
+const qs = require('qs');
 
 export const addEvent = (event) => async dispatch => {
     axios.post('/api/add_event', qs.stringify(event));
