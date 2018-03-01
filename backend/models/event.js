@@ -3,7 +3,9 @@ const {Schema} = mongoose;
 
 const eventSchema = new Schema({
     name: String,
-    code: String
+    code: String,
+    guestsRSVP: [],
+    guestsAttend: [],
 });
 
 mongoose.model('events',eventSchema);

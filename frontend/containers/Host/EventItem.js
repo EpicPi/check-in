@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {removeEvent, selectEvent} from "../../actions";
+import {hostRemoveEvent, hostSelectEvent} from "../../actions";
 import {connect} from 'react-redux';
 import React from "react";
 
@@ -32,8 +32,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        selectEvent: selectEvent,
-        removeEvent: removeEvent
+        selectEvent: hostSelectEvent,
+        removeEvent: hostRemoveEvent
     };
 };
 export default connect(mapStateToProps,mapDispatchToProps())(EventItem);

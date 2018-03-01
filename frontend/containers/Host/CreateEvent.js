@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {addEvent} from "../../actions";
+import {hostAddEvent} from "../../actions";
 
 class CreateEvent extends Component {
 
@@ -81,7 +81,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        addEvent: addEvent,
+        addEvent: hostAddEvent,
     };
 };
 

@@ -3,7 +3,8 @@ const {Schema} = mongoose;
 
 const userSchema = new Schema({
     googleId: String,
-    events: [],
+    hostEvents: [],
+    guestEvents: [],
     name: String,
 });
 

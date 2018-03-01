@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getEvents, removeEvent, selectEvent} from "../../actions";
+import {hostGetEvents, hostRemoveEvent, hostSelectEvent} from "../../actions";
 import Link from "react-router-dom/es/Link";
 import EventItem from "./EventItem";
 
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        getEvents: getEvents,
+        getEvents: hostGetEvents,
     };
 };
 
