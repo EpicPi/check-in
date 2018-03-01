@@ -6,29 +6,31 @@ const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
 module.exports = (router) => {
-    router.use('/add_event', async(req,res) =>{
-            const event = await Event({name:req.body.name, code:req.body.code}).save();
+    router.post('/add_event', async (req, res) => {
+            const event = await Event({name: req.body.name, code: req.body.code}).save();
             const user = await User.findById(req.user.id);
-            // user.events = [];
-            user.events.push(event);
+            // user.events = []; //cleans out event array
+            user.events.push(event.id);
             user.save();
-            res.send('true');
         }
     );
 
-    router.use('/remove_event',
-        (req,res) =>{
+    router.post('/remove_event', async (req, res) => {
+            const user = await User.findById(req.user.id);
+            user.events = user.events.filter(event => req.body._id !== event);
+            user.save();
 
+            await Event.findById(req.body._id).remove();
         }
     );
 
-    router.use('/get_events', async(req, res) => {
+    router.get('/get_events', async (req, res) => {
         const user = await User.findById(req.user.id);
-        // const out = [];
-        // for(let event of user.events){
-        //     out.push(await Event.findById(event));
-        // }
-        // res.send(out);
-        res.send(user.events);
+        const out = [];
+        for (let i = 0; i < user.events.length; i++) {
+            const a = await Event.findById(user.events[i]);
+            out.push(a);
+        }
+        res.send(out);
     });
 };

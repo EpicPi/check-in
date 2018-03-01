@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Event from './Event';
+import Event from './EventDetail';
 import {connect} from 'react-redux';
-import {getEvents, selectEvent} from "../../actions";
+import {getEvents, removeEvent, selectEvent} from "../../actions";
 import Link from "react-router-dom/es/Link";
 
 
@@ -14,9 +14,10 @@ class ShowEvents extends Component {
 
     handleClick(event) {
         this.props.selectEvent(event);
-        console.log('the event is');
-        console.log(event);
         this.props.history.push('/dash/event');
+    }
+    handleRemove(event){
+        this.props.removeEvent(event);
     }
 
     render() {
@@ -26,6 +27,7 @@ class ShowEvents extends Component {
                     Name: {event.name}
                 </div>
                 <button onClick={() => this.handleClick(event)}>more info</button>
+                <button onClick={()=>this.handleRemove(event)}>Remove</button>
             </div>
         ));
         return (
@@ -48,7 +50,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (/* dispatch */) => {
     return {
         getEvents: getEvents,
-        selectEvent: selectEvent
+        selectEvent: selectEvent,
+        removeEvent: removeEvent
     };
 };
 

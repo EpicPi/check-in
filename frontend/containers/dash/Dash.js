@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {BrowserRouter, Route, Link} from "react-router-dom";
+import {Route} from "react-router-dom";
 import CreateEvent from './CreateEvent';
 import ShowEvents from './ShowEvents';
-import Event from './Event';
+import EventDetail from './EventDetail';
 
 class Dash extends Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class Dash extends Component {
                 <div>
                     <Route exact path='/dash' component={ShowEvents}/>
                     <Route exact path='/dash/create' component={CreateEvent}/>
-                    <Route exact path='/dash/event' component={Event}/>
+                    <Route exact path='/dash/event' component={EventDetail}/>
                 </div>
         );
     }
