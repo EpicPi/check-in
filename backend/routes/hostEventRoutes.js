@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-
+const router = require('express').Router();
 require('../models/event');
 require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
-module.exports = (router) => {
-    router.use('/host/add_event', async (req, res) => {
+
+    router.use('/add_event', async (req, res) => {
             const event = await Event({name: req.body.name, code: req.body.code}).save();
             const user = await User.findById(req.user.id);
             // user.events = []; //cleans out event array
@@ -16,7 +16,7 @@ module.exports = (router) => {
         }
     );
 
-    router.post('/host/remove_event', async (req, res) => {
+    router.post('/remove_event', async (req, res) => {
             const user = await User.findById(req.user.id);
             user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
             user.save();
@@ -25,7 +25,7 @@ module.exports = (router) => {
         }
     );
 
-    router.get('/host/get_events', async (req, res) => {
+    router.get('/get_events', async (req, res) => {
         const user = await User.findById(req.user.id);
         const out = [];
         for (let i = 0; i < user.hostEvents.length; i++) {
@@ -34,4 +34,4 @@ module.exports = (router) => {
         }
         res.send(out);
     });
-};
+module.exports = router;

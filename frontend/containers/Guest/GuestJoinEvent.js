@@ -9,7 +9,6 @@ class GuestJoinEvent extends Component {
         super(props);
         this.state = {
             code: '',
-            loading:'',
         };
 
         this.handleNameInput = this.handleNameInput.bind(this);
@@ -57,6 +56,7 @@ class GuestJoinEvent extends Component {
         }else if(this.props.joinFind === JOIN_FIND.ALREADY_JOINED){
             result = <h3>You already RSVPed for this event!</h3>
         }
+
         return (
             <form onSubmit={this.handleSubmit} id="create-form">
                 <label>
