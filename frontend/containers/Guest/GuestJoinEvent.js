@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {guestJoinEvent, hostAddEvent} from "../../actions";
+import {JOIN_FIND} from "../../helpers";
 
 class GuestJoinEvent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            eventName: '',
             code: '',
+            loading:'',
         };
 
         this.handleNameInput = this.handleNameInput.bind(this);
@@ -27,15 +28,26 @@ class GuestJoinEvent extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.joinEvent(this.state.code);
+        this.props.findEvent(this.state.code);
         this.setState({
             code: '',
+            loading:<h3>Checking</h3>
         });
-
-        this.props.history.push('/guest');
     }
 
     render() {
+        let result = '';
+        if(this.props.joinFind === JOIN_FIND.FAIL){
+            result = <h3>Couldn't find, please check code</h3>
+        }else if(this.props.joinFind === JOIN_FIND.SUCCESS){
+            result= (
+                <div>
+                    <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
+                    <button onClick={()=>this.props.joinEvent}>confirm</button>
+                </div>)
+        }else if(this.props.joinFind === JOIN_FIND.CHECKING){
+            result = <h3>Checking code</h3>
+        }
         return (
             <form onSubmit={this.handleSubmit} id="create-form">
                 <label>
@@ -53,6 +65,7 @@ class GuestJoinEvent extends Component {
                         <button type="submit" value="Submit">Submit</button>
                     </div>
                 </div>
+                {result}
             </form>
         );
     }
@@ -60,11 +73,14 @@ class GuestJoinEvent extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        joinFind: state.guest.joinFind,
+        eventToJoin: state.guest.eventToJoin,
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
+        findEvent: guestFindEvent,
         joinEvent: guestJoinEvent,
     };
 };

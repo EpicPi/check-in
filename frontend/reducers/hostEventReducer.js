@@ -1,6 +1,7 @@
 import {HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_SELECT_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE} from '../actions/types';
+import {hostInitial} from "./initialState";
 
-export default function (state = {events: [], selectedEvent: {name:'gerge', code:'fsdfs'}}, action) {
+export default function (state = hostInitial, action) {
     switch (action.type) {
         case HOST_ADD_EVENT:
             return {...state, events: [...state.events, action.payload]};

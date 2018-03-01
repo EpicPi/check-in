@@ -15,7 +15,7 @@ class Land extends Component {
             this.props.history.push('/host');
         }else{
             this.props.setUserType(USER.GUEST);
-            this.props.history.push('/host');
+            this.props.history.push('/guest');
         }
     }
 

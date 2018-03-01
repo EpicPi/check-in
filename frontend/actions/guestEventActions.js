@@ -2,8 +2,13 @@ import * as axios from "axios";
 import * as qs from "qs";
 import {GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_REMOVE_EVENT, GUEST_SELECT_EVENT} from "./types";
 
-export const guestJoinEvent = (code) => async dispatch => {
-    const res = axios.post('/api/guest/join', qs.stringify())
+export const guestJoinEvent = (event) => dispatch => {
+    axios.post('/api/guest/join', qs.stringify(event.id));
+    dispatch({type: GUEST_JOIN_EVENT, payload: event});
+};
+
+export const guestFindEvent = (code) => async dispatch => {
+    const res = axios.post('/api/guest/find', qs.stringify(code));
     dispatch({type: GUEST_JOIN_EVENT, payload: res.data});
 };
 
