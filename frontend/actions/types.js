@@ -1,7 +1,10 @@
 export const FETCH_USER = 'fetch_user';
-export const ADD_EVENT = 'add_event';
-export const GET_EVENTS = 'get_events';
-export const SELECT_EVENT = 'select_event';
-export const REMOVE_EVENT = 'remove_event';
 export const SET_USER_TYPE = 'set_type';
-export const REPLACE = 'replace';
+
+
+export const HOST_ADD_EVENT = 'host_add_event';
+export const HOST_GET_EVENTS = 'host_get_events';
+export const HOST_SELECT_EVENT = 'host_select_event';
+export const HOST_REMOVE_EVENT = 'host_remove_event';
+export const HOST_REPLACE = 'host_replace';
+

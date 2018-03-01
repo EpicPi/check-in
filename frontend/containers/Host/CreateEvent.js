@@ -75,7 +75,6 @@ class CreateEvent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        eve: state.eve,
     };
 };
 

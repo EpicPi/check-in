@@ -34,7 +34,7 @@ class ShowEvents extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        events: state.eve.events,
+        events: state.host.events,
     };
 };
 

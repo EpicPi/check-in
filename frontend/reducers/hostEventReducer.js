@@ -1,19 +1,19 @@
-import {GET_EVENTS, ADD_EVENT, SELECT_EVENT, REMOVE_EVENT, REPLACE} from '../actions/types';
+import {HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_SELECT_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE} from '../actions/types';
 
 export default function (state = {events: [], selectedEvent: {name:'gerge', code:'fsdfs'}}, action) {
     switch (action.type) {
-        case ADD_EVENT:
+        case HOST_ADD_EVENT:
             return {...state, events: [...state.events, action.payload]};
-        case GET_EVENTS:
+        case HOST_GET_EVENTS:
             return {...state, events: action.payload};
-        case SELECT_EVENT:
+        case HOST_SELECT_EVENT:
             return {...state, selectedEvent: action.payload};
-        case REMOVE_EVENT:{
+        case HOST_REMOVE_EVENT:{
             let newEvents = state.events.slice();
             newEvents = newEvents.filter(el=> el._id !== action.payload._id );
             return {...state, events: newEvents};
         }
-        case REPLACE:{
+        case HOST_REPLACE:{
             let newEvents = state.events.slice();
             newEvents = newEvents.filter(el=> el !== action.payload.toReplace);
             newEvents.push(action.payload.event);

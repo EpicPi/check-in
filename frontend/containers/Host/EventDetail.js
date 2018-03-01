@@ -17,7 +17,7 @@ class EventDetail extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        event : state.eve.selectedEvent,
+        event : state.host.selectedEvent,
     };
 };
 

@@ -9,7 +9,7 @@ class Land extends Component {
     }
 
     handleClick(type){
-        if(this.props.auth.user)
+        if(this.props.user)
         if(type === USER.HOST){
             this.props.setUserType(USER.HOST);
             this.props.history.push('/host');
@@ -30,7 +30,9 @@ class Land extends Component {
 }
 
 function mapStateToProps(state) {
-    return {auth: state.auth};
+    return {
+        user: state.auth.user,
+    };
 }
 
 function mapDispathToProps(props) {

@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import authreducer from './authreducer';
-import eventReducer from "./eventReducer";
+import hostEventReducer from "./hostEventReducer";
+import guestEventReducer from "./guestEventReducer";
 
 export default combineReducers({
     auth:authreducer,
-    eve: eventReducer
+    host: hostEventReducer,
+    guest: guestEventReducer
 })
