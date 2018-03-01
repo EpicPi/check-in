@@ -1,7 +1,7 @@
 import * as axios from "axios";
 import * as qs from "qs";
 import {
-    GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_REMOVE_EVENT,
+    GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_REMOVE_EVENT, GUEST_RESET_JOIN_FIND,
     GUEST_SELECT_EVENT
 } from "./types";
 
@@ -29,3 +29,7 @@ export const guestRemoveEvent = (event) => dispatch => {
     dispatch({type: GUEST_REMOVE_EVENT, payload: event});
     axios.post('/api/guest/remove_event', qs.stringify(event));
 };
+
+export const guestResetJoinFind = () => dispatch=>{
+    dispatch({type: GUEST_RESET_JOIN_FIND});
+}

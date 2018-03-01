@@ -16,3 +16,4 @@ export const GUEST_SELECT_EVENT = 'guest_select_event';
 export const GUEST_REMOVE_EVENT = 'guest_remove_event';
 export const GUEST_FIND_EVENT = 'guest_find_event';
 export const GUEST_FOUND_EVENT = 'guest_found_event';
+export const GUEST_RESET_JOIN_FIND = 'guest_reset_join_find';

@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {guestGetEvents} from "../../actions";
+import {guestGetEvents, guestResetJoinFind} from "../../actions";
 import {connect} from "react-redux";
 import React from "react";
 import Link from "react-router-dom/es/Link";
@@ -13,6 +13,7 @@ class GuestShowEvents extends Component {
     componentWillMount() {
         if (this.props.events.length === 0)
             this.props.getEvents();
+        this.props.resetJoin();
     }
 
     render() {
@@ -39,6 +40,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (/* dispatch */) => {
     return {
         getEvents: guestGetEvents,
+        resetJoin: guestResetJoinFind
     };
 };
 
