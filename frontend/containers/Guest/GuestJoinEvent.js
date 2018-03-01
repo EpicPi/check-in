@@ -43,7 +43,7 @@ class GuestJoinEvent extends Component {
             result= (
                 <div>
                     <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-                    <button onClick={()=>this.props.joinEvent}>confirm</button>
+                    <button onClick={()=>this.props.joinEvent(this.props.eventToJoin)}>confirm</button>
                 </div>)
         }else if(this.props.joinFind === JOIN_FIND.CHECKING){
             result = <h3>Checking code</h3>
