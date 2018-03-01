@@ -3,7 +3,7 @@ import {hostRemoveEvent, hostSelectEvent} from "../../actions";
 import {connect} from 'react-redux';
 import React from "react";
 
-class EventItem extends Component {
+class HostEventItem extends Component {
     handleClick(event) {
         this.props.selectEvent(event);
         this.props.history.push('/host/event');
@@ -36,4 +36,4 @@ const mapDispatchToProps = (/* dispatch */) => {
         removeEvent: hostRemoveEvent
     };
 };
-export default connect(mapStateToProps,mapDispatchToProps())(EventItem);
+export default connect(mapStateToProps,mapDispatchToProps())(HostEventItem);

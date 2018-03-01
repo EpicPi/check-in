@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {hostAddEvent} from "../../actions";
 
-class CreateEvent extends Component {
+class HostCreateEvent extends Component {
 
     constructor(props) {
         super(props);
@@ -84,6 +84,6 @@ const mapDispatchToProps = (/* dispatch */) => {
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps())(CreateEvent);
+export default connect(mapStateToProps,mapDispatchToProps())(HostCreateEvent);
 
 

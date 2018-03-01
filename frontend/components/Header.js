@@ -34,7 +34,6 @@ class Header extends Component {
                 </Link>
                 <br/>
                 {this.renderContent()}
-
             </nav>
         );
     }

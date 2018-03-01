@@ -7,6 +7,7 @@ import Header from "../components/Header";
 
 import HostDash from "./Host/HostDash";
 import Land from "../components/Land";
+import GuestDash from "./Guest/GuestDash";
 
 class AppContainer extends Component{
     render(){
@@ -16,6 +17,7 @@ class AppContainer extends Component{
                     <Header/>
                     <Route exact path='/' component={Land}/>
                     <Route path='/host' component={HostDash}/>
+                    <Route path='/guest' component={GuestDash}/>
                 </div>
             </BrowserRouter>
         );

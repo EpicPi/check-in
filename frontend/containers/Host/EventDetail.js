@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class EventDetail extends Component {
+class HostEventDetail extends Component {
     render() {
         return (
             <div>
@@ -25,4 +25,4 @@ const mapDispatchToProps = (/* dispatch */) => {
     return {
     };
 };
-export default connect(mapStateToProps,mapDispatchToProps())(EventDetail);
+export default connect(mapStateToProps,mapDispatchToProps())(HostEventDetail);

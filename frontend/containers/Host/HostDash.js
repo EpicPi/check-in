@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Route} from "react-router-dom";
-import CreateEvent from './CreateEvent';
-import ShowEvents from './ShowEvents';
-import EventDetail from './EventDetail';
+import HostCreateEvent from './CreateEvent';
+import HostShowEvents from './HostShowEvents';
+import HostEventDetail from './EventDetail';
 
 class HostDash extends Component {
     constructor(props) {
@@ -12,9 +12,9 @@ class HostDash extends Component {
     render() {
         return (
                 <div>
-                    <Route exact path='/host' component={ShowEvents}/>
-                    <Route exact path='/host/create' component={CreateEvent}/>
-                    <Route exact path='/host/event' component={EventDetail}/>
+                    <Route exact path='/host' component={HostShowEvents}/>
+                    <Route exact path='/host/create' component={HostCreateEvent}/>
+                    <Route exact path='/host/event' component={HostEventDetail}/>
                 </div>
         );
     }

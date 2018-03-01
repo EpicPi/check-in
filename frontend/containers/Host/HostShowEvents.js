@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {hostGetEvents, hostRemoveEvent, hostSelectEvent} from "../../actions";
 import Link from "react-router-dom/es/Link";
-import EventItem from "./EventItem";
+import EventItem from "./HostEventItem";
 
 
-class ShowEvents extends Component {
+class HostShowEvents extends Component {
     constructor(props) {
         super(props);
     }
@@ -44,5 +44,5 @@ const mapDispatchToProps = (/* dispatch */) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(ShowEvents);
+export default connect(mapStateToProps, mapDispatchToProps())(HostShowEvents);
 
