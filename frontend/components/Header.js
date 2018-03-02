@@ -4,8 +4,6 @@ import {Link} from 'react-router-dom';
 import {fetchUser, login} from "../actions";
 import {USER} from "../helpers";
 
-import "../../public/app.css";
-
 class Header extends Component {
     componentDidMount(){
         this.props.fetchUser();
@@ -28,8 +26,8 @@ class Header extends Component {
     }
     render() {
         return (
-            <nav className="navbar">
-                <div className="page-header">
+            <nav className="navbar navbar-inverse bg-primary">
+                <div className="text-black">
                     <h1>
                         <Link to={
                             this.props.user? (this.props.type? (this.props.type===USER.HOST?'/host':'/guest'):'/'):'/'
@@ -39,7 +37,7 @@ class Header extends Component {
                     </h1>
                 </div>
                 <br/>
-                <p>
+                <p className="text-black">
                     {this.renderContent()}
                 </p>
             </nav>

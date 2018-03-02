@@ -9,17 +9,15 @@ import HostDash from "./Host/HostDash";
 import Land from "../components/Land";
 import GuestDash from "./Guest/GuestDash";
 
-import "../../public/app.css";
-
 class AppContainer extends Component{
     render(){
         return (
             <BrowserRouter>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-8 col-sm-offset-2">
-                            <div className="app">
-                                <Header/>
+                <div>
+                    <Header/>
+                    <div className="container container-fluid">
+                        <div className="row">
+                            <div className="col-sm-8 col-sm-offset-2">
                                 <Route exact path='/' component={Land}/>
                                 <Route path='/host' component={HostDash}/>
                                 <Route path='/guest' component={GuestDash}/>

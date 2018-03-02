@@ -3,10 +3,24 @@
 /*}*/
 
 .app {
-    margin: 10px;
+    /*margin: 10px;*/
     /*background-color: black;*/
 }
 
-.header {
-    /*margin: 10px;*/
+.text-black a{
+    color: black;
+}
+
+/**
+    Land.js
+ */
+.landing {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.landing.btn-selection {
+    margin: 10px 0 10px 0;
 }
