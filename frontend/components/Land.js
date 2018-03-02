@@ -65,7 +65,7 @@ class Land extends Component {
 
                 <div className="col-md-12">
                     <section className="who-we-are">
-                        <div className="container">
+                        <div className="container-fluid">
                             <h2 className="text-center">Who we are</h2>
                             <div className="row">
                                 <br></br>

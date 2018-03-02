@@ -18,14 +18,27 @@ class HostShowEvents extends Component {
 
     render() {
         const events = this.props.events.map((event, i) => (
-            <HostEventItem history ={this.props.history} key={i} event={event}></HostEventItem>
+            <HostEventItem history ={this.props.history} key={i} event={event} />
         ));
         return (
-            <div>
-                <Link to={'/host/create'}>create</Link>
-                <ul>
-                    {events}
-                </ul>
+            <div className="row host-show">
+                <div className="container-fluid">
+                    <div className="row btn-create">
+                        <div className="col-md-12">
+                            <button className="btn btn-lg">
+                                <Link to={'/host/create'}>create</Link>
+                            </button>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <ul>
+                                {events}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
