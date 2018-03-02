@@ -37,11 +37,9 @@ class Header extends Component {
                             </Link>
                         </h1>
                     </div>
-                    <br/>
-                    <p className="text-white">
+                    <p style={{float: "right"}} className="text-white">
                         {this.renderContent()}
                     </p>
-
                 </div>
             </nav>
         );
