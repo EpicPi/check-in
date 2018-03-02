@@ -32,3 +32,18 @@
 .host-show {
     margin: 10px;
 }
+.host-show ul{
+    padding: 0;
+}
+
+
+/**
+    HostEventItem.js
+ */
+.host-event {
+    margin: 10px 0 10px 0;
+}
+
+.host-event button {
+    margin: 0 5px 0 5px;
+}

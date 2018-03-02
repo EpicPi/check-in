@@ -33,7 +33,7 @@ class HostShowEvents extends Component {
                     <hr/>
                     <div className="row">
                         <div className="col-md-12">
-                            <ul>
+                            <ul className="event-list">
                                 {events}
                             </ul>
                         </div>
