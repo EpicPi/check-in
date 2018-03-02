@@ -5,24 +5,19 @@ import { connect } from 'react-redux';
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
 
-import Dash from "./dash/Dash";
-import {fetchUser} from "../actions";
-
-const New = () => <h2>New</h2>;
-const Land = () => <h2>Land</h2>;
+import HostDash from "./Host/HostDash";
+import Land from "../components/Land";
+import GuestDash from "./Guest/GuestDash";
 
 class AppContainer extends Component{
-    componentDidMount(){
-        // this.props.fetchUser();
-    }
     render(){
         return (
             <BrowserRouter>
                 <div>
                     <Header/>
                     <Route exact path='/' component={Land}/>
-                    <Route path='/dash' component={Dash}/>
-                    <Route path='/new' component={New}/>
+                    <Route path='/host' component={HostDash}/>
+                    <Route path='/guest' component={GuestDash}/>
                 </div>
             </BrowserRouter>
         );
@@ -39,10 +34,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (/* dispatch */) => {
+const mapDispatchToProps = (dispatch) => {
     return {
 
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps())(AppContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(AppContainer);

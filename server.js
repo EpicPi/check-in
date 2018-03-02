@@ -6,12 +6,18 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
-const keys = require('./backend/config/keys');
-const api = require('./backend/routes/');
 require('./backend/models/user');
 require('./backend/services/passport');
+const keys = require('./backend/config/keys');
+const api = require('./backend/routes/');
 
 
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieSession({

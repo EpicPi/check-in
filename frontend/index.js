@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { configureStore, history } from './store/configureStore';
-import Root from './containers/Root';
+import Root from './containers/Root/Root';
 
 import './assets/stylesheets/base.scss';
 
