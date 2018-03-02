@@ -44,13 +44,14 @@ router.post('/remove_event', async (req, res) => {
 );
 
 router.post('/checkin', async (req, res) => {
-    console.log(req.body);
-        const event = await Event.findById(req.body.id);
-        if (!event.guestsAttend.filter(guest => guest === req.user.id)) {//not user already checked-in
-            event.guestsAttend.push(req.body.event.id);
+
+        if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {//not user already checked-in
+            event.guestsAttend.push(req.user.id);
+            event.save();
             res.send(true);
+        } else {
+            res.send(false);
         }
-        res.send(false);
     }
 );
 
