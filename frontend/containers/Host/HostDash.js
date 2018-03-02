@@ -7,7 +7,7 @@ import HostEventDetail from './HostEventDetail';
 class HostDash extends Component {
     render() {
         return (
-                <div>
+                <div className="container container-fluid">
                     <Route exact path='/host' component={HostShowEvents}/>
                     <Route exact path='/host/create' component={HostCreateEvent}/>
                     <Route exact path='/host/event' component={HostEventDetail}/>
