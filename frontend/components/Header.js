@@ -26,20 +26,23 @@ class Header extends Component {
     }
     render() {
         return (
-            <nav className="navbar navbar-inverse bg-primary">
-                <div className="text-black">
-                    <h1>
-                        <Link to={
-                            this.props.user? (this.props.type? (this.props.type===USER.HOST?'/host':'/guest'):'/'):'/'
-                        }>
-                            Check-in
-                        </Link>
-                    </h1>
+            <nav className="navbar bg-primary fixed-top">
+                <div className="container-fluid">
+                    <div className="text-white">
+                        <h1>
+                            <Link to={
+                                this.props.user? (this.props.type? (this.props.type===USER.HOST?'/host':'/guest'):'/'):'/'
+                            }>
+                                Check-in
+                            </Link>
+                        </h1>
+                    </div>
+                    <br/>
+                    <p className="text-white">
+                        {this.renderContent()}
+                    </p>
+
                 </div>
-                <br/>
-                <p className="text-black">
-                    {this.renderContent()}
-                </p>
             </nav>
         );
     }
