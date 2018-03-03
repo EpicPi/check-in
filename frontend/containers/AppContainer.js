@@ -15,9 +15,15 @@ class AppContainer extends Component{
             <BrowserRouter>
                 <div>
                     <Header/>
-                    <Route exact path='/' component={Land}/>
-                    <Route path='/host' component={HostDash}/>
-                    <Route path='/guest' component={GuestDash}/>
+                    <div className="container container-fluid">
+                        <div className="row">
+                            <div className="col-sm-8 col-sm-offset-2">
+                                <Route exact path='/' component={Land}/>
+                                <Route path='/host' component={HostDash}/>
+                                <Route path='/guest' component={GuestDash}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </BrowserRouter>
         );

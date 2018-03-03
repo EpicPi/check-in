@@ -42,33 +42,61 @@ class HostCreateEvent extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} id="create-form">
-                <label>
-                    Event Name:
-                    <input
-                        type="text"
-                        name="eventName"
-                        value={this.state.eventName}
-                        onChange={this.handleNameInput}
-                        required
-                    />
-                </label>
-                <label>
-                    Code:
-                    <input
-                        type="text"
-                        name="code"
-                        value={this.state.code}
-                        onChange={this.handleCodeInput}
-                        required
-                    />
-                </label>
-                <div className="row">
-                    <div className="col">
-                        <button type="submit" value="Submit">Submit</button>
+            <div className="host-create-event row">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h2 className="text-center">Create Event</h2>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <form onSubmit={this.handleSubmit} id="create-form">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <label>
+                                                Event Name:
+                                                <div>
+                                                    <input
+                                                        type="text"
+                                                        name="eventName"
+                                                        value={this.state.eventName}
+                                                        onChange={this.handleNameInput}
+                                                        required
+                                                    />
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <label>
+                                            Code:
+                                            <div>
+                                                <input
+                                                    type="text"
+                                                    name="code"
+                                                    value={this.state.code}
+                                                    onChange={this.handleCodeInput}
+                                                    required
+                                                />
+                                            </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <button
+                                                type="submit"
+                                                value="Submit"
+                                                className="btn btn-info">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         );
     }
 }

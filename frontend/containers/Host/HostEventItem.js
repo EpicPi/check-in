@@ -15,12 +15,23 @@ class HostEventItem extends Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    Name: {this.props.event.name}
+            <div className="host-event list-group-item bg-light text-dark">
+                <div className="row">
+                    <div className="col-md-12">
+                        <span>
+                            Name: {this.props.event.name}
+                        </span>
+                        <span style={{float: "right"}}>
+                            <button
+                                onClick={() => this.handleClick(this.props.event)}
+                                className="btn btn-info btn-event">More Info</button>
+                            <button
+                                onClick={() => this.handleRemove(this.props.event)}
+                                className="btn btn-danger btn-event">Remove</button>
+                        </span>
+
+                    </div>
                 </div>
-                <button onClick={() => this.handleClick(this.props.event)}>more info</button>
-                <button onClick={() => this.handleRemove(this.props.event)}>Remove</button>
             </div>
         );
     }
