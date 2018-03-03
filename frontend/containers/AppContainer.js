@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import HostDash from "./Host/HostDash";
 import Land from "../components/Land";
 import GuestDash from "./Guest/GuestDash";
+import requireAuth from "../components/requireAuth";
 
 class AppContainer extends Component{
     render(){
@@ -19,8 +20,8 @@ class AppContainer extends Component{
                         <div className="row">
                             <div className="col-sm-8 col-sm-offset-2">
                                 <Route exact path='/' component={Land}/>
-                                <Route path='/host' component={HostDash}/>
-                                <Route path='/guest' component={GuestDash}/>
+                                <Route path='/host' component={requireAuth(HostDash)}/>
+                                <Route path='/guest' component={requireAuth(GuestDash)}/>
                             </div>
                         </div>
                     </div>
