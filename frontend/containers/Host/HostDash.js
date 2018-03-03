@@ -4,7 +4,6 @@ import HostCreateEvent from './HostCreateEvent';
 import HostShowEvents from './HostShowEvents';
 import HostEventDetail from './HostEventDetail';
 import HostEditEvent from "./HostEditEvent";
-import requireSelectedEvent from "../../Requirers/requireSelectedEvent";
 import {resetEvent} from "../../actions";
 import {connect} from "react-redux";
 
@@ -17,8 +16,8 @@ class HostDash extends Component {
             <div className="container container-fluid">
                 <Route exact path='/host' component={HostShowEvents}/>
                 <Route exact path='/host/create' component={HostCreateEvent}/>
-                <Route exact path='/host/event' component={HostEventDetail, '/host'}/>
-                <Route exact path='/host/edit' component={HostEditEvent, '/host'}/>
+                <Route exact path='/host/event' component={HostEventDetail}/>
+                <Route exact path='/host/edit' component={HostEditEvent}/>
             </div>
         );
     }
