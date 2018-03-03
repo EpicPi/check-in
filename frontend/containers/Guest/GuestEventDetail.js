@@ -24,7 +24,7 @@ class GuestEventDetail extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        event : state.guest.selectedEvent,
+        event : state.event.selected,
     };
 };
 

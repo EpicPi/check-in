@@ -5,10 +5,13 @@ export const guestInitial = {
     events: [],
     joinFind: JOIN_FIND.NOTHING_TO_CHECK,
     eventToJoin: {name: 'erger', code: 'fwwfe'},
-    selectedEvent: {name: 'gerge', code: 'fsdfs'},
 };
 
 export const hostInitial = {
     events: [],
-    selectedEvent: {name: 'gerge', code: 'fsdfs'}
+};
+export const eventInitial ={
+    selected: {name: 'gerge', code: 'fsdfs'},
+    selectedRSVPs: [],
+    selectedAttends: [],
 };
