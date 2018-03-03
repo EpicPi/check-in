@@ -6,10 +6,10 @@ const eventSchema = new Schema({
     code: {type: String, required: true},
     guestsRSVP: [],
     guestsAttend: [],
-    rsvpStart: {type: Date, required: true},
-    rsvpEnd: {type: Date, required: true},
-    checkinStart: {type: Date, required: true},
-    checkinEnd: {type: Date, required: true},
+    rsvpStart: {type: Date, required: true}
+    // rsvpEnd: {type: Date, required: true},
+    // checkinStart: {type: Date, required: true},
+    // checkinEnd: {type: Date, required: true},
 });
 
 mongoose.model('events',eventSchema);

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {hostAddEvent} from "../../actions";
+import { hostAddEvent } from "../../actions";
+import TimePicker from './TimePicker';
+
+const TODAY = new Date().toISOString().slice(0,10);
 
 class HostCreateEvent extends Component {
 
@@ -9,13 +12,17 @@ class HostCreateEvent extends Component {
         this.state = {
             eventName: '',
             code: '',
+            rsvpStart: {
+                time: '00:00',
+                date: TODAY
+            },
         };
 
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleCodeInput = this.handleCodeInput.bind(this);
+        this.handleRsvpStartChange = this.handleRsvpStartChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
 
     handleNameInput(e) {
         this.setState({ eventName: e.target.value });
@@ -25,16 +32,31 @@ class HostCreateEvent extends Component {
         this.setState({ code: e.target.value });
     }
 
+    handleRsvpStartChange(time, date) {
+        this.setState({
+            rsvpStart: {
+                time: time ? time : this.state.rsvpStart.time,
+                date: date ? date : this.state.rsvpStart.date,
+            }
+        });
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         const event = {
             name: this.state.eventName,
             code: this.state.code,
+            rsvpStart: new Date(this.state.rsvpStart.date + ' ' + this.state.rsvpStart.time),
         };
+        console.log("post", event);
         this.props.addEvent(event);
         this.setState({
             eventName: '',
             code: '',
+            rsvpStart: {
+                time: '00:00',
+                date: TODAY,
+            }
         });
 
         this.props.history.push('/host');
@@ -83,6 +105,21 @@ class HostCreateEvent extends Component {
                                             </label>
                                         </div>
                                     </div>
+
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <label>
+                                                RSVP Start:
+                                            <div>
+                                                <TimePicker
+                                                    time={ this.state.rsvpStart.time }
+                                                    date={ this.state.rsvpStart.date }
+                                                    handleChange={ this.handleRsvpStartChange } />
+                                            </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <div className="row">
                                         <div className="col-md-12">
                                             <button
