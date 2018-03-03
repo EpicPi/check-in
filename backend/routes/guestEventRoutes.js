@@ -31,7 +31,6 @@ router.post('/join', async (req, res) => {
 });
 
 router.post('/find', async (req, res) => {
-    console.log(req.body);
     const event = await Event.findOne({'code': req.body.code});
     res.send(event);
 });
@@ -45,7 +44,7 @@ router.post('/remove_event', async (req, res) => {
 );
 
 router.post('/checkin', async (req, res) => {
-
+        const event = await Event.findById(req.body.id);
         if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {//not user already checked-in
             event.guestsAttend.push(req.user.id);
             event.save();
@@ -55,7 +54,6 @@ router.post('/checkin', async (req, res) => {
         }
     }
 );
-
 
 
 module.exports = router;
