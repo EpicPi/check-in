@@ -6,15 +6,15 @@ import {getAttends, getRSVPs} from "../../actions";
 class HostEventDetail extends Component {
     componentWillMount(){
         this.props.getRSVPs(this.props.event);
-        this.props.getAttends(this.props.event);
+        // this.props.getAttends(this.props.event);
     }
     render() {
-        const guestsRSVP = this.props.event.guestsRSVP.map((guest, i) => (
+        const guestsRSVP = this.props.rsvps.map((guest, i) => (
             <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
         ));
-        const guestsAttend = this.props.event.guestsAttend.map((guest, i) => (
-            <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
-        ));
+        // const guestsAttend = this.props.event.attends.map((guest, i) => (
+        //     <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
+        // ));
         return (
             <div>
                 <div>
@@ -30,7 +30,7 @@ class HostEventDetail extends Component {
                 </div>
                 <div>
                     Attendees:
-                    {guestsAttend}
+                    {/*{guestsAttend}*/}
                 </div>
             </div>
         );
@@ -42,6 +42,8 @@ class HostEventDetail extends Component {
 const mapStateToProps = (state) => {
     return {
         event : state.event.selected,
+        rsvps: state.event.selectedRSVPs,
+        // attends: state.event.selectedAttends
     };
 };
 

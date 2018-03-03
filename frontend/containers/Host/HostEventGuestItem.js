@@ -17,7 +17,7 @@ class HostEventItem extends Component {
     render() {
         return (
             <div>
-                Name: {this.props.guest}
+                Name: {this.props.guest.name}
             </div>
         );
     }
