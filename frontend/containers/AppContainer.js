@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
@@ -8,7 +7,7 @@ import Header from "../components/Header";
 import HostDash from "./Host/HostDash";
 import Land from "../components/Land";
 import GuestDash from "./Guest/GuestDash";
-import requireAuth from "../components/requireAuth";
+import requireAuth from "../Requirers/requireAuth";
 
 class AppContainer extends Component{
     render(){
@@ -30,10 +29,6 @@ class AppContainer extends Component{
         );
     }
 }
-
-AppContainer.propTypes = {
-    name: PropTypes.string,
-};
 
 const mapStateToProps = (state) => {
     return {

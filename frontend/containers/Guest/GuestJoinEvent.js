@@ -38,7 +38,7 @@ class GuestJoinEvent extends Component {
             code:''
         });
         this.props.joinEvent(this.props.eventToJoin);
-        this.props.history.push('/guest/');
+        this.props.history.push('/guest');
     }
 
     render() {

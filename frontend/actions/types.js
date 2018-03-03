@@ -23,3 +23,4 @@ export const GUEST_CHECKIN = 'guest_checkin';
 export const SELECT_EVENT = 'select event';
 export const GET_RSVPS = 'get_rsvps';
 export const GET_ATTENDS = 'get_attends';
+export const RESET_EVENT = 'reset_event';
