@@ -10,7 +10,6 @@ class Header extends Component {
     }
 
     renderContent(){
-        console.log(this.props.auth);
         switch (this.props.user){
             case null:
                 return 'stil deciding';
