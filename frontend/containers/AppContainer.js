@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "../components/Header";
@@ -30,16 +29,4 @@ class AppContainer extends Component{
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    };
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(AppContainer);
+export default AppContainer;
