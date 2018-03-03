@@ -1,4 +1,4 @@
-import {FETCH_USER, SET_USER_TYPE} from "./types";
+import {FETCH_USER, RESET_USER_TYPE, SET_USER_TYPE} from "./types";
 import axios from "axios/index";
 
 export const fetchUser = () => async dispatch => {
@@ -9,4 +9,9 @@ export const fetchUser = () => async dispatch => {
 
 export const setUserType = (userType) => dispatch => {
     dispatch({type:SET_USER_TYPE, payload:userType});
-}
+};
+
+
+export const resetUserType = (userType) => dispatch => {
+    dispatch({type:RESET_USER_TYPE, payload:userType});
+};

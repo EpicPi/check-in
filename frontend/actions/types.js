@@ -1,6 +1,7 @@
 //auth event types
 export const FETCH_USER = 'fetch_user';
 export const SET_USER_TYPE = 'set_type';
+export const RESET_USER_TYPE = 'reset_type';
 
 //host event types
 export const HOST_ADD_EVENT = 'host_add_event';

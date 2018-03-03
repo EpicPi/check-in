@@ -30,12 +30,19 @@ class Header extends Component {
                 <div className="container-fluid">
                     <div className="text-white">
                         <h1>
-                            <Link to={
-                                this.props.user? (this.props.type? (this.props.type===USER.HOST?'/host':'/guest'):'/'):'/'
-                            }>
+                            <Link to={'/'}>
                                 Check-in
                             </Link>
                         </h1>
+                    </div>
+                    <div className="text-white">
+                        <h3>
+                            <Link to={
+                                this.props.user? (this.props.type? (this.props.type===USER.HOST?'/host':'/guest'):'/'):'/'
+                            }>
+                                Dash
+                            </Link>
+                        </h3>
                     </div>
                     <p style={{float: "right"}} className="text-white">
                         {this.renderContent()}

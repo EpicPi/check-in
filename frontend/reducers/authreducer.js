@@ -1,4 +1,4 @@
-import {FETCH_USER, SET_USER_TYPE} from '../actions/types';
+import {FETCH_USER, RESET_USER_TYPE, SET_USER_TYPE} from '../actions/types';
 import {authInitial} from "./initialState";
 
 export default function (state = authInitial, action) {
@@ -7,6 +7,8 @@ export default function (state = authInitial, action) {
             return {...state, user: (action.payload || false)};
         case SET_USER_TYPE:
             return {...state, userType: action.payload};
+        case RESET_USER_TYPE:
+            return {...state, userType: authInitial.userType};
         default:
             return state;
     }

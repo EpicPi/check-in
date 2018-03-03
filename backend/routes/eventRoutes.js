@@ -5,7 +5,7 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
-router.use('/rsvp', async (req, res) => {
+router.post('/rsvp', async (req, res) => {
     console.log(req.body);
         const event = await Event.findById(req.body.id);
         //cant use map here cause async await is weird
@@ -17,7 +17,7 @@ router.use('/rsvp', async (req, res) => {
         res.send(out);
     }
 );
-router.get('/attend', async (req, res) => {
+router.post('/attend', async (req, res) => {
         const event = await Event.findById(req.body.id);
         //cant use map here cause async await is weird
         const out = [];
