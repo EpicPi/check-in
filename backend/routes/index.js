@@ -6,9 +6,18 @@ const host = require('./hostEventRoutes');
 const guest = require('./guestEventRoutes');
 const event = require('./eventRoutes');
 
-router.use('/host', host);
-router.use('/auth', auth);
-router.use('/guest', guest);
-router.use('/event', event);
+const checkUser = (req, res, next) => {
+    if (!req.user) return res.send('not authorized');
+    next();
+};
 
-module.exports = router;
+router.use('/auth', auth);
+router.use('/host', checkUser, host);
+router.use('/guest', checkUser, guest);
+router.use('/event', checkUser, event);
+
+
+
+
+module.exports.router = router;
+
