@@ -16,11 +16,26 @@ class HostCreateEvent extends Component {
                 time: '00:00',
                 date: TODAY
             },
+            rsvpEnd: {
+                time: '00:00',
+                date: TODAY
+            },
+            checkinStart: {
+                time: '00:00',
+                date: TODAY
+            },
+            checkinEnd: {
+                time: '00:00',
+                date: TODAY
+            },
         };
 
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleCodeInput = this.handleCodeInput.bind(this);
         this.handleRsvpStartChange = this.handleRsvpStartChange.bind(this);
+        this.handleRsvpEndChange = this.handleRsvpEndChange.bind(this);
+        this.handleCheckinStartChange = this.handleCheckinStartChange.bind(this);
+        this.handleCheckinEndChange = this.handleCheckinEndChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -41,12 +56,47 @@ class HostCreateEvent extends Component {
         });
     }
 
+    handleRsvpEndChange(time, date) {
+        this.setState({
+            rsvpEnd: {
+                time: time ? time : this.state.rsvpEnd.time,
+                date: date ? date : this.state.rsvpEnd.date,
+            }
+        });
+    }
+
+    handleCheckinStartChange(time, date) {
+        this.setState({
+            checkinStart: {
+                time: time ? time : this.state.checkinStart.time,
+                date: date ? date : this.state.checkinStart.date,
+            }
+        });
+    }
+
+    handleCheckinEndChange(time, date) {
+        this.setState({
+            checkinEnd: {
+                time: time ? time : this.state.checkinEnd.time,
+                date: date ? date : this.state.checkinEnd.date,
+            }
+        });
+    }
+
+
+
+
     handleSubmit(e) {
         e.preventDefault();
         const event = {
             name: this.state.eventName,
             code: this.state.code,
-            rsvpStart: new Date(this.state.rsvpStart.date + ' ' + this.state.rsvpStart.time),
+            dates: {
+                rsvpStart: new Date(this.state.rsvpStart.date + ' ' + this.state.rsvpStart.time),
+                rsvpEnd: new Date(this.state.rsvpEnd.date + ' ' + this.state.rsvpEnd.time),
+                checkinStart: new Date(this.state.checkinStart.date + ' ' + this.state.checkinStart.time),
+                checkinEnd: new Date(this.state.checkinEnd.date + ' ' + this.state.checkinEnd.time),
+            }
         };
         console.log("post", event);
         this.props.addEvent(event);
@@ -56,7 +106,19 @@ class HostCreateEvent extends Component {
             rsvpStart: {
                 time: '00:00',
                 date: TODAY,
-            }
+            },
+            rsvpEnd: {
+                time: '00:00',
+                date: TODAY
+            },
+            checkinStart: {
+                time: '00:00',
+                date: TODAY
+            },
+            checkinEnd: {
+                time: '00:00',
+                date: TODAY
+            },
         });
 
         this.props.history.push('/host');
@@ -119,6 +181,49 @@ class HostCreateEvent extends Component {
                                             </label>
                                         </div>
                                     </div>
+
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <label>
+                                                RSVP End:
+                                                <div>
+                                                    <TimePicker
+                                                        time={ this.state.rsvpEnd.time }
+                                                        date={ this.state.rsvpEnd.date }
+                                                        handleChange={ this.handleRsvpEndChange } />
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <label>
+                                                Checkin Start:
+                                                <div>
+                                                    <TimePicker
+                                                        time={ this.state.checkinStart.time }
+                                                        date={ this.state.checkinStart.date }
+                                                        handleChange={ this.handleCheckinStartChange } />
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <label>
+                                                Checkin End:
+                                                <div>
+                                                    <TimePicker
+                                                        time={ this.state.checkinEnd.time }
+                                                        date={ this.state.checkinEnd.date }
+                                                        handleChange={ this.handleCheckinEndChange } />
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
 
                                     <div className="row">
                                         <div className="col-md-12">

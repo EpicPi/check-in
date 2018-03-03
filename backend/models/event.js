@@ -6,7 +6,12 @@ const eventSchema = new Schema({
     code: {type: String, required: true},
     guestsRSVP: [],
     guestsAttend: [],
-    rsvpStart: {type: Date, required: true}
+    dates: {
+        rsvpStart: {type: Date},
+        rsvpEnd: {type: Date},
+        checkinStart: {type: Date},
+        checkinEnd: {type: Date}
+    },
     // rsvpEnd: {type: Date, required: true},
     // checkinStart: {type: Date, required: true},
     // checkinEnd: {type: Date, required: true},

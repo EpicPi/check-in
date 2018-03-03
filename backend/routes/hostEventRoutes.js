@@ -10,7 +10,7 @@ router.post('/add_event', async (req, res) => {
         const event = await Event({
             name: req.body.name,
             code: req.body.code,
-            rsvpStart: req.body.rsvpStart,
+            dates: req.body.dates,
             guestsRSVP:[],
             guestsAttend:[]
         }).save();
