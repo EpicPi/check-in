@@ -7,7 +7,7 @@ const Event = mongoose.model('events');
 
 
 router.post('/add_event', async (req, res) => {
-        const event = await Event({name: req.body.name, code: req.body.code}).save();
+        const event = await Event({name: req.body.name, code: req.body.code, guestsRSVP:[],guestsAttend:[]}).save();
         const user = await User.findById(req.user.id);
         // user.events = []; //cleans out event array
         user.hostEvents.push(event.id);
