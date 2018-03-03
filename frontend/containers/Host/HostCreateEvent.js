@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hostAddEvent } from "../../actions";
 import TimePicker from './TimePicker';
+import {CHECK_CODE} from "../../helpers";
 
 const TODAY = new Date().toISOString().slice(0,10);
 
@@ -12,6 +13,7 @@ class HostCreateEvent extends Component {
         this.state = {
             eventName: '',
             code: '',
+            codeOut:'',
             rsvpStart: {
                 time: '00:00',
                 date: TODAY
@@ -45,6 +47,27 @@ class HostCreateEvent extends Component {
 
     handleCodeInput(e) {
         this.setState({ code: e.target.value });
+
+    }
+    handleCheckCode(){
+        switch(this.props.checkCode){
+            let out;
+            case CHECK_CODE.NOTHING_TO_CHECK:
+                out = '';
+                break;
+            case CHECK_CODE.TAKEN:
+                out = <h3>sorry code is taken</h3>;
+                break;
+            case CHECK_CODE.AVALIABLE:
+                out  = (
+                <div>
+                    <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
+                    <button onClick={this.handleSubmit}>confirm</button>
+                </div>);
+                break;
+            case CHECK_CODE.CHECKING:
+                out = <h3>checking</h3>;
+        }
     }
 
     handleRsvpStartChange(time, date) {
@@ -124,6 +147,7 @@ class HostCreateEvent extends Component {
         this.props.history.push('/host');
     }
 
+
     render() {
         return (
             <div className="host-create-event row">
@@ -167,6 +191,7 @@ class HostCreateEvent extends Component {
                                             </label>
                                         </div>
                                     </div>
+                                    {}
 
                                     <div className="row">
                                         <div className="col-md-12">
@@ -245,6 +270,7 @@ class HostCreateEvent extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        checkCode: state.host.checkCode
     };
 };
 
