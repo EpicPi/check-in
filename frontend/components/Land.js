@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {setUserType} from "../actions";
+import {resetUserType, setUserType} from "../actions";
 import {connect} from "react-redux";
 import React from "react";
 import {USER} from "../helpers";
@@ -7,7 +7,8 @@ import {USER} from "../helpers";
 import "../../public/app.css";
 
 class Land extends Component {
-    componentDidMount() {
+    componentWillMount() {
+        this.props.resetUserType();
     }
 
     handleClick(type){
@@ -115,6 +116,7 @@ function mapStateToProps(state) {
 function mapDispathToProps(props) {
     return {
         setUserType: setUserType,
+        resetUserType: resetUserType
     };
 }
 

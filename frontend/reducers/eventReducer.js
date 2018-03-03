@@ -6,9 +6,9 @@ export default function (state = eventInitial, action) {
     switch (action.type) {
         case SELECT_EVENT:
             return {...state, selected: action.payload};
-        case GET_ATTENDS:
-            return {...state, selectedRSVPs:action.payload};
         case GET_RSVPS:
+            return {...state, selectedRSVPs:action.payload};
+        case GET_ATTENDS:
             return {...state, selectedAttends: action.payload};
         default:
             return state;

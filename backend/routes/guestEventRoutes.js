@@ -44,7 +44,7 @@ router.post('/remove_event', async (req, res) => {
 );
 
 router.post('/checkin', async (req, res) => {
-
+        const event = await Event.findById(req.body.id);
         if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {//not user already checked-in
             event.guestsAttend.push(req.user.id);
             event.save();
@@ -54,5 +54,6 @@ router.post('/checkin', async (req, res) => {
         }
     }
 );
+
 
 module.exports = router;

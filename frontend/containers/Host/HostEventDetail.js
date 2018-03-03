@@ -9,10 +9,10 @@ class HostEventDetail extends Component {
         this.props.getAttends(this.props.event);
     }
     render() {
-        const guestsRSVP = this.props.event.guestsRSVP.map((guest, i) => (
+        const guestsRSVP = this.props.rsvps.map((guest, i) => (
             <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
         ));
-        const guestsAttend = this.props.event.guestsAttend.map((guest, i) => (
+        const guestsAttend = this.props.attends.map((guest, i) => (
             <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
         ));
         return (
@@ -42,6 +42,8 @@ class HostEventDetail extends Component {
 const mapStateToProps = (state) => {
     return {
         event : state.event.selected,
+        rsvps: state.event.selectedRSVPs,
+        attends: state.event.selectedAttends
     };
 };
 

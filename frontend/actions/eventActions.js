@@ -11,6 +11,6 @@ export const getRSVPs = (event) => async dispatch => {
     dispatch({type: GET_RSVPS, payload: res.data});
 };
 export const getAttends = (event) => async dispatch => {
-    const res = await axios.get('/api/event/attend', qs.stringify({id: event._id}));
+    const res = await axios.post('/api/event/attend', qs.stringify({id: event._id}));
     dispatch({type: GET_ATTENDS, payload: res.data});
 };
