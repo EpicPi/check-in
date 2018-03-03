@@ -17,8 +17,8 @@ class GuestDash extends Component {
         return (
             <div>
                 <Route exact path='/guest' component={GuestShowEvents}/>
-                <Route exact path='/guest/join' component={requireSelectedEvent(GuestJoinEvent, '/guest')}/>
-                <Route exact path='/guest/event' component={requireSelectedEvent(GuestEventDetail, '/guest')}/>
+                <Route exact path='/guest/join' component={GuestJoinEvent, '/guest'}/>
+                <Route exact path='/guest/event' component={GuestEventDetail, '/guest'}/>
             </div>
         );
     }

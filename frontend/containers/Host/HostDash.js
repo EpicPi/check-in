@@ -17,8 +17,8 @@ class HostDash extends Component {
             <div className="container container-fluid">
                 <Route exact path='/host' component={HostShowEvents}/>
                 <Route exact path='/host/create' component={HostCreateEvent}/>
-                <Route exact path='/host/event' component={requireSelectedEvent(HostEventDetail, '/host')}/>
-                <Route exact path='/host/edit' component={requireSelectedEvent(HostEditEvent, '/host')}/>
+                <Route exact path='/host/event' component={HostEventDetail, '/host'}/>
+                <Route exact path='/host/edit' component={HostEditEvent, '/host'}/>
             </div>
         );
     }
