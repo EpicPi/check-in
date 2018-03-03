@@ -3,6 +3,7 @@ import {Route} from "react-router-dom";
 import HostCreateEvent from './HostCreateEvent';
 import HostShowEvents from './HostShowEvents';
 import HostEventDetail from './HostEventDetail';
+import HostEditEvent from "./HostEditEvent";
 
 class HostDash extends Component {
     render() {
@@ -11,6 +12,7 @@ class HostDash extends Component {
                     <Route exact path='/host' component={HostShowEvents}/>
                     <Route exact path='/host/create' component={HostCreateEvent}/>
                     <Route exact path='/host/event' component={HostEventDetail}/>
+                    <Route exact path='/host/edit' component={HostEditEvent}/>
                 </div>
         );
     }

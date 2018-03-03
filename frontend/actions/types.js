@@ -8,6 +8,7 @@ export const HOST_GET_EVENTS = 'host_get_events';
 export const HOST_SELECT_EVENT = 'host_select_event';
 export const HOST_REMOVE_EVENT = 'host_remove_event';
 export const HOST_REPLACE = 'host_replace';
+export const HOST_EDIT_EVENT = 'host_edit_event';
 
 //guest event types
 export const GUEST_JOIN_EVENT = 'guest_join_event';

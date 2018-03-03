@@ -11,8 +11,12 @@ class HostEventDetail extends Component {
                 <div>
                     Code: {this.props.event.code}
                 </div>
+                <button onClick={()=>this.handleEditClick()}>Edit Event</button>
             </div>
         );
+    }
+    handleEditClick(){
+        this.props.history.push('/host/edit');
     }
 }
 const mapStateToProps = (state) => {
