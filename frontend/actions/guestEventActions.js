@@ -3,7 +3,6 @@ import * as qs from "qs";
 import {
     GUEST_CHECKIN,
     GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_REMOVE_EVENT, GUEST_RESET_JOIN_FIND,
-    GUEST_SELECT_EVENT
 } from "./types";
 
 export const guestJoinEvent = (event) => dispatch => {
@@ -22,9 +21,6 @@ export const guestGetEvents = () => async dispatch => {
     dispatch({type: GUEST_GET_EVENTS, payload: res.data});
 };
 
-export const guestSelectEvent = (event) => async dispatch => {
-    dispatch({type: GUEST_SELECT_EVENT, payload: event});
-};
 //TODO
 export const guestRemoveEvent = (event) => dispatch => {
     dispatch({type: GUEST_REMOVE_EVENT, payload: event});

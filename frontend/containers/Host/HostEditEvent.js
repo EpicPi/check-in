@@ -84,7 +84,7 @@ class HostEditEvent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        event: state.host.selectedEvent,
+        event: state.event.selected,
     };
 };
 

@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {hostRemoveEvent, hostSelectEvent} from "../../actions";
+import {hostRemoveEvent, hostSelectEvent, selectEvent} from "../../actions";
 import {connect} from 'react-redux';
 import React from "react";
 
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        selectEvent: hostSelectEvent,
+        selectEvent: selectEvent,
         removeEvent: hostRemoveEvent
     };
 };

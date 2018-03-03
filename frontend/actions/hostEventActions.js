@@ -17,10 +17,6 @@ export const hostGetEvents = () => async dispatch=>{
     dispatch({type:HOST_GET_EVENTS, payload: res.data});
 };
 
-export const hostSelectEvent = (event) => async dispatch=>{
-    dispatch({type:HOST_SELECT_EVENT, payload: event});
-};
-
 export const hostRemoveEvent = (event) => dispatch =>{
     dispatch({type:HOST_REMOVE_EVENT, payload: event});
     axios.post('/api/host/remove_event', qs.stringify(event));
@@ -33,4 +29,4 @@ export const replaceEvent = (event, toReplace)=> dispatch=> {
 export const hostEditEvent = (event) => dispatch=>{
     dispatch({type: HOST_EDIT_EVENT, payload:{event:event}});
     axios.post('/api/host/edit_event', qs.stringify(event));
-}
+};
