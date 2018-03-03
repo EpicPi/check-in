@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HostEventGuestItem from "./HostEventGuestItem";
+import {getAttends, getRSVPs} from "../../actions";
 
 class HostEventDetail extends Component {
+    componentWillMount(){
+        this.props.getRSVPs(this.props.event);
+        this.props.getAttends(this.props.event);
+    }
     render() {
         const guestsRSVP = this.props.event.guestsRSVP.map((guest, i) => (
             <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
@@ -24,7 +29,7 @@ class HostEventDetail extends Component {
                     {guestsRSVP}
                 </div>
                 <div>
-                    Attendeess:
+                    Attendees:
                     {guestsAttend}
                 </div>
             </div>
@@ -42,6 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
+        getRSVPs: getRSVPs,
+        getAttends: getAttends
     };
 };
 export default connect(mapStateToProps,mapDispatchToProps())(HostEventDetail);
