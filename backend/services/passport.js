@@ -25,7 +25,6 @@ passport.use(
             if (existingUser) {
                 return done(null, existingUser);// error = null
             }
-            console.log(profile);
             const user = await new User({googleId: profile.id, name:profile.displayName}).save();
             return done(null, user); // error = null
         }
