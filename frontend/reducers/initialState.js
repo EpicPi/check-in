@@ -1,4 +1,4 @@
-import {JOIN_FIND} from "../helpers";
+import {CHECK_CODE, JOIN_FIND} from "../helpers";
 
 export const authInitial = {user: null, userType: null};
 export const guestInitial = {
@@ -9,9 +9,10 @@ export const guestInitial = {
 
 export const hostInitial = {
     events: [],
+    checkCode: CHECK_CODE.NOTHING_TO_CHECK
 };
 export const eventInitial ={
-    selected: {name: 'gerge', code: 'fsdfs'},
+    selected: {},
     selectedRSVPs: [],
     selectedAttends: [],
 };

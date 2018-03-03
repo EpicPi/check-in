@@ -44,4 +44,9 @@ router.post('/edit_event', async (req, res) => {
         res.send(event);
     }
 );
+
+router.post('check_code', async (req,res) =>{
+    const event = await Event.findOne({'code': req.body.code});
+    res.send(!event); // code available?
+});
 module.exports = router;

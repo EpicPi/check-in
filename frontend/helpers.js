@@ -4,5 +4,12 @@ export const JOIN_FIND = Object.freeze({
     SUCCESS: 'success',
     FAIL: 'fail',
     NOTHING_TO_CHECK: 'nothing',
-    ALREADY_JOINED:'already_joined'
+    ALREADY_JOINED: 'already_joined'
+});
+
+export const CHECK_CODE = Object.freeze({
+    CHECKING: 'checking',
+    AVALIABLE: 'avaliable',
+    TAKEN: 'taken',
+    NOTHING_TO_CHECK: 'nothing',
 });
