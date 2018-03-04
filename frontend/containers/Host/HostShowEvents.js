@@ -14,7 +14,9 @@ class HostShowEvents extends Component {
         if (this.props.events.length === 0)
             this.props.getEvents();
     }
+    handleCreate(){
 
+    }
 
     render() {
         const events = this.props.events.map((event, i) => (

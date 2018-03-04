@@ -32,7 +32,9 @@ export const hostEditEvent = (event) => dispatch => {
 };
 
 export const hostCheckCode = (code) => async dispatch => {
+
     dispatch({type:HOST_CHECK_CODE});
-    const res = axios.post('/api/host/check_code',axios.stringify({code:code}));
+    const res = await axios.post('/api/host/check_code',qs.stringify({code:code}));
+    console.log(res);
     dispatch({type:HOST_CHECKED_CODE, payload:res.data});
 };

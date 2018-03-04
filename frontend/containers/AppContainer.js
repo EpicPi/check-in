@@ -14,7 +14,7 @@ class AppContainer extends Component{
             <BrowserRouter>
                 <div>
                     <Header/>
-                    <div className="container container-fluid">
+                    <div className="container-fluid">
                         <div className="row">
                             <div className="col-sm-8 col-sm-offset-2">
                                 <Route exact path='/' component={Land}/>
@@ -30,3 +30,4 @@ class AppContainer extends Component{
 }
 
 export default AppContainer;
+

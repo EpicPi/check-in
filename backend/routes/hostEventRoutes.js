@@ -11,8 +11,8 @@ router.post('/add_event', async (req, res) => {
             name: req.body.name,
             code: req.body.code,
             dates: req.body.dates,
-            guestsRSVP:[],
-            guestsAttend:[]
+            guestsRSVP: [],
+            guestsAttend: []
         }).save();
         const user = await User.findById(req.user.id);
         // user.events = []; //cleans out event array
@@ -51,8 +51,11 @@ router.post('/edit_event', async (req, res) => {
     }
 );
 
-router.post('check_code', async (req,res) =>{
+router.post('/check_code', async (req, res) => {
     const event = await Event.findOne({'code': req.body.code});
-    res.send(!event); // code available?
+    if (req.body.code !== '')
+        res.send(event === null); // code available?
+    else
+        res.send(false);
 });
 module.exports = router;

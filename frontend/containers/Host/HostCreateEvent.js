@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { hostAddEvent } from "../../actions";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {hostAddEvent, hostCheckCode} from "../../actions";
 import TimePicker from './TimePicker';
 import {CHECK_CODE} from "../../helpers";
+import { withAlert } from 'react-alert'
 
-const TODAY = new Date().toISOString().slice(0,10);
+const TODAY = new Date().toISOString().slice(0, 10);
 
 class HostCreateEvent extends Component {
 
@@ -13,7 +14,7 @@ class HostCreateEvent extends Component {
         this.state = {
             eventName: '',
             code: '',
-            codeOut:'',
+            codeOut: '',
             rsvpStart: {
                 time: '00:00',
                 date: TODAY
@@ -42,16 +43,17 @@ class HostCreateEvent extends Component {
     }
 
     handleNameInput(e) {
-        this.setState({ eventName: e.target.value });
+        this.setState({eventName: e.target.value});
     }
 
     handleCodeInput(e) {
-        this.setState({ code: e.target.value });
-
+        this.setState({code: e.target.value});
+        this.props.hostCheckCode(e.target.value);
     }
-    handleCheckCode(){
-        switch(this.props.checkCode){
-            let out;
+
+    checkCodeOutput() {
+        let out;
+        switch (this.props.checkCode) {
             case CHECK_CODE.NOTHING_TO_CHECK:
                 out = '';
                 break;
@@ -59,15 +61,12 @@ class HostCreateEvent extends Component {
                 out = <h3>sorry code is taken</h3>;
                 break;
             case CHECK_CODE.AVALIABLE:
-                out  = (
-                <div>
-                    <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-                    <button onClick={this.handleSubmit}>confirm</button>
-                </div>);
+                out = <h3>Code is avaliable</h3>;
                 break;
             case CHECK_CODE.CHECKING:
                 out = <h3>checking</h3>;
         }
+        return out;
     }
 
     handleRsvpStartChange(time, date) {
@@ -107,10 +106,12 @@ class HostCreateEvent extends Component {
     }
 
 
-
-
     handleSubmit(e) {
         e.preventDefault();
+        if (this.props.checkCode !== CHECK_CODE.AVALIABLE) {
+            // this.props.alert.show('Please enter a different code'); figure out how to do this
+            return;
+        }
         const event = {
             name: this.state.eventName,
             code: this.state.code,
@@ -178,31 +179,30 @@ class HostCreateEvent extends Component {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <label>
-                                            Code:
-                                            <div>
-                                                <input
-                                                    type="text"
-                                                    name="code"
-                                                    value={this.state.code}
-                                                    onChange={this.handleCodeInput}
-                                                    required
-                                                />
-                                            </div>
+                                                Code:
+                                                <div>
+                                                    <input
+                                                        type="text"
+                                                        name="code"
+                                                        value={this.state.code}
+                                                        onChange={this.handleCodeInput}
+                                                        required
+                                                    />
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
-                                    {}
-
+                                    {this.checkCodeOutput()}
                                     <div className="row">
                                         <div className="col-md-12">
                                             <label>
                                                 RSVP Start:
-                                            <div>
-                                                <TimePicker
-                                                    time={ this.state.rsvpStart.time }
-                                                    date={ this.state.rsvpStart.date }
-                                                    handleChange={ this.handleRsvpStartChange } />
-                                            </div>
+                                                <div>
+                                                    <TimePicker
+                                                        time={this.state.rsvpStart.time}
+                                                        date={this.state.rsvpStart.date}
+                                                        handleChange={this.handleRsvpStartChange}/>
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
@@ -213,9 +213,9 @@ class HostCreateEvent extends Component {
                                                 RSVP End:
                                                 <div>
                                                     <TimePicker
-                                                        time={ this.state.rsvpEnd.time }
-                                                        date={ this.state.rsvpEnd.date }
-                                                        handleChange={ this.handleRsvpEndChange } />
+                                                        time={this.state.rsvpEnd.time}
+                                                        date={this.state.rsvpEnd.date}
+                                                        handleChange={this.handleRsvpEndChange}/>
                                                 </div>
                                             </label>
                                         </div>
@@ -227,9 +227,9 @@ class HostCreateEvent extends Component {
                                                 Checkin Start:
                                                 <div>
                                                     <TimePicker
-                                                        time={ this.state.checkinStart.time }
-                                                        date={ this.state.checkinStart.date }
-                                                        handleChange={ this.handleCheckinStartChange } />
+                                                        time={this.state.checkinStart.time}
+                                                        date={this.state.checkinStart.date}
+                                                        handleChange={this.handleCheckinStartChange}/>
                                                 </div>
                                             </label>
                                         </div>
@@ -241,9 +241,9 @@ class HostCreateEvent extends Component {
                                                 Checkin End:
                                                 <div>
                                                     <TimePicker
-                                                        time={ this.state.checkinEnd.time }
-                                                        date={ this.state.checkinEnd.date }
-                                                        handleChange={ this.handleCheckinEndChange } />
+                                                        time={this.state.checkinEnd.time}
+                                                        date={this.state.checkinEnd.date}
+                                                        handleChange={this.handleCheckinEndChange}/>
                                                 </div>
                                             </label>
                                         </div>
@@ -255,7 +255,8 @@ class HostCreateEvent extends Component {
                                             <button
                                                 type="submit"
                                                 value="Submit"
-                                                className="btn btn-info">Submit</button>
+                                                className="btn btn-info">Submit
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -277,9 +278,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (/* dispatch */) => {
     return {
         addEvent: hostAddEvent,
+        hostCheckCode: hostCheckCode
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps())(HostCreateEvent);
+export default connect(mapStateToProps, mapDispatchToProps())(HostCreateEvent);
 
 
