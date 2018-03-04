@@ -15,6 +15,7 @@ class GuestJoinEvent extends Component {
         this.handleCodeInput = this.handleCodeInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleConfirm = this.handleConfirm.bind(this);
+        // this.checkJoinFind = this.checkJoinFind.bind()
     }
 
 
@@ -29,9 +30,6 @@ class GuestJoinEvent extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.findEvent(this.state.code);
-        this.setState({
-            loading: <h3>Checking</h3>
-        });
     }
 
     handleConfirm(e) {
@@ -42,7 +40,7 @@ class GuestJoinEvent extends Component {
         this.props.history.push('/guest');
     }
 
-    render() {
+    checkJoinFind(){
         let result;
         switch (this.props.joinFind) {
             case JOIN_FIND.FAIL:
@@ -64,9 +62,13 @@ class GuestJoinEvent extends Component {
             default:
                 result = '';
         }
+        return result;
+    }
+    render() {
+
 
         return (
-            <form onSubmit={this.handleSubmit} id="create-form">
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     Code:
                     <input
@@ -82,7 +84,7 @@ class GuestJoinEvent extends Component {
                         <button type="submit" value="Submit">Submit</button>
                     </div>
                 </div>
-                {result}
+                {this.checkJoinFind()}
             </form>
         );
     }
