@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {hostAddEvent, hostCheckCode} from "../../actions";
 import TimePicker from './TimePicker';
 import {CHECK_CODE} from "../../helpers";
-import { withAlert } from 'react-alert'
 
 const TODAY = new Date().toISOString().slice(0, 10);
 

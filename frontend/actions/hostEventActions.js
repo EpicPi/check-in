@@ -1,5 +1,6 @@
 import {
-    HOST_ADD_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_EDIT_EVENT, HOST_GET_EVENTS, HOST_REMOVE_EVENT,
+    HOST_ADD_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_EDIT_EVENT, HOST_GET_EVENTS, HOST_GOT_EVENTS,
+    HOST_REMOVE_EVENT,
     HOST_REPLACE,
 } from "./types";
 import axios from "axios/index";
@@ -13,8 +14,9 @@ export const hostAddEvent = (event) => async dispatch => {
 };
 
 export const hostGetEvents = () => async dispatch => {
+    dispatch({type:HOST_GET_EVENTS});
     const res = await axios.get('/api/host/get_events');
-    dispatch({type: HOST_GET_EVENTS, payload: res.data});
+    dispatch({type: HOST_GOT_EVENTS, payload: res.data});
 };
 
 export const hostRemoveEvent = (event) => dispatch => {
@@ -32,7 +34,6 @@ export const hostEditEvent = (event) => dispatch => {
 };
 
 export const hostCheckCode = (code) => async dispatch => {
-
     dispatch({type:HOST_CHECK_CODE});
     const res = await axios.post('/api/host/check_code',qs.stringify({code:code}));
     console.log(res);

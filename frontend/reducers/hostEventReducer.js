@@ -1,15 +1,17 @@
 import {
     HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_SELECT_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE,
-    HOST_EDIT_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE
+    HOST_EDIT_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_GOT_EVENTS
 } from '../actions/types';
 import {hostInitial} from "./initialState";
-import {CHECK_CODE} from "../helpers";
+import {CHECK_CODE, LOAD} from "../helpers";
 
 export default function (state = hostInitial, action) {
     switch (action.type) {
         case HOST_ADD_EVENT:
             return {...state, events: [...state.events, action.payload]};
         case HOST_GET_EVENTS:
+            return {...state, events: LOAD.LOADING};
+        case HOST_GOT_EVENTS:
             return {...state, events: action.payload};
         case HOST_SELECT_EVENT:
             return {...state, selectedEvent: action.payload};

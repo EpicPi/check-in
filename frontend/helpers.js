@@ -1,3 +1,7 @@
+import {connect} from "react-redux";
+import React from "react";
+import {withRouter} from "react-router";
+
 export const USER = Object.freeze({HOST: 'host', GUEST: 'guest'});
 export const JOIN_FIND = Object.freeze({
     CHECKING: 'checking',
@@ -14,3 +18,7 @@ export const CHECK_CODE = Object.freeze({
     NOTHING_TO_CHECK: 'nothing',
 });
 
+export const LOAD = Object.freeze({
+    LOADING: 'loading',
+    NOTHING: 'nothing'
+});

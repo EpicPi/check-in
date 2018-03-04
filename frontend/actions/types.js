@@ -6,6 +6,7 @@ export const RESET_USER_TYPE = 'reset_type';
 //host event types
 export const HOST_ADD_EVENT = 'host_add_event';
 export const HOST_GET_EVENTS = 'host_get_events';
+export const HOST_GOT_EVENTS = 'host_got_events';
 export const HOST_REMOVE_EVENT = 'host_remove_event';
 export const HOST_REPLACE = 'host_replace';
 export const HOST_EDIT_EVENT = 'host_edit_event';
