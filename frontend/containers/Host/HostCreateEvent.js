@@ -109,7 +109,7 @@ class HostCreateEvent extends Component {
     handleSubmit(e) {
         e.preventDefault();
         if (this.props.checkCode !== CHECK_CODE.AVALIABLE) {
-            // this.props.alert.show('Please enter a different code'); figure out how to do this
+            alert('Please enter a different code');
             return;
         }
         const event = {
