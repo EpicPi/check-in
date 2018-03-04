@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {guestFindEvent, guestJoinEvent, hostAddEvent} from "../../actions";
+import {guestFindEvent, guestJoinEvent, guestResetJoinFind, hostAddEvent} from "../../actions";
 import {JOIN_FIND} from "../../helpers";
 
 class GuestJoinEvent extends Component {
@@ -15,9 +15,11 @@ class GuestJoinEvent extends Component {
         this.handleCodeInput = this.handleCodeInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleConfirm = this.handleConfirm.bind(this);
-        // this.checkJoinFind = this.checkJoinFind.bind()
     }
 
+    componentWillMount() {
+        this.props.resetJoin();
+    }
 
     handleNameInput(e) {
         this.setState({eventName: e.target.value});
@@ -94,6 +96,7 @@ const mapDispatchToProps = (/* dispatch */) => {
     return {
         findEvent: guestFindEvent,
         joinEvent: guestJoinEvent,
+        resetJoin: guestResetJoinFind
     };
 };
 

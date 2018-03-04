@@ -2,7 +2,8 @@ import * as axios from "axios";
 import * as qs from "qs";
 import {
     GUEST_CHECKIN,
-    GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_REMOVE_EVENT, GUEST_RESET_JOIN_FIND,
+    GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_GET_EVENTS, GUEST_GOT_EVENTS, GUEST_JOIN_EVENT, GUEST_REMOVE_EVENT,
+    GUEST_RESET_JOIN_FIND,
 } from "./types";
 
 export const guestJoinEvent = (event) => dispatch => {
@@ -17,8 +18,9 @@ export const guestFindEvent = (code) => async dispatch => {
 };
 
 export const guestGetEvents = () => async dispatch => {
+    dispatch({type:GUEST_GET_EVENTS});
     const res = await axios.get('/api/guest/get_events');
-    dispatch({type: GUEST_GET_EVENTS, payload: res.data});
+    dispatch({type: GUEST_GOT_EVENTS, payload: res.data});
 };
 
 //TODO

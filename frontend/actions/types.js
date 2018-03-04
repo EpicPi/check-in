@@ -16,6 +16,7 @@ export const HOST_CHECKED_CODE = 'host_checked_code';
 //guest event types
 export const GUEST_JOIN_EVENT = 'guest_join_event';
 export const GUEST_GET_EVENTS = 'guest_get_events';
+export const GUEST_GOT_EVENTS = 'guest_got_events';
 export const GUEST_REMOVE_EVENT = 'guest_remove_event';
 export const GUEST_FIND_EVENT = 'guest_find_event';
 export const GUEST_FOUND_EVENT = 'guest_found_event';
