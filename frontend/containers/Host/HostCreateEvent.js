@@ -60,7 +60,7 @@ class HostCreateEvent extends Component {
             case CHECK_CODE.TAKEN:
                 out = <h3>sorry code is taken</h3>;
                 break;
-            case CHECK_CODE.AVALIABLE:
+            case CHECK_CODE.AVAILABLE:
                 out = <h3>Code is avaliable</h3>;
                 break;
             case CHECK_CODE.CHECKING:
@@ -108,7 +108,7 @@ class HostCreateEvent extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        if (this.props.checkCode !== CHECK_CODE.AVALIABLE) {
+        if (this.props.checkCode !== CHECK_CODE.AVAILABLE) {
             alert('Please enter a different code');
             return;
         }
@@ -283,5 +283,3 @@ const mapDispatchToProps = (/* dispatch */) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(HostCreateEvent);
-
-

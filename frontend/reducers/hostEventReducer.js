@@ -38,7 +38,7 @@ export default function (state = hostInitial, action) {
         case HOST_CHECK_CODE:
             return {...state, checkCode: CHECK_CODE.CHECKING};
         case HOST_CHECKED_CODE:
-            return {...state, checkCode: action.payload ? CHECK_CODE.AVALIABLE : CHECK_CODE.TAKEN};
+            return {...state, checkCode: action.payload ? CHECK_CODE.AVAILABLE : CHECK_CODE.TAKEN};
         default:
             return state;
     }

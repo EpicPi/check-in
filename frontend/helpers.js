@@ -9,7 +9,8 @@ export const JOIN_FIND = Object.freeze({
 
 export const CHECK_CODE = Object.freeze({
     CHECKING: 'checking',
-    AVALIABLE: 'avaliable',
+    AVAILABLE: 'avaliable',
     TAKEN: 'taken',
     NOTHING_TO_CHECK: 'nothing',
 });
+
