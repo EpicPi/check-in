@@ -51,4 +51,5 @@ router.post('/edit_event', async (req, res) => {
         res.send(event);
     }
 );
+
 module.exports = router;
