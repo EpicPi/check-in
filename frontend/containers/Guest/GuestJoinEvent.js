@@ -40,7 +40,7 @@ class GuestJoinEvent extends Component {
         this.props.history.push('/guest');
     }
 
-    checkJoinFind(){
+    checkJoinFind() {
         let result;
         switch (this.props.joinFind) {
             case JOIN_FIND.FAIL:
@@ -64,9 +64,8 @@ class GuestJoinEvent extends Component {
         }
         return result;
     }
+
     render() {
-
-
         return (
             <form onSubmit={this.handleSubmit}>
                 <label>
