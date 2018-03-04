@@ -23,6 +23,18 @@ class HostEventDetail extends Component {
                 <div>
                     Code: {this.props.event.code}
                 </div>
+                <div>
+                    RSVP Start: { new Date(this.props.event.dates.rsvpStart).toString() }
+                </div>
+                <div>
+                    RSVP End: { new Date(this.props.event.dates.rsvpEnd).toString() }
+                </div>
+                <div>
+                    Checkin Start: { new Date(this.props.event.dates.checkinStart).toString() }
+                </div>
+                <div>
+                    Checkin End: { new Date(this.props.event.dates.checkinEnd).toString() }
+                </div>
                 <button onClick={()=>this.handleEditClick()}>Edit Event</button>
                 <div>
                     RSVPs:
