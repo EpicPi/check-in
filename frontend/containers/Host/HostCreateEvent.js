@@ -51,21 +51,16 @@ class HostCreateEvent extends Component {
     }
 
     checkCodeOutput() {
-        let out;
         switch (this.props.checkCode) {
             case CHECK_CODE.NOTHING_TO_CHECK:
-                out = '';
-                break;
+                return '';
             case CHECK_CODE.TAKEN:
-                out = <h3>sorry code is taken</h3>;
-                break;
+                return <h3>sorry code is taken</h3>;
             case CHECK_CODE.AVAILABLE:
-                out = <h3>Code is avaliable</h3>;
-                break;
+                return <h3>Code is avaliable</h3>;
             case CHECK_CODE.CHECKING:
-                out = <h3>checking</h3>;
+                return <h3>checking</h3>;
         }
-        return out;
     }
 
     handleRsvpStartChange(time, date) {
