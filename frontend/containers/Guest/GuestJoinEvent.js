@@ -41,28 +41,22 @@ class GuestJoinEvent extends Component {
     }
 
     checkJoinFind() {
-        let result;
         switch (this.props.joinFind) {
             case JOIN_FIND.FAIL:
-                result = <h3>Couldn't find, please check code</h3>;
-                break;
+                return <h3>Couldn't find, please check code</h3>;
             case JOIN_FIND.SUCCESS:
-                result = (
+                return (
                     <div>
                         <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
                         <button onClick={this.handleConfirm}>confirm</button>
                     </div>);
-                break;
             case JOIN_FIND.CHECKING:
-                result = <h3>Checking code</h3>;
-                break;
+                return <h3>Checking code</h3>;
             case JOIN_FIND.ALREADY_JOINED:
-                result = <h3>You already RSVPed for this event!</h3>;
-                break;
+                return <h3>You already RSVPed for this event!</h3>;
             default:
-                result = '';
+                return '';
         }
-        return result;
     }
 
     render() {
