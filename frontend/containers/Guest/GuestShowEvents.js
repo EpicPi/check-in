@@ -35,7 +35,7 @@ class GuestShowEvents extends Component {
 
     render() {
         return (
-            <div className="row host-show">
+            <div className="row guest-show">
                 <div className="container-fluid">
                     <div className="row btn-create">
                         <div className="col-md-12">
