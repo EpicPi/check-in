@@ -10,10 +10,10 @@ class HostEventDetail extends Component {
     }
     render() {
         const guestsRSVP = this.props.rsvps.map((guest, i) => (
-            <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
+            <HostEventGuestItem history={this.props.history} key={i} guest={guest} />
         ));
         const guestsAttend = this.props.attends.map((guest, i) => (
-            <HostEventGuestItem history ={this.props.history} key={i} guest={guest} />
+            <HostEventGuestItem history={this.props.history} key={i} guest={guest} />
         ));
         return (
             <div>
@@ -22,6 +22,18 @@ class HostEventDetail extends Component {
                 </div>
                 <div>
                     Code: {this.props.event.code}
+                </div>
+                <div>
+                    RSVP Start: { new Date(this.props.event.dates.rsvpStart).toString() }
+                </div>
+                <div>
+                    RSVP End: { new Date(this.props.event.dates.rsvpEnd).toString() }
+                </div>
+                <div>
+                    Checkin Start: { new Date(this.props.event.dates.checkinStart).toString() }
+                </div>
+                <div>
+                    Checkin End: { new Date(this.props.event.dates.checkinEnd).toString() }
                 </div>
                 <button onClick={()=>this.handleEditClick()}>Edit Event</button>
                 <div>
