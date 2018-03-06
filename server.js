@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //api and frontend routes
-app.use('/api', api.router);
+app.use('/api', api);
 app.use('/', (request, response) => {
     response.sendFile(__dirname + '/public/index.html'); // For React/Redux
 });

@@ -16,5 +16,4 @@ router.use('/host', checkUser, host);
 router.use('/guest', checkUser, guest);
 router.use('/event', checkUser, event);
 
-module.exports.router = router;
-
+module.exports = router;
