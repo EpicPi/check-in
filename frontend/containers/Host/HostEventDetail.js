@@ -2,19 +2,40 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HostEventGuestItem from "./HostEventGuestItem";
 import {getAttends, getRSVPs} from "../../actions";
+import {LOAD} from "../../helpers";
 
 class HostEventDetail extends Component {
     componentWillMount(){
         this.props.getRSVPs(this.props.event);
         this.props.getAttends(this.props.event);
     }
+
+    getRSVPsOutput(){
+        switch(this.props.rsvps){
+            case LOAD.LOADING:
+                return <h3>LOADING</h3>;
+            case LOAD.NOTHING:
+                return;
+            default:
+                return this.props.rsvps.map((guest, i) => (
+                    <HostEventGuestItem history={this.props.history} key={i} guest={guest} />
+                ));
+        }
+    }
+    getAttendssOutput(){
+        switch(this.props.attends){
+            case LOAD.LOADING:
+                return <h3>LOADING</h3>;
+            case LOAD.NOTHING:
+                return;
+            default:
+                return this.props.attends.map((guest, i) => (
+                    <HostEventGuestItem history={this.props.history} key={i} guest={guest} />
+                ));
+        }
+    }
+
     render() {
-        const guestsRSVP = this.props.rsvps.map((guest, i) => (
-            <HostEventGuestItem history={this.props.history} key={i} guest={guest} />
-        ));
-        const guestsAttend = this.props.attends.map((guest, i) => (
-            <HostEventGuestItem history={this.props.history} key={i} guest={guest} />
-        ));
         return (
             <div>
                 <div>
@@ -38,11 +59,11 @@ class HostEventDetail extends Component {
                 <button onClick={()=>this.handleEditClick()}>Edit Event</button>
                 <div>
                     RSVPs:
-                    {guestsRSVP}
+                    {this.getRSVPsOutput()}
                 </div>
                 <div>
                     Attendees:
-                    {guestsAttend}
+                    {this.getAttendssOutput()}
                 </div>
             </div>
         );

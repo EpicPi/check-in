@@ -13,6 +13,6 @@ export const hostInitial = {
 };
 export const eventInitial ={
     selected: {},
-    selectedRSVPs: [],
-    selectedAttends: [],
+    selectedRSVPs: LOAD.NOTHING,
+    selectedAttends: LOAD.NOTHING,
 };

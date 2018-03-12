@@ -27,7 +27,7 @@ class HostShowEvents extends Component {
     getEventsOutput() {
         switch (this.props.events) {
             case LOAD.LOADING:
-                return <h3>LOADING</h3>
+                return <h3>LOADING</h3>;
             case LOAD.NOTHING:
                 return;
             default:
