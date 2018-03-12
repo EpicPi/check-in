@@ -46,6 +46,7 @@ router.post('/edit_event', async (req, res) => {
         //only want to update the editable values
         event.name = req.body.name;
         event.code = req.body.code;
+        event.dates = req.body.dates;
         event.save();
         res.send(event);
     }
@@ -58,4 +59,5 @@ router.post('/check_code', async (req, res) => {
     else
         res.send(false);
 });
+
 module.exports = router;

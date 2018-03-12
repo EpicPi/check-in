@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {hostAddEvent, hostCheckCode} from "../../actions";
 import TimePicker from './TimePicker';
+
 import {CHECK_CODE} from "../../helpers";
 
-const TODAY = new Date().toISOString().slice(0, 10);
+import { TODAY, dateTimeToDate } from "../../helpers";
 
 class HostCreateEvent extends Component {
 
@@ -110,10 +111,10 @@ class HostCreateEvent extends Component {
             name: this.state.eventName,
             code: this.state.code,
             dates: {
-                rsvpStart: new Date(this.state.rsvpStart.date + ' ' + this.state.rsvpStart.time),
-                rsvpEnd: new Date(this.state.rsvpEnd.date + ' ' + this.state.rsvpEnd.time),
-                checkinStart: new Date(this.state.checkinStart.date + ' ' + this.state.checkinStart.time),
-                checkinEnd: new Date(this.state.checkinEnd.date + ' ' + this.state.checkinEnd.time),
+                rsvpStart: dateTimeToDate(this.state.rsvpStart.date, this.state.rsvpStart.time),
+                rsvpEnd: dateTimeToDate(this.state.rsvpEnd.date, this.state.rsvpEnd.time),
+                checkinStart: dateTimeToDate(this.state.checkinStart.date, this.state.checkinStart.time),
+                checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
             }
         };
         console.log("post", event);
