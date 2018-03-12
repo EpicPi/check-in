@@ -1,6 +1,6 @@
 import {GET_ATTENDS, GET_RSVPS, GOT_ATTENDS, GOT_RSVPS, RESET_EVENT, SELECT_EVENT} from "../actions/types";
 import {eventInitial} from "./initialState";
-import {LOAD} from "../helpers";
+import {LOAD} from "../helpers/Enums";
 
 
 export default function (state = eventInitial, action) {

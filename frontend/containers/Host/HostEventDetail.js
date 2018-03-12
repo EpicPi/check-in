@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HostEventGuestItem from "./HostEventGuestItem";
 import {getAttends, getRSVPs} from "../../actions";
-import {LOAD} from "../../helpers";
+import {LOAD} from "../../helpers/Enums";
 
 class HostEventDetail extends Component {
     componentWillMount(){

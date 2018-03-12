@@ -2,7 +2,7 @@ import {Component} from "react";
 import {resetUserType, setUserType} from "../actions";
 import {connect} from "react-redux";
 import React from "react";
-import {USER} from "../helpers";
+import {USER} from "../helpers/Enums";
 
 import "../../public/app.css";
 

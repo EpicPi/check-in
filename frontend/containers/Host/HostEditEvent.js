@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import TimePicker from './TimePicker';
 import {hostEditEvent} from "../../actions";
-import { dateStringToHours, dateStringToDate, dateTimeToDate } from "../../helpers"
+import { dateStringToHours, dateStringToDate, dateTimeToDate } from "../../helpers/Time"
 
 class HostEditEvent extends Component {
     constructor(props) {

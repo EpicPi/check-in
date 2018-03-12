@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import {hostAddEvent, hostCheckCode} from "../../actions";
 import TimePicker from './TimePicker';
 
-import {CHECK_CODE} from "../../helpers";
+import {CHECK_CODE} from "../../helpers/Enums";
 
-import { TODAY, dateTimeToDate } from "../../helpers";
+import { TODAY, dateTimeToDate } from "../../helpers/Time";
 
 class HostCreateEvent extends Component {
 
@@ -244,7 +244,13 @@ class HostCreateEvent extends Component {
                                         </div>
                                     </div>
 
-
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <select>
+                                                <option value='basic'></option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div className="row">
                                         <div className="col-md-12">
                                             <button
@@ -254,6 +260,8 @@ class HostCreateEvent extends Component {
                                             </button>
                                         </div>
                                     </div>
+
+
                                 </form>
                             </div>
                         </div>

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {hostGetEvents, hostRemoveEvent, hostSelectEvent} from "../../actions";
 import Link from "react-router-dom/es/Link";
 import HostEventItem from "./HostEventItem";
-import {LOAD} from "../../helpers";
+import {LOAD} from "../../helpers/Enums";
 
 
 class HostShowEvents extends Component {

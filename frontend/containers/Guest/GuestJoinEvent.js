@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {guestFindEvent, guestJoinEvent, guestResetJoinFind, hostAddEvent} from "../../actions";
-import {JOIN_FIND} from "../../helpers";
+import {JOIN_FIND} from "../../helpers/Enums";
 
 class GuestJoinEvent extends Component {
 

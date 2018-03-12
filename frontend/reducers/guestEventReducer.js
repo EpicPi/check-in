@@ -3,7 +3,7 @@ import {
     GUEST_GET_EVENTS, GUEST_JOIN_EVENT, GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_RESET_JOIN_FIND, GUEST_CHECKIN,
     GUEST_SELECT_EVENT, GUEST_GOT_EVENTS
 } from '../actions/types';
-import {JOIN_FIND, LOAD} from "../helpers";
+import {JOIN_FIND, LOAD} from "../helpers/Enums";
 import {guestInitial} from "./initialState";
 import {guestSelectEvent} from "../actions";
 

@@ -3,7 +3,7 @@ import {
     HOST_EDIT_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_GOT_EVENTS
 } from '../actions/types';
 import {hostInitial} from "./initialState";
-import {CHECK_CODE, LOAD} from "../helpers";
+import {CHECK_CODE, LOAD} from "../helpers/Enums";
 
 export default function (state = hostInitial, action) {
     switch (action.type) {

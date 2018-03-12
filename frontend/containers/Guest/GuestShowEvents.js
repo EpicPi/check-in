@@ -3,7 +3,7 @@ import {guestGetEvents} from "../../actions";
 import {connect} from "react-redux";
 import React from "react";
 import GuestEventItem from "./GuestEventItem";
-import {LOAD} from "../../helpers";
+import {LOAD} from "../../helpers/Enums";
 
 class GuestShowEvents extends Component {
     constructor(props) {
