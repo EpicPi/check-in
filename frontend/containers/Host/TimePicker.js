@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-const TODAY = new Date().toISOString().slice(0,10);
+// const TODAY = new Date().toISOString().slice(0,10);
 
 class TimePicker extends Component {
     constructor(props) {

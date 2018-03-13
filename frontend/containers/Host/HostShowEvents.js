@@ -7,6 +7,7 @@ import {LOAD} from "../../helpers/Enums";
 
 
 class HostShowEvents extends Component {
+
     constructor(props) {
         super(props);
         this.handleCreate = this.handleCreate.bind(this);
@@ -16,8 +17,6 @@ class HostShowEvents extends Component {
     componentDidMount() {
         if (this.props.events === LOAD.NOTHING)
             this.props.getEvents();
-
-
     }
 
     handleCreate() {

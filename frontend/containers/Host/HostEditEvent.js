@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import HostEvent from "./HostEvent";
 
 class HostEditEvent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>

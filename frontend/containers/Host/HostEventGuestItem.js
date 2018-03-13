@@ -3,15 +3,6 @@ import {connect} from 'react-redux';
 import React from "react";
 
 class HostEventItem extends Component {
-    handleClick(event) {
-        this.props.selectEvent(event);
-        this.props.history.push('/host/event');
-    }
-
-    handleRemove(event) {
-        this.props.removeEvent(event);
-    }
-
 
     render() {
         return (
