@@ -12,7 +12,9 @@ router.post('/add_event', async (req, res) => {
             code: req.body.code,
             dates: req.body.dates,
             guestsRSVP: [],
-            guestsAttend: []
+            guestsAttend: [],
+            type: req.body.type,
+            checkInCode: req.body.checkInCode
         }).save();
         const user = await User.findById(req.user.id);
         // user.events = []; //cleans out event array

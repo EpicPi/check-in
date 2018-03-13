@@ -12,9 +12,8 @@ const eventSchema = new Schema({
         checkinStart: {type: Date},
         checkinEnd: {type: Date}
     },
-    // rsvpEnd: {type: Date, required: true},
-    // checkinStart: {type: Date, required: true},
-    // checkinEnd: {type: Date, required: true},
+    type: {type: String, required: true},
+    checkInCode: {type: String}
 });
 
 mongoose.model('events',eventSchema);
