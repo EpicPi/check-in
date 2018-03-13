@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {hostAddEvent, hostCheckCode} from "../../actions";
 import TimePicker from './TimePicker';
 
-import {CHECK_CODE} from "../../helpers/Enums";
+import {CHECK_CODE, EVENT_TYPES} from "../../helpers/Enums";
 
 import { TODAY, dateTimeToDate } from "../../helpers/Time";
 
@@ -11,6 +11,19 @@ class HostCreateEvent extends Component {
 
     constructor(props) {
         super(props);
+        this.handleNameInput = this.handleNameInput.bind(this);
+        this.handleCodeInput = this.handleCodeInput.bind(this);
+        this.handleRsvpStartChange = this.handleRsvpStartChange.bind(this);
+        this.handleRsvpEndChange = this.handleRsvpEndChange.bind(this);
+        this.handleCheckinStartChange = this.handleCheckinStartChange.bind(this);
+        this.handleCheckinEndChange = this.handleCheckinEndChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.getSelectOutput = this.getSelectOutput.bind(this);
+        this.handleCheckInCodeInput = this.handleCheckInCodeInput.bind(this);
+    }
+
+    componentWillMount(){
         this.state = {
             eventName: '',
             code: '',
@@ -31,15 +44,10 @@ class HostCreateEvent extends Component {
                 time: '00:00',
                 date: TODAY
             },
-        };
+            select: EVENT_TYPES.BASIC,
+            checkInCode: '',
 
-        this.handleNameInput = this.handleNameInput.bind(this);
-        this.handleCodeInput = this.handleCodeInput.bind(this);
-        this.handleRsvpStartChange = this.handleRsvpStartChange.bind(this);
-        this.handleRsvpEndChange = this.handleRsvpEndChange.bind(this);
-        this.handleCheckinStartChange = this.handleCheckinStartChange.bind(this);
-        this.handleCheckinEndChange = this.handleCheckinEndChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        };
     }
 
     handleNameInput(e) {
@@ -100,6 +108,39 @@ class HostCreateEvent extends Component {
         });
     }
 
+    handleSelectChange(e){
+        this.setState({select: e.target.value});
+    }
+
+    handleCheckInCodeInput(e){
+        this.setState({checkInCode: e.target.value});
+    }
+
+    getSelectOutput(){
+        switch(this.state.select){
+            case EVENT_TYPES.BASIC:
+                return;
+            case EVENT_TYPES.CODE:
+                return (
+                    <div className="row">
+                        <div className="col-md-12">
+                            <label>
+                                Check In Code:
+                                <div>
+                                    <input
+                                        type="text"
+                                        name="code"
+                                        value={this.state.checkInCode}
+                                        onChange={this.handleCheckInCodeInput}
+                                        required
+                                    />
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                );
+        }
+    }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -115,9 +156,10 @@ class HostCreateEvent extends Component {
                 rsvpEnd: dateTimeToDate(this.state.rsvpEnd.date, this.state.rsvpEnd.time),
                 checkinStart: dateTimeToDate(this.state.checkinStart.date, this.state.checkinStart.time),
                 checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
-            }
+            },
+            type: this.state.select,
+            checkInCode: this.state.checkInCode,
         };
-        console.log("post", event);
         this.props.addEvent(event);
         this.setState({
             eventName: '',
@@ -138,6 +180,8 @@ class HostCreateEvent extends Component {
                 time: '00:00',
                 date: TODAY
             },
+            select: EVENT_TYPES.BASIC,
+            checkInCode: '',
         });
 
         this.props.history.push('/host');
@@ -171,6 +215,7 @@ class HostCreateEvent extends Component {
                                             </label>
                                         </div>
                                     </div>
+
                                     <div className="row">
                                         <div className="col-md-12">
                                             <label>
@@ -187,7 +232,9 @@ class HostCreateEvent extends Component {
                                             </label>
                                         </div>
                                     </div>
+
                                     {this.checkCodeOutput()}
+
                                     <div className="row">
                                         <div className="col-md-12">
                                             <label>
@@ -246,11 +293,16 @@ class HostCreateEvent extends Component {
 
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <select>
-                                                <option value='basic'></option>
+                                            Check-in type
+                                            <select value = {this.state.select} onChange={this.handleSelectChange}>
+                                                <option value={EVENT_TYPES.BASIC}>Basic</option>
+                                                <option value={EVENT_TYPES.CODE}>Code</option>
                                             </select>
                                         </div>
                                     </div>
+
+                                    {this.getSelectOutput()}
+
                                     <div className="row">
                                         <div className="col-md-12">
                                             <button
@@ -260,8 +312,6 @@ class HostCreateEvent extends Component {
                                             </button>
                                         </div>
                                     </div>
-
-
                                 </form>
                             </div>
                         </div>

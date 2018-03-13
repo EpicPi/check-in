@@ -23,5 +23,8 @@ export const LOAD = Object.freeze({
     NOTHING: 'nothing'
 });
 
-// export const
+export const EVENT_TYPES = Object.freeze({
+    BASIC: 'basic',
+    CODE: 'code'
+});
 

@@ -9,7 +9,6 @@ import * as qs from 'qs';
 export const hostAddEvent = (event) => async dispatch => {
     dispatch({type: HOST_ADD_EVENT, payload: event});
     const event2 = await axios.post('/api/host/add_event', qs.stringify(event));
-    console.log(event2.data);
     dispatch(replaceEvent(event2.data, event));
 };
 
