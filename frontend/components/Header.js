@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {fetchUser, login} from "../actions";
-import {USER} from "../helpers";
+import {USER} from "../helpers/Enums";
 
 class Header extends Component {
     componentDidMount(){

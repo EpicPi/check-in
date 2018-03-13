@@ -3,8 +3,14 @@ import {Route} from "react-router-dom";
 import GuestShowEvents from "./GuestShowEvents";
 import GuestJoinEvent from "./GuestJoinEvent";
 import GuestEventDetail from "./GuestEventDetail";
+import {resetEvent} from "../../actions";
+import {connect} from "react-redux";
 
 class GuestDash extends Component {
+    componentWillMount() {
+        this.props.resetEvent();
+    }
+
     render() {
         return (
             <div>
@@ -15,4 +21,14 @@ class GuestDash extends Component {
         );
     }
 }
-export default GuestDash;
+
+const mapStateToProps = (state) => {
+    return {};
+};
+const mapDispatchToProps = () => {
+    return {
+        resetEvent: resetEvent,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps())(GuestDash);

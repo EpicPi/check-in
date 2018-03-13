@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {guestFindEvent, guestJoinEvent, hostAddEvent} from "../../actions";
-import {JOIN_FIND} from "../../helpers";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {guestFindEvent, guestJoinEvent, guestResetJoinFind, hostAddEvent} from "../../actions";
+import {JOIN_FIND} from "../../helpers/Enums";
 
 class GuestJoinEvent extends Component {
 
@@ -17,48 +17,53 @@ class GuestJoinEvent extends Component {
         this.handleConfirm = this.handleConfirm.bind(this);
     }
 
+    componentWillMount() {
+        this.props.resetJoin();
+    }
 
     handleNameInput(e) {
-        this.setState({ eventName: e.target.value });
+        this.setState({eventName: e.target.value});
     }
 
     handleCodeInput(e) {
-        this.setState({ code: e.target.value });
+        this.setState({code: e.target.value});
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.props.findEvent(this.state.code);
-        this.setState({
-            loading:<h3>Checking</h3>
-        });
     }
-    handleConfirm(e){
+
+    handleConfirm(e) {
         this.setState({
-            code:''
+            code: ''
         });
         this.props.joinEvent(this.props.eventToJoin);
-        this.props.history.push('/guest/');
+        this.props.history.push('/guest');
+    }
+
+    checkJoinFind() {
+        switch (this.props.joinFind) {
+            case JOIN_FIND.FAIL:
+                return <h3>Couldn't find, please check code</h3>;
+            case JOIN_FIND.SUCCESS:
+                return (
+                    <div>
+                        <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
+                        <button onClick={this.handleConfirm}>confirm</button>
+                    </div>);
+            case JOIN_FIND.CHECKING:
+                return <h3>Checking code</h3>;
+            case JOIN_FIND.ALREADY_JOINED:
+                return <h3>You already RSVPed for this event!</h3>;
+            default:
+                return '';
+        }
     }
 
     render() {
-        let result = '';
-        if(this.props.joinFind === JOIN_FIND.FAIL){
-            result = <h3>Couldn't find, please check code</h3>
-        }else if(this.props.joinFind === JOIN_FIND.SUCCESS){
-            result= (
-                <div>
-                    <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-                    <button onClick={this.handleConfirm}>confirm</button>
-                </div>)
-        }else if(this.props.joinFind === JOIN_FIND.CHECKING){
-            result = <h3>Checking code</h3>
-        }else if(this.props.joinFind === JOIN_FIND.ALREADY_JOINED){
-            result = <h3>You already RSVPed for this event!</h3>
-        }
-
         return (
-            <form onSubmit={this.handleSubmit} id="create-form">
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     Code:
                     <input
@@ -74,7 +79,7 @@ class GuestJoinEvent extends Component {
                         <button type="submit" value="Submit">Submit</button>
                     </div>
                 </div>
-                {result}
+                {this.checkJoinFind()}
             </form>
         );
     }
@@ -91,7 +96,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     return {
         findEvent: guestFindEvent,
         joinEvent: guestJoinEvent,
+        resetJoin: guestResetJoinFind
     };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps())(GuestJoinEvent);
+export default connect(mapStateToProps, mapDispatchToProps())(GuestJoinEvent);

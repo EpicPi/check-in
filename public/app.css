@@ -55,3 +55,25 @@ body {
 .host-event button {
     margin: 0 5px 0 5px;
 }
+
+/**
+    GuestShowEvent.js
+ */
+.guest-show {
+    margin: 10px;
+}
+.guest-show ul{
+    padding: 0;
+}
+
+
+/**
+    GuestEventItem.js
+ */
+.guest-event {
+    margin: 10px 0 10px 0;
+}
+
+.guest-event button {
+    margin: 0 5px 0 5px;
+}

@@ -8,26 +8,38 @@ class GuestEventItem extends Component {
         this.props.selectEvent(event);
         this.props.history.push('/guest/event');
     }
-    handleRemove(event){
+
+    handleRemove(event) {
         this.props.removeEvent(event);
     }
 
 
     render() {
         return (
-            <div>
-                <div>
-                    Name: {this.props.event.name}
+            <div className="guest-event list-group-item bg-light text-dark">
+                <div className="row">
+                    <div className="col-md-12">
+                        <span>
+                            Name: {this.props.event.name}
+                        </span>
+                        <span style={{float: "right"}}>
+                            <button
+                                onClick={() => this.handleClick(this.props.event)}
+                                className="btn btn-info btn-event">more info</button>
+                            <button
+                                onClick={() => this.handleRemove(this.props.event)}
+                                className="btn btn-danger btn-event">Remove</button>
+                        </span>
+
+                    </div>
                 </div>
-                <button onClick={() => this.handleClick(this.props.event)}>more info</button>
-                <button onClick={() => this.handleRemove(this.props.event)}>Remove</button>
             </div>
         );
     }
 }
+
 const mapStateToProps = (state) => {
-    return {
-    };
+    return {};
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
@@ -36,4 +48,4 @@ const mapDispatchToProps = (/* dispatch */) => {
         removeEvent: guestRemoveEvent
     };
 };
-export default connect(mapStateToProps,mapDispatchToProps())(GuestEventItem);
+export default connect(mapStateToProps, mapDispatchToProps())(GuestEventItem);

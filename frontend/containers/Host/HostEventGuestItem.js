@@ -1,5 +1,4 @@
 import {Component} from "react";
-import {hostRemoveEvent, hostSelectEvent} from "../../actions";
 import {connect} from 'react-redux';
 import React from "react";
 

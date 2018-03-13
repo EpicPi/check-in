@@ -1,17 +1,18 @@
-import {JOIN_FIND} from "../helpers";
+import {CHECK_CODE, JOIN_FIND, LOAD} from "../helpers/Enums";
 
 export const authInitial = {user: null, userType: null};
 export const guestInitial = {
-    events: [],
+    events: LOAD.NOTHING,
     joinFind: JOIN_FIND.NOTHING_TO_CHECK,
     eventToJoin: {name: 'erger', code: 'fwwfe'},
 };
 
 export const hostInitial = {
-    events: [],
+    events: LOAD.NOTHING,
+    checkCode: CHECK_CODE.NOTHING_TO_CHECK
 };
 export const eventInitial ={
-    selected: {name: 'gerge', code: 'fsdfs'},
-    selectedRSVPs: [],
-    selectedAttends: [],
+    selected: {},
+    selectedRSVPs: LOAD.NOTHING,
+    selectedAttends: LOAD.NOTHING,
 };
