@@ -45,7 +45,7 @@ class HostEvent extends Component {
                     time: '00:00',
                     date: TODAY
                 },
-                select: EVENT_TYPES.BASIC,
+                type: EVENT_TYPES.BASIC,
                 checkInCode: '',
 
             };
@@ -69,8 +69,8 @@ class HostEvent extends Component {
                     time: dateStringToHours(this.props.event.dates.checkinEnd),
                     date: dateStringToDate(this.props.event.dates.checkinEnd)
                 },
-                type: this.props.type,
-                checkInCode: this.props.checkInCode,
+                type: this.props.event.type,
+                checkInCode: this.props.event.checkInCode,
             };
     }
 
@@ -136,7 +136,7 @@ class HostEvent extends Component {
     }
 
     handleSelectChange(e) {
-        this.setState({select: e.target.value});
+        this.setState({type: e.target.value});
     }
 
     handleCheckInCodeInput(e) {
@@ -144,7 +144,7 @@ class HostEvent extends Component {
     }
 
     getSelectOutput() {
-        switch (this.state.select) {
+        switch (this.state.type) {
             case EVENT_TYPES.BASIC:
                 return;
             case EVENT_TYPES.CODE:
@@ -186,7 +186,7 @@ class HostEvent extends Component {
                 checkinStart: dateTimeToDate(this.state.checkinStart.date, this.state.checkinStart.time),
                 checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
             },
-            type: this.state.select,
+            type: this.state.type,
             checkInCode: this.state.checkInCode,
         };
         if (this.props.add)
@@ -213,7 +213,7 @@ class HostEvent extends Component {
                 time: '00:00',
                 date: TODAY
             },
-            select: EVENT_TYPES.BASIC,
+            type: EVENT_TYPES.BASIC,
             checkInCode: '',
         });
 
@@ -323,7 +323,7 @@ class HostEvent extends Component {
                                 <div className="row">
                                     <div className="col-md-12">
                                         Check-in type
-                                        <select value={this.state.select} onChange={this.handleSelectChange}>
+                                        <select value={this.state.type} onChange={this.handleSelectChange}>
                                             <option value={EVENT_TYPES.BASIC}>Basic</option>
                                             <option value={EVENT_TYPES.CODE}>Code</option>
                                         </select>
