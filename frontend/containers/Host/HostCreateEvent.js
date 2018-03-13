@@ -16,5 +16,4 @@ class HostCreateEvent extends Component {
     }
 }
 
-
 export default HostCreateEvent;

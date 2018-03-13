@@ -5,6 +5,7 @@ import GuestJoinEvent from "./GuestJoinEvent";
 import GuestEventDetail from "./GuestEventDetail";
 import {resetEvent} from "../../actions";
 import {connect} from "react-redux";
+import GuestCheckIn from "./GuestCheckIn";
 
 class GuestDash extends Component {
     componentWillMount() {
@@ -17,6 +18,7 @@ class GuestDash extends Component {
                 <Route exact path='/guest' component={GuestShowEvents}/>
                 <Route exact path='/guest/join' component={GuestJoinEvent}/>
                 <Route exact path='/guest/event' component={GuestEventDetail}/>
+                <Route exact path='/guest/checkin' component={GuestCheckIn}/>
             </div>
         );
     }

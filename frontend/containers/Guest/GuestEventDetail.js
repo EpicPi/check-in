@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import {guestCheckIn} from "../../actions";
 
 class GuestEventDetail extends Component {
+
     constructor(props){
         super(props);
         this.handleCheckIn = this.handleCheckIn.bind(this);
     }
+
     render() {
         return (
             <div>
@@ -17,9 +19,9 @@ class GuestEventDetail extends Component {
             </div>
         );
     }
+
     handleCheckIn(){
-        this.props.checkIn(this.props.event);
-        this.props.history.push('/guest');
+        this.props.history.push('/guest/checkin');
     }
 }
 const mapStateToProps = (state) => {
@@ -30,7 +32,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        checkIn: guestCheckIn,
     };
 };
 export default connect(mapStateToProps,mapDispatchToProps())(GuestEventDetail);
