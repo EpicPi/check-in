@@ -11,7 +11,6 @@ class CheckinCode extends Component {
         this.getCheckCheckInOutput = this.getCheckCheckInOutput.bind(this);
         this.handleCheckIn = this.handleCheckIn.bind(this);
         this.handleCheckInCodeInput = this.handleCheckInCodeInput.bind(this);
-        this.getCheckinOutput = this.getCheckinOutput.bind(this);
         this.handleSubmit = this.handleCheckInCodeInput.bind(this);
         this.state = {
             eventName: '',
@@ -19,34 +18,6 @@ class CheckinCode extends Component {
             checkinCode: '',
 
         };
-    }
-
-    getCheckinOutput() {
-        switch (this.props.event.type) {
-            case EVENT_TYPE.BASIC:
-                return <button onClick={this.handleCheckIn}>Check In</button>;
-            case EVENT_TYPE.CODE:
-                return (
-                    <div className="row">
-                        <div className="col-md-12">
-                            <label>
-                                Check In Code:
-                                <div>
-                                    <input
-                                        type="text"
-                                        name="code"
-                                        value={this.state.checkinCode}
-                                        onChange={this.handleCheckInCodeInput}
-                                        required
-                                    />
-                                </div>
-                                <button onClick={this.handleSubmit}>confirm</button>
-                            </label>
-                            {this.getCheckCheckInOutput()}
-                        </div>
-                    </div>
-                );
-        }
     }
 
     handleCheckInCodeInput(e) {
@@ -80,8 +51,23 @@ class CheckinCode extends Component {
 
     render() {
         return (
-            <div>
-                {this.getCheckinOutput()}
+            <div className="row">
+                <div className="col-md-12">
+                    <label>
+                        Check In Code:
+                        <div>
+                            <input
+                                type="text"
+                                name="code"
+                                value={this.state.checkinCode}
+                                onChange={this.handleCheckInCodeInput}
+                                required
+                            />
+                        </div>
+                        <button onClick={this.handleSubmit}>confirm</button>
+                    </label>
+                    {this.getCheckCheckInOutput()}
+                </div>
             </div>
         );
     }

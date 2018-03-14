@@ -7,7 +7,7 @@ class CheckinBasic extends Component {
 
     constructor(props) {
         super(props);
-        this.handleCheckIn = this.handleCheckIn.bind(this);
+        this.handleCheckin = this.handleCheckin.bind(this);
     }
 
     handleCheckin() {

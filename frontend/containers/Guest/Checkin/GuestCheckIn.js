@@ -1,9 +1,7 @@
 import {Component} from "react";
-import {guestCheckCheckin, guestCheckin, resetEvent} from "../../../actions/index";
 import {connect} from "react-redux";
 import React from "react";
-import {CHECK_CHECKIN, EVENT_TYPES as EVENT_TYPE} from "../../../helpers/Enums";
-import {TODAY} from "../../../helpers/Time";
+import {EVENT_TYPES as EVENT_TYPE} from "../../../helpers/Enums";
 import CheckinBasic from "./CheckinBasic";
 import CheckinCode from "./CheckinCode";
 
@@ -14,11 +12,11 @@ class GuestCheckIn extends Component {
     }
 
     getCheckinScreen(){
-        switch(event.type){
+        switch(this.props.event.type){
             case EVENT_TYPE.CODE:
-                return <CheckinCode/>
+                return <CheckinCode history = {this.props.history}/>;
             default:
-                return <CheckinBasic/>
+                return <CheckinBasic history = {this.props.history}/>;
         }
     }
     render() {
@@ -37,9 +35,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = () => {
     return {
-        resetEvent: resetEvent,
-        checkin: guestCheckin,
-        checkCode: guestCheckCheckin
     };
 };
 
