@@ -46,7 +46,7 @@ class HostEvent extends Component {
                     date: TODAY
                 },
                 type: EVENT_TYPES.BASIC,
-                checkInCode: '',
+                checkinCode: '',
 
             };
         else
@@ -70,7 +70,7 @@ class HostEvent extends Component {
                     date: dateStringToDate(this.props.event.dates.checkinEnd)
                 },
                 type: this.props.event.type,
-                checkInCode: this.props.event.checkinCode,
+                checkinCode: this.props.event.checkinCode,
             };
     }
 
@@ -140,7 +140,7 @@ class HostEvent extends Component {
     }
 
     handleCheckInCodeInput(e) {
-        this.setState({checkInCode: e.target.value});
+        this.setState({checkinCode: e.target.value});
     }
 
     getSelectOutput() {
@@ -187,7 +187,7 @@ class HostEvent extends Component {
                 checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
             },
             type: this.state.type,
-            checkInCode: this.state.checkinCode,
+            checkinCode: this.state.checkinCode,
         };
         if (this.props.add)
             this.props.addEvent(event);
@@ -214,7 +214,7 @@ class HostEvent extends Component {
                 date: TODAY
             },
             type: EVENT_TYPES.BASIC,
-            checkInCode: '',
+            checkinCode: '',
         });
 
         this.props.history.push('/host');

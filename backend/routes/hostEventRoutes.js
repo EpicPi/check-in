@@ -49,6 +49,7 @@ router.post('/edit_event', async (req, res) => {
         event.name = req.body.name;
         event.code = req.body.code;
         event.dates = req.body.dates;
+        event.checkinCode = req.body.checkinCode;
         event.save();
         res.send(event);
     }
