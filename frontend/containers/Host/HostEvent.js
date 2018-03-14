@@ -70,7 +70,7 @@ class HostEvent extends Component {
                     date: dateStringToDate(this.props.event.dates.checkinEnd)
                 },
                 type: this.props.event.type,
-                checkInCode: this.props.event.checkInCode,
+                checkInCode: this.props.event.checkinCode,
             };
     }
 
@@ -157,7 +157,7 @@ class HostEvent extends Component {
                                     <input
                                         type="text"
                                         name="code"
-                                        value={this.state.checkInCode}
+                                        value={this.state.checkinCode}
                                         onChange={this.handleCheckInCodeInput}
                                         required
                                     />
@@ -187,7 +187,7 @@ class HostEvent extends Component {
                 checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
             },
             type: this.state.type,
-            checkInCode: this.state.checkInCode,
+            checkInCode: this.state.checkinCode,
         };
         if (this.props.add)
             this.props.addEvent(event);

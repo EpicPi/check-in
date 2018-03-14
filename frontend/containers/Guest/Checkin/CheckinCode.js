@@ -1,11 +1,10 @@
 import {Component} from "react";
-import {guestCheckCheckIn, guestCheckIn, resetEvent} from "../../actions";
+import {guestCheckCheckin, guestCheckin} from "../../../actions/index";
 import {connect} from "react-redux";
 import React from "react";
-import {CHECK_CHECKIN, EVENT_TYPES as EVENT_TYPE} from "../../helpers/Enums";
-import {TODAY} from "../../helpers/Time";
+import {CHECK_CHECKIN, EVENT_TYPES as EVENT_TYPE} from "../../../helpers/Enums";
 
-class GuestCheckIn extends Component {
+class CheckinCode extends Component {
 
     constructor(props) {
         super(props);
@@ -17,7 +16,7 @@ class GuestCheckIn extends Component {
         this.state = {
             eventName: '',
             code: '',
-            checkInCode: '',
+            checkinCode: '',
 
         };
     }
@@ -36,7 +35,7 @@ class GuestCheckIn extends Component {
                                     <input
                                         type="text"
                                         name="code"
-                                        value={this.state.checkInCode}
+                                        value={this.state.checkinCode}
                                         onChange={this.handleCheckInCodeInput}
                                         required
                                     />
@@ -51,12 +50,12 @@ class GuestCheckIn extends Component {
     }
 
     handleCheckInCodeInput(e) {
-        this.setState({checkInCode: e.target.value});
+        this.setState({checkinCode: e.target.value});
     }
 
     handleSubmit(){
         console.log('abc');
-        this.props.checkCode(this.props.event, this.state.checkInCode);
+        this.props.checkCode(this.props.event, this.state.checkinCode);
     }
 
     getCheckCheckInOutput() {
@@ -76,7 +75,7 @@ class GuestCheckIn extends Component {
     }
 
     handleCheckIn() {
-        this.props.checkIn();
+        this.props.checkin();
     }
 
     render() {
@@ -96,10 +95,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = () => {
     return {
-        resetEvent: resetEvent,
-        checkIn: guestCheckIn,
-        checkCode: guestCheckCheckIn
+        checkin: guestCheckin,
+        checkCode: guestCheckCheckin
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(GuestCheckIn);
+export default connect(mapStateToProps, mapDispatchToProps())(CheckinCode);

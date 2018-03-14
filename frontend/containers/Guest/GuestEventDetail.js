@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {guestCheckIn} from "../../actions";
+import {guestCheckin} from "../../actions";
 
 class GuestEventDetail extends Component {
 

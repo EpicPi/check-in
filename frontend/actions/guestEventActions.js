@@ -34,12 +34,12 @@ export const guestResetJoinFind = () => dispatch => {
     dispatch({type: GUEST_RESET_JOIN_FIND});
 };
 
-export const guestCheckIn = (event) => dispatch => {
+export const guestCheckin = (event) => dispatch => {
     axios.post('api/guest/checkin', qs.stringify({id: event._id}));
     dispatch({type: GUEST_CHECKIN});
 };
 
-export const guestCheckCheckIn = (event, code) => dispatch =>{
+export const guestCheckCheckin = (event, code) => dispatch =>{
     dispatch({type: GUEST_CHECK_CHECKIN});
     const res = axios.post('/api/guest/check_checkin', qs.stringify({id: event._id, code:code}));
     dispatch({type:GUEST_CHECKED_CHECKIN, payload: res.data});

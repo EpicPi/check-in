@@ -57,7 +57,7 @@ router.post('/checkin', async (req, res) => {
 
 router.post('/check_checkin', async (req,res) => {
    const event = await Event.findById(req.body.id);
-   res.send(event.checkInCode === req.body.code);
+   res.send(event.checkinCode === req.body.code);
 });
 
 module.exports = router;

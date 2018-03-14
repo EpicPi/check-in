@@ -5,7 +5,7 @@ import GuestJoinEvent from "./GuestJoinEvent";
 import GuestEventDetail from "./GuestEventDetail";
 import {resetEvent} from "../../actions";
 import {connect} from "react-redux";
-import GuestCheckIn from "./GuestCheckIn";
+import GuestCheckIn from "./Checkin/GuestCheckIn";
 
 class GuestDash extends Component {
     componentWillMount() {
