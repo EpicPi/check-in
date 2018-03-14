@@ -9,12 +9,9 @@ class CheckinCode extends Component {
     constructor(props) {
         super(props);
         this.getCheckCheckInOutput = this.getCheckCheckInOutput.bind(this);
-        this.handleCheckIn = this.handleCheckIn.bind(this);
         this.handleCheckInCodeInput = this.handleCheckInCodeInput.bind(this);
-        this.handleSubmit = this.handleCheckInCodeInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            eventName: '',
-            code: '',
             checkinCode: '',
 
         };
@@ -24,12 +21,13 @@ class CheckinCode extends Component {
         this.setState({checkinCode: e.target.value});
     }
 
-    handleSubmit(){
-        console.log('abc');
+    handleSubmit(e){
+        e.preventDefault();
         this.props.checkCode(this.props.event, this.state.checkinCode);
     }
 
     getCheckCheckInOutput() {
+        console.log(this.props.check);
         switch (this.props.check) {
             case CHECK_CHECKIN.SUCCESS:
                 alert('checked in');
@@ -45,14 +43,12 @@ class CheckinCode extends Component {
         }
     }
 
-    handleCheckIn() {
-        this.props.checkin();
-    }
 
     render() {
         return (
             <div className="row">
                 <div className="col-md-12">
+                    <form onSubmit={this.handleSubmit}>
                     <label>
                         Check In Code:
                         <div>
@@ -64,8 +60,10 @@ class CheckinCode extends Component {
                                 required
                             />
                         </div>
-                        <button onClick={this.handleSubmit}>confirm</button>
+                        <button type="submit" value = "submit"
+                                >confirm</button>
                     </label>
+                    </form>
                     {this.getCheckCheckInOutput()}
                 </div>
             </div>
