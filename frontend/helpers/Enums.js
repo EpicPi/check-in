@@ -28,3 +28,9 @@ export const EVENT_TYPES = Object.freeze({
     CODE: 'code'
 });
 
+export const CHECK_CHECKIN = Object.freeze({
+    CHECKING: 'checking',
+    SUCCESS: 'success',
+    FAIL: 'fail',
+    NOTHING_TO_CHECK: 'nothing',
+});

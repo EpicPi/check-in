@@ -1,6 +1,7 @@
 import * as axios from "axios";
 import * as qs from "qs";
 import {
+    GUEST_CHECK_CHECKIN, GUEST_CHECKED_CHECKIN,
     GUEST_CHECKIN,
     GUEST_FIND_EVENT, GUEST_FOUND_EVENT, GUEST_GET_EVENTS, GUEST_GOT_EVENTS, GUEST_JOIN_EVENT, GUEST_REMOVE_EVENT,
     GUEST_RESET_JOIN_FIND,
@@ -36,4 +37,10 @@ export const guestResetJoinFind = () => dispatch => {
 export const guestCheckIn = (event) => dispatch => {
     axios.post('api/guest/checkin', qs.stringify({id: event._id}));
     dispatch({type: GUEST_CHECKIN});
+};
+
+export const guestCheckCheckIn = (event, code) => dispatch =>{
+    dispatch({type: GUEST_CHECK_CHECKIN});
+    const res = axios.post('/api/guest/check_checkin', qs.stringify({id: event._id, code:code}));
+    dispatch({type:GUEST_CHECKED_CHECKIN, payload: res.data});
 };
