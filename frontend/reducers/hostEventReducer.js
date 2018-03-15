@@ -1,6 +1,6 @@
 import {
     HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE,
-    HOST_EDIT_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_GOT_EVENTS
+    HOST_EDIT_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_GOT_EVENTS, HOST_RESET_EVENT
 } from '../actions/types';
 import {hostInitial} from "./initialState";
 import {CHECK_CODE, LOAD} from "../helpers/Enums";
@@ -39,6 +39,8 @@ export default function (state = hostInitial, action) {
             return {...state, checkCode: CHECK_CODE.CHECKING};
         case HOST_CHECKED_CODE:
             return {...state, checkCode: action.payload ? CHECK_CODE.AVAILABLE : CHECK_CODE.TAKEN};
+        case HOST_RESET_EVENT:
+            return {...state, checkCode: CHECK_CODE.NOTHING_TO_CHECK};
         default:
             return state;
     }

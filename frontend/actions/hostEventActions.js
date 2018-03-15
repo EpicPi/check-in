@@ -1,7 +1,7 @@
 import {
     HOST_ADD_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_EDIT_EVENT, HOST_GET_EVENTS, HOST_GOT_EVENTS,
     HOST_REMOVE_EVENT,
-    HOST_REPLACE,
+    HOST_REPLACE, HOST_RESET_EVENT,
 } from "./types";
 import axios from "axios/index";
 import * as qs from 'qs';
@@ -39,4 +39,6 @@ export const hostCheckCode = (code) => async dispatch => {
     dispatch({type: HOST_CHECKED_CODE, payload: res.data});
 };
 
-//todo host reset event
+export const hostResetEvent = () => dispatch => {
+    dispatch({type: HOST_RESET_EVENT});
+};

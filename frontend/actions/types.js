@@ -12,6 +12,7 @@ export const HOST_REPLACE = 'host_replace';
 export const HOST_EDIT_EVENT = 'host_edit_event';
 export const HOST_CHECK_CODE = 'host_check_code';
 export const HOST_CHECKED_CODE = 'host_checked_code';
+export const HOST_RESET_EVENT = 'host_reset_event';
 
 //guest event types
 export const GUEST_JOIN_EVENT = 'guest_join_event';

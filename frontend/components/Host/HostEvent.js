@@ -6,6 +6,7 @@ import TimePicker from './TimePicker';
 import {CHECK_CODE, EVENT_TYPES} from "../../helpers/Enums";
 
 import {TODAY, dateTimeToDate, dateStringToHours, dateStringToDate} from "../../helpers/Time";
+import {hostResetEvent} from "../../actions";
 
 const initialState = {
     eventName: '',
@@ -74,7 +75,7 @@ class HostEvent extends Component {
     }
 
     componentWillUnmount(){
-
+        this.props.resetEvent();
     }
 
     handleGeneral(e) {
@@ -329,7 +330,7 @@ const mapDispatchToProps = (/* dispatch */) => {
         addEvent: hostAddEvent,
         hostCheckCode: hostCheckCode,
         editEvent: hostEditEvent,
-        resetEvent: hostResteEvent
+        resetEvent: hostResetEvent
     };
 };
 
