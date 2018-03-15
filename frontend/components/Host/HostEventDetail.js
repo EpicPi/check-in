@@ -10,36 +10,88 @@ class HostEventDetail extends Component {
         super(props);
         this.handleEditClick = this.handleEditClick.bind(this);
 
-        props.getRSVPs(this.props.event);
-        props.getAttends(this.props.event);
+        //gotta make the call to load them
+        this.props.getAttends(this.props.event);
+        this.props.getRSVPs(this.props.event);
+
+        this.state = {
+            rsvps: this.getRSVPsOutput(this.props),
+            attends: this.getAttendsOutput(this.props),
+            uriRsvp: this.getUriRSVPOutput(this.props),
+            uriAttend: this.getUriAttendsOutput(this.props),
+        }
+
     }
 
     handleEditClick() {
         this.props.history.push('/host/edit');
     }
 
-    getRSVPsOutput() {
-        switch (this.props.rsvps) {
+    componentWillReceiveProps(props) {
+        this.setState({
+            rsvps: this.getRSVPsOutput(props),
+            attends: this.getAttendsOutput(props),
+            uriRsvp: this.getUriRSVPOutput(props),
+            uriAttend: this.getUriAttendsOutput(props),
+        })
+    }
+
+    getUriRSVPOutput(props) {
+        switch (props.rsvps) {
+            case LOAD.LOADING:
+                return;
+            case LOAD.NOTHING:
+                return;
+            default:
+                let csvContent = "data:text/csv;charset=utf-8,";
+                props.rsvps.forEach(el => {
+                    const row = el.name + "," + el.extra;
+                    csvContent += row + "\r\n";
+                });
+                return csvContent;
+
+        }
+    }
+
+    getUriAttendsOutput(props) {
+        switch (props.rsvps) {
+            case LOAD.LOADING:
+                return;
+            case LOAD.NOTHING:
+                return;
+            default:
+                let csvContent = "data:text/csv;charset=utf-8,";
+                props.attends.forEach(el => {
+                    const row = el.name + "," + el.extra;
+                    csvContent += row + "\r\n";
+                });
+                return csvContent;
+
+        }
+    }
+
+    getRSVPsOutput(props) {
+        switch (props.rsvps) {
             case LOAD.LOADING:
                 return <h3>LOADING</h3>;
             case LOAD.NOTHING:
                 return;
             default:
-                return this.props.rsvps.map((guest, i) => (
-                    <HostEventGuestItem history={this.props.history} key={i} guest={guest}/>
+                return props.rsvps.map((guest, i) => (
+                    <HostEventGuestItem history={props.history} key={i} guest={guest}/>
                 ));
         }
     }
 
-    getAttendsOutput() {
-        switch (this.props.attends) {
+    getAttendsOutput(props) {
+        switch (props.attends) {
             case LOAD.LOADING:
                 return <h3>LOADING</h3>;
             case LOAD.NOTHING:
                 return;
             default:
-                return this.props.attends.map((guest, i) => (
-                    <HostEventGuestItem history={this.props.history} key={i} guest={guest}/>
+                return props.attends.map((guest, i) => (
+                    <HostEventGuestItem history={props.history} key={i} guest={guest}/>
                 ));
         }
     }
@@ -80,14 +132,17 @@ class HostEventDetail extends Component {
                 <div>
                     <br/>
                     RSVPs:
+                    <a href={this.state.uriRsvp} download={this.props.event.name + "_rsvps.csv"}> download csv</a>
                     <hr/>
-                    {this.getRSVPsOutput()}
+                    {this.state.rsvps}
                     <br/>
+
                 </div>
                 <div>
                     Attendees:
+                    <a href={this.state.uriAttend} download={this.props.event.name + "_attends.csv"}> download csv</a>
                     <hr/>
-                    {this.getAttendsOutput()}
+                    {this.state.attends}
                 </div>
             </div>
         );
