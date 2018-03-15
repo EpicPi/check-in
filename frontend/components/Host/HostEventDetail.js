@@ -47,15 +47,19 @@ class HostEventDetail extends Component {
     render() {
         return (
             <div>
+                <br/>
                 <div>
                     Name: {this.props.event.name}
                 </div>
+                <br/>
                 <div>
                     Code: {this.props.event.code}
                 </div>
+                <br/>
                 <div>
                     Info: {this.props.event.info}
                 </div>
+                <br/>
                 <div>
                     RSVP Start: {new Date(this.props.event.dates.rsvpStart).toString()}
                 </div>
@@ -68,13 +72,21 @@ class HostEventDetail extends Component {
                 <div>
                     Checkin End: {new Date(this.props.event.dates.checkinEnd).toString()}
                 </div>
+                <br/>
+                <br/>
                 <button onClick={this.handleEditClick}>Edit Event</button>
+                <br/>
+                <br/>
                 <div>
+                    <br/>
                     RSVPs:
+                    <hr/>
                     {this.getRSVPsOutput()}
+                    <br/>
                 </div>
                 <div>
                     Attendees:
+                    <hr/>
                     {this.getAttendsOutput()}
                 </div>
             </div>

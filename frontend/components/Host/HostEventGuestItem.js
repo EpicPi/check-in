@@ -8,9 +8,11 @@ class HostEventItem extends Component {
         return (
             <div>
                 Name: {this.props.guest.name}
+                <br/>
                 GT username: {this.props.guest.extra}
-            </div>
-        );
+                <br/>
+                <hr/>
+            </div>);
     }
 }
 
