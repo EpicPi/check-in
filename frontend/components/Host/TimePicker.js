@@ -12,11 +12,11 @@ class TimePicker extends Component {
     }
 
     handleTimeChange(event) {
-        this.props.handleChange(event.target.value, null);
+        this.props.handleChange(this.props.name, event.target.value, null);
     }
 
     handleDateChange(event) {
-        this.props.handleChange(null, event.target.value);
+        this.props.handleChange(this.props.name, null, event.target.value);
     }
 
     render() {

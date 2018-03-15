@@ -5,9 +5,15 @@ import {getAttends, getRSVPs} from "../../actions/index";
 import {LOAD} from "../../helpers/Enums";
 
 class HostEventDetail extends Component {
-    componentWillMount() {
-        this.props.getRSVPs(this.props.event);
-        this.props.getAttends(this.props.event);
+   constructor(props){
+       super(props);
+       props.getRSVPs(this.props.event);
+       props.getAttends(this.props.event);
+       this.handleEditClick = this.handleEditClick.bind(this);
+   }
+
+    handleEditClick() {
+        this.props.history.push('/host/edit');
     }
 
     getRSVPsOutput() {
@@ -70,9 +76,7 @@ class HostEventDetail extends Component {
         );
     }
 
-    handleEditClick() {
-        this.props.history.push('/host/edit');
-    }
+
 }
 
 const mapStateToProps = (state) => {

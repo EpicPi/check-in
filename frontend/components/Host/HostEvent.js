@@ -7,52 +7,47 @@ import {CHECK_CODE, EVENT_TYPES} from "../../helpers/Enums";
 
 import {TODAY, dateTimeToDate, dateStringToHours, dateStringToDate} from "../../helpers/Time";
 
+const initialState = {
+    eventName: '',
+    code: '',
+    info: '',
+    rsvpStart: {
+        time: '00:00',
+        date: TODAY
+    },
+    rsvpEnd: {
+        time: '00:00',
+        date: TODAY
+    },
+    checkinStart: {
+        time: '00:00',
+        date: TODAY
+    },
+    checkinEnd: {
+        time: '00:00',
+        date: TODAY
+    },
+    type: EVENT_TYPES.BASIC,
+    checkinCode: '',
+};
+
 class HostEvent extends Component {
 
     constructor(props) {
         super(props);
-        this.handleNameInput = this.handleNameInput.bind(this);
-        this.handleCodeInput = this.handleCodeInput.bind(this);
-        this.handleRsvpStartChange = this.handleRsvpStartChange.bind(this);
-        this.handleRsvpEndChange = this.handleRsvpEndChange.bind(this);
-        this.handleCheckinStartChange = this.handleCheckinStartChange.bind(this);
-        this.handleCheckinEndChange = this.handleCheckinEndChange.bind(this);
-        this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.handleGeneral = this.handleGeneral.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getSelectOutput = this.getSelectOutput.bind(this);
-        this.handleCheckInCodeInput = this.handleCheckInCodeInput.bind(this);
-    }
+        this.handleCodeInput = this.handleCodeInput.bind(this);
+        this.handleTimeChange = this.handleTimeChange. bind(this);
 
-    componentWillMount() {
         if (this.props.add)
-            this.state = {
-                eventName: '',
-                code: '',
-                codeOut: '',
-                rsvpStart: {
-                    time: '00:00',
-                    date: TODAY
-                },
-                rsvpEnd: {
-                    time: '00:00',
-                    date: TODAY
-                },
-                checkinStart: {
-                    time: '00:00',
-                    date: TODAY
-                },
-                checkinEnd: {
-                    time: '00:00',
-                    date: TODAY
-                },
-                type: EVENT_TYPES.BASIC,
-                checkinCode: '',
-
-            };
+            this.state = initialState;
         else
             this.state = {
                 eventName: this.props.event.name,
                 code: this.props.event.code,
+                info: '',
                 rsvpStart: {
                     time: dateStringToHours(this.props.event.dates.rsvpStart),
                     date: dateStringToDate(this.props.event.dates.rsvpStart)
@@ -74,8 +69,8 @@ class HostEvent extends Component {
             };
     }
 
-    handleNameInput(e) {
-        this.setState({eventName: e.target.value});
+    handleGeneral(e) {
+        this.setState({[e.target.name]: e.target.value});
     }
 
     handleCodeInput(e) {
@@ -84,7 +79,16 @@ class HostEvent extends Component {
             this.props.hostCheckCode(e.target.value);
     }
 
-    checkCodeOutput() {
+    handleTimeChange(name, time, date) {
+        this.setState({
+            [name]: {
+                time: time ? time : this.state[name].time,
+                date: date ? date : this.state[name].date,
+            }
+        });
+    }
+
+    getCheckCodeOutput() {
         if (this.state.code === this.props.event.code) // if editing and you dont change
             return;
         switch (this.props.checkCode) {
@@ -97,50 +101,6 @@ class HostEvent extends Component {
             case CHECK_CODE.CHECKING:
                 return <h3>checking</h3>;
         }
-    }
-
-    handleRsvpStartChange(time, date) {
-        this.setState({
-            rsvpStart: {
-                time: time ? time : this.state.rsvpStart.time,
-                date: date ? date : this.state.rsvpStart.date,
-            }
-        });
-    }
-
-    handleRsvpEndChange(time, date) {
-        this.setState({
-            rsvpEnd: {
-                time: time ? time : this.state.rsvpEnd.time,
-                date: date ? date : this.state.rsvpEnd.date,
-            }
-        });
-    }
-
-    handleCheckinStartChange(time, date) {
-        this.setState({
-            checkinStart: {
-                time: time ? time : this.state.checkinStart.time,
-                date: date ? date : this.state.checkinStart.date,
-            }
-        });
-    }
-
-    handleCheckinEndChange(time, date) {
-        this.setState({
-            checkinEnd: {
-                time: time ? time : this.state.checkinEnd.time,
-                date: date ? date : this.state.checkinEnd.date,
-            }
-        });
-    }
-
-    handleSelectChange(e) {
-        this.setState({type: e.target.value});
-    }
-
-    handleCheckInCodeInput(e) {
-        this.setState({checkinCode: e.target.value});
     }
 
     getSelectOutput() {
@@ -156,9 +116,9 @@ class HostEvent extends Component {
                                 <div>
                                     <input
                                         type="text"
-                                        name="code"
+                                        name="checkinCode"
                                         value={this.state.checkinCode}
-                                        onChange={this.handleCheckInCodeInput}
+                                        onChange={this.handleGeneral}
                                         required
                                     />
                                 </div>
@@ -171,6 +131,7 @@ class HostEvent extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
         if (this.props.checkCode !== CHECK_CODE.AVAILABLE && this.state.code !== this.props.event.code) {
             alert('Please enter a different code');
             return;
@@ -189,33 +150,13 @@ class HostEvent extends Component {
             type: this.state.type,
             checkinCode: this.state.checkinCode,
         };
+
         if (this.props.add)
             this.props.addEvent(event);
         else
             this.props.editEvent(event);
 
-        this.setState({
-            eventName: '',
-            code: '',
-            rsvpStart: {
-                time: '00:00',
-                date: TODAY,
-            },
-            rsvpEnd: {
-                time: '00:00',
-                date: TODAY
-            },
-            checkinStart: {
-                time: '00:00',
-                date: TODAY
-            },
-            checkinEnd: {
-                time: '00:00',
-                date: TODAY
-            },
-            type: EVENT_TYPES.BASIC,
-            checkinCode: '',
-        });
+        this.setState(initialState);
 
         this.props.history.push('/host');
     }
@@ -237,7 +178,7 @@ class HostEvent extends Component {
                                                     type="text"
                                                     name="eventName"
                                                     value={this.state.eventName}
-                                                    onChange={this.handleNameInput}
+                                                    onChange={this.handleGeneral}
                                                     required
                                                 />
                                             </div>
@@ -262,7 +203,23 @@ class HostEvent extends Component {
                                     </div>
                                 </div>
 
-                                {this.checkCodeOutput()}
+                                {this.getCheckCodeOutput()}
+
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <label>
+                                            Other info:
+                                            <div>
+                                                <textarea
+                                                    name="info"
+                                                    value={this.state.info}
+                                                    onChange={this.handleGeneral}
+                                                    required
+                                                />
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
 
                                 <div className="row">
                                     <div className="col-md-12">
@@ -270,9 +227,10 @@ class HostEvent extends Component {
                                             RSVP Start:
                                             <div>
                                                 <TimePicker
+                                                    name="rsvpStart"
                                                     time={this.state.rsvpStart.time}
                                                     date={this.state.rsvpStart.date}
-                                                    handleChange={this.handleRsvpStartChange}/>
+                                                    handleChange={this.handleTimeChange}/>
                                             </div>
                                         </label>
                                     </div>
@@ -284,9 +242,10 @@ class HostEvent extends Component {
                                             RSVP End:
                                             <div>
                                                 <TimePicker
+                                                    name="rsvpEnd"
                                                     time={this.state.rsvpEnd.time}
                                                     date={this.state.rsvpEnd.date}
-                                                    handleChange={this.handleRsvpEndChange}/>
+                                                    handleChange={this.handleTimeChange}/>
                                             </div>
                                         </label>
                                     </div>
@@ -298,9 +257,10 @@ class HostEvent extends Component {
                                             Checkin Start:
                                             <div>
                                                 <TimePicker
+                                                    name="checkinStart"
                                                     time={this.state.checkinStart.time}
                                                     date={this.state.checkinStart.date}
-                                                    handleChange={this.handleCheckinStartChange}/>
+                                                    handleChange={this.handleTimeChange}/>
                                             </div>
                                         </label>
                                     </div>
@@ -312,9 +272,10 @@ class HostEvent extends Component {
                                             Checkin End:
                                             <div>
                                                 <TimePicker
+                                                    name="checkinEnd"
                                                     time={this.state.checkinEnd.time}
                                                     date={this.state.checkinEnd.date}
-                                                    handleChange={this.handleCheckinEndChange}/>
+                                                    handleChange={this.handleTimeChange}/>
                                             </div>
                                         </label>
                                     </div>
@@ -323,7 +284,10 @@ class HostEvent extends Component {
                                 <div className="row">
                                     <div className="col-md-12">
                                         Check-in type
-                                        <select value={this.state.type} onChange={this.handleSelectChange}>
+                                        <select
+                                            value={this.state.type}
+                                            onChange={this.handleGeneral}
+                                            name="type">
                                             <option value={EVENT_TYPES.BASIC}>Basic</option>
                                             <option value={EVENT_TYPES.CODE}>Code</option>
                                         </select>
