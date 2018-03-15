@@ -37,9 +37,8 @@ class HostEvent extends Component {
         super(props);
         this.handleGeneral = this.handleGeneral.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
         this.getSelectOutput = this.getSelectOutput.bind(this);
-        this.handleCodeInput = this.handleCodeInput.bind(this);
-        this.handleTimeChange = this.handleTimeChange. bind(this);
 
         if (this.props.add)
             this.state = initialState;
@@ -69,14 +68,13 @@ class HostEvent extends Component {
             };
     }
 
-    handleGeneral(e) {
-        this.setState({[e.target.name]: e.target.value});
+    componentWillUpdate(props, state) {
+        if (state.code !== props.event.code && state.code !== this.state.code) // if editing and you dont change
+            props.hostCheckCode(state.code);
     }
 
-    handleCodeInput(e) {
-        this.setState({code: e.target.value});
-        if (this.state.code !== this.props.event.code) // if editing and you dont change
-            this.props.hostCheckCode(e.target.value);
+    handleGeneral(e) {
+        this.setState({[e.target.name]: e.target.value});
     }
 
     handleTimeChange(name, time, date) {
@@ -86,6 +84,38 @@ class HostEvent extends Component {
                 date: date ? date : this.state[name].date,
             }
         });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        if (this.props.checkCode !== CHECK_CODE.AVAILABLE && this.state.code !== this.props.event.code) {
+            alert('Please enter a different code');
+            return;
+        }
+
+        const event = {
+            ...this.props.event,
+            name: this.state.eventName,
+            code: this.state.code,
+            dates: {
+                rsvpStart: dateTimeToDate(this.state.rsvpStart.date, this.state.rsvpStart.time),
+                rsvpEnd: dateTimeToDate(this.state.rsvpEnd.date, this.state.rsvpEnd.time),
+                checkinStart: dateTimeToDate(this.state.checkinStart.date, this.state.checkinStart.time),
+                checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
+            },
+            type: this.state.type,
+            checkinCode: this.state.checkinCode,
+        };
+
+        if (this.props.add)
+            this.props.addEvent(event);
+        else
+            this.props.editEvent(event);
+
+        this.setState(initialState);
+
+        this.props.history.push('/host');
     }
 
     getCheckCodeOutput() {
@@ -129,38 +159,6 @@ class HostEvent extends Component {
         }
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-
-        if (this.props.checkCode !== CHECK_CODE.AVAILABLE && this.state.code !== this.props.event.code) {
-            alert('Please enter a different code');
-            return;
-        }
-
-        const event = {
-            ...this.props.event,
-            name: this.state.eventName,
-            code: this.state.code,
-            dates: {
-                rsvpStart: dateTimeToDate(this.state.rsvpStart.date, this.state.rsvpStart.time),
-                rsvpEnd: dateTimeToDate(this.state.rsvpEnd.date, this.state.rsvpEnd.time),
-                checkinStart: dateTimeToDate(this.state.checkinStart.date, this.state.checkinStart.time),
-                checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
-            },
-            type: this.state.type,
-            checkinCode: this.state.checkinCode,
-        };
-
-        if (this.props.add)
-            this.props.addEvent(event);
-        else
-            this.props.editEvent(event);
-
-        this.setState(initialState);
-
-        this.props.history.push('/host');
-    }
-
 
     render() {
         return (
@@ -195,7 +193,7 @@ class HostEvent extends Component {
                                                     type="text"
                                                     name="code"
                                                     value={this.state.code}
-                                                    onChange={this.handleCodeInput}
+                                                    onChange={this.handleGeneral}
                                                     required
                                                 />
                                             </div>
