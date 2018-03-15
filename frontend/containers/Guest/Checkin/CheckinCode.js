@@ -22,7 +22,7 @@ class CheckinCode extends Component {
         if(this.props.check === CHECK_CHECKIN.SUCCESS){
             alert('checked in');
             this.props.history.push('/guest');
-            this.props.checkin();
+            this.props.checkin(this.props.event);
         }
     }
 
