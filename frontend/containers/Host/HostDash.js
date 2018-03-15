@@ -8,9 +8,10 @@ import {resetEvent} from "../../actions";
 import {connect} from "react-redux";
 
 class HostDash extends Component {
-    componentWillMount(){
+    componentWillMount() {
         this.props.resetEvent();
     }
+
     render() {
         return (
             <div className="container container-fluid">

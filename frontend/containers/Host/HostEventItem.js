@@ -30,7 +30,6 @@ class HostEventItem extends Component {
                                 onClick={() => this.handleRemove(this.props.event)}
                                 className="btn btn-danger btn-event">Remove</button>
                         </span>
-
                     </div>
                 </div>
             </div>

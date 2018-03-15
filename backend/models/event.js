@@ -16,4 +16,4 @@ const eventSchema = new Schema({
     checkinCode: {type: String}
 });
 
-mongoose.model('events',eventSchema);
+mongoose.model('events', eventSchema);

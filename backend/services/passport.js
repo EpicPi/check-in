@@ -8,6 +8,7 @@ const User = mongoose.model('users');
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
+
 passport.deserializeUser((id, done) => {
     User.findById(id).then(user => done(null, user));
 });
@@ -25,7 +26,7 @@ passport.use(
             if (existingUser) {
                 return done(null, existingUser);// error = null
             }
-            const user = await new User({googleId: profile.id, name:profile.displayName}).save();
+            const user = await new User({googleId: profile.id, name: profile.displayName}).save();
             return done(null, user); // error = null
         }
     )

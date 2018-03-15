@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {guestRemoveEvent, selectEvent} from "../../actions";
+import {selectEvent} from "../../actions";
 import {connect} from 'react-redux';
 import React from "react";
 
@@ -13,7 +13,6 @@ class GuestEventItem extends Component {
         this.props.selectEvent(event);
         this.props.history.push('/guest/checkin');
     }
-
 
     render() {
         return (

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 // const TODAY = new Date().toISOString().slice(0,10);
 
@@ -20,14 +20,14 @@ class TimePicker extends Component {
     }
 
     render() {
-        return(
+        return (
             <div className="row">
                 <div className="col-md-6">
-                    <input type="time" value={this.props.time} onChange={ this.handleTimeChange } required/>
+                    <input type="time" value={this.props.time} onChange={this.handleTimeChange} required/>
                 </div>
                 <div className="col-md-6">
                     {/* TODO: put restrictions on imposible date */}
-                    <input type="date" value={this.props.date} onChange={ this.handleDateChange } required/>
+                    <input type="date" value={this.props.date} onChange={this.handleDateChange} required/>
                 </div>
             </div>
         );
@@ -35,16 +35,13 @@ class TimePicker extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {
-    };
+    return {};
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
-    return {
-
-    };
+    return {};
 };
 
-export default connect(mapStateToProps,mapDispatchToProps())(TimePicker);
+export default connect(mapStateToProps, mapDispatchToProps())(TimePicker);
 
 

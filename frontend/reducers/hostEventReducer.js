@@ -1,5 +1,5 @@
 import {
-    HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_SELECT_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE,
+    HOST_GET_EVENTS, HOST_ADD_EVENT, HOST_REMOVE_EVENT, HOST_REPLACE,
     HOST_EDIT_EVENT, HOST_CHECK_CODE, HOST_CHECKED_CODE, HOST_GOT_EVENTS
 } from '../actions/types';
 import {hostInitial} from "./initialState";
@@ -13,8 +13,6 @@ export default function (state = hostInitial, action) {
             return {...state, events: LOAD.LOADING};
         case HOST_GOT_EVENTS:
             return {...state, events: action.payload};
-        case HOST_SELECT_EVENT:
-            return {...state, selectedEvent: action.payload};
         case HOST_REMOVE_EVENT: {
             let newEvents = state.events.slice();
             newEvents = newEvents.filter(el => el._id !== action.payload._id);

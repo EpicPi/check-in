@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {guestCheckin} from "../../actions";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 class GuestEventDetail extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.handleCheckIn = this.handleCheckIn.bind(this);
+    }
+
+    handleCheckIn() {
+        this.props.history.push('/guest/checkin');
     }
 
     render() {
@@ -19,19 +22,15 @@ class GuestEventDetail extends Component {
             </div>
         );
     }
-
-    handleCheckIn(){
-        this.props.history.push('/guest/checkin');
-    }
 }
+
 const mapStateToProps = (state) => {
     return {
-        event : state.event.selected,
+        event: state.event.selected,
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
-    return {
-    };
+    return {};
 };
-export default connect(mapStateToProps,mapDispatchToProps())(GuestEventDetail);
+export default connect(mapStateToProps, mapDispatchToProps())(GuestEventDetail);

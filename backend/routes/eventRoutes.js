@@ -5,6 +5,7 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
+
 router.post('/rsvp', async (req, res) => {
         const event = await Event.findById(req.body.id);
         //cant use map here cause async await is weird
@@ -16,6 +17,7 @@ router.post('/rsvp', async (req, res) => {
         res.send(out);
     }
 );
+
 router.post('/attend', async (req, res) => {
         const event = await Event.findById(req.body.id);
         //cant use map here cause async await is weird
@@ -27,4 +29,5 @@ router.post('/attend', async (req, res) => {
         res.send(out);
     }
 );
+
 module.exports = router;

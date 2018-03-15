@@ -27,6 +27,7 @@ class GuestDash extends Component {
 const mapStateToProps = (state) => {
     return {};
 };
+
 const mapDispatchToProps = () => {
     return {
         resetEvent: resetEvent,

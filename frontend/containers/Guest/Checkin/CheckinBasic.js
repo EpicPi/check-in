@@ -27,6 +27,7 @@ const mapStateToProps = (state) => {
         event: state.event.selected,
     };
 };
+
 const mapDispatchToProps = () => {
     return {
         checkin: guestCheckin,

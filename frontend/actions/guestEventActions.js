@@ -20,7 +20,7 @@ export const guestFindEvent = (code) => async dispatch => {
 };
 
 export const guestGetEvents = () => async dispatch => {
-    dispatch({type:GUEST_GET_EVENTS});
+    dispatch({type: GUEST_GET_EVENTS});
     const res = await axios.get('/api/guest/get_events');
     dispatch({type: GUEST_GOT_EVENTS, payload: res.data});
 };
@@ -40,12 +40,12 @@ export const guestCheckin = (event) => dispatch => {
     dispatch({type: GUEST_CHECKIN});
 };
 
-export const guestCheckCheckin = (event, code) => async dispatch =>{
+export const guestCheckCheckin = (event, code) => async dispatch => {
     dispatch({type: GUEST_CHECK_CHECKIN});
-    const res = await axios.post('/api/guest/check_checkin', qs.stringify({id: event._id, code:code}));
-    dispatch({type:GUEST_CHECKED_CHECKIN, payload: res.data});
+    const res = await axios.post('/api/guest/check_checkin', qs.stringify({id: event._id, code: code}));
+    dispatch({type: GUEST_CHECKED_CHECKIN, payload: res.data});
 };
 
 export const guestResetCheckin = () => dispatch => {
-    dispatch({type:GUEST_RESET_CHECKIN});
+    dispatch({type: GUEST_RESET_CHECKIN});
 };

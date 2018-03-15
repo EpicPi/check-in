@@ -2,7 +2,7 @@ import {Component} from "react";
 import {guestCheckCheckin, guestCheckin} from "../../../actions/index";
 import {connect} from "react-redux";
 import React from "react";
-import {CHECK_CHECKIN, EVENT_TYPES as EVENT_TYPE} from "../../../helpers/Enums";
+import {CHECK_CHECKIN} from "../../../helpers/Enums";
 import {guestResetCheckin} from "../../../actions";
 
 class CheckinCode extends Component {

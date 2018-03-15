@@ -13,7 +13,7 @@ export const hostAddEvent = (event) => async dispatch => {
 };
 
 export const hostGetEvents = () => async dispatch => {
-    dispatch({type:HOST_GET_EVENTS});
+    dispatch({type: HOST_GET_EVENTS});
     const res = await axios.get('/api/host/get_events');
     dispatch({type: HOST_GOT_EVENTS, payload: res.data});
 };
@@ -33,8 +33,8 @@ export const hostEditEvent = (event) => dispatch => {
 };
 
 export const hostCheckCode = (code) => async dispatch => {
-    dispatch({type:HOST_CHECK_CODE});
-    const res = await axios.post('/api/host/check_code',qs.stringify({code:code}));
+    dispatch({type: HOST_CHECK_CODE});
+    const res = await axios.post('/api/host/check_code', qs.stringify({code: code}));
     console.log(res);
-    dispatch({type:HOST_CHECKED_CODE, payload:res.data});
+    dispatch({type: HOST_CHECKED_CODE, payload: res.data});
 };

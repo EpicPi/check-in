@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {hostGetEvents, hostRemoveEvent, hostSelectEvent} from "../../actions";
-import Link from "react-router-dom/es/Link";
+import {hostGetEvents} from "../../actions";
 import HostEventItem from "./HostEventItem";
 import {LOAD} from "../../helpers/Enums";
 

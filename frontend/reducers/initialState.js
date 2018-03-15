@@ -12,7 +12,7 @@ export const hostInitial = {
     events: LOAD.NOTHING,
     checkCode: CHECK_CODE.NOTHING_TO_CHECK
 };
-export const eventInitial ={
+export const eventInitial = {
     selected: {},
     selectedRSVPs: LOAD.NOTHING,
     selectedAttends: LOAD.NOTHING,

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {guestFindEvent, guestJoinEvent, guestResetJoinFind, hostAddEvent} from "../../actions";
+import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../actions";
 import {JOIN_FIND} from "../../helpers/Enums";
 
 class GuestJoinEvent extends Component {
@@ -18,13 +18,14 @@ class GuestJoinEvent extends Component {
         this.handleConfirm = this.handleConfirm.bind(this);
     }
 
-    componentWillReceiveProps(next){
+    componentWillReceiveProps(next) {
         this.setState({out: this.getJoinFindOutput(next)});
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.resetJoin();
     }
+
     handleNameInput(e) {
         this.setState({eventName: e.target.value});
     }
