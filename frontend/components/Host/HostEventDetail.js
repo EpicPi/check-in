@@ -5,12 +5,14 @@ import {getAttends, getRSVPs} from "../../actions/index";
 import {LOAD} from "../../helpers/Enums";
 
 class HostEventDetail extends Component {
-   constructor(props){
-       super(props);
-       props.getRSVPs(this.props.event);
-       props.getAttends(this.props.event);
-       this.handleEditClick = this.handleEditClick.bind(this);
-   }
+
+    constructor(props) {
+        super(props);
+        this.handleEditClick = this.handleEditClick.bind(this);
+
+        props.getRSVPs(this.props.event);
+        props.getAttends(this.props.event);
+    }
 
     handleEditClick() {
         this.props.history.push('/host/edit');
@@ -52,6 +54,9 @@ class HostEventDetail extends Component {
                     Code: {this.props.event.code}
                 </div>
                 <div>
+                    Info: {this.props.event.info}
+                </div>
+                <div>
                     RSVP Start: {new Date(this.props.event.dates.rsvpStart).toString()}
                 </div>
                 <div>
@@ -75,8 +80,6 @@ class HostEventDetail extends Component {
             </div>
         );
     }
-
-
 }
 
 const mapStateToProps = (state) => {
@@ -93,4 +96,5 @@ const mapDispatchToProps = (/* dispatch */) => {
         getAttends: getAttends
     };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps())(HostEventDetail);

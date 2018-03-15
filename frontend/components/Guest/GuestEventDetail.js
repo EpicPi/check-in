@@ -18,6 +18,9 @@ class GuestEventDetail extends Component {
                 <div>
                     Name: {this.props.event.name}
                 </div>
+                <div>
+                    Info: {this.props.event.info}
+                </div>
                 <button onClick={this.handleCheckIn}>Check In</button>
             </div>
         );
