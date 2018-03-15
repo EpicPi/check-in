@@ -46,7 +46,7 @@ class HostEvent extends Component {
             this.state = {
                 eventName: this.props.event.name,
                 code: this.props.event.code,
-                info: '',
+                info: this.props.event.info,
                 rsvpStart: {
                     time: dateStringToHours(this.props.event.dates.rsvpStart),
                     date: dateStringToDate(this.props.event.dates.rsvpStart)
@@ -106,6 +106,7 @@ class HostEvent extends Component {
             },
             type: this.state.type,
             checkinCode: this.state.checkinCode,
+            info: this.state.info
         };
 
         if (this.props.add)
