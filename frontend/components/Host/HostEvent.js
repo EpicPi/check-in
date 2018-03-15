@@ -73,6 +73,10 @@ class HostEvent extends Component {
             props.hostCheckCode(state.code);
     }
 
+    componentWillUnmount(){
+
+    }
+
     handleGeneral(e) {
         this.setState({[e.target.name]: e.target.value});
     }
@@ -325,6 +329,7 @@ const mapDispatchToProps = (/* dispatch */) => {
         addEvent: hostAddEvent,
         hostCheckCode: hostCheckCode,
         editEvent: hostEditEvent,
+        resetEvent: hostResteEvent
     };
 };
 

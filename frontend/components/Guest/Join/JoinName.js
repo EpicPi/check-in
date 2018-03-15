@@ -15,7 +15,7 @@ class JoinName extends Component {
 
     handleConfirm(e) {
         e.preventDefault();
-        this.props.joinEvent(this.props.eventToJoin);
+        this.props.joinEvent(this.props.eventToJoin, this.state.name);
         this.props.history.push('/guest');
     }
 
@@ -27,7 +27,7 @@ class JoinName extends Component {
         return (
             <div>
                 <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-                Name:
+                GT username:
                 <input
                     name="name"
                     type="text"

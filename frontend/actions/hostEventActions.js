@@ -38,3 +38,5 @@ export const hostCheckCode = (code) => async dispatch => {
     console.log(res);
     dispatch({type: HOST_CHECKED_CODE, payload: res.data});
 };
+
+//todo host reset event

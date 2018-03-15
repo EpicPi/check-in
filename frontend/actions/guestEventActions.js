@@ -8,8 +8,8 @@ import {
     GUEST_RESET_JOIN_FIND,
 } from "./types";
 
-export const guestJoinEvent = (event) => dispatch => {
-    axios.post('/api/guest/join', qs.stringify({id: event._id}));
+export const guestJoinEvent = (event, extra) => dispatch => {
+    axios.post('/api/guest/join', qs.stringify({id: event._id, extra: extra}));
     dispatch({type: GUEST_JOIN_EVENT, payload: event});
 };
 
