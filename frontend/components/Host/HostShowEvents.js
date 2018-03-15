@@ -1,28 +1,28 @@
-import {Component} from "react";
-import {guestGetEvents} from "../../actions";
-import {connect} from "react-redux";
-import React from "react";
-import GuestEventItem from "./GuestEventItem";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {hostGetEvents} from "../../actions/index";
+import HostEventItem from "./HostEventItem";
 import {LOAD} from "../../helpers/Enums";
 
-class GuestShowEvents extends Component {
+
+class HostShowEvents extends Component {
+
     constructor(props) {
         super(props);
+        this.handleCreate = this.handleCreate.bind(this);
         this.getEventsOutput = this.getEventsOutput.bind(this);
-        this.handleJoin = this.handleJoin.bind(this);
 
         if (this.props.events === LOAD.NOTHING)
             this.props.getEvents();
         this.state = {out: this.getEventsOutput(this.props)};
-
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({out: this.getEventsOutput(nextProps)});
     }
 
-    handleJoin() {
-        this.props.history.push('/guest/join');
+    handleCreate() {
+        this.props.history.push('/host/create');
     }
 
     getEventsOutput(props) {
@@ -33,18 +33,18 @@ class GuestShowEvents extends Component {
                 return;
             default:
                 return props.events.map((event, i) => (
-                    <GuestEventItem history={props.history} key={i} event={event}/>
+                    <HostEventItem history={props.history} key={i} event={event}/>
                 ));
         }
     }
 
     render() {
         return (
-            <div className="row guest-show">
+            <div className="row host-show">
                 <div className="container-fluid">
                     <div className="row btn-create">
                         <div className="col-md-12">
-                            <button className="btn btn-lg" onClick={this.handleJoin}>Join
+                            <button className="btn btn-lg" onClick={this.handleCreate}>create
                             </button>
                         </div>
                     </div>
@@ -64,14 +64,15 @@ class GuestShowEvents extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        events: state.guest.events,
+        events: state.host.events,
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        getEvents: guestGetEvents,
+        getEvents: hostGetEvents,
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(GuestShowEvents);
+export default connect(mapStateToProps, mapDispatchToProps())(HostShowEvents);
+

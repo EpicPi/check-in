@@ -3,7 +3,7 @@ import {Route} from "react-router-dom";
 import GuestShowEvents from "./GuestShowEvents";
 import GuestJoinEvent from "./GuestJoinEvent";
 import GuestEventDetail from "./GuestEventDetail";
-import {resetEvent} from "../../actions";
+import {resetEvent} from "../../actions/index";
 import {connect} from "react-redux";
 import GuestCheckIn from "./Checkin/GuestCheckIn";
 

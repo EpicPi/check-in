@@ -4,7 +4,7 @@ import HostCreateEvent from './HostCreateEvent';
 import HostShowEvents from './HostShowEvents';
 import HostEventDetail from './HostEventDetail';
 import HostEditEvent from "./HostEditEvent";
-import {resetEvent} from "../../actions";
+import {resetEvent} from "../../actions/index";
 import {connect} from "react-redux";
 
 class HostDash extends Component {

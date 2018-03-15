@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {hostAddEvent, hostCheckCode, hostEditEvent} from "../../actions";
+import {hostAddEvent, hostCheckCode, hostEditEvent} from "../../actions/index";
 import TimePicker from './TimePicker';
 
 import {CHECK_CODE, EVENT_TYPES} from "../../helpers/Enums";
