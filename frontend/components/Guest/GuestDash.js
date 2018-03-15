@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Route} from "react-router-dom";
 import GuestShowEvents from "./GuestShowEvents";
-import GuestJoinEvent from "./GuestJoinEvent";
+import GuestJoinEvent from "./Join/GuestJoinEvent";
 import GuestEventDetail from "./GuestEventDetail";
 import {resetEvent} from "../../actions/index";
 import {connect} from "react-redux";

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../actions";
-import {JOIN_FIND} from "../../helpers/Enums";
+import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../../actions/index";
+import {JOIN_FIND} from "../../../helpers/Enums";
+import JoinBasic from "./JoinBasic";
 
 class GuestJoinEvent extends Component {
 
@@ -12,7 +13,6 @@ class GuestJoinEvent extends Component {
             out: this.getJoinFindOutput(this.props),
         };
 
-        this.handleNameInput = this.handleNameInput.bind(this);
         this.handleCodeInput = this.handleCodeInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleConfirm = this.handleConfirm.bind(this);
@@ -24,10 +24,6 @@ class GuestJoinEvent extends Component {
 
     componentWillUnmount() {
         this.props.resetJoin();
-    }
-
-    handleNameInput(e) {
-        this.setState({eventName: e.target.value});
     }
 
     handleCodeInput(e) {
@@ -53,11 +49,7 @@ class GuestJoinEvent extends Component {
             case JOIN_FIND.FAIL:
                 return <h3>Couldn't find, please check code</h3>;
             case JOIN_FIND.SUCCESS:
-                return (
-                    <div>
-                        <h3>Please confirm RSVP for {props.eventToJoin.name}</h3>
-                        <button onClick={this.handleConfirm}>confirm</button>
-                    </div>);
+                return (<JoinBasic/>);
             case JOIN_FIND.CHECKING:
                 return <h3>Checking code</h3>;
             case JOIN_FIND.ALREADY_JOINED:
