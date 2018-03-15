@@ -26,15 +26,15 @@ class HostShowEvents extends Component {
         this.props.history.push('/host/create');
     }
 
-    getEventsOutput() {
-        switch (this.props.events) {
+    getEventsOutput(props) {
+        switch (props.events) {
             case LOAD.LOADING:
                 return <h3>LOADING</h3>;
             case LOAD.NOTHING:
                 return;
             default:
-                return this.props.events.map((event, i) => (
-                    <HostEventItem history={this.props.history} key={i} event={event}/>
+                return props.events.map((event, i) => (
+                    <HostEventItem history={props.history} key={i} event={event}/>
                 ));
         }
     }

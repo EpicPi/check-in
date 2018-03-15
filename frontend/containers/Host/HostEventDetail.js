@@ -22,7 +22,7 @@ class HostEventDetail extends Component {
                 ));
         }
     }
-    getAttendssOutput(){
+    getAttendsOutput(){
         switch(this.props.attends){
             case LOAD.LOADING:
                 return <h3>LOADING</h3>;
@@ -56,14 +56,14 @@ class HostEventDetail extends Component {
                 <div>
                     Checkin End: { new Date(this.props.event.dates.checkinEnd).toString() }
                 </div>
-                <button onClick={()=>this.handleEditClick()}>Edit Event</button>
+                <button onClick={this.handleEditClick}>Edit Event</button>
                 <div>
                     RSVPs:
                     {this.getRSVPsOutput()}
                 </div>
                 <div>
                     Attendees:
-                    {this.getAttendssOutput()}
+                    {this.getAttendsOutput()}
                 </div>
             </div>
         );
