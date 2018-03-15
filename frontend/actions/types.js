@@ -24,6 +24,7 @@ export const GUEST_RESET_JOIN_FIND = 'guest_reset_join_find';
 export const GUEST_CHECKIN = 'guest_checkin';
 export const GUEST_CHECK_CHECKIN = 'guest_check_checkin';
 export const GUEST_CHECKED_CHECKIN = 'guest_checked_checkin';
+export const GUEST_RESET_CHECKIN = 'guest_reset_checkin';
 
 //event event types
 export const SELECT_EVENT = 'select event';
