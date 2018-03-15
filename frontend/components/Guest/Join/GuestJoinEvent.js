@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../../actions/index";
 import {JOIN_FIND} from "../../../helpers/Enums";
 import JoinBasic from "./JoinBasic";
+import JoinName from "./JoinName";
 
 class GuestJoinEvent extends Component {
 
@@ -39,7 +40,7 @@ class GuestJoinEvent extends Component {
             case JOIN_FIND.FAIL:
                 return <h3>Couldn't find, please check code</h3>;
             case JOIN_FIND.SUCCESS:
-                return (<JoinBasic history={this.props.history}/>);
+                return (<JoinName history={this.props.history}/>);
             case JOIN_FIND.CHECKING:
                 return <h3>Checking code</h3>;
             case JOIN_FIND.ALREADY_JOINED:

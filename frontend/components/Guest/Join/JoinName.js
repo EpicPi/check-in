@@ -7,7 +7,7 @@ class JoinName extends Component {
     constructor(props) {
         super(props);
         this.handleConfirm = this.handleConfirm.bind(this);
-
+        this.handleInput = this.handleInput.bind(this);
         this.state = {
             name: '',
         };
@@ -25,7 +25,7 @@ class JoinName extends Component {
 
     render() {
         return (
-            <form>
+            <div>
                 <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
                 Name:
                 <input
@@ -33,8 +33,8 @@ class JoinName extends Component {
                     type="text"
                     value={this.state.name}
                     onChange={this.handleInput}/>
-                <input type="submit" value="submit">confirm</input>
-            </form>
+                <button onClick={this.handleConfirm}>confirm</button>
+            </div>
         );
 
     }
