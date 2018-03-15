@@ -4,23 +4,39 @@ import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../../actio
 import {JOIN_FIND} from "../../../helpers/Enums";
 
 class JoinName extends Component {
+    constructor(props) {
+        super(props);
+        this.handleConfirm = this.handleConfirm.bind(this);
+
+        this.state = {
+            name: '',
+        };
+    }
 
     handleConfirm(e) {
         e.preventDefault();
-        this.setState({
-            code: ''
-        });
         this.props.joinEvent(this.props.eventToJoin);
         this.props.history.push('/guest');
     }
 
+    handleInput(e) {
+        this.setState({name: e.target.value});
+    }
+
     render() {
         return (
-            <div>
+            <form>
                 <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-                <button onClick={this.handleConfirm}>confirm</button>
-            </div>
+                Name:
+                <input
+                    name="name"
+                    type="text"
+                    value={this.state.name}
+                    onChange={this.handleInput}/>
+                <input type="submit" value="submit">confirm</input>
+            </form>
         );
+
     }
 }
 
@@ -38,3 +54,5 @@ const mapDispatchToProps = (/* dispatch */) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(JoinName);
+
+

@@ -15,7 +15,6 @@ class GuestJoinEvent extends Component {
 
         this.handleCodeInput = this.handleCodeInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleConfirm = this.handleConfirm.bind(this);
     }
 
     componentWillReceiveProps(next) {
@@ -35,21 +34,12 @@ class GuestJoinEvent extends Component {
         this.props.findEvent(this.state.code);
     }
 
-    handleConfirm(e) {
-        e.preventDefault();
-        this.setState({
-            code: ''
-        });
-        this.props.joinEvent(this.props.eventToJoin);
-        this.props.history.push('/guest');
-    }
-
     getJoinFindOutput(props) {
         switch (props.joinFind) {
             case JOIN_FIND.FAIL:
                 return <h3>Couldn't find, please check code</h3>;
             case JOIN_FIND.SUCCESS:
-                return (<JoinBasic/>);
+                return (<JoinBasic history={this.props.history}/>);
             case JOIN_FIND.CHECKING:
                 return <h3>Checking code</h3>;
             case JOIN_FIND.ALREADY_JOINED:

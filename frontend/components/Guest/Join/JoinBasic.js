@@ -4,12 +4,13 @@ import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../../actio
 import {JOIN_FIND} from "../../../helpers/Enums";
 
 class JoinBasic extends Component {
+    constructor(props){
+        super(props);
+        this.handleConfirm = this.handleConfirm.bind(this);
+    }
 
     handleConfirm(e) {
         e.preventDefault();
-        this.setState({
-            code: ''
-        });
         this.props.joinEvent(this.props.eventToJoin);
         this.props.history.push('/guest');
     }
