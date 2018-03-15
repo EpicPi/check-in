@@ -12,11 +12,14 @@ class HostShowEvents extends Component {
         super(props);
         this.handleCreate = this.handleCreate.bind(this);
         this.getEventsOutput = this.getEventsOutput.bind(this);
-    }
 
-    componentDidMount() {
         if (this.props.events === LOAD.NOTHING)
             this.props.getEvents();
+        this.state = {out: this.getEventsOutput(this.props)};
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({out: this.getEventsOutput(nextProps)});
     }
 
     handleCreate() {
@@ -50,7 +53,7 @@ class HostShowEvents extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             <ul className="event-list">
-                                {this.getEventsOutput()}
+                                {this.state.out}
                             </ul>
                         </div>
                     </div>
