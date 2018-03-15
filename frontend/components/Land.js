@@ -7,7 +7,8 @@ import {USER} from "../helpers/Enums";
 import "../../public/app.css";
 
 class Land extends Component {
-    componentWillMount() {
+    constructor(props){
+        super(props);
         this.props.resetUserType();
     }
 

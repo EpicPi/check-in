@@ -5,6 +5,7 @@ import {fetchUser} from "../actions";
 import {USER} from "../helpers/Enums";
 
 class Header extends Component {
+
     componentDidMount() {
         this.props.fetchUser();
     }
