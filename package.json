@@ -5,6 +5,7 @@
     "private": true,
     "main": "server.js",
     "scripts": {
+        "precommit": "lint-staged",
         "build": "webpack --config webpack.prod.config.js",
         "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
         "frontend": "webpack -d --watch",
@@ -28,12 +29,15 @@
         "enzyme": "^2.8.1",
         "expect": "^1.20.2",
         "express": "^4.15.2",
+        "husky": "^0.14.3",
         "jquery": "^3.3.1",
+        "lint-staged": "^7.0.0",
         "mocha": "^3.2.0",
         "mongoose": "^5.0.6",
         "node-sass": "^4.5.2",
         "passport": "^0.4.0",
         "passport-google-oauth20": "^1.0.0",
+        "prettier": "^1.11.1",
         "prop-types": "^15.5.8",
         "qs": "^6.5.1",
         "react": "^15.5.4",
@@ -65,5 +69,11 @@
         "webpack-dev-middleware": "^1.10.1",
         "webpack-dev-server": "^2.4.2",
         "webpack-hot-middleware": "^2.18.0"
+    },
+    "lint-staged": {
+        "src/**/*.{js,jsx,json,css}": [
+        "prettier --single-quote --write",
+        "git add"
+      ]
     }
 }
