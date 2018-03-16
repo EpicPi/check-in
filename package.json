@@ -72,9 +72,6 @@
         "webpack-hot-middleware": "^2.18.0"
     },
     "lint-staged": {
-        "src/**/*.{js,jsx,json,css}": [
-            "prettier --single-quote --write",
-            "git add"
-        ]
+        "**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
     }
 }
