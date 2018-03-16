@@ -1,6 +1,6 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {configureStore} from './store/configureStore';
+import { render } from 'react-dom';
+import { configureStore } from './store/configureStore';
 import Root from './components/Root/Root';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +12,6 @@ import '../public/app.css';
 const store = configureStore();
 
 render(
-    <Root store={store} history={history}/>,
+    <Root store={store} history={history} />,
     document.getElementById('root')
 );

@@ -1,24 +1,21 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {hostGetEvents} from "../../actions/index";
-import HostEventItem from "./HostEventItem";
-import {LOAD} from "../../helpers/Enums";
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { hostGetEvents } from '../../actions/index';
+import HostEventItem from './HostEventItem';
+import { LOAD } from '../../helpers/Enums';
 
 class HostShowEvents extends Component {
-
     constructor(props) {
         super(props);
         this.handleCreate = this.handleCreate.bind(this);
         this.getEventsOutput = this.getEventsOutput.bind(this);
 
-        if (this.props.events === LOAD.NOTHING)
-            this.props.getEvents();
-        this.state = {out: this.getEventsOutput(this.props)};
+        if (this.props.events === LOAD.NOTHING) this.props.getEvents();
+        this.state = { out: this.getEventsOutput(this.props) };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({out: this.getEventsOutput(nextProps)});
+        this.setState({ out: this.getEventsOutput(nextProps) });
     }
 
     handleCreate() {
@@ -33,7 +30,11 @@ class HostShowEvents extends Component {
                 return;
             default:
                 return props.events.map((event, i) => (
-                    <HostEventItem history={props.history} key={i} event={event}/>
+                    <HostEventItem
+                        history={props.history}
+                        key={i}
+                        event={event}
+                    />
                 ));
         }
     }
@@ -44,16 +45,18 @@ class HostShowEvents extends Component {
                 <div className="container-fluid">
                     <div className="row btn-create">
                         <div className="col-md-12">
-                            <button className="btn btn-lg" onClick={this.handleCreate}>create
+                            <button
+                                className="btn btn-lg"
+                                onClick={this.handleCreate}
+                            >
+                                create
                             </button>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="row">
                         <div className="col-md-12">
-                            <ul className="event-list">
-                                {this.state.out}
-                            </ul>
+                            <ul className="event-list">{this.state.out}</ul>
                         </div>
                     </div>
                 </div>
@@ -62,17 +65,16 @@ class HostShowEvents extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        events: state.host.events,
+        events: state.host.events
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        getEvents: hostGetEvents,
+        getEvents: hostGetEvents
     };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(HostShowEvents);
-

@@ -1,11 +1,11 @@
-import React, {Component} from "react";
-import {Route} from "react-router-dom";
-import GuestShowEvents from "./GuestShowEvents";
-import GuestJoinEvent from "./Join/GuestJoinEvent";
-import GuestEventDetail from "./GuestEventDetail";
-import {resetEvent} from "../../actions/index";
-import {connect} from "react-redux";
-import GuestCheckIn from "./Checkin/GuestCheckIn";
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import GuestShowEvents from './GuestShowEvents';
+import GuestJoinEvent from './Join/GuestJoinEvent';
+import GuestEventDetail from './GuestEventDetail';
+import { resetEvent } from '../../actions/index';
+import { connect } from 'react-redux';
+import GuestCheckIn from './Checkin/GuestCheckIn';
 
 class GuestDash extends Component {
     componentWillMount() {
@@ -15,22 +15,22 @@ class GuestDash extends Component {
     render() {
         return (
             <div>
-                <Route exact path='/guest' component={GuestShowEvents}/>
-                <Route exact path='/guest/join' component={GuestJoinEvent}/>
-                <Route exact path='/guest/event' component={GuestEventDetail}/>
-                <Route exact path='/guest/checkin' component={GuestCheckIn}/>
+                <Route exact path="/guest" component={GuestShowEvents} />
+                <Route exact path="/guest/join" component={GuestJoinEvent} />
+                <Route exact path="/guest/event" component={GuestEventDetail} />
+                <Route exact path="/guest/checkin" component={GuestCheckIn} />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {};
 };
 
 const mapDispatchToProps = () => {
     return {
-        resetEvent: resetEvent,
+        resetEvent: resetEvent
     };
 };
 

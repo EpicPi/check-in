@@ -1,5 +1,5 @@
 /** {*/
-    /*margin: 10px;*/
+/*margin: 10px;*/
 /*}*/
 
 .app {
@@ -13,7 +13,6 @@
 body {
     padding-top: 70px;
 }
-
 
 .text-white a {
     color: white;
@@ -33,17 +32,15 @@ body {
     margin: 10px 0 10px 0;
 }
 
-
 /**
     HostShowEvent.js
  */
 .host-show {
     margin: 10px;
 }
-.host-show ul{
+.host-show ul {
     padding: 0;
 }
-
 
 /**
     HostEventItem.js
@@ -62,10 +59,9 @@ body {
 .guest-show {
     margin: 10px;
 }
-.guest-show ul{
+.guest-show ul {
     padding: 0;
 }
-
 
 /**
     GuestEventItem.js

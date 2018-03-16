@@ -2,14 +2,12 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-    entry: [
-        './frontend/index'
-    ],
+    entry: ['./frontend/index'],
     module: {
         rules: [
             { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/ },
-            { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' },
-        ],
+            { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' }
+        ]
     },
     resolve: {
         extensions: ['.js', '.scss']
@@ -29,8 +27,8 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
-            "process.env": {
-                "NODE_ENV": JSON.stringify("production")
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
             }
         }),
         new webpack.optimize.UglifyJsPlugin({

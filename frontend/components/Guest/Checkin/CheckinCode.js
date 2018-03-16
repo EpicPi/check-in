@@ -1,37 +1,35 @@
-import {Component} from "react";
-import {guestCheckCheckin, guestCheckin} from "../../../actions/index";
-import {connect} from "react-redux";
-import React from "react";
-import {CHECK_CHECKIN} from "../../../helpers/Enums";
-import {guestResetCheckin} from "../../../actions";
+import { Component } from 'react';
+import { guestCheckCheckin, guestCheckin } from '../../../actions/index';
+import { connect } from 'react-redux';
+import React from 'react';
+import { CHECK_CHECKIN } from '../../../helpers/Enums';
+import { guestResetCheckin } from '../../../actions';
 
 class CheckinCode extends Component {
-
     constructor(props) {
         super(props);
         this.getCheckCheckInOutput = this.getCheckCheckInOutput.bind(this);
         this.handleCheckInCodeInput = this.handleCheckInCodeInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            checkinCode: '',
-
+            checkinCode: ''
         };
     }
 
-    componentDidUpdate(){
-        if(this.props.check === CHECK_CHECKIN.SUCCESS){
+    componentDidUpdate() {
+        if (this.props.check === CHECK_CHECKIN.SUCCESS) {
             alert('checked in');
             this.props.history.push('/guest');
             this.props.checkin(this.props.event);
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.reset();
     }
 
     handleCheckInCodeInput(e) {
-        this.setState({checkinCode: e.target.value});
+        this.setState({ checkinCode: e.target.value });
     }
 
     handleSubmit(e) {
@@ -66,8 +64,8 @@ class CheckinCode extends Component {
                                     required
                                 />
                             </div>
-                            <button type="submit" value="submit"
-                            >confirm
+                            <button type="submit" value="submit">
+                                confirm
                             </button>
                         </label>
                     </form>
@@ -78,10 +76,10 @@ class CheckinCode extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         event: state.event.selected,
-        check: state.guest.check,
+        check: state.guest.check
     };
 };
 const mapDispatchToProps = () => {

@@ -5,34 +5,31 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
-
 router.post('/add_event', async (req, res) => {
-        const event = await Event({
-            name: req.body.name,
-            code: req.body.code,
-            dates: req.body.dates,
-            guestsRSVP: [],
-            guestsAttend: [],
-            type: req.body.type,
-            checkinCode: req.body.checkinCode,
-            info: req.body.info,
-        }).save();
-        const user = await User.findById(req.user.id);
-        // user.events = []; //cleans out event array
-        user.hostEvents.push(event.id);
-        user.save();
-        res.send(event);
-    }
-);
+    const event = await Event({
+        name: req.body.name,
+        code: req.body.code,
+        dates: req.body.dates,
+        guestsRSVP: [],
+        guestsAttend: [],
+        type: req.body.type,
+        checkinCode: req.body.checkinCode,
+        info: req.body.info
+    }).save();
+    const user = await User.findById(req.user.id);
+    // user.events = []; //cleans out event array
+    user.hostEvents.push(event.id);
+    user.save();
+    res.send(event);
+});
 
 router.post('/remove_event', async (req, res) => {
-        const user = await User.findById(req.user.id);
-        user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
-        user.save();
+    const user = await User.findById(req.user.id);
+    user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
+    user.save();
 
-        await Event.findById(req.body._id).remove();
-    }
-);
+    await Event.findById(req.body._id).remove();
+});
 
 router.get('/get_events', async (req, res) => {
     const user = await User.findById(req.user.id);
@@ -45,24 +42,22 @@ router.get('/get_events', async (req, res) => {
 });
 
 router.post('/edit_event', async (req, res) => {
-        const event = await Event.findById(req.body._id);
-        //only want to update the editable values
-        event.name = req.body.name;
-        event.code = req.body.code;
-        event.dates = req.body.dates;
-        event.checkinCode = req.body.checkinCode;
-        event.info = req.body.info;
-        event.save();
-        res.send(event);
-    }
-);
+    const event = await Event.findById(req.body._id);
+    //only want to update the editable values
+    event.name = req.body.name;
+    event.code = req.body.code;
+    event.dates = req.body.dates;
+    event.checkinCode = req.body.checkinCode;
+    event.info = req.body.info;
+    event.save();
+    res.send(event);
+});
 
 router.post('/check_code', async (req, res) => {
-    const event = await Event.findOne({'code': req.body.code});
+    const event = await Event.findOne({ code: req.body.code });
     if (req.body.code !== '')
         res.send(event === null); // code available?
-    else
-        res.send(false);
+    else res.send(false);
 });
 
 module.exports = router;

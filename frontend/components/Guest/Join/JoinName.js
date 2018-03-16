@@ -1,7 +1,11 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../../actions/index";
-import {JOIN_FIND} from "../../../helpers/Enums";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+    guestFindEvent,
+    guestJoinEvent,
+    guestResetJoinFind
+} from '../../../actions/index';
+import { JOIN_FIND } from '../../../helpers/Enums';
 
 class JoinName extends Component {
     constructor(props) {
@@ -9,7 +13,7 @@ class JoinName extends Component {
         this.handleConfirm = this.handleConfirm.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.state = {
-            name: '',
+            name: ''
         };
     }
 
@@ -20,7 +24,7 @@ class JoinName extends Component {
     }
 
     handleInput(e) {
-        this.setState({name: e.target.value});
+        this.setState({ name: e.target.value });
     }
 
     render() {
@@ -32,17 +36,17 @@ class JoinName extends Component {
                     name="name"
                     type="text"
                     value={this.state.name}
-                    onChange={this.handleInput}/>
+                    onChange={this.handleInput}
+                />
                 <button onClick={this.handleConfirm}>confirm</button>
             </div>
         );
-
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        eventToJoin: state.guest.eventToJoin,
+        eventToJoin: state.guest.eventToJoin
     };
 };
 
@@ -54,5 +58,3 @@ const mapDispatchToProps = (/* dispatch */) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(JoinName);
-
-

@@ -11,7 +11,8 @@
         "frontend": "webpack -d --watch",
         "backend": "nodemon server.js",
         "start": "npm run build && NODE_ENV=production node server.js",
-        "test": "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles"
+        "test":
+            "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles"
     },
     "author": "",
     "license": "ISC",
@@ -72,8 +73,8 @@
     },
     "lint-staged": {
         "src/**/*.{js,jsx,json,css}": [
-        "prettier --single-quote --write",
-        "git add"
-      ]
+            "prettier --single-quote --write",
+            "git add"
+        ]
     }
 }

@@ -11,19 +11,22 @@ require('./backend/services/passport');
 const keys = require('./backend/config/keys');
 const api = require('./backend/routes/');
 
-
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(
+    bodyParser.urlencoded({
+        extended: true
+    })
+);
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cookieSession({
-    maxAge: 24*60*60*1000, // 1 day
-    keys: [keys.cookieKey]
-}));
+app.use(
+    cookieSession({
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        keys: [keys.cookieKey]
+    })
+);
 
 //authentication
 app.use(passport.initialize());
@@ -41,6 +44,8 @@ mongoose.connect(keys.mongoUri);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, error => {
     error
-    ? console.error(error)
-    : console.info(`==> 🌎 Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`);
+        ? console.error(error)
+        : console.info(
+              `==> 🌎 Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`
+          );
 });

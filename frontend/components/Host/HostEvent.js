@@ -1,12 +1,21 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {hostAddEvent, hostCheckCode, hostEditEvent} from "../../actions/index";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+    hostAddEvent,
+    hostCheckCode,
+    hostEditEvent
+} from '../../actions/index';
 import TimePicker from './TimePicker';
 
-import {CHECK_CODE, EVENT_TYPES} from "../../helpers/Enums";
+import { CHECK_CODE, EVENT_TYPES } from '../../helpers/Enums';
 
-import {TODAY, dateTimeToDate, dateStringToHours, dateStringToDate} from "../../helpers/Time";
-import {hostResetEvent} from "../../actions";
+import {
+    TODAY,
+    dateTimeToDate,
+    dateStringToHours,
+    dateStringToDate
+} from '../../helpers/Time';
+import { hostResetEvent } from '../../actions';
 
 const initialState = {
     eventName: '',
@@ -29,11 +38,10 @@ const initialState = {
         date: TODAY
     },
     type: EVENT_TYPES.BASIC,
-    checkinCode: '',
+    checkinCode: ''
 };
 
 class HostEvent extends Component {
-
     constructor(props) {
         super(props);
         this.handleGeneral = this.handleGeneral.bind(this);
@@ -41,8 +49,7 @@ class HostEvent extends Component {
         this.handleTimeChange = this.handleTimeChange.bind(this);
         this.getSelectOutput = this.getSelectOutput.bind(this);
 
-        if (this.props.add)
-            this.state = initialState;
+        if (this.props.add) this.state = initialState;
         else
             this.state = {
                 eventName: this.props.event.name,
@@ -57,7 +64,9 @@ class HostEvent extends Component {
                     date: dateStringToDate(this.props.event.dates.rsvpEnd)
                 },
                 checkinStart: {
-                    time: dateStringToHours(this.props.event.dates.checkinStart),
+                    time: dateStringToHours(
+                        this.props.event.dates.checkinStart
+                    ),
                     date: dateStringToDate(this.props.event.dates.checkinStart)
                 },
                 checkinEnd: {
@@ -65,28 +74,29 @@ class HostEvent extends Component {
                     date: dateStringToDate(this.props.event.dates.checkinEnd)
                 },
                 type: this.props.event.type,
-                checkinCode: this.props.event.checkinCode,
+                checkinCode: this.props.event.checkinCode
             };
     }
 
     componentWillUpdate(props, state) {
-        if (state.code !== props.event.code && state.code !== this.state.code) // if editing and you dont change
+        if (state.code !== props.event.code && state.code !== this.state.code)
+            // if editing and you dont change
             props.hostCheckCode(state.code);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.resetEvent();
     }
 
     handleGeneral(e) {
-        this.setState({[e.target.name]: e.target.value});
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     handleTimeChange(name, time, date) {
         this.setState({
             [name]: {
                 time: time ? time : this.state[name].time,
-                date: date ? date : this.state[name].date,
+                date: date ? date : this.state[name].date
             }
         });
     }
@@ -94,7 +104,10 @@ class HostEvent extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        if (this.props.checkCode !== CHECK_CODE.AVAILABLE && this.state.code !== this.props.event.code) {
+        if (
+            this.props.checkCode !== CHECK_CODE.AVAILABLE &&
+            this.state.code !== this.props.event.code
+        ) {
             alert('Please enter a different code');
             return;
         }
@@ -104,20 +117,30 @@ class HostEvent extends Component {
             name: this.state.eventName,
             code: this.state.code,
             dates: {
-                rsvpStart: dateTimeToDate(this.state.rsvpStart.date, this.state.rsvpStart.time),
-                rsvpEnd: dateTimeToDate(this.state.rsvpEnd.date, this.state.rsvpEnd.time),
-                checkinStart: dateTimeToDate(this.state.checkinStart.date, this.state.checkinStart.time),
-                checkinEnd: dateTimeToDate(this.state.checkinEnd.date, this.state.checkinEnd.time),
+                rsvpStart: dateTimeToDate(
+                    this.state.rsvpStart.date,
+                    this.state.rsvpStart.time
+                ),
+                rsvpEnd: dateTimeToDate(
+                    this.state.rsvpEnd.date,
+                    this.state.rsvpEnd.time
+                ),
+                checkinStart: dateTimeToDate(
+                    this.state.checkinStart.date,
+                    this.state.checkinStart.time
+                ),
+                checkinEnd: dateTimeToDate(
+                    this.state.checkinEnd.date,
+                    this.state.checkinEnd.time
+                )
             },
             type: this.state.type,
             checkinCode: this.state.checkinCode,
             info: this.state.info
         };
 
-        if (this.props.add)
-            this.props.addEvent(event);
-        else
-            this.props.editEvent(event);
+        if (this.props.add) this.props.addEvent(event);
+        else this.props.editEvent(event);
 
         this.setState(initialState);
 
@@ -125,7 +148,8 @@ class HostEvent extends Component {
     }
 
     getCheckCodeOutput() {
-        if (this.state.code === this.props.event.code) // if editing and you dont change
+        if (this.state.code === this.props.event.code)
+            // if editing and you dont change
             return;
         switch (this.props.checkCode) {
             case CHECK_CODE.NOTHING_TO_CHECK:
@@ -165,7 +189,6 @@ class HostEvent extends Component {
         }
     }
 
-
     render() {
         return (
             <div className="host-create-event row">
@@ -182,7 +205,9 @@ class HostEvent extends Component {
                                                     type="text"
                                                     name="eventName"
                                                     value={this.state.eventName}
-                                                    onChange={this.handleGeneral}
+                                                    onChange={
+                                                        this.handleGeneral
+                                                    }
                                                     required
                                                 />
                                             </div>
@@ -199,7 +224,9 @@ class HostEvent extends Component {
                                                     type="text"
                                                     name="code"
                                                     value={this.state.code}
-                                                    onChange={this.handleGeneral}
+                                                    onChange={
+                                                        this.handleGeneral
+                                                    }
                                                     required
                                                 />
                                             </div>
@@ -217,7 +244,9 @@ class HostEvent extends Component {
                                                 <textarea
                                                     name="info"
                                                     value={this.state.info}
-                                                    onChange={this.handleGeneral}
+                                                    onChange={
+                                                        this.handleGeneral
+                                                    }
                                                     required
                                                 />
                                             </div>
@@ -232,9 +261,18 @@ class HostEvent extends Component {
                                             <div>
                                                 <TimePicker
                                                     name="rsvpStart"
-                                                    time={this.state.rsvpStart.time}
-                                                    date={this.state.rsvpStart.date}
-                                                    handleChange={this.handleTimeChange}/>
+                                                    time={
+                                                        this.state.rsvpStart
+                                                            .time
+                                                    }
+                                                    date={
+                                                        this.state.rsvpStart
+                                                            .date
+                                                    }
+                                                    handleChange={
+                                                        this.handleTimeChange
+                                                    }
+                                                />
                                             </div>
                                         </label>
                                     </div>
@@ -247,9 +285,16 @@ class HostEvent extends Component {
                                             <div>
                                                 <TimePicker
                                                     name="rsvpEnd"
-                                                    time={this.state.rsvpEnd.time}
-                                                    date={this.state.rsvpEnd.date}
-                                                    handleChange={this.handleTimeChange}/>
+                                                    time={
+                                                        this.state.rsvpEnd.time
+                                                    }
+                                                    date={
+                                                        this.state.rsvpEnd.date
+                                                    }
+                                                    handleChange={
+                                                        this.handleTimeChange
+                                                    }
+                                                />
                                             </div>
                                         </label>
                                     </div>
@@ -262,9 +307,18 @@ class HostEvent extends Component {
                                             <div>
                                                 <TimePicker
                                                     name="checkinStart"
-                                                    time={this.state.checkinStart.time}
-                                                    date={this.state.checkinStart.date}
-                                                    handleChange={this.handleTimeChange}/>
+                                                    time={
+                                                        this.state.checkinStart
+                                                            .time
+                                                    }
+                                                    date={
+                                                        this.state.checkinStart
+                                                            .date
+                                                    }
+                                                    handleChange={
+                                                        this.handleTimeChange
+                                                    }
+                                                />
                                             </div>
                                         </label>
                                     </div>
@@ -277,9 +331,18 @@ class HostEvent extends Component {
                                             <div>
                                                 <TimePicker
                                                     name="checkinEnd"
-                                                    time={this.state.checkinEnd.time}
-                                                    date={this.state.checkinEnd.date}
-                                                    handleChange={this.handleTimeChange}/>
+                                                    time={
+                                                        this.state.checkinEnd
+                                                            .time
+                                                    }
+                                                    date={
+                                                        this.state.checkinEnd
+                                                            .date
+                                                    }
+                                                    handleChange={
+                                                        this.handleTimeChange
+                                                    }
+                                                />
                                             </div>
                                         </label>
                                     </div>
@@ -291,9 +354,14 @@ class HostEvent extends Component {
                                         <select
                                             value={this.state.type}
                                             onChange={this.handleGeneral}
-                                            name="type">
-                                            <option value={EVENT_TYPES.BASIC}>Basic</option>
-                                            <option value={EVENT_TYPES.CODE}>Code</option>
+                                            name="type"
+                                        >
+                                            <option value={EVENT_TYPES.BASIC}>
+                                                Basic
+                                            </option>
+                                            <option value={EVENT_TYPES.CODE}>
+                                                Code
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -305,7 +373,9 @@ class HostEvent extends Component {
                                         <button
                                             type="submit"
                                             value="Submit"
-                                            className="btn btn-info">Submit
+                                            className="btn btn-info"
+                                        >
+                                            Submit
                                         </button>
                                     </div>
                                 </div>
@@ -318,7 +388,7 @@ class HostEvent extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         event: state.event.selected,
         checkCode: state.host.checkCode

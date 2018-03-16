@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import HostEvent from "./HostEvent";
+import React, { Component } from 'react';
+import HostEvent from './HostEvent';
 
 class HostEditEvent extends Component {
     render() {
@@ -10,7 +10,7 @@ class HostEditEvent extends Component {
                         <h2 className="text-center">Edit Event</h2>
                     </div>
                 </div>
-                <HostEvent history={this.props.history} add={false}/>
+                <HostEvent history={this.props.history} add={false} />
             </div>
         );
     }
