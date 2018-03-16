@@ -5,6 +5,7 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
+
 router.get('/get_events', async (req, res) => {
     const user = await User.findById(req.user.id);
     const out = [];
@@ -24,6 +25,7 @@ router.post('/join', async (req, res) => {
     if (event) {
         const user = await User.findById(req.user.id);
         user.guestEvents.push(event.id);
+        user.extra = req.body.extra;
         user.save();
         event.guestsRSVP.push(user.id);
         event.save();
@@ -55,5 +57,9 @@ router.post('/checkin', async (req, res) => {
     }
 );
 
+router.post('/check_checkin', async (req, res) => {
+    const event = await Event.findById(req.body.id);
+    res.send(event.checkinCode === req.body.code);
+});
 
 module.exports = router;

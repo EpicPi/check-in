@@ -1,17 +1,18 @@
 import {Component} from "react";
-import {hostRemoveEvent, hostSelectEvent, selectEvent} from "../../actions";
+import {hostRemoveEvent, selectEvent} from "../../actions";
 import {connect} from 'react-redux';
 import React from "react";
 
 class HostEventItem extends Component {
+
     handleClick(event) {
         this.props.selectEvent(event);
         this.props.history.push('/host/event');
     }
-    handleRemove(event){
+
+    handleRemove(event) {
         this.props.removeEvent(event);
     }
-
 
     render() {
         return (
@@ -29,16 +30,15 @@ class HostEventItem extends Component {
                                 onClick={() => this.handleRemove(this.props.event)}
                                 className="btn btn-danger btn-event">Remove</button>
                         </span>
-
                     </div>
                 </div>
             </div>
         );
     }
 }
+
 const mapStateToProps = (state) => {
-    return {
-    };
+    return {};
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
@@ -47,4 +47,4 @@ const mapDispatchToProps = (/* dispatch */) => {
         removeEvent: hostRemoveEvent
     };
 };
-export default connect(mapStateToProps,mapDispatchToProps())(HostEventItem);
+export default connect(mapStateToProps, mapDispatchToProps())(HostEventItem);

@@ -6,12 +6,10 @@ export const fetchUser = () => async dispatch => {
     dispatch({type: FETCH_USER, payload: res.data});
 };
 
-
 export const setUserType = (userType) => dispatch => {
-    dispatch({type:SET_USER_TYPE, payload:userType});
+    dispatch({type: SET_USER_TYPE, payload: userType});
 };
 
-
 export const resetUserType = (userType) => dispatch => {
-    dispatch({type:RESET_USER_TYPE, payload:userType});
+    dispatch({type: RESET_USER_TYPE, payload: userType});
 };

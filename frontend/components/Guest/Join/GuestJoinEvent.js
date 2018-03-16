@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {guestFindEvent, guestJoinEvent, guestResetJoinFind, hostAddEvent} from "../../actions";
-import {JOIN_FIND} from "../../helpers/Enums";
+import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../../actions/index";
+import {JOIN_FIND} from "../../../helpers/Enums";
+import JoinBasic from "./JoinBasic";
+import JoinName from "./JoinName";
 
 class GuestJoinEvent extends Component {
 
@@ -9,20 +11,19 @@ class GuestJoinEvent extends Component {
         super(props);
         this.state = {
             code: '',
+            out: this.getJoinFindOutput(this.props),
         };
 
-        this.handleNameInput = this.handleNameInput.bind(this);
         this.handleCodeInput = this.handleCodeInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleConfirm = this.handleConfirm.bind(this);
     }
 
-    componentWillMount() {
+    componentWillReceiveProps(next) {
+        this.setState({out: this.getJoinFindOutput(next)});
+    }
+
+    componentWillUnmount() {
         this.props.resetJoin();
-    }
-
-    handleNameInput(e) {
-        this.setState({eventName: e.target.value});
     }
 
     handleCodeInput(e) {
@@ -34,24 +35,12 @@ class GuestJoinEvent extends Component {
         this.props.findEvent(this.state.code);
     }
 
-    handleConfirm(e) {
-        this.setState({
-            code: ''
-        });
-        this.props.joinEvent(this.props.eventToJoin);
-        this.props.history.push('/guest');
-    }
-
-    checkJoinFind() {
-        switch (this.props.joinFind) {
+    getJoinFindOutput(props) {
+        switch (props.joinFind) {
             case JOIN_FIND.FAIL:
                 return <h3>Couldn't find, please check code</h3>;
             case JOIN_FIND.SUCCESS:
-                return (
-                    <div>
-                        <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-                        <button onClick={this.handleConfirm}>confirm</button>
-                    </div>);
+                return (<JoinName history={this.props.history}/>);
             case JOIN_FIND.CHECKING:
                 return <h3>Checking code</h3>;
             case JOIN_FIND.ALREADY_JOINED:
@@ -79,7 +68,7 @@ class GuestJoinEvent extends Component {
                         <button type="submit" value="Submit">Submit</button>
                     </div>
                 </div>
-                {this.checkJoinFind()}
+                {this.state.out}
             </form>
         );
     }

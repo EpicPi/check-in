@@ -7,19 +7,20 @@ import {USER} from "../helpers/Enums";
 import "../../public/app.css";
 
 class Land extends Component {
-    componentWillMount() {
+    constructor(props){
+        super(props);
         this.props.resetUserType();
     }
 
-    handleClick(type){
-        if(this.props.user)
-        if(type === USER.HOST){
-            this.props.setUserType(USER.HOST);
-            this.props.history.push('/host');
-        }else{
-            this.props.setUserType(USER.GUEST);
-            this.props.history.push('/guest');
-        }
+    handleClick(type) {
+        if (this.props.user)
+            if (type === USER.HOST) {
+                this.props.setUserType(USER.HOST);
+                this.props.history.push('/host');
+            } else {
+                this.props.setUserType(USER.GUEST);
+                this.props.history.push('/guest');
+            }
     }
 
     render() {
@@ -31,15 +32,17 @@ class Land extends Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <button
-                                        onClick={()=>this.handleClick(USER.HOST)}
+                                        onClick={() => this.handleClick(USER.HOST)}
                                         type="button"
-                                        className="btn btn-lg btn-selection">host</button>
+                                        className="btn btn-lg btn-selection">host
+                                    </button>
                                 </div>
                                 <div className="col-md-6">
                                     <button
-                                        onClick={()=>this.handleClick(USER.GUEST)}
+                                        onClick={() => this.handleClick(USER.GUEST)}
                                         type="button"
-                                        className="btn btn-lg btn-selection">guest</button>
+                                        className="btn btn-lg btn-selection">guest
+                                    </button>
                                 </div>
                             </div>
                             <hr/>

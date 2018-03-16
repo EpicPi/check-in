@@ -13,7 +13,8 @@ const eventSchema = new Schema({
         checkinEnd: {type: Date}
     },
     type: {type: String, required: true},
-    checkInCode: {type: String}
+    checkinCode: {type: String},
+    info: {type: String}
 });
 
-mongoose.model('events',eventSchema);
+mongoose.model('events', eventSchema);

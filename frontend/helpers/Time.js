@@ -1,4 +1,4 @@
-export const TODAY = new Date().toISOString().slice(0,10);
+export const TODAY = new Date().toISOString().slice(0, 10);
 
 export function dateStringToHours(date) {
     let hours = ('0' + (new Date(date).getHours())).slice(-2);

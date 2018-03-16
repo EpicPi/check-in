@@ -1,6 +1,6 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import {createStore, compose, applyMiddleware} from 'redux';
 import reducers from '../reducers';
-import DevTools from '../containers/Root/DevTools';
+import DevTools from '../components/Root/DevTools';
 import reduxThunk from 'redux-thunk';
 
 export function configureStore(initialState) {

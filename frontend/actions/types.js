@@ -12,6 +12,7 @@ export const HOST_REPLACE = 'host_replace';
 export const HOST_EDIT_EVENT = 'host_edit_event';
 export const HOST_CHECK_CODE = 'host_check_code';
 export const HOST_CHECKED_CODE = 'host_checked_code';
+export const HOST_RESET_EVENT = 'host_reset_event';
 
 //guest event types
 export const GUEST_JOIN_EVENT = 'guest_join_event';
@@ -22,6 +23,9 @@ export const GUEST_FIND_EVENT = 'guest_find_event';
 export const GUEST_FOUND_EVENT = 'guest_found_event';
 export const GUEST_RESET_JOIN_FIND = 'guest_reset_join_find';
 export const GUEST_CHECKIN = 'guest_checkin';
+export const GUEST_CHECK_CHECKIN = 'guest_check_checkin';
+export const GUEST_CHECKED_CHECKIN = 'guest_checked_checkin';
+export const GUEST_RESET_CHECKIN = 'guest_reset_checkin';
 
 //event event types
 export const SELECT_EVENT = 'select event';
@@ -29,5 +33,4 @@ export const GET_RSVPS = 'get_rsvps';
 export const GOT_RSVPS = 'got_rsvps';
 export const GET_ATTENDS = 'get_attends';
 export const GOT_ATTENDS = 'got_attends';
-
 export const RESET_EVENT = 'reset_event';

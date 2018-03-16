@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {guestGetEvents} from "../../actions";
+import {guestGetEvents} from "../../actions/index";
 import {connect} from "react-redux";
 import React from "react";
 import GuestEventItem from "./GuestEventItem";
@@ -10,25 +10,30 @@ class GuestShowEvents extends Component {
         super(props);
         this.getEventsOutput = this.getEventsOutput.bind(this);
         this.handleJoin = this.handleJoin.bind(this);
-    }
 
-    componentWillMount() {
         if (this.props.events === LOAD.NOTHING)
             this.props.getEvents();
+        this.state = {out: this.getEventsOutput(this.props)};
+
     }
-    handleJoin(){
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({out: this.getEventsOutput(nextProps)});
+    }
+
+    handleJoin() {
         this.props.history.push('/guest/join');
     }
 
-    getEventsOutput(){
-        switch (this.props.events) {
+    getEventsOutput(props) {
+        switch (props.events) {
             case LOAD.LOADING:
-                return <h3>LOADING</h3>
+                return <h3>LOADING</h3>;
             case LOAD.NOTHING:
                 return;
             default:
-                return this.props.events.map((event, i) => (
-                    <GuestEventItem history={this.props.history} key={i} event={event}/>
+                return props.events.map((event, i) => (
+                    <GuestEventItem history={props.history} key={i} event={event}/>
                 ));
         }
     }
@@ -47,7 +52,7 @@ class GuestShowEvents extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             <ul className="event-list">
-                                {this.getEventsOutput()}
+                                {this.state.out}
                             </ul>
                         </div>
                     </div>

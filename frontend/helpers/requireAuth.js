@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import {withRouter} from 'react-router';
 import {connect} from "react-redux";
 
 export default function requireAuth(Component) {
@@ -11,18 +11,19 @@ export default function requireAuth(Component) {
         }
 
         checkAuth() {
-            if ( ! this.props.user) {
+            if (!this.props.user) {
                 this.props.history.push(`/`);
             }
         }
 
         render() {
             return this.props.user
-                ? <Component { ...this.props } />
+                ? <Component {...this.props} />
                 : null;
         }
 
     }
+
     const mapStateToProps = (state) => {
         return {
             user: state.auth.user,
@@ -30,10 +31,8 @@ export default function requireAuth(Component) {
     };
 
     const mapDispatchToProps = (/* dispatch */) => {
-        return {
-
-        };
+        return {};
     };
 
-    return withRouter(connect(mapStateToProps,mapDispatchToProps())(AuthenticatedComponent));
+    return withRouter(connect(mapStateToProps, mapDispatchToProps())(AuthenticatedComponent));
 }

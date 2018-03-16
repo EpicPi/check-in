@@ -3,32 +3,24 @@ import {connect} from 'react-redux';
 import React from "react";
 
 class HostEventItem extends Component {
-    handleClick(event) {
-        this.props.selectEvent(event);
-        this.props.history.push('/host/event');
-    }
-
-    handleRemove(event) {
-        this.props.removeEvent(event);
-    }
-
 
     render() {
         return (
             <div>
                 Name: {this.props.guest.name}
-            </div>
-        );
+                <br/>
+                GT username: {this.props.guest.extra}
+                <br/>
+                <hr/>
+            </div>);
     }
 }
 
 const mapStateToProps = (state) => {
-    return {    };
+    return {};
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
-    return {
-
-    };
+    return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps())(HostEventItem);

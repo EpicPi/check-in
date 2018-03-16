@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Header from "../components/Header";
+import Header from "./Header";
 
 import HostDash from "./Host/HostDash";
-import Land from "../components/Land";
+import Land from "./Land";
 import GuestDash from "./Guest/GuestDash";
-import requireAuth from "../Requirers/requireAuth";
+import requireAuth from "../helpers/requireAuth";
 
 class AppContainer extends Component {
     render() {

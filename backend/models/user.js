@@ -6,6 +6,7 @@ const userSchema = new Schema({
     hostEvents: [],
     guestEvents: [],
     name: String,
+    extra: Schema.Types.Mixed
 });
 
-mongoose.model('users',userSchema);
+mongoose.model('users', userSchema);

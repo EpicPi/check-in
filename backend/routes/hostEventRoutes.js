@@ -14,7 +14,8 @@ router.post('/add_event', async (req, res) => {
             guestsRSVP: [],
             guestsAttend: [],
             type: req.body.type,
-            checkInCode: req.body.checkInCode
+            checkinCode: req.body.checkinCode,
+            info: req.body.info,
         }).save();
         const user = await User.findById(req.user.id);
         // user.events = []; //cleans out event array
@@ -49,6 +50,8 @@ router.post('/edit_event', async (req, res) => {
         event.name = req.body.name;
         event.code = req.body.code;
         event.dates = req.body.dates;
+        event.checkinCode = req.body.checkinCode;
+        event.info = req.body.info;
         event.save();
         res.send(event);
     }

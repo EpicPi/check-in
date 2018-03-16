@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {guestRemoveEvent, selectEvent} from "../../actions";
+import {selectEvent} from "../../actions/index";
 import {connect} from 'react-redux';
 import React from "react";
 
@@ -9,10 +9,10 @@ class GuestEventItem extends Component {
         this.props.history.push('/guest/event');
     }
 
-    handleRemove(event) {
-        this.props.removeEvent(event);
+    handleCheckIn(event) {
+        this.props.selectEvent(event);
+        this.props.history.push('/guest/checkin');
     }
-
 
     render() {
         return (
@@ -25,10 +25,10 @@ class GuestEventItem extends Component {
                         <span style={{float: "right"}}>
                             <button
                                 onClick={() => this.handleClick(this.props.event)}
-                                className="btn btn-info btn-event">more info</button>
+                                className="btn btn-info btn-event">More Info</button>
                             <button
-                                onClick={() => this.handleRemove(this.props.event)}
-                                className="btn btn-danger btn-event">Remove</button>
+                                onClick={() => this.handleCheckIn(this.props.event)}
+                                className="btn btn-danger btn-event">Check In</button>
                         </span>
 
                     </div>
@@ -45,7 +45,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (/* dispatch */) => {
     return {
         selectEvent: selectEvent,
-        removeEvent: guestRemoveEvent
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps())(GuestEventItem);

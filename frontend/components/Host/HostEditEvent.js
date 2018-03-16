@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import HostEvent from "./HostEvent";
 
-class HostCreateEvent extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
+class HostEditEvent extends Component {
     render() {
         return (
             <div>
@@ -15,11 +10,10 @@ class HostCreateEvent extends Component {
                         <h2 className="text-center">Edit Event</h2>
                     </div>
                 </div>
-                <HostEvent history={this.props.history} add={true}/>
+                <HostEvent history={this.props.history} add={false}/>
             </div>
         );
     }
 }
 
-
-export default HostCreateEvent;
+export default HostEditEvent;
