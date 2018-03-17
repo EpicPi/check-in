@@ -22,3 +22,8 @@ export const eventInitial = {
     selectedRSVPs: LOAD.NOTHING,
     selectedAttends: LOAD.NOTHING
 };
+
+export const openInitial = {
+    event: LOAD.NOTHING,
+    checkCode: CHECK_CODE.NOTHING_TO_CHECK
+};

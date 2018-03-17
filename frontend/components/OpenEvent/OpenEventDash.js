@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { hostGetEvents } from '../../actions';
 import { connect } from 'react-redux';
+import { openGetEvent } from '../../actions/openEventActions';
 
-class EventDash extends Component {
+class OpenEventDash extends Component {
     constructor(props) {
         super(props);
     }
 
-    componentWillMount() {}
+    componentWillMount() {
+        this.props.getEvent(this.props.match.params.id);
+    }
 
     render() {
         return (
@@ -21,14 +24,14 @@ class EventDash extends Component {
 
 const mapStateToProps = state => {
     return {
-        event: state.event.event
+        event: state.open.event
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        getEvent: getEvent
+        getEvent: openGetEvent
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(EventDash);
+export default connect(mapStateToProps, mapDispatchToProps())(OpenEventDash);
