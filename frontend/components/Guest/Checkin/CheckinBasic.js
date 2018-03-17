@@ -1,10 +1,9 @@
-import {Component} from "react";
-import {guestCheckin} from "../../../actions/index";
-import {connect} from "react-redux";
-import React from "react";
+import { Component } from 'react';
+import { guestCheckin } from '../../../actions/index';
+import { connect } from 'react-redux';
+import React from 'react';
 
 class CheckinBasic extends Component {
-
     constructor(props) {
         super(props);
         this.handleCheckin = this.handleCheckin.bind(this);
@@ -16,21 +15,19 @@ class CheckinBasic extends Component {
     }
 
     render() {
-        return (
-            <button onClick={this.handleCheckin}>Check In</button>
-        );
+        return <button onClick={this.handleCheckin}>Check In</button>;
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        event: state.event.selected,
+        event: state.event.selected
     };
 };
 
 const mapDispatchToProps = () => {
     return {
-        checkin: guestCheckin,
+        checkin: guestCheckin
     };
 };
 

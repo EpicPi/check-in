@@ -1,8 +1,8 @@
 export const TODAY = new Date().toISOString().slice(0, 10);
 
 export function dateStringToHours(date) {
-    let hours = ('0' + (new Date(date).getHours())).slice(-2);
-    let mins = ('0' + (new Date(date).getMinutes())).slice(-2);
+    let hours = ('0' + new Date(date).getHours()).slice(-2);
+    let mins = ('0' + new Date(date).getMinutes()).slice(-2);
     return hours + ':' + mins;
 }
 

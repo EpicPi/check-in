@@ -1,10 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {guestFindEvent, guestJoinEvent, guestResetJoinFind} from "../../../actions/index";
-import {JOIN_FIND} from "../../../helpers/Enums";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+    guestFindEvent,
+    guestJoinEvent,
+    guestResetJoinFind
+} from '../../../actions/index';
+import { JOIN_FIND } from '../../../helpers/Enums';
 
 class JoinBasic extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.handleConfirm = this.handleConfirm.bind(this);
     }
@@ -25,9 +29,9 @@ class JoinBasic extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        eventToJoin: state.guest.eventToJoin,
+        eventToJoin: state.guest.eventToJoin
     };
 };
 

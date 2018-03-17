@@ -1,22 +1,22 @@
-import {Component} from "react";
-import {connect} from 'react-redux';
-import React from "react";
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import React from 'react';
 
 class HostEventItem extends Component {
-
     render() {
         return (
             <div>
                 Name: {this.props.guest.name}
-                <br/>
+                <br />
                 GT username: {this.props.guest.extra}
-                <br/>
-                <hr/>
-            </div>);
+                <br />
+                <hr />
+            </div>
+        );
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {};
 };
 

@@ -5,7 +5,6 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
-
 router.get('/get_events', async (req, res) => {
     const user = await User.findById(req.user.id);
     const out = [];
@@ -14,8 +13,7 @@ router.get('/get_events', async (req, res) => {
         const a = await Event.findById(user.guestEvents[i]);
         if (!a) {
             //what do we do when host deletes events but ppl already signed up???
-        } else
-            out.push(a);
+        } else out.push(a);
     }
     res.send(out);
 });
@@ -33,29 +31,28 @@ router.post('/join', async (req, res) => {
 });
 
 router.post('/find', async (req, res) => {
-    const event = await Event.findOne({'code': req.body.code});
+    const event = await Event.findOne({ code: req.body.code });
     res.send(event);
 });
 
 //TODO
 router.post('/remove_event', async (req, res) => {
-        const user = await User.findById(req.user.id);
-        user.guestEvents = user.guestEvents.filter(event => req.body._id !== event);
-        user.save();
-    }
-);
+    const user = await User.findById(req.user.id);
+    user.guestEvents = user.guestEvents.filter(event => req.body._id !== event);
+    user.save();
+});
 
 router.post('/checkin', async (req, res) => {
-        const event = await Event.findById(req.body.id);
-        if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {//not user already checked-in
-            event.guestsAttend.push(req.user.id);
-            event.save();
-            res.send(true);
-        } else {
-            res.send(false);
-        }
+    const event = await Event.findById(req.body.id);
+    if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {
+        //not user already checked-in
+        event.guestsAttend.push(req.user.id);
+        event.save();
+        res.send(true);
+    } else {
+        res.send(false);
     }
-);
+});
 
 router.post('/check_checkin', async (req, res) => {
     const event = await Event.findById(req.body.id);

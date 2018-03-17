@@ -1,9 +1,9 @@
-import {Component} from "react";
-import {guestGetEvents} from "../../actions/index";
-import {connect} from "react-redux";
-import React from "react";
-import GuestEventItem from "./GuestEventItem";
-import {LOAD} from "../../helpers/Enums";
+import { Component } from 'react';
+import { guestGetEvents } from '../../actions/index';
+import { connect } from 'react-redux';
+import React from 'react';
+import GuestEventItem from './GuestEventItem';
+import { LOAD } from '../../helpers/Enums';
 
 class GuestShowEvents extends Component {
     constructor(props) {
@@ -11,14 +11,12 @@ class GuestShowEvents extends Component {
         this.getEventsOutput = this.getEventsOutput.bind(this);
         this.handleJoin = this.handleJoin.bind(this);
 
-        if (this.props.events === LOAD.NOTHING)
-            this.props.getEvents();
-        this.state = {out: this.getEventsOutput(this.props)};
-
+        if (this.props.events === LOAD.NOTHING) this.props.getEvents();
+        this.state = { out: this.getEventsOutput(this.props) };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({out: this.getEventsOutput(nextProps)});
+        this.setState({ out: this.getEventsOutput(nextProps) });
     }
 
     handleJoin() {
@@ -33,7 +31,11 @@ class GuestShowEvents extends Component {
                 return;
             default:
                 return props.events.map((event, i) => (
-                    <GuestEventItem history={props.history} key={i} event={event}/>
+                    <GuestEventItem
+                        history={props.history}
+                        key={i}
+                        event={event}
+                    />
                 ));
         }
     }
@@ -44,16 +46,18 @@ class GuestShowEvents extends Component {
                 <div className="container-fluid">
                     <div className="row btn-create">
                         <div className="col-md-12">
-                            <button className="btn btn-lg" onClick={this.handleJoin}>Join
+                            <button
+                                className="btn btn-lg"
+                                onClick={this.handleJoin}
+                            >
+                                Join
                             </button>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="row">
                         <div className="col-md-12">
-                            <ul className="event-list">
-                                {this.state.out}
-                            </ul>
+                            <ul className="event-list">{this.state.out}</ul>
                         </div>
                     </div>
                 </div>
@@ -62,15 +66,15 @@ class GuestShowEvents extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        events: state.guest.events,
+        events: state.guest.events
     };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
     return {
-        getEvents: guestGetEvents,
+        getEvents: guestGetEvents
     };
 };
 

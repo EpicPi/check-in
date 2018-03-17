@@ -1,13 +1,13 @@
-import {Component} from "react";
-import {resetUserType, setUserType} from "../actions";
-import {connect} from "react-redux";
-import React from "react";
-import {USER} from "../helpers/Enums";
+import { Component } from 'react';
+import { resetUserType, setUserType } from '../actions';
+import { connect } from 'react-redux';
+import React from 'react';
+import { USER } from '../helpers/Enums';
 
-import "../../public/app.css";
+import '../../public/app.css';
 
 class Land extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.props.resetUserType();
     }
@@ -32,20 +32,28 @@ class Land extends Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <button
-                                        onClick={() => this.handleClick(USER.HOST)}
+                                        onClick={() =>
+                                            this.handleClick(USER.HOST)
+                                        }
                                         type="button"
-                                        className="btn btn-lg btn-selection">host
+                                        className="btn btn-lg btn-selection"
+                                    >
+                                        host
                                     </button>
                                 </div>
                                 <div className="col-md-6">
                                     <button
-                                        onClick={() => this.handleClick(USER.GUEST)}
+                                        onClick={() =>
+                                            this.handleClick(USER.GUEST)
+                                        }
                                         type="button"
-                                        className="btn btn-lg btn-selection">guest
+                                        className="btn btn-lg btn-selection"
+                                    >
+                                        guest
                                     </button>
                                 </div>
                             </div>
-                            <hr/>
+                            <hr />
                         </div>
                     </section>
                 </div>
@@ -63,7 +71,7 @@ class Land extends Component {
                                 </div>
                             </div>
                         </div>
-                        <hr/>
+                        <hr />
                     </section>
                 </div>
 
@@ -72,18 +80,21 @@ class Land extends Component {
                         <div className="container-fluid">
                             <h2 className="text-center">Who we are</h2>
                             <div className="row">
-                                <br></br>
+                                <br />
                                 <div className="col-md-offset-2 col-md-8 mx-auto text-center">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Ab accusamus amet consectetur consequatur consequuntur cupiditate deleniti
-                                        doloribus, ea, est fugiat illo nihil officia quae quaerat quod tempore,
-                                        vero voluptatem voluptatibus.
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit. Ab accusamus amet
+                                        consectetur consequatur consequuntur
+                                        cupiditate deleniti doloribus, ea, est
+                                        fugiat illo nihil officia quae quaerat
+                                        quod tempore, vero voluptatem
+                                        voluptatibus.
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <hr/>
+                        <hr />
                     </section>
                 </div>
 
@@ -91,7 +102,7 @@ class Land extends Component {
                     <section className="contact">
                         <div className="container-fluid">
                             <h2 className="text-center">Created By</h2>
-                            <br/>
+                            <br />
                             <div className="row">
                                 <div className="col-sm-6">
                                     <h3>Sereym Baek</h3>
@@ -112,15 +123,15 @@ class Land extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.user,
+        user: state.auth.user
     };
 }
 
-function mapDispathToProps(props) {
+function mapDispatchToProps(props) {
     return {
         setUserType: setUserType,
         resetUserType: resetUserType
     };
 }
 
-export default connect(mapStateToProps, mapDispathToProps())(Land);
+export default connect(mapStateToProps, mapDispatchToProps())(Land);

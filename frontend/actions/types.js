@@ -34,3 +34,8 @@ export const GOT_RSVPS = 'got_rsvps';
 export const GET_ATTENDS = 'get_attends';
 export const GOT_ATTENDS = 'got_attends';
 export const RESET_EVENT = 'reset_event';
+
+// open event types
+export const OPEN_GET_EVENT = 'open_get_event';
+export const OPEN_GOT_EVENT = 'open_got_event';
+export const OPEN_JOIN_EVENT = 'open_join_event';
