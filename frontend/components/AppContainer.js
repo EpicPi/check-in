@@ -6,7 +6,7 @@ import Header from './Header';
 import HostDash from './Host/HostDash';
 import Land from './Land';
 import GuestDash from './Guest/GuestDash';
-import EventDash from './Event/EventDash';
+import EventDash from './OpenEvent/OpenEventDash';
 import requireAuth from '../helpers/requireAuth';
 
 class AppContainer extends Component {
