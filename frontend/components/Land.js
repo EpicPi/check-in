@@ -127,11 +127,11 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispathToProps(props) {
+function mapDispatchToProps(props) {
     return {
         setUserType: setUserType,
         resetUserType: resetUserType
     };
 }
 
-export default connect(mapStateToProps, mapDispathToProps())(Land);
+export default connect(mapStateToProps, mapDispatchToProps())(Land);
