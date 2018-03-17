@@ -24,6 +24,5 @@ export const eventInitial = {
 };
 
 export const openInitial = {
-    event: LOAD.NOTHING,
-    checkCode: CHECK_CODE.NOTHING_TO_CHECK
+    event: LOAD.NOTHING
 };

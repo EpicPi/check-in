@@ -7,7 +7,10 @@ export default function(state = openInitial, action) {
         case OPEN_GET_EVENT:
             return { ...state, event: LOAD.LOADING };
         case OPEN_GOT_EVENT:
-            return { ...state, event: action.payload };
+            return {
+                ...state,
+                event: action.payload ? action.payload : LOAD.NOTHING
+            };
         default:
             return state;
     }
