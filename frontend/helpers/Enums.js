@@ -25,7 +25,8 @@ export const LOAD = Object.freeze({
 
 export const EVENT_TYPES = Object.freeze({
     BASIC: 'basic',
-    CODE: 'code'
+    CODE: 'code',
+    NO_REG: 'no_reg'
 });
 
 export const CHECK_CHECKIN = Object.freeze({

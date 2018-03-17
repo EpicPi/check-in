@@ -21,6 +21,7 @@ class AppContainer extends Component {
                                 <Switch>
                                     <Route exact path="/" component={Land} />
                                     <Route
+                                        exact
                                         path="/event/:id"
                                         component={EventDash}
                                     />

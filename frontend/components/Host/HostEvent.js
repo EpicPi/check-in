@@ -362,6 +362,9 @@ class HostEvent extends Component {
                                             <option value={EVENT_TYPES.CODE}>
                                                 Code
                                             </option>
+                                            <option value={EVENT_TYPES.NO_REG}>
+                                                No Registration
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
