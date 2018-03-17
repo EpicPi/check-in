@@ -1,4 +1,8 @@
-import { OPEN_GET_EVENT, OPEN_GOT_EVENT } from '../actions/types';
+import {
+    OPEN_GET_EVENT,
+    OPEN_GOT_EVENT,
+    OPEN_JOIN_EVENT
+} from '../actions/types';
 import { LOAD } from '../helpers/Enums';
 import { openInitial } from './initialState';
 
@@ -10,6 +14,12 @@ export default function(state = openInitial, action) {
             return {
                 ...state,
                 event: action.payload ? action.payload : LOAD.NOTHING
+            };
+        // TODO: check openEventActions.js
+        case OPEN_JOIN_EVENT:
+            return {
+                ...state,
+                event: LOAD.NOTHING
             };
         default:
             return state;
