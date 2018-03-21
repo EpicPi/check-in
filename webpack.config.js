@@ -15,14 +15,19 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/public'),
         publicPath: '/',
-        filename: 'bundle.js',
-        hotUpdateChunkFilename: 'hot/hot-update.js',
-        hotUpdateMainFilename: 'hot/hot-update.json'
+        filename: 'bundle.js'
     },
     devtool: 'cheap-eval-source-map',
     devServer: {
         contentBase: './public',
-        hot: true
+        hot: true,
+        inline: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                secure: false
+            }
+        }
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),

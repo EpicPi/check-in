@@ -8,6 +8,7 @@ import Land from './Land';
 import GuestDash from './Guest/GuestDash';
 import EventDash from './OpenEvent/OpenEventDash';
 import requireAuth from '../helpers/requireAuth';
+import { hot } from 'react-hot-loader';
 
 class AppContainer extends Component {
     render() {
@@ -44,4 +45,4 @@ class AppContainer extends Component {
     }
 }
 
-export default AppContainer;
+export default hot(module)(AppContainer);
