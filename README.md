@@ -7,7 +7,7 @@ Getting statrted:
 
 That's it.
 The dev script runs the frontend and backend concurrently.
-It's avaliable at localhost:3000
+It's avaliable at localhost:8080
 
 We use 
 - mLab (for the mongo DB hosting)
