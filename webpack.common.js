@@ -17,18 +17,5 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
+  plugins: [new webpack.optimize.OccurrenceOrderPlugin()]
 };
