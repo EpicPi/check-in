@@ -195,166 +195,126 @@ class HostEvent extends Component {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12">
-                            <form onSubmit={this.handleSubmit} id="create-form">
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>
-                                            Event Name:
-                                            <div>
-                                                <input
-                                                    type="text"
-                                                    name="eventName"
-                                                    value={this.state.eventName}
-                                                    onChange={
-                                                        this.handleGeneral
-                                                    }
-                                                    required
-                                                />
-                                            </div>
-                                        </label>
+                            <form
+                                onSubmit={this.handleSubmit}
+                                id="create-form"
+                                className="form"
+                            >
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
+                                        Event Name:
+                                    </label>
+                                    <div className="col-md-10">
+                                        <input
+                                            type="text"
+                                            name="eventName"
+                                            value={this.state.eventName}
+                                            onChange={this.handleGeneral}
+                                            required
+                                            className="form-control"
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>
-                                            Code:
-                                            <div>
-                                                <input
-                                                    type="text"
-                                                    name="code"
-                                                    value={this.state.code}
-                                                    onChange={
-                                                        this.handleGeneral
-                                                    }
-                                                    required
-                                                />
-                                            </div>
-                                        </label>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
+                                        Code:
+                                    </label>
+                                    <div className="col-md-10">
+                                        <input
+                                            type="text"
+                                            name="code"
+                                            value={this.state.code}
+                                            onChange={this.handleGeneral}
+                                            required
+                                            className="form-control"
+                                        />
                                     </div>
                                 </div>
 
                                 {this.getCheckCodeOutput()}
 
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>
-                                            Other info:
-                                            <div>
-                                                <textarea
-                                                    name="info"
-                                                    value={this.state.info}
-                                                    onChange={
-                                                        this.handleGeneral
-                                                    }
-                                                    required
-                                                />
-                                            </div>
-                                        </label>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
+                                        Other info:
+                                    </label>
+                                    <div className="col-md-10">
+                                        <textarea
+                                            name="info"
+                                            value={this.state.info}
+                                            onChange={this.handleGeneral}
+                                            required
+                                            className="form-control"
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>
-                                            RSVP Start:
-                                            <div>
-                                                <TimePicker
-                                                    name="rsvpStart"
-                                                    time={
-                                                        this.state.rsvpStart
-                                                            .time
-                                                    }
-                                                    date={
-                                                        this.state.rsvpStart
-                                                            .date
-                                                    }
-                                                    handleChange={
-                                                        this.handleTimeChange
-                                                    }
-                                                />
-                                            </div>
-                                        </label>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
+                                        RSVP Start:
+                                    </label>
+                                    <div className="col-md-10">
+                                        <TimePicker
+                                            name="rsvpStart"
+                                            time={this.state.rsvpStart.time}
+                                            date={this.state.rsvpStart.date}
+                                            handleChange={this.handleTimeChange}
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>
-                                            RSVP End:
-                                            <div>
-                                                <TimePicker
-                                                    name="rsvpEnd"
-                                                    time={
-                                                        this.state.rsvpEnd.time
-                                                    }
-                                                    date={
-                                                        this.state.rsvpEnd.date
-                                                    }
-                                                    handleChange={
-                                                        this.handleTimeChange
-                                                    }
-                                                />
-                                            </div>
-                                        </label>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
+                                        RSVP End:
+                                    </label>
+                                    <div className="col-md-10">
+                                        <TimePicker
+                                            name="rsvpEnd"
+                                            time={this.state.rsvpEnd.time}
+                                            date={this.state.rsvpEnd.date}
+                                            handleChange={this.handleTimeChange}
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>
-                                            Checkin Start:
-                                            <div>
-                                                <TimePicker
-                                                    name="checkinStart"
-                                                    time={
-                                                        this.state.checkinStart
-                                                            .time
-                                                    }
-                                                    date={
-                                                        this.state.checkinStart
-                                                            .date
-                                                    }
-                                                    handleChange={
-                                                        this.handleTimeChange
-                                                    }
-                                                />
-                                            </div>
-                                        </label>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
+                                        Checkin Start:
+                                    </label>
+                                    <div className="col-md-10">
+                                        <TimePicker
+                                            name="checkinStart"
+                                            time={this.state.checkinStart.time}
+                                            date={this.state.checkinStart.date}
+                                            handleChange={this.handleTimeChange}
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <label>
-                                            Checkin End:
-                                            <div>
-                                                <TimePicker
-                                                    name="checkinEnd"
-                                                    time={
-                                                        this.state.checkinEnd
-                                                            .time
-                                                    }
-                                                    date={
-                                                        this.state.checkinEnd
-                                                            .date
-                                                    }
-                                                    handleChange={
-                                                        this.handleTimeChange
-                                                    }
-                                                />
-                                            </div>
-                                        </label>
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
+                                        Checkin End:
+                                    </label>
+                                    <div className="col-md-10">
+                                        <TimePicker
+                                            name="checkinEnd"
+                                            time={this.state.checkinEnd.time}
+                                            date={this.state.checkinEnd.date}
+                                            handleChange={this.handleTimeChange}
+                                        />
                                     </div>
                                 </div>
 
-                                <div className="row">
-                                    <div className="col-md-12">
+                                <div className="form-group row">
+                                    <label className="col-md-2 col-form-label">
                                         Check-in type
+                                    </label>
+                                    <div className="col-md-3">
                                         <select
                                             value={this.state.type}
                                             onChange={this.handleGeneral}
                                             name="type"
+                                            className="form-control"
                                         >
                                             <option value={EVENT_TYPES.BASIC}>
                                                 Basic
@@ -371,12 +331,12 @@ class HostEvent extends Component {
 
                                 {this.getSelectOutput()}
 
-                                <div className="row">
+                                <div className="form-group row">
                                     <div className="col-md-12">
                                         <button
                                             type="submit"
                                             value="Submit"
-                                            className="btn btn-info"
+                                            className="btn btn-primary"
                                         >
                                             Submit
                                         </button>
