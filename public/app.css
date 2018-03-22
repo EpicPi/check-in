@@ -10,9 +10,9 @@
 /**
     prevents overlaying of fixed navbar
  */
-body {
-    padding-top: 70px;
-}
+/*body {*/
+/*padding-top: 70px;*/
+/*}*/
 
 .nav-text a {
     color: white;
