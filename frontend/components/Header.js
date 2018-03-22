@@ -59,7 +59,6 @@ class Header extends Component {
                         }
                         id="collapsingNavbar"
                     >
-                        {/*<div className="navbar-collapse w-100">*/}
                         <ul className="navbar-nav w-100 justify-content-center">
                             <li className="nav-item active">
                                 <p className="nav-link" href="#">
@@ -88,23 +87,6 @@ class Header extends Component {
                             </li>
                         </ul>
                     </div>
-
-                    {/*<div className="col-md-6">*/}
-                    {/*<a className="navbar-brand h1 btn btn-outline-light">*/}
-                    {/**/}
-                    {/*</a>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="collapse navbar-collapse" id="navbarNavAltMarkup">*/}
-                    {/*<div className="navbar-nav">*/}
-                    {/*<a className="btn btn-outline-light">*/}
-
-                    {/*</a>*/}
-                    {/**/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-
-                    {/*</div>*/}
                 </div>
             </nav>
         );
