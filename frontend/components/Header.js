@@ -22,33 +22,40 @@ class Header extends Component {
 
     render() {
         return (
-            <nav className="navbar bg-primary fixed-top">
+            <nav className="navbar bg-primary fixed-top nav-text">
                 <div className="container-fluid">
-                    <div className="text-white">
-                        <h1>
-                            <Link to={'/'}>Check-in</Link>
-                        </h1>
-                    </div>
-                    <div className="text-white">
-                        <h3>
-                            <Link
-                                to={
-                                    this.props.user
-                                        ? this.props.type
-                                            ? this.props.type === USER.HOST
-                                                ? '/host'
-                                                : '/guest'
+                    <div
+                        className="row justify-content-between text-center"
+                        style={{ width: '100%' }}
+                    >
+                        <div className="col">
+                            <h1>
+                                <Link to={'/'}>Check-in</Link>
+                            </h1>
+                        </div>
+
+                        <div className="col">
+                            <h2>
+                                <Link
+                                    to={
+                                        this.props.user
+                                            ? this.props.type
+                                                ? this.props.type === USER.HOST
+                                                    ? '/host'
+                                                    : '/guest'
+                                                : '/'
                                             : '/'
-                                        : '/'
-                                }
-                            >
-                                Dash
-                            </Link>
-                        </h3>
+                                    }
+                                >
+                                    Dash
+                                </Link>
+                            </h2>
+                        </div>
+
+                        <div className="col">
+                            <h4>{this.renderContent()}</h4>
+                        </div>
                     </div>
-                    <p style={{ float: 'right' }} className="text-white">
-                        {this.renderContent()}
-                    </p>
                 </div>
             </nav>
         );

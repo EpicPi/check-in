@@ -5,12 +5,12 @@ import React from 'react';
 class HostEventItem extends Component {
     render() {
         return (
-            <div>
-                Name: {this.props.guest.name}
+            <div className="row">
+                <div className="col-md-3">Name</div>
+                <div className="col-md-9">{this.props.guest.name}</div>
+                <div className="col-md-3">GT Username</div>
+                <div className="col-md-9">{this.props.guest.extra}</div>
                 <br />
-                GT username: {this.props.guest.extra}
-                <br />
-                <hr />
             </div>
         );
     }

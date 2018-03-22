@@ -14,8 +14,9 @@ body {
     padding-top: 70px;
 }
 
-.text-white a {
+.nav-text a {
     color: white;
+    vertical-align: bottom !important;
 }
 
 /**

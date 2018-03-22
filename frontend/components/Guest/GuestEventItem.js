@@ -25,7 +25,7 @@ class GuestEventItem extends Component {
                                 onClick={() =>
                                     this.handleClick(this.props.event)
                                 }
-                                className="btn btn-info btn-event"
+                                className="btn btn-success btn-event"
                             >
                                 More Info
                             </button>

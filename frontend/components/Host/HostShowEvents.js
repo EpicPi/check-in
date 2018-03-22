@@ -46,7 +46,7 @@ class HostShowEvents extends Component {
                     <div className="row btn-create">
                         <div className="col-md-12">
                             <button
-                                className="btn btn-lg"
+                                className="btn btn-lg btn-info"
                                 onClick={this.handleCreate}
                             >
                                 create
