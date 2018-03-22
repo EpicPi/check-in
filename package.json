@@ -12,7 +12,6 @@
     "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
     "frontend": "webpack-dev-server",
     "backend": "nodemon server.js",
-    "prod": "NODE_ENV=production PORT=80 node server.js",
     "test":
       "mocha --compilers js:babel-core/register ./test/**/*.js --require ignore-styles"
   },
