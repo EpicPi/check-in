@@ -69,7 +69,7 @@ class HostEventDetail extends Component {
     getRSVPsOutput(props) {
         switch (props.rsvps) {
             case LOAD.LOADING:
-                return <h3>LOADING</h3>;
+                return <h6>LOADING</h6>;
             case LOAD.NOTHING:
                 return;
             default:
@@ -86,7 +86,7 @@ class HostEventDetail extends Component {
     getAttendsOutput(props) {
         switch (props.attends) {
             case LOAD.LOADING:
-                return <h3>LOADING</h3>;
+                return <h6>LOADING</h6>;
             case LOAD.NOTHING:
                 return;
             default:
@@ -102,68 +102,133 @@ class HostEventDetail extends Component {
 
     render() {
         return (
-            <div>
-                <br />
-                <div>Name: {this.props.event.name}</div>
-                <br />
-                <div>Code: {this.props.event.code}</div>
-                <br />
-                <div>Info: {this.props.event.info}</div>
-                <br />
-                <div>
-                    RSVP Start:{' '}
-                    {new Date(
-                        this.props.event.dates.rsvpStart
-                    ).toLocaleString()}
+            <form>
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">Name</label>
+                    <div className="col-md-10">
+                        <input
+                            type="text"
+                            readOnly
+                            className="form-control-plaintext"
+                            value={this.props.event.name}
+                        />
+                    </div>
                 </div>
-                <div>
-                    RSVP End:{' '}
-                    {new Date(this.props.event.dates.rsvpEnd).toLocaleString()}
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">Code</label>
+                    <div className="col-md-10">
+                        <input
+                            type="text"
+                            readOnly
+                            className="form-control-plaintext"
+                            value={this.props.event.code}
+                        />
+                    </div>
                 </div>
-                <div>
-                    Checkin Start:{' '}
-                    {new Date(
-                        this.props.event.dates.checkinStart
-                    ).toLocaleString()}
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">Info</label>
+                    <div className="col-md-10">
+                        <input
+                            type="text"
+                            readOnly
+                            className="form-control-plaintext"
+                            value={this.props.event.info}
+                        />
+                    </div>
                 </div>
-                <div>
-                    Checkin End:{' '}
-                    {new Date(
-                        this.props.event.dates.checkinEnd
-                    ).toLocaleString()}
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">
+                        RSVP Start
+                    </label>
+                    <div className="col-md-10">
+                        <input
+                            type="text"
+                            readOnly
+                            className="form-control-plaintext"
+                            value={new Date(
+                                this.props.event.dates.rsvpStart
+                            ).toLocaleString()}
+                        />
+                    </div>
                 </div>
-                <br />
-                <br />
-                <button onClick={this.handleEditClick}>Edit Event</button>
-                <br />
-                <br />
-                <div>
-                    <br />
-                    RSVPs:
-                    <a
-                        href={this.state.uriRsvp}
-                        download={this.props.event.name + '_rsvps.csv'}
-                    >
-                        {' '}
-                        download csv
-                    </a>
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">RSVP End</label>
+                    <div className="col-md-10">
+                        <input
+                            type="text"
+                            readOnly
+                            className="form-control-plaintext"
+                            value={new Date(
+                                this.props.event.dates.rsvpEnd
+                            ).toLocaleString()}
+                        />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">
+                        Checkin Start
+                    </label>
+                    <div className="col-md-10">
+                        <input
+                            type="text"
+                            readOnly
+                            className="form-control-plaintext"
+                            value={new Date(
+                                this.props.event.dates.checkinStart
+                            ).toLocaleString()}
+                        />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">
+                        Checkin End
+                    </label>
+                    <div className="col-md-10">
+                        <input
+                            type="text"
+                            readOnly
+                            className="form-control-plaintext"
+                            value={new Date(
+                                this.props.event.dates.checkinEnd
+                            ).toLocaleString()}
+                        />
+                    </div>
+                </div>
+                <button onClick={this.handleEditClick} className="btn btn-info">
+                    Edit Event
+                </button>
+                <div className="col-md-12">
                     <hr />
-                    {this.state.rsvps}
+                </div>
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">RSVPs</label>
+                    <div className="col-md-10">
+                        <a
+                            className="btn btn-link btn-outline-success"
+                            href={this.state.uriRsvp}
+                            download={this.props.event.name + '_rsvps.csv'}
+                        >
+                            download csv
+                        </a>
+                    </div>
                     <br />
+                    <div className="col-md-12">{this.state.rsvps}</div>
                 </div>
-                <div>
-                    Attendees:
-                    <a
-                        href={this.state.uriAttend}
-                        download={this.props.event.name + '_attends.csv'}
-                    >
-                        {' '}
-                        download csv
-                    </a>
-                    <hr />
-                    {this.state.attends}
+                <div className="form-group row">
+                    <label className="col-md-2 col-form-label">Attendees</label>
+                    <div className="col-md-10">
+                        <a
+                            className="btn btn-link btn-outline-success"
+                            href={this.state.uriAttend}
+                            download={this.props.event.name + '_attends.csv'}
+                        >
+                            download csv
+                        </a>
+                    </div>
+                    <br />
+                    <div className="col-md-12">{this.state.attends}</div>
                 </div>
-            </div>
+            </form>
         );
     }
 }
