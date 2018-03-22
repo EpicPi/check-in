@@ -112,19 +112,25 @@ class HostEventDetail extends Component {
                 <br />
                 <div>
                     RSVP Start:{' '}
-                    {new Date(this.props.event.dates.rsvpStart).toString()}
+                    {new Date(
+                        this.props.event.dates.rsvpStart
+                    ).toLocaleString()}
                 </div>
                 <div>
                     RSVP End:{' '}
-                    {new Date(this.props.event.dates.rsvpEnd).toString()}
+                    {new Date(this.props.event.dates.rsvpEnd).toLocaleString()}
                 </div>
                 <div>
                     Checkin Start:{' '}
-                    {new Date(this.props.event.dates.checkinStart).toString()}
+                    {new Date(
+                        this.props.event.dates.checkinStart
+                    ).toLocaleString()}
                 </div>
                 <div>
                     Checkin End:{' '}
-                    {new Date(this.props.event.dates.checkinEnd).toString()}
+                    {new Date(
+                        this.props.event.dates.checkinEnd
+                    ).toLocaleString()}
                 </div>
                 <br />
                 <br />
