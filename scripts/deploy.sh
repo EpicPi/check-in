@@ -1,9 +1,13 @@
 #!/bin/bash
+
+base=$(dirname $0)/../
 pem="~/.ssh/eventensure.pem"
-url="ubuntu@ec2-54-81-229-28.compute-1.amazonaws.com"
+url=ubuntu@eec2-52-207-19-214.compute-1.amazonaws.com
 dest="${url}:~/"
 
 echo This deploys the eventensure app to the ec2 url located at ${url}
+
+cd ${base}
 
 npm run build
 echo built
