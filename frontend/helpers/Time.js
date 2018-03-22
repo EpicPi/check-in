@@ -13,3 +13,18 @@ export function dateStringToDate(date) {
 export function dateTimeToDate(date, time) {
     return new Date(date + ' ' + time);
 }
+
+export function timeInputFormat(date) {
+    let now = new Date(date);
+    let hour = ('0' + (now.getHours() + 1)).slice(-2);
+    let min = ('0' + (now.getMinutes() + 1)).slice(-2);
+    return hour + ':' + min;
+}
+
+export function dateInputFormat(date) {
+    let now = new Date(date);
+    let year = now.getFullYear();
+    let month = ('0' + (now.getMonth() + 1)).slice(-2);
+    let day = ('0' + now.getDate()).slice(-2);
+    return year + '-' + month + '-' + day;
+}
