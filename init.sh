@@ -9,4 +9,4 @@ export COOKIE_KEY=you
 export PORT=3000
 export NODE_ENV=production
 
-node ~/server/server.js
+pm2 start ~/server/server.js --name server

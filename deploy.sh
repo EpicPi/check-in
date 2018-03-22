@@ -16,6 +16,8 @@ echo sent new files
 ssh -i ${pem} ${url} << END
     echo i am now sshed in
 
+    pm2 kill
+
     rm -rf server/backend
 
     rm -rf server/public/
@@ -33,9 +35,9 @@ ssh -i ${pem} ${url} << END
     echo setup for next import
 
     cd server/
-    npm install
+    npm install --only=production
     echo npm installed
-
+    cd ..
     ./init.sh
     exit
 END
