@@ -36,7 +36,7 @@ class Land extends Component {
                                             this.handleClick(USER.HOST)
                                         }
                                         type="button"
-                                        className="btn btn-lg btn-selection"
+                                        className="btn btn-lg btn-info btn-selection"
                                     >
                                         host
                                     </button>
@@ -47,7 +47,7 @@ class Land extends Component {
                                             this.handleClick(USER.GUEST)
                                         }
                                         type="button"
-                                        className="btn btn-lg btn-selection"
+                                        className="btn btn-lg btn-info btn-selection"
                                     >
                                         guest
                                     </button>
