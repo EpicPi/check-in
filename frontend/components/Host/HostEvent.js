@@ -201,10 +201,10 @@ class HostEvent extends Component {
                                 className="form"
                             >
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        Event Name:
+                                    <label className="col-md-3 col-form-label">
+                                        Event Name
                                     </label>
-                                    <div className="col-md-10">
+                                    <div className="col-md-9">
                                         <input
                                             type="text"
                                             name="eventName"
@@ -217,10 +217,10 @@ class HostEvent extends Component {
                                 </div>
 
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        Code:
+                                    <label className="col-md-3 col-form-label">
+                                        Code
                                     </label>
-                                    <div className="col-md-10">
+                                    <div className="col-md-9">
                                         <input
                                             type="text"
                                             name="code"
@@ -235,10 +235,10 @@ class HostEvent extends Component {
                                 {this.getCheckCodeOutput()}
 
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        Other info:
+                                    <label className="col-md-3 col-form-label">
+                                        Other info
                                     </label>
-                                    <div className="col-md-10">
+                                    <div className="col-md-9">
                                         <textarea
                                             name="info"
                                             value={this.state.info}
@@ -250,10 +250,10 @@ class HostEvent extends Component {
                                 </div>
 
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        RSVP Start:
+                                    <label className="col-md-3 col-form-label">
+                                        RSVP Start
                                     </label>
-                                    <div className="col-md-10">
+                                    <div className="col-md-9">
                                         <TimePicker
                                             name="rsvpStart"
                                             time={this.state.rsvpStart.time}
@@ -264,10 +264,10 @@ class HostEvent extends Component {
                                 </div>
 
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        RSVP End:
+                                    <label className="col-md-3 col-form-label">
+                                        RSVP End
                                     </label>
-                                    <div className="col-md-10">
+                                    <div className="col-md-9">
                                         <TimePicker
                                             name="rsvpEnd"
                                             time={this.state.rsvpEnd.time}
@@ -278,10 +278,10 @@ class HostEvent extends Component {
                                 </div>
 
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        Checkin Start:
+                                    <label className="col-md-3 col-form-label">
+                                        Checkin Start
                                     </label>
-                                    <div className="col-md-10">
+                                    <div className="col-md-9">
                                         <TimePicker
                                             name="checkinStart"
                                             time={this.state.checkinStart.time}
@@ -292,10 +292,10 @@ class HostEvent extends Component {
                                 </div>
 
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        Checkin End:
+                                    <label className="col-md-3 col-form-label">
+                                        Checkin End
                                     </label>
-                                    <div className="col-md-10">
+                                    <div className="col-md-9">
                                         <TimePicker
                                             name="checkinEnd"
                                             time={this.state.checkinEnd.time}
@@ -306,8 +306,8 @@ class HostEvent extends Component {
                                 </div>
 
                                 <div className="form-group row">
-                                    <label className="col-md-2 col-form-label">
-                                        Check-in type
+                                    <label className="col-md-3 col-form-label">
+                                        Check-in Type
                                     </label>
                                     <div className="col-md-3">
                                         <select

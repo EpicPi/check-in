@@ -6,10 +6,10 @@ class HostEventItem extends Component {
     render() {
         return (
             <div className="row">
-                <div className="col-md-2">Name</div>
-                <div className="col-md-10">{this.props.guest.name}</div>
-                <div className="col-md-2">GT Username</div>
-                <div className="col-md-10">{this.props.guest.extra}</div>
+                <div className="col-md-3">Name</div>
+                <div className="col-md-9">{this.props.guest.name}</div>
+                <div className="col-md-3">GT Username</div>
+                <div className="col-md-9">{this.props.guest.extra}</div>
                 <br />
             </div>
         );

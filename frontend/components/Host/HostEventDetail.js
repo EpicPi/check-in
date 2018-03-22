@@ -104,8 +104,8 @@ class HostEventDetail extends Component {
         return (
             <form>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Name</label>
-                    <div className="col-md-10">
+                    <label className="col-md-3 col-form-label">Name</label>
+                    <div className="col-md-9">
                         <input
                             type="text"
                             readOnly
@@ -115,8 +115,8 @@ class HostEventDetail extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Code</label>
-                    <div className="col-md-10">
+                    <label className="col-md-3 col-form-label">Code</label>
+                    <div className="col-md-9">
                         <input
                             type="text"
                             readOnly
@@ -126,8 +126,8 @@ class HostEventDetail extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Info</label>
-                    <div className="col-md-10">
+                    <label className="col-md-3 col-form-label">Info</label>
+                    <div className="col-md-9">
                         <input
                             type="text"
                             readOnly
@@ -137,10 +137,10 @@ class HostEventDetail extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">
+                    <label className="col-md-3 col-form-label">
                         RSVP Start
                     </label>
-                    <div className="col-md-10">
+                    <div className="col-md-9">
                         <input
                             type="text"
                             readOnly
@@ -152,8 +152,8 @@ class HostEventDetail extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">RSVP End</label>
-                    <div className="col-md-10">
+                    <label className="col-md-3 col-form-label">RSVP End</label>
+                    <div className="col-md-9">
                         <input
                             type="text"
                             readOnly
@@ -165,10 +165,10 @@ class HostEventDetail extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">
+                    <label className="col-md-3 col-form-label">
                         Checkin Start
                     </label>
-                    <div className="col-md-10">
+                    <div className="col-md-9">
                         <input
                             type="text"
                             readOnly
@@ -180,10 +180,10 @@ class HostEventDetail extends Component {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">
+                    <label className="col-md-3 col-form-label">
                         Checkin End
                     </label>
-                    <div className="col-md-10">
+                    <div className="col-md-9">
                         <input
                             type="text"
                             readOnly
@@ -201,8 +201,8 @@ class HostEventDetail extends Component {
                     <hr />
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">RSVPs</label>
-                    <div className="col-md-10">
+                    <label className="col-md-3 col-form-label">RSVPs</label>
+                    <div className="col-md-9">
                         <a
                             className="btn btn-link btn-outline-success"
                             href={this.state.uriRsvp}
@@ -215,8 +215,8 @@ class HostEventDetail extends Component {
                     <div className="col-md-12">{this.state.rsvps}</div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-md-2 col-form-label">Attendees</label>
-                    <div className="col-md-10">
+                    <label className="col-md-3 col-form-label">Attendees</label>
+                    <div className="col-md-9">
                         <a
                             className="btn btn-link btn-outline-success"
                             href={this.state.uriAttend}
