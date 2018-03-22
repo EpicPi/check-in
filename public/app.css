@@ -3,73 +3,74 @@
 /*}*/
 
 .app {
-    /*margin: 10px;*/
-    /*background-color: black;*/
+  /*margin: 10px;*/
+  /*background-color: black;*/
 }
 
 /**
     prevents overlaying of fixed navbar
  */
 body {
-    padding-top: 70px;
+  padding-top: 70px;
 }
 
-.text-white a {
-    color: white;
+.nav-text a {
+  color: white;
+  vertical-align: bottom !important;
 }
 
 /**
     Land.js
  */
 .landing {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    margin: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
 }
 
 .landing.btn-selection {
-    margin: 10px 0 10px 0;
+  margin: 10px 0 10px 0;
 }
 
 /**
     HostShowEvent.js
  */
 .host-show {
-    margin: 10px;
+  margin: 10px;
 }
 .host-show ul {
-    padding: 0;
+  padding: 0;
 }
 
 /**
     HostEventItem.js
  */
 .host-event {
-    margin: 10px 0 10px 0;
+  margin: 10px 0 10px 0;
 }
 
 .host-event button {
-    margin: 0 5px 0 5px;
+  margin: 0 5px 0 5px;
 }
 
 /**
     GuestShowEvent.js
  */
 .guest-show {
-    margin: 10px;
+  margin: 10px;
 }
 .guest-show ul {
-    padding: 0;
+  padding: 0;
 }
 
 /**
     GuestEventItem.js
  */
 .guest-event {
-    margin: 10px 0 10px 0;
+  margin: 10px 0 10px 0;
 }
 
 .guest-event button {
-    margin: 0 5px 0 5px;
+  margin: 0 5px 0 5px;
 }
