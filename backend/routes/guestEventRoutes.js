@@ -19,7 +19,6 @@ router.post('/join', async (req, res) => {
   if (event) {
     const user = await User.findById(req.user.id);
     user.guestEvents.push(event.id);
-    user.extra = req.body.extra;
     user.save();
     event.guestsRSVP.push(user.id);
     event.save();
