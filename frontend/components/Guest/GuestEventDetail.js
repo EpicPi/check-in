@@ -13,10 +13,38 @@ class GuestEventDetail extends Component {
 
     render() {
         return (
-            <div>
-                <div>Name: {this.props.event.name}</div>
-                <div>Info: {this.props.event.info}</div>
-                <button onClick={this.handleCheckIn}>Check In</button>
+            <div className="row">
+                {/*<div className="form-group row">*/}
+                {/*<label className="col-md-3 col-form-label">asdfasdf</label>*/}
+                {/*<div className="col-md-9">*/}
+                {/*<input*/}
+                {/*type="text"*/}
+                {/*readOnly*/}
+                {/*className="form-control-plaintext"*/}
+                {/*value={this.props.event.name}*/}
+                {/*/>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                <div className="col-md-12">
+                    <div className="form-group row">
+                        <label className="col-md-3 col-form-label">Name</label>
+                        <label className="col-md-9 col-form-label">
+                            {this.props.event.name}
+                        </label>
+                    </div>
+                    <div className="form-group row">
+                        <label className="col-md-3 col-form-label">Info</label>
+                        <label className="col-md-9 col-form-label">
+                            {this.props.event.info}
+                        </label>
+                    </div>
+                    <button
+                        className="btn btn-success"
+                        onClick={this.handleCheckIn}
+                    >
+                        Check In
+                    </button>
+                </div>
             </div>
         );
     }
