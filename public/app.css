@@ -67,3 +67,10 @@
 .guest-event button {
     margin: 0 5px 0 5px;
 }
+
+/**
+    GuestJoinEvent.js
+ */
+.guest-join {
+    margin: 10px;
+}

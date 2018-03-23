@@ -41,13 +41,13 @@ class GuestJoinEvent extends Component {
     getJoinFindOutput(props) {
         switch (props.joinFind) {
             case JOIN_FIND.FAIL:
-                return <h3>Couldn't find, please check code</h3>;
+                return <h4>Couldn't find, please check code</h4>;
             case JOIN_FIND.SUCCESS:
                 return <JoinName history={this.props.history} />;
             case JOIN_FIND.CHECKING:
-                return <h3>Checking code</h3>;
+                return <h4>Checking code</h4>;
             case JOIN_FIND.ALREADY_JOINED:
-                return <h3>You already RSVPed for this event!</h3>;
+                return <h4>You already RSVPed for this event!</h4>;
             default:
                 return '';
         }
@@ -55,26 +55,43 @@ class GuestJoinEvent extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Code:
-                    <input
-                        type="text"
-                        name="code"
-                        value={this.state.code}
-                        onChange={this.handleCodeInput}
-                        required
-                    />
-                </label>
-                <div className="row">
-                    <div className="col">
-                        <button type="submit" value="Submit">
-                            Submit
-                        </button>
+            <div className="guest-join">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <form className="form" onSubmit={this.handleSubmit}>
+                                <div className="form-group row">
+                                    <label className="col-md-3 col-form-label">
+                                        Code
+                                    </label>
+                                    <div className="col-md-9">
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            name="code"
+                                            value={this.state.code}
+                                            onChange={this.handleCodeInput}
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <button
+                                    className="form-group btn btn-success"
+                                    type="submit"
+                                    value="Submit"
+                                >
+                                    Submit
+                                </button>
+                            </form>
+                            <div className="form-group row">
+                                <div className="col-md-12">
+                                    {this.state.out}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {this.state.out}
-            </form>
+            </div>
         );
     }
 }
