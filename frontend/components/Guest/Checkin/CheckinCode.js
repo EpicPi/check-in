@@ -50,13 +50,16 @@ class CheckinCode extends Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="row" style={{ margin: '10px' }}>
                 <div className="col-md-12">
                     <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Check In Code:
-                            <div>
+                        <div className="form-group row">
+                            <label className="col-md-3 col-form-label">
+                                Check In Code
+                            </label>
+                            <div className="col-md-9">
                                 <input
+                                    className="form-control"
                                     type="text"
                                     name="code"
                                     value={this.state.checkinCode}
@@ -64,12 +67,24 @@ class CheckinCode extends Component {
                                     required
                                 />
                             </div>
-                            <button type="submit" value="submit">
-                                confirm
-                            </button>
-                        </label>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-12">
+                                <button
+                                    className="btn btn-success"
+                                    type="submit"
+                                    value="submit"
+                                >
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-12">
+                                {this.getCheckCheckInOutput()}
+                            </div>
+                        </div>
                     </form>
-                    {this.getCheckCheckInOutput()}
                 </div>
             </div>
         );

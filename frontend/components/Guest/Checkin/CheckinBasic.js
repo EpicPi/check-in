@@ -15,7 +15,11 @@ class CheckinBasic extends Component {
     }
 
     render() {
-        return <button onClick={this.handleCheckin}>Check In</button>;
+        return (
+            <button className="btn btn-success" onClick={this.handleCheckin}>
+                Check In
+            </button>
+        );
     }
 }
 
