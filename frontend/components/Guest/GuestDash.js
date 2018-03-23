@@ -8,30 +8,30 @@ import { connect } from 'react-redux';
 import GuestCheckIn from './Checkin/GuestCheckIn';
 
 class GuestDash extends Component {
-    componentWillMount() {
-        this.props.resetEvent();
-    }
+  componentWillMount() {
+    this.props.resetEvent();
+  }
 
-    render() {
-        return (
-            <div>
-                <Route exact path="/guest" component={GuestShowEvents} />
-                <Route exact path="/guest/join" component={GuestJoinEvent} />
-                <Route exact path="/guest/event" component={GuestEventDetail} />
-                <Route exact path="/guest/checkin" component={GuestCheckIn} />
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <Route exact path="/guest" component={GuestShowEvents} />
+        <Route exact path="/guest/join" component={GuestJoinEvent} />
+        <Route exact path="/guest/event" component={GuestEventDetail} />
+        <Route exact path="/guest/checkin" component={GuestCheckIn} />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-    return {};
+  return {};
 };
 
 const mapDispatchToProps = () => {
-    return {
-        resetEvent: resetEvent
-    };
+  return {
+    resetEvent: resetEvent
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(GuestDash);

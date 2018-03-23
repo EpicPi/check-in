@@ -3,33 +3,33 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 export default function requireAuth(Component) {
-    class AuthenticatedComponent extends React.Component {
-        componentWillMount() {
-            this.checkAuth();
-        }
-
-        checkAuth() {
-            if (!this.props.user) {
-                this.props.history.push(`/`);
-            }
-        }
-
-        render() {
-            return this.props.user ? <Component {...this.props} /> : null;
-        }
+  class AuthenticatedComponent extends React.Component {
+    componentWillMount() {
+      this.checkAuth();
     }
 
-    const mapStateToProps = state => {
-        return {
-            user: state.auth.user
-        };
-    };
+    checkAuth() {
+      if (!this.props.user) {
+        this.props.history.push(`/`);
+      }
+    }
 
-    const mapDispatchToProps = (/* dispatch */) => {
-        return {};
-    };
+    render() {
+      return this.props.user ? <Component {...this.props} /> : null;
+    }
+  }
 
-    return withRouter(
-        connect(mapStateToProps, mapDispatchToProps())(AuthenticatedComponent)
-    );
+  const mapStateToProps = state => {
+    return {
+      user: state.auth.user
+    };
+  };
+
+  const mapDispatchToProps = (/* dispatch */) => {
+    return {};
+  };
+
+  return withRouter(
+    connect(mapStateToProps, mapDispatchToProps())(AuthenticatedComponent)
+  );
 }

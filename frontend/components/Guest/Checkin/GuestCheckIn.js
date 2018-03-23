@@ -6,30 +6,30 @@ import CheckinBasic from './CheckinBasic';
 import CheckinCode from './CheckinCode';
 
 class GuestCheckIn extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    getCheckinScreen() {
-        switch (this.props.event.type) {
-            case EVENT_TYPE.CODE:
-                return <CheckinCode history={this.props.history} />;
-            default:
-                return <CheckinBasic history={this.props.history} />;
-        }
+  getCheckinScreen() {
+    switch (this.props.event.type) {
+      case EVENT_TYPE.CODE:
+        return <CheckinCode history={this.props.history} />;
+      default:
+        return <CheckinBasic history={this.props.history} />;
     }
-    render() {
-        return <div>{this.getCheckinScreen()}</div>;
-    }
+  }
+  render() {
+    return <div>{this.getCheckinScreen()}</div>;
+  }
 }
 
 const mapStateToProps = state => {
-    return {
-        event: state.event.selected
-    };
+  return {
+    event: state.event.selected
+  };
 };
 const mapDispatchToProps = () => {
-    return {};
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(GuestCheckIn);

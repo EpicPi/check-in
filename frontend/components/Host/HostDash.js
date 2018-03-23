@@ -8,29 +8,29 @@ import { resetEvent } from '../../actions/index';
 import { connect } from 'react-redux';
 
 class HostDash extends Component {
-    componentWillMount() {
-        this.props.resetEvent();
-    }
+  componentWillMount() {
+    this.props.resetEvent();
+  }
 
-    render() {
-        return (
-            <div className="container container-fluid">
-                <Route exact path="/host" component={HostShowEvents} />
-                <Route exact path="/host/create" component={HostCreateEvent} />
-                <Route exact path="/host/event" component={HostEventDetail} />
-                <Route exact path="/host/edit" component={HostEditEvent} />
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="container container-fluid">
+        <Route exact path="/host" component={HostShowEvents} />
+        <Route exact path="/host/create" component={HostCreateEvent} />
+        <Route exact path="/host/event" component={HostEventDetail} />
+        <Route exact path="/host/edit" component={HostEditEvent} />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-    return {};
+  return {};
 };
 const mapDispatchToProps = () => {
-    return {
-        resetEvent: resetEvent
-    };
+  return {
+    resetEvent: resetEvent
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps())(HostDash);
