@@ -56,7 +56,7 @@ class JoinName extends Component {
                     value="Submit"
                     onClick={this.handleConfirm}
                 >
-                    confirm
+                    Confirm
                 </button>
             </form>
         );
