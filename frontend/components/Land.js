@@ -79,11 +79,9 @@ class Land extends Component {
                 <br />
                 <div className="col-md-offset-2 col-md-8 mx-auto text-center">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                    accusamus amet consectetur consequatur consequuntur
-                    cupiditate deleniti doloribus, ea, est fugiat illo nihil
-                    officia quae quaerat quod tempore, vero voluptatem
-                    voluptatibus.
+                    We are ambitious computer science student at Georgia Tech
+                    solving the frustrating problems that comes from event
+                    RSVPs, so that you can focus on the actual event!
                   </p>
                 </div>
               </div>
