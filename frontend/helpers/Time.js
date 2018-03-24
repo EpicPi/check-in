@@ -28,3 +28,12 @@ export function dateInputFormat(date) {
   let day = ('0' + now.getDate()).slice(-2);
   return year + '-' + month + '-' + day;
 }
+
+export function getCurrentTime() {
+  let now = new Date();
+  return timeInputFormat(now);
+}
+export function getCurrentDate() {
+  let now = new Date();
+  return dateInputFormat(now);
+}

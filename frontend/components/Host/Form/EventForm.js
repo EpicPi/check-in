@@ -10,10 +10,12 @@ import TimePicker from '../../../helpers/TimePicker';
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
-  TODAY,
   dateTimeToDate,
   dateStringToHours,
-  dateStringToDate
+  dateStringToDate,
+  timeInputFormat,
+  getCurrentTime,
+  getCurrentDate
 } from '../../../helpers/Time';
 import { resetSignupCode } from '../../../actions/index';
 
@@ -22,20 +24,20 @@ const initialState = {
   code: '',
   info: '',
   rsvpStart: {
-    time: '00:00',
-    date: TODAY
+    time: getCurrentTime(),
+    date: getCurrentDate()
   },
   rsvpEnd: {
-    time: '00:00',
-    date: TODAY
+    time: getCurrentTime(),
+    date: getCurrentDate()
   },
   checkinStart: {
-    time: '00:00',
-    date: TODAY
+    time: getCurrentTime(),
+    date: getCurrentDate()
   },
   checkinEnd: {
-    time: '00:00',
-    date: TODAY
+    time: getCurrentTime(),
+    date: getCurrentDate()
   },
   type: EVENT_TYPES.BASIC,
   checkinCode: ''
