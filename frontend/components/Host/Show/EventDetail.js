@@ -35,14 +35,14 @@ class EventDetail extends Component {
   }
 
   getUriRSVPOutput(props) {
-    switch (props.rsvps) {
+    switch (props.uriRsvp) {
       case LOAD.LOADING:
         return;
       case LOAD.NOTHING:
         return;
       default:
         let csvContent = 'data:text/csv;charset=utf-8,';
-        props.rsvps.forEach(el => {
+        props.uriRsvp.forEach(el => {
           const row = el.name + ',' + el.extra;
           csvContent += row + '\r\n';
         });
@@ -51,14 +51,14 @@ class EventDetail extends Component {
   }
 
   getUriAttendsOutput(props) {
-    switch (props.rsvps) {
+    switch (props.uriAttend) {
       case LOAD.LOADING:
         return;
       case LOAD.NOTHING:
         return;
       default:
         let csvContent = 'data:text/csv;charset=utf-8,';
-        props.attends.forEach(el => {
+        props.uriAttend.forEach(el => {
           const row = el.name + ',' + el.extra;
           csvContent += row + '\r\n';
         });
