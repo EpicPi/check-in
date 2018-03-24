@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchUser } from '../actions';
 import { USER } from '../helpers/Enums';
+import logo from '../assets/images/eventensure.png';
 
 class Header extends Component {
   constructor(props) {
@@ -46,11 +47,11 @@ class Header extends Component {
     const { navCollapsed } = this.state;
 
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-primary nav-text">
+      <nav className="navbar navbar-expand-md navbar-dark bgColor nav-text">
         <div className="container-fluid">
-          <p className="navbar-brand d-flex w-50 mr-auto">
-            <Link to={'/'}>Event-Ensure</Link>
-          </p>
+          <Link to={'/'}>
+            <img src={logo} width={125} />
+          </Link>
           <button
             aria-expanded="false"
             onClick={this.onToggleNav}

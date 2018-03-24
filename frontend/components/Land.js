@@ -70,7 +70,7 @@ class Land extends Component {
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
-                  <h1 className="text-center">Check-in</h1>
+                  <h1 className="text-center">Event Ensure</h1>
                 </div>
               </div>
               <div className="col-md-12">
