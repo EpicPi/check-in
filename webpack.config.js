@@ -36,7 +36,7 @@ if (isDevServer) {
           target: 'http://localhost:8080',
           secure: false
         },
-        '/': {
+        '/event': {
           target: 'http://localhost:8080',
           secure: false
         }
