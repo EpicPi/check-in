@@ -19,6 +19,7 @@ class TimePicker extends Component {
   }
 
   currentTime(event) {
+    event.preventDefault();
     let now = new Date();
     let time = timeInputFormat(now);
     let date = dateInputFormat(now);
