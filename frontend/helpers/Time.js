@@ -16,8 +16,8 @@ export function dateTimeToDate(date, time) {
 
 export function timeInputFormat(date) {
   let now = new Date(date);
-  let hour = ('0' + (now.getHours() + 1)).slice(-2);
-  let min = ('0' + (now.getMinutes() + 1)).slice(-2);
+  let hour = ('0' + now.getHours()).slice(-2);
+  let min = ('0' + now.getMinutes()).slice(-2);
   return hour + ':' + min;
 }
 
