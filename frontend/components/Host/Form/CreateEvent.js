@@ -7,7 +7,9 @@ class CreateEvent extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col">
-            <h2 className="text-center">Create Event</h2>
+            <br />
+            <h2 className="text-left">Create Event</h2>
+            <br />
             <EventForm history={this.props.history} add={true} />
           </div>
         </div>

@@ -40,7 +40,7 @@ class Header extends Component {
       <nav className="navbar navbar-expand-md navbar-dark bg-primary nav-text">
         <div className="container-fluid">
           <p className="navbar-brand d-flex w-50 mr-auto">
-            <Link to={'/'}>Check-in</Link>
+            <Link to={'/'}>Event-Ensure</Link>
           </p>
           <button
             aria-expanded="false"

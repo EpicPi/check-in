@@ -201,7 +201,7 @@ class EventForm extends Component {
                 className="form"
               >
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Event Name</label>
+                  <label className="col-md-2 col-form-label">Event Name</label>
                   <div className="col-md-9">
                     <input
                       type="text"
@@ -215,7 +215,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Code</label>
+                  <label className="col-md-2 col-form-label">Code</label>
                   <div className="col-md-9">
                     <input
                       type="text"
@@ -233,7 +233,7 @@ class EventForm extends Component {
                 {this.getCheckCodeOutput()}
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Other info</label>
+                  <label className="col-md-2 col-form-label">Other info</label>
                   <div className="col-md-9">
                     <textarea
                       name="info"
@@ -246,7 +246,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">RSVP Start</label>
+                  <label className="col-md-2 col-form-label">RSVP Start</label>
                   <div className="col-md-9">
                     <TimePicker
                       name="rsvpStart"
@@ -258,7 +258,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">RSVP End</label>
+                  <label className="col-md-2 col-form-label">RSVP End</label>
                   <div className="col-md-9">
                     <TimePicker
                       name="rsvpEnd"
@@ -270,7 +270,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">
+                  <label className="col-md-2 col-form-label">
                     Checkin Start
                   </label>
                   <div className="col-md-9">
@@ -284,7 +284,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Checkin End</label>
+                  <label className="col-md-2 col-form-label">Checkin End</label>
                   <div className="col-md-9">
                     <TimePicker
                       name="checkinEnd"
@@ -296,7 +296,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">
+                  <label className="col-md-2 col-form-label">
                     Check-in Type
                   </label>
                   <div className="col-md-3">
@@ -315,14 +315,24 @@ class EventForm extends Component {
 
                 {this.getSelectOutput()}
 
-                <div className="form-group row">
-                  <div className="col-md-12">
+                <br />
+                <br />
+                <div className="form-group row ">
+                  <div className="col-md-6 text-right">
                     <button
                       type="submit"
                       value="Submit"
                       className="btn btn-primary"
                     >
                       Submit
+                    </button>
+                  </div>
+                  <div className="col-md-6 text-left">
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => this.props.history.push('/host')}
+                    >
+                      Cancel
                     </button>
                   </div>
                 </div>
