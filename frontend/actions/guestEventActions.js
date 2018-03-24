@@ -1,24 +1,24 @@
 import * as axios from 'axios';
 import * as qs from 'qs';
 import {
-  GUEST_CHECK_CHECKIN,
-  GUEST_CHECKED_CHECKIN,
+  GUEST_CHECK_CHECKIN_CODE,
+  GUEST_CHECKED_CHECKIN_CODE,
   GUEST_CHECKIN,
   GUEST_FIND_EVENT,
   GUEST_FOUND_EVENT,
   GUEST_GET_EVENTS,
   GUEST_GOT_EVENTS,
   GUEST_JOIN_EVENT,
-  GUEST_RESET_CHECKIN,
+  GUEST_RESET_CHECKIN_CODE,
   GUEST_RESET_JOIN_FIND
 } from './types';
 
-export const guestJoinEvent = event => dispatch => {
+export const joinEvent = event => dispatch => {
   axios.post('/api/guest/join', qs.stringify({ id: event._id }));
   dispatch({ type: GUEST_JOIN_EVENT, payload: event });
 };
 
-export const guestFindEvent = code => async dispatch => {
+export const findEvent = code => async dispatch => {
   dispatch({ type: GUEST_FIND_EVENT });
   const res = await axios.post('/api/guest/find', qs.stringify({ code: code }));
   dispatch({ type: GUEST_FOUND_EVENT, payload: res.data });
@@ -30,24 +30,24 @@ export const guestGetEvents = () => async dispatch => {
   dispatch({ type: GUEST_GOT_EVENTS, payload: res.data });
 };
 
-export const guestResetJoinFind = () => dispatch => {
+export const resetJoinFind = () => dispatch => {
   dispatch({ type: GUEST_RESET_JOIN_FIND });
 };
 
-export const guestCheckin = event => dispatch => {
+export const checkin = event => dispatch => {
   axios.post('api/guest/checkin', qs.stringify({ id: event._id }));
   dispatch({ type: GUEST_CHECKIN });
 };
 
-export const guestCheckCheckin = (event, code) => async dispatch => {
-  dispatch({ type: GUEST_CHECK_CHECKIN });
+export const checkCheckinCode = (event, code) => async dispatch => {
+  dispatch({ type: GUEST_CHECK_CHECKIN_CODE });
   const res = await axios.post(
     '/api/guest/check_checkin',
     qs.stringify({ id: event._id, code: code })
   );
-  dispatch({ type: GUEST_CHECKED_CHECKIN, payload: res.data });
+  dispatch({ type: GUEST_CHECKED_CHECKIN_CODE, payload: res.data });
 };
 
-export const guestResetCheckin = () => dispatch => {
-  dispatch({ type: GUEST_RESET_CHECKIN });
+export const resetCheckin = () => dispatch => {
+  dispatch({ type: GUEST_RESET_CHECKIN_CODE });
 };

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import React from 'react';
 
-class HostEventItem extends Component {
+class GuestItem extends Component {
   render() {
     return (
       <div className="row">
@@ -21,4 +21,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {};
 };
-export default connect(mapStateToProps, mapDispatchToProps())(HostEventItem);
+export default connect(mapStateToProps, mapDispatchToProps())(GuestItem);

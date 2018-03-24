@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { guestCheckin } from '../../../actions/index';
+import { checkin } from '../../../actions/index';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -31,7 +31,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = () => {
   return {
-    checkin: guestCheckin
+    checkin: checkin
   };
 };
 

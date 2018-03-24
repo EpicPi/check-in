@@ -5,7 +5,7 @@ import { EVENT_TYPES as EVENT_TYPE } from '../../../helpers/Enums';
 import CheckinBasic from './CheckinBasic';
 import CheckinCode from './CheckinCode';
 
-class GuestCheckIn extends Component {
+class CheckIn extends Component {
   constructor(props) {
     super(props);
   }
@@ -32,4 +32,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(GuestCheckIn);
+export default connect(mapStateToProps, mapDispatchToProps())(CheckIn);

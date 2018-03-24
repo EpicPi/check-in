@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { guestJoinEvent, guestResetJoinFind } from '../../../actions/index';
+import { joinEvent, resetJoinFind } from '../../../actions/index';
 
 class JoinName extends Component {
   constructor(props) {
@@ -64,8 +64,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    joinEvent: guestJoinEvent,
-    resetJoin: guestResetJoinFind
+    joinEvent: joinEvent,
+    resetJoin: resetJoinFind
   };
 };
 

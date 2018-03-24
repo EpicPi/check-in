@@ -13,7 +13,7 @@ export const selectEvent = event => async dispatch => {
   dispatch({ type: SELECT_EVENT, payload: event });
 };
 
-export const getRSVPs = event => async dispatch => {
+export const getRsvps = event => async dispatch => {
   dispatch({ type: GET_RSVPS });
   const res = await axios.post(
     '/api/event/rsvp',

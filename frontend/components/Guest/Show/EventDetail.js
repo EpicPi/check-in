@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class GuestEventDetail extends Component {
+class EventDetail extends Component {
   constructor(props) {
     super(props);
     this.handleCheckIn = this.handleCheckIn.bind(this);
@@ -46,4 +46,4 @@ const mapDispatchToProps = (/* dispatch */) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(GuestEventDetail);
+export default connect(mapStateToProps, mapDispatchToProps())(EventDetail);

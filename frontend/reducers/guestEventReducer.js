@@ -6,9 +6,9 @@ import {
   GUEST_RESET_JOIN_FIND,
   GUEST_CHECKIN,
   GUEST_GOT_EVENTS,
-  GUEST_CHECK_CHECKIN,
-  GUEST_CHECKED_CHECKIN,
-  GUEST_RESET_CHECKIN
+  GUEST_CHECK_CHECKIN_CODE,
+  GUEST_CHECKED_CHECKIN_CODE,
+  GUEST_RESET_CHECKIN_CODE
 } from '../actions/types';
 import { CHECK_CHECKIN, JOIN_FIND, LOAD } from '../helpers/Enums';
 import { guestInitial } from './initialState';
@@ -47,15 +47,15 @@ export default function(state = guestInitial, action) {
       return { ...state, joinFind: JOIN_FIND.NOTHING_TO_CHECK };
     case GUEST_CHECKIN:
       return state;
-    case GUEST_CHECK_CHECKIN:
-      return { ...state, check: CHECK_CHECKIN.CHECKING };
-    case GUEST_CHECKED_CHECKIN:
+    case GUEST_CHECK_CHECKIN_CODE:
+      return { ...state, checkCode: CHECK_CHECKIN.CHECKING };
+    case GUEST_CHECKED_CHECKIN_CODE:
       return {
         ...state,
-        check: action.payload ? CHECK_CHECKIN.SUCCESS : CHECK_CHECKIN.FAIL
+        checkCode: action.payload ? CHECK_CHECKIN.SUCCESS : CHECK_CHECKIN.FAIL
       };
-    case GUEST_RESET_CHECKIN:
-      return { ...state, check: CHECK_CHECKIN.NOTHING_TO_CHECK };
+    case GUEST_RESET_CHECKIN_CODE:
+      return { ...state, checkCode: CHECK_CHECKIN.NOTHING_TO_CHECK };
     default:
       return state;
   }

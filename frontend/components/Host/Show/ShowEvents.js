@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hostGetEvents } from '../../../actions/index';
-import HostEventItem from './EventItem';
+import EventItem from './EventItem';
 import { LOAD } from '../../../helpers/Enums';
 
-class HostShowEvents extends Component {
+class ShowEvents extends Component {
   constructor(props) {
     super(props);
     this.handleCreate = this.handleCreate.bind(this);
@@ -30,7 +30,7 @@ class HostShowEvents extends Component {
         return;
       default:
         return props.events.map((event, i) => (
-          <HostEventItem history={props.history} key={i} event={event} />
+          <EventItem history={props.history} key={i} event={event} />
         ));
     }
   }
@@ -73,4 +73,4 @@ const mapDispatchToProps = (/* dispatch */) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(HostShowEvents);
+export default connect(mapStateToProps, mapDispatchToProps())(ShowEvents);

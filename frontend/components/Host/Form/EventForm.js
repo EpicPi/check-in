@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  hostAddEvent,
-  hostCheckCode,
-  hostEditEvent
+  createEvent,
+  checkSignupCode,
+  editEvent
 } from '../../../actions/index';
 import TimePicker from '../../../helpers/TimePicker';
 
@@ -15,7 +15,7 @@ import {
   dateStringToHours,
   dateStringToDate
 } from '../../../helpers/Time';
-import { hostResetEvent } from '../../../actions/index';
+import { resetSignupCode } from '../../../actions/index';
 
 const initialState = {
   eventName: '',
@@ -41,7 +41,7 @@ const initialState = {
   checkinCode: ''
 };
 
-class HostEvent extends Component {
+class EventForm extends Component {
   constructor(props) {
     super(props);
     this.handleGeneral = this.handleGeneral.bind(this);
@@ -340,11 +340,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    addEvent: hostAddEvent,
-    hostCheckCode: hostCheckCode,
-    editEvent: hostEditEvent,
-    resetEvent: hostResetEvent
+    addEvent: createEvent,
+    hostCheckCode: checkSignupCode,
+    editEvent: editEvent,
+    resetEvent: resetSignupCode
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(HostEvent);
+export default connect(mapStateToProps, mapDispatchToProps())(EventForm);

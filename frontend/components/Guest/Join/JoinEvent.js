@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  guestFindEvent,
-  guestJoinEvent,
-  guestResetJoinFind
-} from '../../../actions/index';
+import { findEvent, joinEvent, resetJoinFind } from '../../../actions/index';
 import { JOIN_FIND } from '../../../helpers/Enums';
 import JoinBasic from './JoinBasic';
 
-class GuestJoinEvent extends Component {
+class JoinEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,10 +96,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    findEvent: guestFindEvent,
-    joinEvent: guestJoinEvent,
-    resetJoin: guestResetJoinFind
+    findEvent: findEvent,
+    joinEvent: joinEvent,
+    resetJoin: resetJoinFind
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(GuestJoinEvent);
+export default connect(mapStateToProps, mapDispatchToProps())(JoinEvent);

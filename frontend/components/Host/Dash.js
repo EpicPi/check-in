@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import HostCreateEvent from './Form/CreateEvent';
-import HostShowEvents from './Show/ShowEvents';
-import HostEventDetail from './Show/EventDetail';
-import HostEditEvent from './Form/EditEvent';
+import CreateEvent from './Form/CreateEvent';
+import ShowEvents from './Show/ShowEvents';
+import EventDetail from './Show/EventDetail';
+import EditEvent from './Form/EditEvent';
 import { connect } from 'react-redux';
 
 class HostDash extends Component {
   render() {
     return (
       <div className="container container-fluid">
-        <Route exact path="/host" component={HostShowEvents} />
-        <Route exact path="/host/create" component={HostCreateEvent} />
-        <Route exact path="/host/event" component={HostEventDetail} />
-        <Route exact path="/host/edit" component={HostEditEvent} />
+        <Route exact path="/host" component={ShowEvents} />
+        <Route exact path="/host/create" component={CreateEvent} />
+        <Route exact path="/host/event" component={EventDetail} />
+        <Route exact path="/host/edit" component={EditEvent} />
       </div>
     );
   }

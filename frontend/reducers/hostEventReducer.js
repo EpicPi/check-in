@@ -4,10 +4,10 @@ import {
   HOST_REMOVE_EVENT,
   HOST_REPLACE,
   HOST_EDIT_EVENT,
-  HOST_CHECK_CODE,
-  HOST_CHECKED_CODE,
+  HOST_CHECK_SIGNUP_CODE,
+  HOST_CHECKED_SIGNUP_CODE,
   HOST_GOT_EVENTS,
-  HOST_RESET_EVENT
+  HOST_RESET_SIGNUP_EVENT
 } from '../actions/types';
 import { hostInitial } from './initialState';
 import { CHECK_CODE, LOAD } from '../helpers/Enums';
@@ -42,14 +42,14 @@ export default function(state = hostInitial, action) {
       });
       return { ...state, events: newEvents };
     }
-    case HOST_CHECK_CODE:
+    case HOST_CHECK_SIGNUP_CODE:
       return { ...state, checkCode: CHECK_CODE.CHECKING };
-    case HOST_CHECKED_CODE:
+    case HOST_CHECKED_SIGNUP_CODE:
       return {
         ...state,
         checkCode: action.payload ? CHECK_CODE.AVAILABLE : CHECK_CODE.TAKEN
       };
-    case HOST_RESET_EVENT:
+    case HOST_RESET_SIGNUP_EVENT:
       return { ...state, checkCode: CHECK_CODE.NOTHING_TO_CHECK };
     default:
       return state;
