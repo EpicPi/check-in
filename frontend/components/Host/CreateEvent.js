@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HostEvent from './HostEvent';
+import HostEvent from './Event';
 
 class HostCreateEvent extends Component {
   render() {

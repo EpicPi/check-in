@@ -26,7 +26,6 @@ router.post('/attend', async (req, res) => {
     const pOut = event.guestsAttend.map(async id => User.findById(id));
     const out = await Promise.all(pOut);
     res.send(out);
-    res.send(out);
   } else
     console.log(
       '[ERR] Event was not found. Passed in id: ' +

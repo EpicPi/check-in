@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import HostCreateEvent from './HostCreateEvent';
-import HostShowEvents from './HostShowEvents';
-import HostEventDetail from './HostEventDetail';
-import HostEditEvent from './HostEditEvent';
+import HostCreateEvent from './CreateEvent';
+import HostShowEvents from './ShowEvents';
+import HostEventDetail from './EventDetail';
+import HostEditEvent from './EditEvent';
 import { connect } from 'react-redux';
 
 class HostDash extends Component {

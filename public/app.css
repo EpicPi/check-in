@@ -37,7 +37,7 @@
 }
 
 /**
-    HostEventItem.js
+    EventItem.js
  */
 .host-event {
   margin: 10px 0 10px 0;
@@ -58,7 +58,7 @@
 }
 
 /**
-    GuestEventItem.js
+    EventItem.js
  */
 .guest-event {
   margin: 10px 0 10px 0;
@@ -69,7 +69,7 @@
 }
 
 /**
-    GuestJoinEvent.js
+    JoinEvent.js
  */
 .guest-join {
   margin: 10px;

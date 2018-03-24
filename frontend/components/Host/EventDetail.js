@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HostEventGuestItem from './HostEventGuestItem';
+import HostEventGuestItem from './EventGuestItem';
 import { getAttends, getRSVPs } from '../../actions/index';
 import { LOAD } from '../../helpers/Enums';
 

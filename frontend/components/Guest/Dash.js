@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import GuestShowEvents from './GuestShowEvents';
-import GuestJoinEvent from './Join/GuestJoinEvent';
-import GuestEventDetail from './GuestEventDetail';
+import GuestShowEvents from './ShowEvents';
+import GuestJoinEvent from './Join/JoinEvent';
+import GuestEventDetail from './EventDetail';
 import { resetEvent } from '../../actions/index';
 import { connect } from 'react-redux';
-import GuestCheckIn from './Checkin/GuestCheckIn';
+import GuestCheckIn from './Checkin/CheckIn';
 
 class GuestDash extends Component {
   componentWillMount() {
