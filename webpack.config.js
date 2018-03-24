@@ -35,6 +35,10 @@ if (isDevServer) {
         '/api': {
           target: 'http://localhost:8080',
           secure: false
+        },
+        '/': {
+          target: 'http://localhost:8080',
+          secure: false
         }
       }
     },

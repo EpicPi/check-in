@@ -76,6 +76,7 @@ class OpenEventDash extends Component {
     const out = this.getEventOutput(this.props);
     return (
       <div className="container-fluid container">
+        hi
         <div>{out}</div>
       </div>
     );
