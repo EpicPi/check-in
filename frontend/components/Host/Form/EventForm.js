@@ -222,6 +222,8 @@ class EventForm extends Component {
                       onChange={this.handleGeneral}
                       required
                       className="form-control"
+                      autoComplete="off"
+                      autoCapitalize="off"
                     />
                   </div>
                 </div>

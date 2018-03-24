@@ -65,6 +65,8 @@ class JoinEvent extends Component {
                       value={this.state.code}
                       onChange={this.handleCodeInput}
                       required
+                      autoComplete="off"
+                      autoCapitalize="off"
                     />
                   </div>
                 </div>
