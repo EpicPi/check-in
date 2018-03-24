@@ -31,7 +31,7 @@ router.post('/join', async (req, res) => {
 });
 
 router.post('/find', async (req, res) => {
-  const event = await Event.findOne({ code: req.body.code });
+  const event = await Event.findOne({ code: req.body.code.toLowerCase() });
   res.send(event);
 });
 
@@ -56,7 +56,7 @@ router.post('/checkin', async (req, res) => {
 
 router.post('/check_checkin', async (req, res) => {
   const event = await Event.findById(req.body.id);
-  res.send(event.checkinCode === req.body.code);
+  res.send(event.checkinCode === req.body.code.toLowerCase());
 });
 
 module.exports = router;
