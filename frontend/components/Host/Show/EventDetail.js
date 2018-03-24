@@ -51,7 +51,7 @@ class EventDetail extends Component {
   }
 
   getUriAttendsOutput(props) {
-    switch (props.rsvps) {
+    switch (props.attends) {
       case LOAD.LOADING:
         return;
       case LOAD.NOTHING:
