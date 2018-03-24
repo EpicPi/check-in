@@ -16,7 +16,7 @@ echo npm has run the build script located in package.json
 
 scp -i ${pem} server.js package.json ${dest}new/
 scp -i ${pem} -r backend/ ${dest}new/
-scp -i ${pem} public/app.css public/index.html public/bundle.js ${dest}new/
+scp -i ${pem} public/ ${dest}new/
 echo Files were sent to the ec2 instance
 
 ssh -i ${pem} ${url} << END
@@ -34,10 +34,8 @@ ssh -i ${pem} ${url} << END
     mv new/backend/ server/backend/
     mv new/server.js server/
     mv new/package.json server/
-    mv new/ server/public
+    mv new/public server/
     echo files have been moved to teh appropriate places
-
-    mkdir new
     echo stage is set for the next deploy
 
     cd server/
