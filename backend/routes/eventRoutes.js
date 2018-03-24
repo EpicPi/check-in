@@ -7,6 +7,7 @@ const Event = mongoose.model('events');
 
 router.post('/rsvp', async (req, res) => {
   const event = await Event.findById(req.body.id);
+
   if (event) {
     const pOut = event.guestsRSVP.map(async id => User.findById(id));
     const out = await Promise.all(pOut);

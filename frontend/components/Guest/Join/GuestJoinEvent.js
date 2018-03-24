@@ -54,26 +54,39 @@ class GuestJoinEvent extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Code:
-          <input
-            type="text"
-            name="code"
-            value={this.state.code}
-            onChange={this.handleCodeInput}
-            required
-          />
-        </label>
-        <div className="row">
-          <div className="col">
-            <button type="submit" value="Submit">
-              Submit
-            </button>
+      <div className="guest-join">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <form className="form" onSubmit={this.handleSubmit}>
+                <div className="form-group row">
+                  <label className="col-md-3 col-form-label">Code</label>
+                  <div className="col-md-9">
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="code"
+                      value={this.state.code}
+                      onChange={this.handleCodeInput}
+                      required
+                    />
+                  </div>
+                </div>
+                <button
+                  className="form-group btn btn-success"
+                  type="submit"
+                  value="Submit"
+                >
+                  Submit
+                </button>
+              </form>
+              <div className="form-group row">
+                <div className="col-md-12">{this.state.out}</div>
+              </div>
+            </div>
           </div>
         </div>
-        {this.state.out}
-      </form>
+      </div>
     );
   }
 }

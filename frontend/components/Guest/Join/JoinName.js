@@ -24,17 +24,34 @@ class JoinName extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-        GT username:
-        <input
-          name="name"
-          type="text"
-          value={this.state.name}
-          onChange={this.handleInput}
-        />
-        <button onClick={this.handleConfirm}>confirm</button>
-      </div>
+      <form className="form">
+        <br />
+        <div className="form-group row">
+          <label className="col-md-12 col-form-label col-form-label-lg">
+            Please confirm RSVP for {this.props.eventToJoin.name}
+          </label>
+        </div>
+        <div className="form-group row">
+          <label className="col-md-3 col-form-label">GT username:</label>
+          <div className="col-md-9">
+            <input
+              className="form-control"
+              name="name"
+              type="text"
+              value={this.state.name}
+              onChange={this.handleInput}
+            />
+          </div>
+        </div>
+        <button
+          className="form-group btn btn-success"
+          type="submit"
+          value="Submit"
+          onClick={this.handleConfirm}
+        >
+          Confirm
+        </button>
+      </form>
     );
   }
 }

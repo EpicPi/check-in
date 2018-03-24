@@ -8,8 +8,8 @@ const event = require('./eventRoutes');
 const open = require('./openEventRoutes');
 
 const checkUser = (req, res, next) => {
-    if (!req.user) return res.send('not authorized');
-    next();
+  if (!req.user) return res.send('not authorized');
+  next();
 };
 
 router.use('/auth', auth);

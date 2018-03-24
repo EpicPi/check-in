@@ -5,6 +5,19 @@ import { fetchUser } from '../actions';
 import { USER } from '../helpers/Enums';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      navCollapsed: true
+    };
+    this._onToggleNav = this._onToggleNav.bind(this);
+  }
+
+  _onToggleNav() {
+    this.setState({ navCollapsed: !this.state.navCollapsed });
+    console.log(this.state);
+  }
+
   componentDidMount() {
     this.props.fetchUser();
   }
@@ -12,7 +25,7 @@ class Header extends Component {
   renderContent() {
     switch (this.props.user) {
       case null:
-        return 'stil deciding';
+        return 'still deciding';
       case false:
         return <a href={'/api/auth/google/get'}>log in</a>;
       default:
@@ -21,38 +34,54 @@ class Header extends Component {
   }
 
   render() {
+    const { navCollapsed } = this.state;
+
     return (
-      <nav className="navbar bg-primary fixed-top nav-text">
+      <nav className="navbar navbar-expand-md navbar-dark bg-primary nav-text">
         <div className="container-fluid">
-          <div
-            className="row justify-content-between text-center"
-            style={{ width: '100%' }}
+          <p className="navbar-brand d-flex w-50 mr-auto">
+            <Link to={'/'}>Check-in</Link>
+          </p>
+          <button
+            aria-expanded="false"
+            onClick={this._onToggleNav}
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapsingNavbar"
           >
-            <div className="col">
-              <h1>
-                <Link to={'/'}>Check-in</Link>
-              </h1>
-            </div>
-
-            <div className="col">
-              <h2>
-                <Link
-                  to={
-                    this.props.user
-                      ? this.props.type
-                        ? this.props.type === USER.HOST ? '/host' : '/guest'
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div
+            className={
+              (navCollapsed ? 'collapse' : '') + ' navbar-collapse w-100'
+            }
+            id="collapsingNavbar"
+          >
+            <ul className="navbar-nav w-100 justify-content-center">
+              <li className="nav-item active">
+                <p className="nav-link" href="#">
+                  <Link
+                    to={
+                      this.props.user
+                        ? this.props.type
+                          ? this.props.type === USER.HOST ? '/host' : '/guest'
+                          : '/'
                         : '/'
-                      : '/'
-                  }
-                >
-                  Dash
-                </Link>
-              </h2>
-            </div>
-
-            <div className="col">
-              <h4>{this.renderContent()}</h4>
-            </div>
+                    }
+                  >
+                    Dash
+                  </Link>
+                </p>
+              </li>
+            </ul>
+            <ul className="nav navbar-nav ml-auto w-100 justify-content-end">
+              <li className="nav-item active">
+                <p className="nav-link" href="#">
+                  {this.renderContent()}
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -67,10 +96,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispathToProps() {
+function mapDispatchToProps() {
   return {
     fetchUser: fetchUser
   };
 }
 
-export default connect(mapStateToProps, mapDispathToProps())(Header);
+export default connect(mapStateToProps, mapDispatchToProps())(Header);
