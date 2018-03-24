@@ -14,6 +14,7 @@ export function dateTimeToDate(date, time) {
   return new Date(date + ' ' + time);
 }
 
+//formats time nicely
 export function timeInputFormat(date) {
   let now = new Date(date);
   let hour = ('0' + now.getHours()).slice(-2);
@@ -21,6 +22,7 @@ export function timeInputFormat(date) {
   return hour + ':' + min;
 }
 
+//formats date nicely
 export function dateInputFormat(date) {
   let now = new Date(date);
   let year = now.getFullYear();

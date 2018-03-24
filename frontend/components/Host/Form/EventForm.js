@@ -111,6 +111,41 @@ class EventForm extends Component {
       alert('Please enter a different code');
       return;
     }
+    const rsvpEnd = dateTimeToDate(
+      this.state.rsvpEnd.date,
+      this.state.rsvpEnd.time
+    );
+    const rsvpStart = dateTimeToDate(
+      this.state.rsvpStart.date,
+      this.state.rsvpStart.time
+    );
+    const checkinStart = dateTimeToDate(
+      this.state.checkinStart.date,
+      this.state.checkinStart.time
+    );
+    const checkinEnd = dateTimeToDate(
+      this.state.checkinEnd.date,
+      this.state.checkinEnd.time
+    );
+
+    if (rsvpEnd < rsvpStart) {
+      alert(
+        'please make sure your rsvp end time is after your rsvp start time'
+      );
+      return;
+    }
+    if (checkinEnd < checkinStart) {
+      alert(
+        'please make sure your checkin end time is after your checkin start time'
+      );
+      return;
+    }
+    if (checkinStart < rsvpStart) {
+      alert(
+        'please make sure your checkin start time is after your rsvp start time'
+      );
+      return;
+    }
 
     const event = {
       ...this.props.event,
