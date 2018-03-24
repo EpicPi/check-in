@@ -24,31 +24,43 @@ class Land extends Component {
   }
 
   render() {
+    const buttons = !this.props.user ? (
+      <a
+        href={'/api/auth/google/get'}
+        className="btn btn-lg btn-success"
+        role="button"
+      >
+        Log in!
+      </a>
+    ) : (
+      <div className="row" style={{ justifyContent: 'center' }}>
+        <div className="col-md-6">
+          <button
+            onClick={() => this.handleClick(USER.HOST)}
+            type="button"
+            className="btn btn-lg btn-info btn-selection"
+          >
+            Host
+          </button>
+        </div>
+        <div className="col-md-6">
+          <button
+            onClick={() => this.handleClick(USER.GUEST)}
+            type="button"
+            className="btn btn-lg btn-info btn-selection"
+          >
+            Guest
+          </button>
+        </div>
+      </div>
+    );
+
     return (
       <div className="row landing">
         <div className="col-md-12">
           <section className="selection">
             <div className="container-fluid">
-              <div className="row">
-                <div className="col-md-6">
-                  <button
-                    onClick={() => this.handleClick(USER.HOST)}
-                    type="button"
-                    className="btn btn-lg btn-info btn-selection"
-                  >
-                    host
-                  </button>
-                </div>
-                <div className="col-md-6">
-                  <button
-                    onClick={() => this.handleClick(USER.GUEST)}
-                    type="button"
-                    className="btn btn-lg btn-info btn-selection"
-                  >
-                    guest
-                  </button>
-                </div>
-              </div>
+              {buttons}
               <hr />
             </div>
           </section>
