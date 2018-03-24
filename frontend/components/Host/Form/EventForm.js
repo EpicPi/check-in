@@ -4,18 +4,18 @@ import {
   hostAddEvent,
   hostCheckCode,
   hostEditEvent
-} from '../../actions/index';
-import TimePicker from './TimePicker';
+} from '../../../actions/index';
+import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES } from '../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
   TODAY,
   dateTimeToDate,
   dateStringToHours,
   dateStringToDate
-} from '../../helpers/Time';
-import { hostResetEvent } from '../../actions';
+} from '../../../helpers/Time';
+import { hostResetEvent } from '../../../actions/index';
 
 const initialState = {
   eventName: '',

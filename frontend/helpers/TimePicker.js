@@ -5,7 +5,7 @@ import {
   dateStringToDate,
   dateStringToHours,
   timeInputFormat
-} from '../../helpers/Time';
+} from './Time';
 
 // const TODAY = new Date().toISOString().slice(0,10);
 

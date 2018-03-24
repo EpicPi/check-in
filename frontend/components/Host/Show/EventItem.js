@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { hostRemoveEvent, selectEvent } from '../../actions';
+import { hostRemoveEvent, selectEvent } from '../../../actions/index';
 import { connect } from 'react-redux';
 import React from 'react';
 
