@@ -13,7 +13,12 @@ router.post('/join', async (req, res) => {
   if (event) {
     event.guestsAttend.push(req.body.id);
     event.save();
-  }
+  } else
+    console.log(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /open/join'
+    );
 });
 
 module.exports = router;

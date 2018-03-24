@@ -17,7 +17,6 @@ router.post('/add_event', async (req, res) => {
     info: req.body.info
   }).save();
   const user = await User.findById(req.user.id);
-  // user.events = []; //cleans out event array
   user.hostEvents.push(event.id);
   user.save();
   res.send(event);
@@ -33,11 +32,8 @@ router.post('/remove_event', async (req, res) => {
 
 router.get('/get_events', async (req, res) => {
   const user = await User.findById(req.user.id);
-  const out = [];
-  for (let i = 0; i < user.hostEvents.length; i++) {
-    const a = await Event.findById(user.hostEvents[i]);
-    out.push(a);
-  }
+  const pOut = user.hostEvents.map(async id => Event.findById(id));
+  const out = await Promise.all(pOut);
   res.send(out);
 });
 

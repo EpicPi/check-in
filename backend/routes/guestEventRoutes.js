@@ -22,7 +22,12 @@ router.post('/join', async (req, res) => {
     user.save();
     event.guestsRSVP.push(user.id);
     event.save();
-  }
+  } else
+    console.log(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /guest/join'
+    );
 });
 
 router.post('/find', async (req, res) => {
@@ -32,14 +37,21 @@ router.post('/find', async (req, res) => {
 
 router.post('/checkin', async (req, res) => {
   const event = await Event.findById(req.body.id);
-  if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {
-    //not user already checked-in
-    event.guestsAttend.push(req.user.id);
-    event.save();
-    res.send(true);
-  } else {
-    res.send(false);
-  }
+  if (!event) {
+    if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {
+      //not user already checked-in
+      event.guestsAttend.push(req.user.id);
+      event.save();
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  } else
+    console.log(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /guest/checkin'
+    );
 });
 
 router.post('/check_checkin', async (req, res) => {
