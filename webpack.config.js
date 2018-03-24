@@ -32,11 +32,7 @@ if (isDevServer) {
       inline: true,
       port: 3000,
       proxy: {
-        '/api': {
-          target: 'http://localhost:8080',
-          secure: false
-        },
-        '/event': {
+        '/**': {
           target: 'http://localhost:8080',
           secure: false
         }
