@@ -10,10 +10,10 @@ class Header extends Component {
     this.state = {
       navCollapsed: true
     };
-    this._onToggleNav = this._onToggleNav.bind(this);
+    this.onToggleNav = this.onToggleNav.bind(this);
   }
 
-  _onToggleNav() {
+  onToggleNav() {
     this.setState({ navCollapsed: !this.state.navCollapsed });
     console.log(this.state);
   }
@@ -22,7 +22,7 @@ class Header extends Component {
     this.props.fetchUser();
   }
 
-  renderContent() {
+  getAuthOutput() {
     switch (this.props.user) {
       case null:
         return 'still deciding';
@@ -33,6 +33,15 @@ class Header extends Component {
     }
   }
 
+  getDashOutPut() {
+    if (this.props.user && this.props.type) {
+      return (
+        <Link to={this.props.type === USER.HOST ? '/host' : '/guest'}>
+          Dash
+        </Link>
+      );
+    }
+  }
   render() {
     const { navCollapsed } = this.state;
 
@@ -44,7 +53,7 @@ class Header extends Component {
           </p>
           <button
             aria-expanded="false"
-            onClick={this._onToggleNav}
+            onClick={this.onToggleNav}
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -60,26 +69,12 @@ class Header extends Component {
           >
             <ul className="navbar-nav w-100 justify-content-center">
               <li className="nav-item active">
-                <p className="nav-link" href="#">
-                  <Link
-                    to={
-                      this.props.user
-                        ? this.props.type
-                          ? this.props.type === USER.HOST ? '/host' : '/guest'
-                          : '/'
-                        : '/'
-                    }
-                  >
-                    Dash
-                  </Link>
-                </p>
+                <p>{this.getDashOutPut()}</p>
               </li>
             </ul>
             <ul className="nav navbar-nav ml-auto w-100 justify-content-end">
               <li className="nav-item active">
-                <p className="nav-link" href="#">
-                  {this.renderContent()}
-                </p>
+                <p className="nav-link">{this.getAuthOutput()}</p>
               </li>
             </ul>
           </div>
