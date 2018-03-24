@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import HostEvent from './HostEvent';
+import EventForm from './EventForm';
 
-class HostEditEvent extends Component {
+class EditEvent extends Component {
   render() {
     return (
       <div>
@@ -10,10 +10,10 @@ class HostEditEvent extends Component {
             <h2 className="text-center">Edit Event</h2>
           </div>
         </div>
-        <HostEvent history={this.props.history} add={false} />
+        <EventForm history={this.props.history} add={false} />
       </div>
     );
   }
 }
 
-export default HostEditEvent;
+export default EditEvent;

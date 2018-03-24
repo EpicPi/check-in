@@ -15,6 +15,6 @@ export const openJoinEvent = (code, id) => async dispatch => {
     '/api/open/join',
     qs.stringify({ code: code, id: id })
   );
-  // TODO: check successfully joined or not
+  // TODO: checkCode successfully joined or not
   dispatch({ type: OPEN_JOIN_EVENT, payload: res.data });
 };

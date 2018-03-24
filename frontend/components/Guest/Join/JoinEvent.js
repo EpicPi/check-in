@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  guestFindEvent,
-  guestJoinEvent,
-  guestResetJoinFind
-} from '../../../actions/index';
+import { findEvent, joinEvent, resetJoinFind } from '../../../actions/index';
 import { JOIN_FIND } from '../../../helpers/Enums';
 import JoinBasic from './JoinBasic';
-import JoinName from './JoinName';
 
-class GuestJoinEvent extends Component {
+class JoinEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,13 +36,13 @@ class GuestJoinEvent extends Component {
   getJoinFindOutput(props) {
     switch (props.joinFind) {
       case JOIN_FIND.FAIL:
-        return <h4>Couldn't find, please check code</h4>;
+        return <h3>Couldn't find, please check code</h3>;
       case JOIN_FIND.SUCCESS:
-        return <JoinName history={this.props.history} />;
+        return <JoinBasic history={this.props.history} />;
       case JOIN_FIND.CHECKING:
-        return <h4>Checking code</h4>;
+        return <h3>Checking code</h3>;
       case JOIN_FIND.ALREADY_JOINED:
-        return <h4>You already RSVPed for this event!</h4>;
+        return <h3>You already RSVPed for this event!</h3>;
       default:
         return '';
     }
@@ -70,6 +65,8 @@ class GuestJoinEvent extends Component {
                       value={this.state.code}
                       onChange={this.handleCodeInput}
                       required
+                      autoComplete="off"
+                      autoCapitalize="off"
                     />
                   </div>
                 </div>
@@ -101,10 +98,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    findEvent: guestFindEvent,
-    joinEvent: guestJoinEvent,
-    resetJoin: guestResetJoinFind
+    findEvent: findEvent,
+    joinEvent: joinEvent,
+    resetJoin: resetJoinFind
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(GuestJoinEvent);
+export default connect(mapStateToProps, mapDispatchToProps())(JoinEvent);

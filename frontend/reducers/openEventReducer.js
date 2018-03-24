@@ -15,7 +15,7 @@ export default function(state = openInitial, action) {
         ...state,
         event: action.payload ? action.payload : LOAD.NOTHING
       };
-    // TODO: check openEventActions.js
+    // TODO: checkCode openEventActions.js
     case OPEN_JOIN_EVENT:
       return {
         ...state,

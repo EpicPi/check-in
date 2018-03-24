@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import HostEvent from './HostEvent';
+import EventForm from './EventForm';
 
-class HostCreateEvent extends Component {
+class CreateEvent extends Component {
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col">
             <h2 className="text-center">Create Event</h2>
-            <HostEvent history={this.props.history} add={true} />
+            <EventForm history={this.props.history} add={true} />
           </div>
         </div>
       </div>
@@ -16,4 +16,4 @@ class HostCreateEvent extends Component {
   }
 }
 
-export default HostCreateEvent;
+export default CreateEvent;

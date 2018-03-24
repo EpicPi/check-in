@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import { hostRemoveEvent, selectEvent } from '../../actions';
+import { hostRemoveEvent, selectEvent } from '../../../actions/index';
 import { connect } from 'react-redux';
 import React from 'react';
 
-class HostEventItem extends Component {
+class EventItem extends Component {
   handleClick(event) {
     this.props.selectEvent(event);
     this.props.history.push('/host/event');
@@ -50,4 +50,4 @@ const mapDispatchToProps = (/* dispatch */) => {
     removeEvent: hostRemoveEvent
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps())(HostEventItem);
+export default connect(mapStateToProps, mapDispatchToProps())(EventItem);

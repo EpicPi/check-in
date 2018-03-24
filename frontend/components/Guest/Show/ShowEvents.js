@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import { guestGetEvents } from '../../../actions/index';
 import { connect } from 'react-redux';
-import { hostGetEvents } from '../../actions/index';
-import HostEventItem from './HostEventItem';
-import { LOAD } from '../../helpers/Enums';
+import React from 'react';
+import EventItem from './EventItem';
+import { LOAD } from '../../../helpers/Enums';
 
-class HostShowEvents extends Component {
+class ShowEvents extends Component {
   constructor(props) {
     super(props);
-    this.handleCreate = this.handleCreate.bind(this);
     this.getEventsOutput = this.getEventsOutput.bind(this);
+    this.handleJoin = this.handleJoin.bind(this);
 
     if (this.props.events === LOAD.NOTHING) this.props.getEvents();
     this.state = { out: this.getEventsOutput(this.props) };
@@ -18,8 +19,8 @@ class HostShowEvents extends Component {
     this.setState({ out: this.getEventsOutput(nextProps) });
   }
 
-  handleCreate() {
-    this.props.history.push('/host/create');
+  handleJoin() {
+    this.props.history.push('/guest/join');
   }
 
   getEventsOutput(props) {
@@ -30,22 +31,19 @@ class HostShowEvents extends Component {
         return;
       default:
         return props.events.map((event, i) => (
-          <HostEventItem history={props.history} key={i} event={event} />
+          <EventItem history={props.history} key={i} event={event} />
         ));
     }
   }
 
   render() {
     return (
-      <div className="row host-show">
+      <div className="row guest-show">
         <div className="container-fluid">
           <div className="row btn-create">
             <div className="col-md-12">
-              <button
-                className="btn btn-lg btn-info"
-                onClick={this.handleCreate}
-              >
-                create
+              <button className="btn btn-lg btn-info" onClick={this.handleJoin}>
+                Join
               </button>
             </div>
           </div>
@@ -63,14 +61,14 @@ class HostShowEvents extends Component {
 
 const mapStateToProps = state => {
   return {
-    events: state.host.events
+    events: state.guest.events
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getEvents: hostGetEvents
+    getEvents: guestGetEvents
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(HostShowEvents);
+export default connect(mapStateToProps, mapDispatchToProps())(ShowEvents);

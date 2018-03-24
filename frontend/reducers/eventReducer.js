@@ -14,9 +14,9 @@ export default function(state = eventInitial, action) {
     case SELECT_EVENT:
       return { ...state, selected: action.payload };
     case GET_RSVPS:
-      return { ...state, selectedRSVPs: LOAD.LOADING };
+      return { ...state, selectedRsvps: LOAD.LOADING };
     case GOT_RSVPS:
-      return { ...state, selectedRSVPs: action.payload };
+      return { ...state, selectedRsvps: action.payload };
     case GET_ATTENDS:
       return { ...state, selectedAttends: LOAD.LOADING };
     case GOT_ATTENDS:

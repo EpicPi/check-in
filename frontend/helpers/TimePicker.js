@@ -5,7 +5,7 @@ import {
   dateStringToDate,
   dateStringToHours,
   timeInputFormat
-} from '../../helpers/Time';
+} from './Time';
 
 // const TODAY = new Date().toISOString().slice(0,10);
 
@@ -19,6 +19,7 @@ class TimePicker extends Component {
   }
 
   currentTime(event) {
+    event.preventDefault();
     let now = new Date();
     let time = timeInputFormat(now);
     let date = dateInputFormat(now);

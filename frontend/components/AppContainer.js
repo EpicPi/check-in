@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './Header';
 
-import HostDash from './Host/HostDash';
+import HostDash from './Host/Dash';
 import Land from './Land';
-import GuestDash from './Guest/GuestDash';
-import EventDash from './OpenEvent/OpenEventDash';
+import GuestDash from './Guest/Dash';
+import EventDash from './OpenEvent/Dash';
 import requireAuth from '../helpers/requireAuth';
 import { hot } from 'react-hot-loader';
 

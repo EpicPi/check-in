@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { hostGetEvents } from '../../actions';
 import { connect } from 'react-redux';
-import {
-  openGetEvent,
-  openCheckin,
-  openJoinEvent
-} from '../../actions/openEventActions';
+import { openGetEvent, openCheckin, openJoinEvent } from '../../actions/';
 import { LOAD } from '../../helpers/Enums';
 
 class OpenEventDash extends Component {

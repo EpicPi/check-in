@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import { selectEvent } from '../../actions/index';
+import { selectEvent } from '../../../actions/index';
 import { connect } from 'react-redux';
 import React from 'react';
 
-class GuestEventItem extends Component {
+class EventItem extends Component {
   handleClick(event) {
     this.props.selectEvent(event);
     this.props.history.push('/guest/event');
@@ -50,4 +50,4 @@ const mapDispatchToProps = (/* dispatch */) => {
     selectEvent: selectEvent
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps())(GuestEventItem);
+export default connect(mapStateToProps, mapDispatchToProps())(EventItem);

@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  hostAddEvent,
-  hostCheckCode,
-  hostEditEvent
-} from '../../actions/index';
-import TimePicker from './TimePicker';
+  createEvent,
+  checkSignupCode,
+  editEvent
+} from '../../../actions/index';
+import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES } from '../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
   TODAY,
   dateTimeToDate,
   dateStringToHours,
   dateStringToDate
-} from '../../helpers/Time';
-import { hostResetEvent } from '../../actions';
+} from '../../../helpers/Time';
+import { resetSignupCode } from '../../../actions/index';
 
 const initialState = {
   eventName: '',
@@ -41,7 +41,7 @@ const initialState = {
   checkinCode: ''
 };
 
-class HostEvent extends Component {
+class EventForm extends Component {
   constructor(props) {
     super(props);
     this.handleGeneral = this.handleGeneral.bind(this);
@@ -222,6 +222,8 @@ class HostEvent extends Component {
                       onChange={this.handleGeneral}
                       required
                       className="form-control"
+                      autoComplete="off"
+                      autoCapitalize="off"
                     />
                   </div>
                 </div>
@@ -340,11 +342,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    addEvent: hostAddEvent,
-    hostCheckCode: hostCheckCode,
-    editEvent: hostEditEvent,
-    resetEvent: hostResetEvent
+    addEvent: createEvent,
+    hostCheckCode: checkSignupCode,
+    editEvent: editEvent,
+    resetEvent: resetSignupCode
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(HostEvent);
+export default connect(mapStateToProps, mapDispatchToProps())(EventForm);

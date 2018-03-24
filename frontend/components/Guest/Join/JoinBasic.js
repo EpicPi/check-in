@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  guestFindEvent,
-  guestJoinEvent,
-  guestResetJoinFind
-} from '../../../actions/index';
-import { JOIN_FIND } from '../../../helpers/Enums';
+
+import { joinEvent, resetJoinFind } from '../../../actions/index';
 
 class JoinBasic extends Component {
   constructor(props) {
@@ -23,9 +19,7 @@ class JoinBasic extends Component {
     return (
       <div>
         <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-        <button className="btn btn-success" onClick={this.handleConfirm}>
-          Confirm
-        </button>
+        <button onClick={this.handleConfirm}>confirm</button>
       </div>
     );
   }
@@ -39,8 +33,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    joinEvent: guestJoinEvent,
-    resetJoin: guestResetJoinFind
+    joinEvent: joinEvent,
+    resetJoin: resetJoinFind
   };
 };
 

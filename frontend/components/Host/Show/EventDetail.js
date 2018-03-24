@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HostEventGuestItem from './HostEventGuestItem';
-import { getAttends, getRSVPs } from '../../actions/index';
-import { LOAD } from '../../helpers/Enums';
+import GuestItem from './GuestItem';
+import { getAttends, getRsvps } from '../../../actions/index';
+import { LOAD } from '../../../helpers/Enums';
 
-class HostEventDetail extends Component {
+class EventDetail extends Component {
   constructor(props) {
     super(props);
     this.handleEditClick = this.handleEditClick.bind(this);
 
     //gotta make the call to load them
     this.props.getAttends(this.props.event);
-    this.props.getRSVPs(this.props.event);
+    this.props.getRsvps(this.props.event);
 
     this.state = {
       rsvps: this.getRSVPsOutput(this.props),
@@ -51,7 +51,7 @@ class HostEventDetail extends Component {
   }
 
   getUriAttendsOutput(props) {
-    switch (props.rsvps) {
+    switch (props.attends) {
       case LOAD.LOADING:
         return;
       case LOAD.NOTHING:
@@ -74,7 +74,7 @@ class HostEventDetail extends Component {
         return;
       default:
         return props.rsvps.map((guest, i) => (
-          <HostEventGuestItem history={props.history} key={i} guest={guest} />
+          <GuestItem history={props.history} key={i} guest={guest} />
         ));
     }
   }
@@ -87,7 +87,7 @@ class HostEventDetail extends Component {
         return;
       default:
         return props.attends.map((guest, i) => (
-          <HostEventGuestItem history={props.history} key={i} guest={guest} />
+          <GuestItem history={props.history} key={i} guest={guest} />
         ));
     }
   }
@@ -220,16 +220,16 @@ class HostEventDetail extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    rsvps: state.event.selectedRSVPs,
+    rsvps: state.event.selectedRsvps,
     attends: state.event.selectedAttends
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getRSVPs: getRSVPs,
+    getRsvps: getRsvps,
     getAttends: getAttends
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(HostEventDetail);
+export default connect(mapStateToProps, mapDispatchToProps())(EventDetail);

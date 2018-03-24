@@ -9,7 +9,7 @@ export const guestInitial = {
   events: LOAD.NOTHING,
   joinFind: JOIN_FIND.NOTHING_TO_CHECK,
   eventToJoin: { name: 'erger', code: 'fwwfe' },
-  check: CHECK_CHECKIN.NOTHING_TO_CHECK
+  checkCode: CHECK_CHECKIN.NOTHING_TO_CHECK
 };
 
 export const hostInitial = {
@@ -19,7 +19,7 @@ export const hostInitial = {
 
 export const eventInitial = {
   selected: {},
-  selectedRSVPs: LOAD.NOTHING,
+  selectedRsvps: LOAD.NOTHING,
   selectedAttends: LOAD.NOTHING
 };
 

@@ -10,22 +10,21 @@ export const HOST_GOT_EVENTS = 'host_got_events';
 export const HOST_REMOVE_EVENT = 'host_remove_event';
 export const HOST_REPLACE = 'host_replace';
 export const HOST_EDIT_EVENT = 'host_edit_event';
-export const HOST_CHECK_CODE = 'host_check_code';
-export const HOST_CHECKED_CODE = 'host_checked_code';
-export const HOST_RESET_EVENT = 'host_reset_event';
+export const HOST_CHECK_SIGNUP_CODE = 'host_check_code';
+export const HOST_CHECKED_SIGNUP_CODE = 'host_checked_code';
+export const HOST_RESET_SIGNUP_EVENT = 'host_reset_event';
 
 //guest event types
 export const GUEST_JOIN_EVENT = 'guest_join_event';
 export const GUEST_GET_EVENTS = 'guest_get_events';
 export const GUEST_GOT_EVENTS = 'guest_got_events';
-export const GUEST_REMOVE_EVENT = 'guest_remove_event';
 export const GUEST_FIND_EVENT = 'guest_find_event';
 export const GUEST_FOUND_EVENT = 'guest_found_event';
 export const GUEST_RESET_JOIN_FIND = 'guest_reset_join_find';
 export const GUEST_CHECKIN = 'guest_checkin';
-export const GUEST_CHECK_CHECKIN = 'guest_check_checkin';
-export const GUEST_CHECKED_CHECKIN = 'guest_checked_checkin';
-export const GUEST_RESET_CHECKIN = 'guest_reset_checkin';
+export const GUEST_CHECK_CHECKIN_CODE = 'guest_check_checkin';
+export const GUEST_CHECKED_CHECKIN_CODE = 'guest_checked_checkin';
+export const GUEST_RESET_CHECKIN_CODE = 'guest_reset_checkin';
 
 //event event types
 export const SELECT_EVENT = 'select event';

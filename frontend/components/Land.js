@@ -24,31 +24,43 @@ class Land extends Component {
   }
 
   render() {
+    const buttons = !this.props.user ? (
+      <a
+        href={'/api/auth/google/get'}
+        className="btn btn-lg btn-success"
+        role="button"
+      >
+        Log in!
+      </a>
+    ) : (
+      <div className="row" style={{ justifyContent: 'center' }}>
+        <div className="col-md-6">
+          <button
+            onClick={() => this.handleClick(USER.HOST)}
+            type="button"
+            className="btn btn-lg btn-info btn-selection"
+          >
+            Host
+          </button>
+        </div>
+        <div className="col-md-6">
+          <button
+            onClick={() => this.handleClick(USER.GUEST)}
+            type="button"
+            className="btn btn-lg btn-info btn-selection"
+          >
+            Guest
+          </button>
+        </div>
+      </div>
+    );
+
     return (
       <div className="row landing">
         <div className="col-md-12">
           <section className="selection">
             <div className="container-fluid">
-              <div className="row">
-                <div className="col-md-6">
-                  <button
-                    onClick={() => this.handleClick(USER.HOST)}
-                    type="button"
-                    className="btn btn-lg btn-info btn-selection"
-                  >
-                    host
-                  </button>
-                </div>
-                <div className="col-md-6">
-                  <button
-                    onClick={() => this.handleClick(USER.GUEST)}
-                    type="button"
-                    className="btn btn-lg btn-info btn-selection"
-                  >
-                    guest
-                  </button>
-                </div>
-              </div>
+              {buttons}
               <hr />
             </div>
           </section>
@@ -79,11 +91,9 @@ class Land extends Component {
                 <br />
                 <div className="col-md-offset-2 col-md-8 mx-auto text-center">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                    accusamus amet consectetur consequatur consequuntur
-                    cupiditate deleniti doloribus, ea, est fugiat illo nihil
-                    officia quae quaerat quod tempore, vero voluptatem
-                    voluptatibus.
+                    We are ambitious computer science student at Georgia Tech
+                    solving the frustrating problems that comes from event
+                    RSVPs, so that you can focus on the actual event!
                   </p>
                 </div>
               </div>

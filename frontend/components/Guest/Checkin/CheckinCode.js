@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import { guestCheckCheckin, guestCheckin } from '../../../actions/index';
+import { checkCheckinCode, checkin } from '../../../actions/index';
 import { connect } from 'react-redux';
 import React from 'react';
 import { CHECK_CHECKIN } from '../../../helpers/Enums';
-import { guestResetCheckin } from '../../../actions';
+import { resetCheckin } from '../../../actions';
 
 class CheckinCode extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class CheckinCode extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.check === CHECK_CHECKIN.SUCCESS) {
+    if (this.props.checkCode === CHECK_CHECKIN.SUCCESS) {
       alert('checked in');
       this.props.history.push('/guest');
       this.props.checkin(this.props.event);
@@ -38,7 +38,7 @@ class CheckinCode extends Component {
   }
 
   getCheckCheckInOutput() {
-    switch (this.props.check) {
+    switch (this.props.checkCode) {
       case CHECK_CHECKIN.FAIL:
         return <h3>Code was not valid</h3>;
       case CHECK_CHECKIN.CHECKING:
@@ -90,14 +90,14 @@ class CheckinCode extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    check: state.guest.check
+    checkCode: state.guest.checkCode
   };
 };
 const mapDispatchToProps = () => {
   return {
-    checkin: guestCheckin,
-    checkCode: guestCheckCheckin,
-    reset: guestResetCheckin
+    checkin: checkin,
+    checkCode: checkCheckinCode,
+    reset: resetCheckin
   };
 };
 
