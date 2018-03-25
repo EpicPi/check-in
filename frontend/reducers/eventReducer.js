@@ -18,7 +18,13 @@ export default function(state = eventInitial, action) {
     case GOT_RSVPS:
       return { ...state, selectedRsvps: action.payload };
     case GET_ATTENDS:
-      return { ...state, selectedAttends: LOAD.LOADING };
+      return {
+        ...state,
+        selectedAttends:
+          state.selectedAttends === LOAD.NOTHING
+            ? LOAD.LOADING
+            : state.selectedAttends
+      };
     case GOT_ATTENDS:
       return { ...state, selectedAttends: action.payload };
     case RESET_EVENT:

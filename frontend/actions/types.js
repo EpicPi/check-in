@@ -13,6 +13,7 @@ export const HOST_EDIT_EVENT = 'host_edit_event';
 export const HOST_CHECK_SIGNUP_CODE = 'host_check_code';
 export const HOST_CHECKED_SIGNUP_CODE = 'host_checked_code';
 export const HOST_RESET_SIGNUP_EVENT = 'host_reset_event';
+export const HOST_CHECKIN = 'host_checkin';
 
 //guest event types
 export const GUEST_JOIN_EVENT = 'guest_join_event';

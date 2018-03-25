@@ -10,10 +10,12 @@ import TimePicker from '../../../helpers/TimePicker';
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
-  TODAY,
-  dateTimeToDate,
+  dateTimeToDateString,
   dateStringToHours,
-  dateStringToDate
+  dateStringToDate,
+  timeInputFormat,
+  getCurrentTime,
+  getCurrentDate
 } from '../../../helpers/Time';
 import { resetSignupCode } from '../../../actions/index';
 
@@ -23,19 +25,19 @@ const initialState = {
   info: '',
   rsvpStart: {
     time: '00:00',
-    date: TODAY
+    date: getCurrentDate()
   },
   rsvpEnd: {
     time: '00:00',
-    date: TODAY
+    date: getCurrentDate()
   },
   checkinStart: {
     time: '00:00',
-    date: TODAY
+    date: getCurrentDate()
   },
   checkinEnd: {
     time: '00:00',
-    date: TODAY
+    date: getCurrentDate()
   },
   type: EVENT_TYPES.BASIC,
   checkinCode: ''
@@ -109,25 +111,62 @@ class EventForm extends Component {
       alert('Please enter a different code');
       return;
     }
+    const rsvpEnd = new Date(
+      dateTimeToDateString(this.state.rsvpEnd.date, this.state.rsvpEnd.time)
+    );
+    const rsvpStart = new Date(
+      dateTimeToDateString(this.state.rsvpStart.date, this.state.rsvpStart.time)
+    );
+    const checkinStart = new Date(
+      dateTimeToDateString(
+        this.state.checkinStart.date,
+        this.state.checkinStart.time
+      )
+    );
+    const checkinEnd = new Date(
+      dateTimeToDateString(
+        this.state.checkinEnd.date,
+        this.state.checkinEnd.time
+      )
+    );
+
+    if (rsvpEnd < rsvpStart) {
+      alert(
+        'please make sure your rsvp end time is after your rsvp start time'
+      );
+      return;
+    }
+    if (checkinEnd < checkinStart) {
+      alert(
+        'please make sure your checkin end time is after your checkin start time'
+      );
+      return;
+    }
+    if (checkinStart < rsvpStart) {
+      alert(
+        'please make sure your checkin start time is after your rsvp start time'
+      );
+      return;
+    }
 
     const event = {
       ...this.props.event,
       name: this.state.eventName,
       code: this.state.code,
       dates: {
-        rsvpStart: dateTimeToDate(
+        rsvpStart: dateTimeToDateString(
           this.state.rsvpStart.date,
           this.state.rsvpStart.time
         ),
-        rsvpEnd: dateTimeToDate(
+        rsvpEnd: dateTimeToDateString(
           this.state.rsvpEnd.date,
           this.state.rsvpEnd.time
         ),
-        checkinStart: dateTimeToDate(
+        checkinStart: dateTimeToDateString(
           this.state.checkinStart.date,
           this.state.checkinStart.time
         ),
-        checkinEnd: dateTimeToDate(
+        checkinEnd: dateTimeToDateString(
           this.state.checkinEnd.date,
           this.state.checkinEnd.time
         )
@@ -199,7 +238,7 @@ class EventForm extends Component {
                 className="form"
               >
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Event Name</label>
+                  <label className="col-md-2 col-form-label">Event Name</label>
                   <div className="col-md-9">
                     <input
                       type="text"
@@ -213,7 +252,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Code</label>
+                  <label className="col-md-2 col-form-label">Code</label>
                   <div className="col-md-9">
                     <input
                       type="text"
@@ -231,7 +270,7 @@ class EventForm extends Component {
                 {this.getCheckCodeOutput()}
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Other info</label>
+                  <label className="col-md-2 col-form-label">Other info</label>
                   <div className="col-md-9">
                     <textarea
                       name="info"
@@ -244,7 +283,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">RSVP Start</label>
+                  <label className="col-md-2 col-form-label">RSVP Start</label>
                   <div className="col-md-9">
                     <TimePicker
                       name="rsvpStart"
@@ -256,7 +295,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">RSVP End</label>
+                  <label className="col-md-2 col-form-label">RSVP End</label>
                   <div className="col-md-9">
                     <TimePicker
                       name="rsvpEnd"
@@ -268,7 +307,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">
+                  <label className="col-md-2 col-form-label">
                     Checkin Start
                   </label>
                   <div className="col-md-9">
@@ -282,7 +321,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Checkin End</label>
+                  <label className="col-md-2 col-form-label">Checkin End</label>
                   <div className="col-md-9">
                     <TimePicker
                       name="checkinEnd"
@@ -294,7 +333,7 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">
+                  <label className="col-md-2 col-form-label">
                     Check-in Type
                   </label>
                   <div className="col-md-3">
@@ -313,16 +352,24 @@ class EventForm extends Component {
 
                 {this.getSelectOutput()}
 
-                <div className="form-group row">
-                  <div className="col-md-12">
-                    <button
-                      type="submit"
-                      value="Submit"
-                      className="btn btn-primary"
-                    >
-                      Submit
-                    </button>
-                  </div>
+                <br />
+                <br />
+                <div className="center-block text-center">
+                  <button
+                    type="submit"
+                    value="Submit"
+                    className="btn btn-primary p"
+                    style={{ marginRight: '5px' }}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => this.props.history.push('/host')}
+                    style={{ marginLeft: '5px' }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchUser } from '../actions';
 import { USER } from '../helpers/Enums';
+import logo from '../assets/images/eventensure.png';
 
 class Header extends Component {
   constructor(props) {
@@ -10,19 +11,18 @@ class Header extends Component {
     this.state = {
       navCollapsed: true
     };
-    this._onToggleNav = this._onToggleNav.bind(this);
-  }
-
-  _onToggleNav() {
-    this.setState({ navCollapsed: !this.state.navCollapsed });
-    console.log(this.state);
+    this.onToggleNav = this.onToggleNav.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchUser();
   }
 
-  renderContent() {
+  onToggleNav() {
+    this.setState({ navCollapsed: !this.state.navCollapsed });
+  }
+
+  getAuthOutput() {
     switch (this.props.user) {
       case null:
         return 'still deciding';
@@ -33,18 +33,28 @@ class Header extends Component {
     }
   }
 
+  getDashOutPut() {
+    if (this.props.user && this.props.type) {
+      return (
+        <Link to={this.props.type === USER.HOST ? '/host' : '/guest'}>
+          Dash
+        </Link>
+      );
+    }
+  }
+
   render() {
     const { navCollapsed } = this.state;
 
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-primary nav-text">
+      <nav className="navbar navbar-expand-md navbar-dark bgColor nav-text">
         <div className="container-fluid">
-          <p className="navbar-brand d-flex w-50 mr-auto">
-            <Link to={'/'}>Check-in</Link>
-          </p>
+          <Link to={'/'} className="w-50 mr-auto">
+            <img src={logo} width={125} />
+          </Link>
           <button
             aria-expanded="false"
-            onClick={this._onToggleNav}
+            onClick={this.onToggleNav}
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -60,26 +70,12 @@ class Header extends Component {
           >
             <ul className="navbar-nav w-100 justify-content-center">
               <li className="nav-item active">
-                <p className="nav-link" href="#">
-                  <Link
-                    to={
-                      this.props.user
-                        ? this.props.type
-                          ? this.props.type === USER.HOST ? '/host' : '/guest'
-                          : '/'
-                        : '/'
-                    }
-                  >
-                    Dash
-                  </Link>
-                </p>
+                <h4 className="nav-link">{this.getDashOutPut()}</h4>
               </li>
             </ul>
             <ul className="nav navbar-nav ml-auto w-100 justify-content-end">
               <li className="nav-item active">
-                <p className="nav-link" href="#">
-                  {this.renderContent()}
-                </p>
+                <h4 className="nav-link">{this.getAuthOutput()}</h4>
               </li>
             </ul>
           </div>

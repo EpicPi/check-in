@@ -2,6 +2,24 @@
 /*margin: 10px;*/
 /*}*/
 
+.bgColor {
+  background-color: #0379ae;
+}
+.mainColor {
+  background: #d1e6ea;
+}
+.accentColor {
+  background-color: #ff9a3d;
+}
+.bgText {
+  color: #0379ae;
+}
+.mainText {
+  color: #d1e6ea;
+}
+.accentText {
+  color: #ff9a3d;
+}
 .app {
   /*margin: 10px;*/
   /*background-color: black;*/
