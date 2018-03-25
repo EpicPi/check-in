@@ -8,12 +8,12 @@ const Event = mongoose.model('events');
 router.post('/add_event', async (req, res) => {
   const event = await Event({
     name: req.body.name,
-    code: req.body.code.toLowerCase(),
+    code: req.body.code.toUpperCase(),
     dates: req.body.dates,
     guestsRSVP: [],
     guestsAttend: [],
     type: req.body.type,
-    checkinCode: req.body.checkinCode.toLowerCase(),
+    checkinCode: req.body.checkinCode.toUpperCase(),
     info: req.body.info
   }).save();
   const user = await User.findById(req.user.id);
@@ -41,9 +41,9 @@ router.post('/edit_event', async (req, res) => {
   if (event) {
     //only want to update the editable values
     event.name = req.body.name;
-    event.code = req.body.code.toLowerCase();
+    event.code = req.body.code.toUpperCase();
     event.dates = req.body.dates;
-    event.checkinCode = req.body.checkinCode.toLowerCase();
+    event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
     event.save();
@@ -57,7 +57,7 @@ router.post('/edit_event', async (req, res) => {
 });
 
 router.post('/check_code', async (req, res) => {
-  const event = await Event.findOne({ code: req.body.code.toLowerCase() });
+  const event = await Event.findOne({ code: req.body.code.toUpperCase() });
   if (req.body.code !== '')
     res.send(event === null); // code available?
   else res.send(false);
