@@ -1,16 +1,14 @@
 export const TODAY = new Date().toISOString().slice(0, 10);
 
 export function dateStringToHours(date) {
-  let hours = ('0' + new Date(date).getHours()).slice(-2);
-  let mins = ('0' + new Date(date).getMinutes()).slice(-2);
-  return hours + ':' + mins;
+  timeInputFormat(date);
 }
 
 export function dateStringToDate(date) {
   return dateInputFormat(date);
 }
 
-export function dateTimeToDate(date, time) {
+export function dateTimeToDateString(date, time) {
   return new Date(date + ' ' + time).toUTCString();
 }
 
@@ -38,4 +36,15 @@ export function getCurrentTime() {
 export function getCurrentDate() {
   let now = new Date();
   return dateInputFormat(now);
+}
+export function isEVentActive(event) {
+  let now = new Date();
+  return (
+    now < new Date(event.dates.checkinEnd) &&
+    now > new Date(event.dates.checkinStart)
+  );
+}
+export function isEventClosed(event) {
+  let now = new Date();
+  return now > new Date(event.dates.checkinEnd);
 }

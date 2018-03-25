@@ -3,31 +3,26 @@ import { connect } from 'react-redux';
 import { hostGetEvents } from '../../../actions/index';
 import EventItem from './EventItem';
 import { LOAD } from '../../../helpers/Enums';
-import {
-  dateStringToDate,
-  dateStringToHours,
-  dateTimeToDate,
-  getCurrentDate,
-  getCurrentTime
-} from '../../../helpers/Time';
+import { isEVentActive, isEventClosed } from '../../../helpers/Time';
 
 class ShowEvents extends Component {
   constructor(props) {
     super(props);
     this.handleCreate = this.handleCreate.bind(this);
-    this.getEventsOutput = this.getEventsOutput.bind(this);
 
     if (this.props.events === LOAD.NOTHING) this.props.getEvents();
     this.state = {
       out: this.getEventsOutput(this.props),
-      active: this.getActiveEventsOutput(this.props)
+      active: this.getActiveEventsOutput(this.props),
+      closed: this.getClosedEventsOutput(this.props)
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       out: this.getEventsOutput(nextProps),
-      active: this.getActiveEventsOutput(nextProps)
+      active: this.getActiveEventsOutput(nextProps),
+      closed: this.getClosedEventsOutput(nextProps)
     });
   }
 
@@ -42,9 +37,31 @@ class ShowEvents extends Component {
       case LOAD.NOTHING:
         return;
       default:
-        return props.events.map((event, i) => (
-          <EventItem history={props.history} key={i} event={event} />
-        ));
+        if (props.events.filter(event => isEVentActive(event)).length > 0)
+          return (
+            <div>
+              <h3>Open</h3>
+              <div className="row">
+                <div className="col-md-12">
+                  <ul className="event-list">
+                    {' '}
+                    {props.events
+                      .filter(
+                        event => !isEVentActive(event) && !isEventClosed(event)
+                      )
+                      .map((event, i) => (
+                        <EventItem
+                          history={props.history}
+                          key={i}
+                          event={event}
+                        />
+                      ))}
+                  </ul>
+                </div>
+              </div>
+              <hr />
+            </div>
+          );
     }
   }
 
@@ -55,24 +72,60 @@ class ShowEvents extends Component {
       case LOAD.NOTHING:
         return;
       default:
-        let now = new Date();
-        let eve = props.events[0];
-        console.log(eve.dates.checkinStart);
-        console.log(new Date(eve.dates.checkinStart).toISOString());
-        console.log(dateStringToDate(eve.dates.checkinStart));
-        let e = dateTimeToDate(
-          dateStringToDate(eve.dates.checkinStart),
-          dateStringToHours(eve.dates.checkinStart)
+        if (props.events.filter(event => isEVentActive(event)).length > 0)
+          return (
+            <div>
+              <h3>CheckIn Active</h3>
+              <div className="row">
+                <div className="col-md-12">
+                  <ul className="event-list">
+                    {' '}
+                    {props.events
+                      .filter(event => isEVentActive(event))
+                      .map((event, i) => (
+                        <EventItem
+                          history={props.history}
+                          key={i}
+                          event={event}
+                        />
+                      ))}
+                  </ul>
+                </div>
+              </div>
+              <hr />
+            </div>
+          );
+    }
+  }
+
+  getClosedEventsOutput(props) {
+    switch (props.events) {
+      case LOAD.LOADING:
+        return <h3>LOADING</h3>;
+      case LOAD.NOTHING:
+        return;
+      default:
+        return (
+          <div>
+            <h3>Closed</h3>
+            <div className="row">
+              <div className="col-md-12">
+                <ul className="event-list">
+                  {' '}
+                  {props.events
+                    .filter(event => isEventClosed(event))
+                    .map((event, i) => (
+                      <EventItem
+                        history={props.history}
+                        key={i}
+                        event={event}
+                      />
+                    ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         );
-        console.log(now + e);
-        return props.events
-          .filter(
-            event =>
-              now < event.dates.checkinEnd && now > event.dates.checkinStart
-          )
-          .map((event, i) => (
-            <EventItem history={props.history} key={i} event={event} />
-          ));
     }
   }
 
@@ -91,17 +144,9 @@ class ShowEvents extends Component {
             </div>
           </div>
           <hr />
-          <div className="row">
-            <div className="col-md-12">
-              <ul className="event-list">{this.state.out}</ul>
-            </div>
-          </div>
-          Active
-          <div className="row">
-            <div className="col-md-12">
-              <ul className="event-list">{this.state.active}</ul>
-            </div>
-          </div>
+          {this.state.active}
+          {this.state.out}
+          {this.state.closed}
         </div>
       </div>
     );

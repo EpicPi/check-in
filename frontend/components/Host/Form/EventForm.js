@@ -10,7 +10,7 @@ import TimePicker from '../../../helpers/TimePicker';
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
-  dateTimeToDate,
+  dateTimeToDateString,
   dateStringToHours,
   dateStringToDate,
   timeInputFormat,
@@ -111,21 +111,23 @@ class EventForm extends Component {
       alert('Please enter a different code');
       return;
     }
-    const rsvpEnd = dateTimeToDate(
-      this.state.rsvpEnd.date,
-      this.state.rsvpEnd.time
+    const rsvpEnd = new Date(
+      dateTimeToDateString(this.state.rsvpEnd.date, this.state.rsvpEnd.time)
     );
-    const rsvpStart = dateTimeToDate(
-      this.state.rsvpStart.date,
-      this.state.rsvpStart.time
+    const rsvpStart = new Date(
+      dateTimeToDateString(this.state.rsvpStart.date, this.state.rsvpStart.time)
     );
-    const checkinStart = dateTimeToDate(
-      this.state.checkinStart.date,
-      this.state.checkinStart.time
+    const checkinStart = new Date(
+      dateTimeToDateString(
+        this.state.checkinStart.date,
+        this.state.checkinStart.time
+      )
     );
-    const checkinEnd = dateTimeToDate(
-      this.state.checkinEnd.date,
-      this.state.checkinEnd.time
+    const checkinEnd = new Date(
+      dateTimeToDateString(
+        this.state.checkinEnd.date,
+        this.state.checkinEnd.time
+      )
     );
 
     if (rsvpEnd < rsvpStart) {
@@ -152,19 +154,19 @@ class EventForm extends Component {
       name: this.state.eventName,
       code: this.state.code,
       dates: {
-        rsvpStart: dateTimeToDate(
+        rsvpStart: dateTimeToDateString(
           this.state.rsvpStart.date,
           this.state.rsvpStart.time
         ),
-        rsvpEnd: dateTimeToDate(
+        rsvpEnd: dateTimeToDateString(
           this.state.rsvpEnd.date,
           this.state.rsvpEnd.time
         ),
-        checkinStart: dateTimeToDate(
+        checkinStart: dateTimeToDateString(
           this.state.checkinStart.date,
           this.state.checkinStart.time
         ),
-        checkinEnd: dateTimeToDate(
+        checkinEnd: dateTimeToDateString(
           this.state.checkinEnd.date,
           this.state.checkinEnd.time
         )
@@ -361,7 +363,6 @@ class EventForm extends Component {
                   >
                     Submit
                   </button>
-                  {/*<p style={{paddingLeft:"5px"}}/>*/}
                   <button
                     className="btn btn-danger"
                     onClick={() => this.props.history.push('/host')}
