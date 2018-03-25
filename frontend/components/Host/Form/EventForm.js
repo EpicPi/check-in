@@ -89,7 +89,11 @@ class EventForm extends Component {
   }
 
   handleGeneral(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    let value = e.target.value;
+    if (e.target.name === 'code' || e.target.name === 'checkinCode') {
+      value = value.toUpperCase();
+    }
+    this.setState({ [e.target.name]: value });
   }
 
   handleTimeChange(name, time, date) {
