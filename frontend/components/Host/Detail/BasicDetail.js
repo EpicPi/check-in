@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GuestItem from './GuestItem';
+import GuestItem from '../Show/GuestItem';
 import { getAttends, getRsvps } from '../../../actions/index';
 import { LOAD } from '../../../helpers/Enums';
 
-class EventDetail extends Component {
+class BasicDetail extends Component {
   constructor(props) {
     super(props);
     this.handleEditClick = this.handleEditClick.bind(this);
@@ -95,6 +95,7 @@ class EventDetail extends Component {
   render() {
     return (
       <div>
+        basic
         <div className="row">
           <div className="col-md-12">
             <br />
@@ -206,4 +207,4 @@ const mapDispatchToProps = (/* dispatch */) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(EventDetail);
+export default connect(mapStateToProps, mapDispatchToProps())(BasicDetail);

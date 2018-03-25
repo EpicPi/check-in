@@ -2,11 +2,15 @@ import { Component } from 'react';
 import { hostRemoveEvent, selectEvent } from '../../../actions/index';
 import { connect } from 'react-redux';
 import React from 'react';
+import { isEVentActive, isEventClosed } from '../../../helpers/Time';
 
 class EventItem extends Component {
   handleClick(event) {
     this.props.selectEvent(event);
-    this.props.history.push('/host/event');
+    if (isEVentActive(event)) this.props.history.push('/host/event/active');
+    else if (isEventClosed(event))
+      this.props.history.push('/host/event/closed');
+    else this.props.history.push('/host/event/basic');
   }
 
   handleRemove(event) {
