@@ -10,7 +10,6 @@ router.get('/get_events', async (req, res) => {
   const pOut = user.guestEvents.map(async id => Event.findById(id));
   let out = await Promise.all(pOut);
   out = out.filter(obj => obj !== null);
-  console.log(out);
   res.send(out);
 });
 
@@ -37,7 +36,7 @@ router.post('/find', async (req, res) => {
 
 router.post('/checkin', async (req, res) => {
   const event = await Event.findById(req.body.id);
-  if (!event) {
+  if (event) {
     if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {
       //not user already checked-in
       event.guestsAttend.push(req.user.id);

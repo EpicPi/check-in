@@ -26,7 +26,6 @@ router.post('/remove_event', async (req, res) => {
   const user = await User.findById(req.user.id);
   user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
   user.save();
-
   await Event.findById(req.body._id).remove();
 });
 
@@ -39,15 +38,22 @@ router.get('/get_events', async (req, res) => {
 
 router.post('/edit_event', async (req, res) => {
   const event = await Event.findById(req.body._id);
-  //only want to update the editable values
-  event.name = req.body.name;
-  event.code = req.body.code.toLowerCase();
-  event.dates = req.body.dates;
-  event.checkinCode = req.body.checkinCode.toLowerCase();
-  event.info = req.body.info;
-  event.type = req.body.type;
-  event.save();
-  res.send(event);
+  if (event) {
+    //only want to update the editable values
+    event.name = req.body.name;
+    event.code = req.body.code.toLowerCase();
+    event.dates = req.body.dates;
+    event.checkinCode = req.body.checkinCode.toLowerCase();
+    event.info = req.body.info;
+    event.type = req.body.type;
+    event.save();
+    res.send(event);
+  } else
+    console.log(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /guest/checkin'
+    );
 });
 
 router.post('/check_code', async (req, res) => {

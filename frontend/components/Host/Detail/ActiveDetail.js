@@ -73,7 +73,7 @@ class ActiveDetail extends Component {
           return (
             <div>
               <br />
-              everyone signed in!
+              Everyone Checked in!
             </div>
           );
     }
