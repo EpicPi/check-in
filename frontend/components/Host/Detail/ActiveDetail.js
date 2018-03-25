@@ -14,10 +14,7 @@ class ActiveDetail extends Component {
     this.props.getRsvps(this.props.event);
 
     this.state = {
-      rsvps: this.getRSVPsOutput(this.props),
-      attends: this.getAttendsOutput(this.props),
-      uriRsvp: this.getUriRSVPOutput(this.props),
-      uriAttend: this.getUriAttendsOutput(this.props)
+      notSignedIn: this.getNotSignedInOutput(this.props)
     };
   }
 
@@ -27,75 +24,44 @@ class ActiveDetail extends Component {
 
   componentWillReceiveProps(props) {
     this.setState({
-      rsvps: this.getRSVPsOutput(props),
-      attends: this.getAttendsOutput(props),
-      uriRsvp: this.getUriRSVPOutput(props),
-      uriAttend: this.getUriAttendsOutput(props)
+      notSignedIn: this.getNotSignedInOutput(props)
     });
   }
 
-  getUriRSVPOutput(props) {
-    switch (props.rsvps) {
-      case LOAD.LOADING:
-        return;
-      case LOAD.NOTHING:
-        return;
-      default:
-        let csvContent = 'data:text/csv;charset=utf-8,';
-        props.rsvps.forEach(el => {
-          const row = el.name + ',' + el.extra;
-          csvContent += row + '\r\n';
-        });
-        return csvContent;
-    }
-  }
-
-  getUriAttendsOutput(props) {
-    switch (props.attends) {
-      case LOAD.LOADING:
-        return;
-      case LOAD.NOTHING:
-        return;
-      default:
-        let csvContent = 'data:text/csv;charset=utf-8,';
-        props.attends.forEach(el => {
-          const row = el.name + ',' + el.extra;
-          csvContent += row + '\r\n';
-        });
-        return csvContent;
-    }
-  }
-
-  getRSVPsOutput(props) {
+  getNotSignedInOutput(props) {
     switch (props.rsvps) {
       case LOAD.LOADING:
         return <h6>LOADING</h6>;
       case LOAD.NOTHING:
         return;
       default:
-        return props.rsvps.map((guest, i) => (
-          <GuestItem history={props.history} key={i} guest={guest} />
-        ));
-    }
-  }
-
-  getAttendsOutput(props) {
-    switch (props.attends) {
-      case LOAD.LOADING:
-        return <h6>LOADING</h6>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        return props.attends.map((guest, i) => (
-          <GuestItem history={props.history} key={i} guest={guest} />
-        ));
+        const ppl = props.rsvps.filter(person => {
+          console.log(props.attends);
+          return !props.attends.includes(person);
+        });
+        if (ppl.length > 0)
+          return (
+            <div>
+              <br />
+              <p>The following have not signed in:</p>
+              {ppl.map((guest, i) => (
+                <GuestItem history={props.history} key={i} guest={guest} />
+              ))}
+            </div>
+          );
+        else
+          return (
+            <div>
+              <br />
+              everyone signed in!
+            </div>
+          );
     }
   }
 
   render() {
     return (
       <div>
-        act
         <div className="row">
           <div className="col-md-12">
             <br />
@@ -103,90 +69,19 @@ class ActiveDetail extends Component {
             <br />
           </div>
         </div>
-        <div className="row">
-          <label className="col-md-2 ">Code</label>
-          <div className="col-md-9">
-            <div>{this.props.event.code}</div>
-          </div>
-        </div>
-        <div className="row">
-          <label className="col-md-2 ">Info</label>
-          <div className="col-md-9">
-            <div>{this.props.event.info}</div>
-          </div>
-        </div>
-        <div className="row">
-          <label className="col-md-2 ">RSVP Start time</label>
-          <div className="col-md-9">
-            <div>
-              {new Date(this.props.event.dates.rsvpStart).toLocaleString()}
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <label className="col-md-2 ">RSVP End time</label>
-          <div className="col-md-9">
-            <div>
-              {new Date(this.props.event.dates.rsvpEnd).toLocaleString()}
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <label className="col-md-2 ">Checkin Start time</label>
-          <div className="col-md-9">
-            <div>
-              {new Date(this.props.event.dates.checkinStart).toLocaleString()}
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <label className="col-md-2 ">Checkin End time</label>
-          <div className="col-md-9">
-            <div>
-              {new Date(this.props.event.dates.checkinEnd).toLocaleString()}
-            </div>
-          </div>
-        </div>
+        {this.props.attends.length} out of {this.props.rsvps.length} people have
+        signed in
+        {this.state.notSignedIn}
         <br />
         <button onClick={this.handleEditClick} className="btn btn-info">
           Edit Event
         </button>
-        <div className="col-md-12">
-          <hr />
-        </div>
-        <div className=" row">
-          <h4 className="col-md-12 ">RSVPs</h4>
-          <br />
-          <div className="col-md-12">{this.state.rsvps}</div>
-
-          <div className="col-md-6 text-left">
-            <br />
-            <button
-              className="btn btn-secondary"
-              href={this.state.uriRsvp}
-              download={this.props.event.name + '_rsvps.csv'}
-            >
-              Download csv
-            </button>
-          </div>
-        </div>
-        <br />
-        <div className=" row">
-          <h4 className="col-md-12">Attendees</h4>
-          <br />
-          <div className="col-md-12">{this.state.attends}</div>
-
-          <div className="col-md-6 text-left">
-            <br />
-            <button
-              className="btn btn-secondary"
-              href={this.state.uriAttend}
-              download={this.props.event.name + '_attends.csv'}
-            >
-              download csv
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={() => this.props.history.push('/host/event/basic')}
+          className="btn btn-info"
+        >
+          More Info
+        </button>
       </div>
     );
   }
