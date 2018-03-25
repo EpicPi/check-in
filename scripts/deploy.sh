@@ -16,7 +16,7 @@ echo npm has run the build script located in package.json
 
 scp -i ${pem} server.js package.json ${dest}new/
 scp -i ${pem} -r backend/ ${dest}new/
-scp -i ${pem} public/ ${dest}new/
+scp -i ${pem} -r public/ ${dest}new/
 echo Files were sent to the ec2 instance
 
 ssh -i ${pem} ${url} << END
