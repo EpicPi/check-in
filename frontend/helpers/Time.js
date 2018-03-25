@@ -7,11 +7,11 @@ export function dateStringToHours(date) {
 }
 
 export function dateStringToDate(date) {
-  return new Date(date).toISOString().split('T')[0];
+  return dateInputFormat(date);
 }
 
 export function dateTimeToDate(date, time) {
-  return new Date(date + ' ' + time);
+  return new Date(date + ' ' + time).toUTCString();
 }
 
 //formats time nicely
