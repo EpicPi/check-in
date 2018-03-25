@@ -14,7 +14,7 @@ router.post('/join', async (req, res) => {
     event.guestsAttend.push(req.body.id);
     event.save();
   } else
-    console.log(
+    console.error(
       '[ERR] Event was not found. Passed in id: ' +
         req.body.id +
         ' in /open/join'

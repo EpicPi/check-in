@@ -49,7 +49,7 @@ router.post('/edit_event', async (req, res) => {
     event.save();
     res.send(event);
   } else
-    console.log(
+    console.error(
       '[ERR] Event was not found. Passed in id: ' +
         req.body.id +
         ' in /guest/checkin'
@@ -67,13 +67,13 @@ router.post('/check_in', async (req, res) => {
   const event = await Event.findById(req.body.event);
   const guest = await User.findById(req.body.guest);
   if (!event) {
-    console.log(
+    console.error(
       '[ERR] Event was not found. Passed in id: ' +
         req.body.id +
         ' in /host/check_in'
     );
   } else if (!guest) {
-    console.log(
+    console.error(
       '[ERR] Guest was not found. Passed in id: ' +
         req.body.id +
         ' in /host/check_in'
