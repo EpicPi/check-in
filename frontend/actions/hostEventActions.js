@@ -48,7 +48,6 @@ export const checkSignupCode = code => async dispatch => {
     '/api/host/check_code',
     qs.stringify({ code: code })
   );
-  console.log(res);
   dispatch({ type: HOST_CHECKED_SIGNUP_CODE, payload: res.data });
 };
 

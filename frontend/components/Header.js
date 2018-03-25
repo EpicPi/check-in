@@ -20,7 +20,6 @@ class Header extends Component {
 
   onToggleNav() {
     this.setState({ navCollapsed: !this.state.navCollapsed });
-    console.log(this.state);
   }
 
   getAuthOutput() {

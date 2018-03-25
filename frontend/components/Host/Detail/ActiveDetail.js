@@ -51,7 +51,6 @@ class ActiveDetail extends Component {
         const ids = props.attends.map(person => person._id);
 
         const ppl = props.rsvps.filter(person => {
-          console.log(props.attends);
           return !ids.includes(person._id);
         });
         if (ppl.length > 0)
