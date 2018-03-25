@@ -49,7 +49,7 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bgColor nav-text">
         <div className="container-fluid">
-          <Link to={'/'}>
+          <Link to={'/'} className="w-50 mr-auto">
             <img src={logo} width={125} />
           </Link>
           <button
@@ -70,12 +70,14 @@ class Header extends Component {
           >
             <ul className="navbar-nav w-100 justify-content-center">
               <li className="nav-item active">
-                <p>{this.getDashOutPut()}</p>
+                <h4 className="nav-link" href="#">
+                  {this.getDashOutPut()}
+                </h4>
               </li>
             </ul>
             <ul className="nav navbar-nav ml-auto w-100 justify-content-end">
               <li className="nav-item active">
-                <p className="nav-link">{this.getAuthOutput()}</p>
+                <h4 className="nav-link">{this.getAuthOutput()}</h4>
               </li>
             </ul>
           </div>
