@@ -24,19 +24,19 @@ const initialState = {
   code: '',
   info: '',
   rsvpStart: {
-    time: getCurrentTime(),
+    time: '00:00',
     date: getCurrentDate()
   },
   rsvpEnd: {
-    time: getCurrentTime(),
+    time: '00:00',
     date: getCurrentDate()
   },
   checkinStart: {
-    time: getCurrentTime(),
+    time: '00:00',
     date: getCurrentDate()
   },
   checkinEnd: {
-    time: getCurrentTime(),
+    time: '00:00',
     date: getCurrentDate()
   },
   type: EVENT_TYPES.BASIC,
