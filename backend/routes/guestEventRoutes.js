@@ -7,10 +7,10 @@ const Event = mongoose.model('events');
 
 router.get('/get_events', async (req, res) => {
   const user = await User.findById(req.user.id);
-  const pOut = user.guestEvents
-    .map(async id => Event.findById(id))
-    .filter(obj => obj !== undefined);
-  const out = await Promise.all(pOut);
+  const pOut = user.guestEvents.map(async id => Event.findById(id));
+  let out = await Promise.all(pOut);
+  out = out.filter(obj => obj !== null);
+  console.log(out);
   res.send(out);
 });
 

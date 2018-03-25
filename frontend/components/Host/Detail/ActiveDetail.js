@@ -29,7 +29,6 @@ class ActiveDetail extends Component {
   }
 
   componentWillUnmount() {
-    console.log('component did unmount');
     clearInterval(this.state.timer);
   }
   componentWillReceiveProps(props) {
@@ -49,9 +48,11 @@ class ActiveDetail extends Component {
       case LOAD.NOTHING:
         return;
       default:
+        const ids = props.attends.map(person => person._id);
+
         const ppl = props.rsvps.filter(person => {
           console.log(props.attends);
-          return !props.attends.includes(person);
+          return !ids.includes(person._id);
         });
         if (ppl.length > 0)
           return (

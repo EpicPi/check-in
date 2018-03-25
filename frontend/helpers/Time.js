@@ -1,7 +1,7 @@
 export const TODAY = new Date().toISOString().slice(0, 10);
 
 export function dateStringToHours(date) {
-  timeInputFormat(date);
+  return timeInputFormat(date);
 }
 
 export function dateStringToDate(date) {

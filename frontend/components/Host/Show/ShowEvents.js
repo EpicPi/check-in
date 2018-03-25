@@ -37,14 +37,17 @@ class ShowEvents extends Component {
       case LOAD.NOTHING:
         return;
       default:
-        if (props.events.filter(event => isEVentActive(event)).length > 0)
+        if (
+          props.events.filter(
+            event => !isEVentActive(event) && !isEventClosed(event)
+          ).length > 0
+        )
           return (
             <div>
               <h3>Open</h3>
               <div className="row">
                 <div className="col-md-12">
                   <ul className="event-list">
-                    {' '}
                     {props.events
                       .filter(
                         event => !isEVentActive(event) && !isEventClosed(event)
@@ -79,7 +82,6 @@ class ShowEvents extends Component {
               <div className="row">
                 <div className="col-md-12">
                   <ul className="event-list">
-                    {' '}
                     {props.events
                       .filter(event => isEVentActive(event))
                       .map((event, i) => (
@@ -105,27 +107,27 @@ class ShowEvents extends Component {
       case LOAD.NOTHING:
         return;
       default:
-        return (
-          <div>
-            <h3>Closed</h3>
-            <div className="row">
-              <div className="col-md-12">
-                <ul className="event-list">
-                  {' '}
-                  {props.events
-                    .filter(event => isEventClosed(event))
-                    .map((event, i) => (
-                      <EventItem
-                        history={props.history}
-                        key={i}
-                        event={event}
-                      />
-                    ))}
-                </ul>
+        if (props.events.filter(event => isEventClosed(event)).length > 0)
+          return (
+            <div>
+              <h3>Closed</h3>
+              <div className="row">
+                <div className="col-md-12">
+                  <ul className="event-list">
+                    {props.events
+                      .filter(event => isEventClosed(event))
+                      .map((event, i) => (
+                        <EventItem
+                          history={props.history}
+                          key={i}
+                          event={event}
+                        />
+                      ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        );
+          );
     }
   }
 
