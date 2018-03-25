@@ -57,4 +57,31 @@ router.post('/check_code', async (req, res) => {
   else res.send(false);
 });
 
+router.post('/check_in', async (req, res) => {
+  const event = await Event.findById(req.body.event);
+  const guest = await User.findById(req.body.guest);
+  if (!event) {
+    console.log(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /host/check_in'
+    );
+  } else if (!guest) {
+    console.log(
+      '[ERR] Guest was not found. Passed in id: ' +
+        req.body.id +
+        ' in /host/check_in'
+    );
+  } else {
+    if (!event.guestsAttend.filter(el => el === guest.id).length) {
+      //not guest already checked-in
+      event.guestsAttend.push(guest.id);
+      event.save();
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  }
+});
+
 module.exports = router;
