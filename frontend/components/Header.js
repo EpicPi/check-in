@@ -14,13 +14,13 @@ class Header extends Component {
     this.onToggleNav = this.onToggleNav.bind(this);
   }
 
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
   onToggleNav() {
     this.setState({ navCollapsed: !this.state.navCollapsed });
     console.log(this.state);
-  }
-
-  componentDidMount() {
-    this.props.fetchUser();
   }
 
   getAuthOutput() {
@@ -43,6 +43,7 @@ class Header extends Component {
       );
     }
   }
+
   render() {
     const { navCollapsed } = this.state;
 
@@ -70,9 +71,7 @@ class Header extends Component {
           >
             <ul className="navbar-nav w-100 justify-content-center">
               <li className="nav-item active">
-                <h4 className="nav-link" href="#">
-                  {this.getDashOutPut()}
-                </h4>
+                <h4 className="nav-link">{this.getDashOutPut()}</h4>
               </li>
             </ul>
             <ul className="nav navbar-nav ml-auto w-100 justify-content-end">

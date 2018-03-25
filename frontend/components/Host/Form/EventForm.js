@@ -352,24 +352,23 @@ class EventForm extends Component {
 
                 <br />
                 <br />
-                <div className="form-group row ">
-                  <div className="col-md-6 text-right">
-                    <button
-                      type="submit"
-                      value="Submit"
-                      className="btn btn-primary"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                  <div className="col-md-6 text-left">
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => this.props.history.push('/host')}
-                    >
-                      Cancel
-                    </button>
-                  </div>
+                <div className="center-block text-center">
+                  <button
+                    type="submit"
+                    value="Submit"
+                    className="btn btn-primary p"
+                    style={{ marginRight: '5px' }}
+                  >
+                    Submit
+                  </button>
+                  {/*<p style={{paddingLeft:"5px"}}/>*/}
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => this.props.history.push('/host')}
+                    style={{ marginLeft: '5px' }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
