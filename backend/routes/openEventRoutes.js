@@ -4,12 +4,18 @@ require('../models/event');
 const Event = mongoose.model('events');
 
 router.get('/get_event', async (req, res) => {
-  const event = await Event.findOne({ type: 'open', code: req.query.code });
+  const event = await Event.findOne({
+    type: 'open',
+    code: req.query.code.toUpperCase()
+  });
   res.send(event);
 });
 
 router.post('/join', async (req, res) => {
-  const event = await Event.findOne({ type: 'open', code: req.body.code });
+  const event = await Event.findOne({
+    type: 'open',
+    code: req.body.code.toUpperCase()
+  });
   if (event) {
     event.guestsAttend.push(req.body.id);
     event.save();
