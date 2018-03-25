@@ -7,7 +7,8 @@ import {
   HOST_CHECK_SIGNUP_CODE,
   HOST_CHECKED_SIGNUP_CODE,
   HOST_GOT_EVENTS,
-  HOST_RESET_SIGNUP_EVENT
+  HOST_RESET_SIGNUP_EVENT,
+  HOST_CHECKIN
 } from '../actions/types';
 import { hostInitial } from './initialState';
 import { CHECK_CODE, LOAD } from '../helpers/Enums';
@@ -51,6 +52,8 @@ export default function(state = hostInitial, action) {
       };
     case HOST_RESET_SIGNUP_EVENT:
       return { ...state, checkCode: CHECK_CODE.NOTHING_TO_CHECK };
+    case HOST_CHECKIN:
+      return state;
     default:
       return state;
   }

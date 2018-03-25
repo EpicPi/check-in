@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GuestItem from '../Show/GuestItem';
+import GuestItem from './GuestItem';
 import { getAttends, getRsvps } from '../../../actions/index';
 import { LOAD } from '../../../helpers/Enums';
 
@@ -59,7 +59,12 @@ class ActiveDetail extends Component {
               <br />
               <p>The following have not signed in:</p>
               {ppl.map((guest, i) => (
-                <GuestItem history={props.history} key={i} guest={guest} />
+                <GuestItem
+                  history={props.history}
+                  key={i}
+                  guest={guest}
+                  manualCheckin={true}
+                />
               ))}
             </div>
           );

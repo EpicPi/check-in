@@ -2,6 +2,7 @@ import {
   HOST_ADD_EVENT,
   HOST_CHECK_SIGNUP_CODE,
   HOST_CHECKED_SIGNUP_CODE,
+  HOST_CHECKIN,
   HOST_EDIT_EVENT,
   HOST_GET_EVENTS,
   HOST_GOT_EVENTS,
@@ -53,4 +54,12 @@ export const checkSignupCode = code => async dispatch => {
 
 export const resetSignupCode = () => dispatch => {
   dispatch({ type: HOST_RESET_SIGNUP_EVENT });
+};
+
+export const hostCheckIn = (event, guest) => dispatch => {
+  axios.post(
+    '/api/host/check_in',
+    qs.stringify({ event: event._id, guest: guest._id })
+  );
+  dispatch({ type: HOST_CHECKIN });
 };
