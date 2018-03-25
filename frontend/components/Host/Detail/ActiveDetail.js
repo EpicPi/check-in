@@ -8,6 +8,7 @@ class ActiveDetail extends Component {
   constructor(props) {
     super(props);
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.tick = this.tick.bind(this);
 
     //gotta make the call to load them
     this.props.getAttends(this.props.event);
@@ -18,14 +19,27 @@ class ActiveDetail extends Component {
     };
   }
 
-  handleEditClick() {
-    this.props.history.push('/host/edit');
+  componentDidMount() {
+    let timer = setInterval(this.tick, 5000);
+    this.setState({ timer });
   }
 
+  tick() {
+    this.props.getAttends(this.props.event);
+  }
+
+  componentWillUnmount() {
+    console.log('component did unmount');
+    clearInterval(this.state.timer);
+  }
   componentWillReceiveProps(props) {
     this.setState({
       notSignedIn: this.getNotSignedInOutput(props)
     });
+  }
+
+  handleEditClick() {
+    this.props.history.push('/host/edit');
   }
 
   getNotSignedInOutput(props) {
