@@ -227,6 +227,17 @@ class EventForm extends Component {
             </div>
           </div>
         );
+      case EVENT_TYPES.OPEN:
+        return (
+          <div className="row">
+            <div className="col-md-12">
+              <div>
+                Input file:
+                <input type="file" id="fileInput" />
+              </div>
+            </div>
+          </div>
+        );
     }
   }
 
