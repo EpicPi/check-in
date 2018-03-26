@@ -54,13 +54,17 @@ class RsvpInput extends Component {
       this.props.guests === LOAD.NOTHING
         ? ''
         : this.props.guests.map((guest, i) => (
-            <div className="row" key={i}>
-              <div className="col-md-6">
+            <div className="form-group row" key={i}>
+              <label className="col-md-2 col-form-label">Name</label>
+              <div className="col-md-4">
                 <input
+                  className="form-group"
                   type="text"
                   value={guest}
                   onChange={this.changeGuest.bind(this, i)}
                 />
+              </div>
+              <div className="col-md-1">
                 <button
                   type="button"
                   className="close"
@@ -78,20 +82,35 @@ class RsvpInput extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <input type="file" id="files" onChange={this.handleFile} />
-          <output id="output" />
+          <input
+            className="form-group"
+            type="file"
+            id="files"
+            onChange={this.handleFile}
+          />
           <div>
-            RSVP List:
+            <div className="row">
+              <div className="col-md-12">RSVP List:</div>
+            </div>
             {guests}
-            <button className="btn btn-info" onClick={this.addGuest.bind(this)}>
-              Add
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={this.deleteGuests.bind(this)}
-            >
-              Delete All
-            </button>
+          </div>
+          <div className="row">
+            <div className="col-md-3">
+              <button
+                className="btn btn-info"
+                onClick={this.addGuest.bind(this)}
+              >
+                Add
+              </button>
+            </div>
+            <div className="col-md-3">
+              <button
+                className="btn btn-danger"
+                onClick={this.deleteGuests.bind(this)}
+              >
+                Delete All
+              </button>
+            </div>
           </div>
         </div>
       </div>
