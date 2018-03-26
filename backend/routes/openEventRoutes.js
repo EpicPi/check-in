@@ -39,6 +39,10 @@ router.post('/join', async (req, res) => {
     );
 });
 
+/**
+ * replaces the current guestsRSVP with the given rsvp
+ * creates list of new users with name
+ */
 router.post('/replace', async (req, res) => {
   const event = await Event.findById(req.body.id);
   event.guestsRSVP = [];
