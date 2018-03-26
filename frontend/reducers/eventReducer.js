@@ -3,6 +3,8 @@ import {
   GET_RSVPS,
   GOT_ATTENDS,
   GOT_RSVPS,
+  REMOVE_GUEST,
+  REPLACE_ALL_RSVPS,
   REPLACE_RSVPS,
   REPLACED_RSVPS,
   RESET_EVENT,
@@ -18,7 +20,8 @@ export default function(state = eventInitial, action) {
     case GET_RSVPS:
       return { ...state, selectedRsvps: LOAD.LOADING };
     case GOT_RSVPS:
-      return { ...state, selectedRsvps: action.payload };
+      let guests = action.payload.map(guest => guest.name);
+      return { ...state, selectedRsvps: action.payload, guests: guests };
     case GET_ATTENDS:
       return {
         ...state,
@@ -31,13 +34,22 @@ export default function(state = eventInitial, action) {
       return { ...state, selectedAttends: action.payload };
     case RESET_EVENT:
       return eventInitial;
+    case REPLACE_ALL_RSVPS:
+      return { ...state, guests: action.payload };
     case REPLACE_RSVPS:
-      return { ...state, event: LOAD.LOADING };
+      return { ...state, guests: LOAD.LOADING };
+    case REMOVE_GUEST:
+      let removed_guests = [
+        ...state.guests.slice(0, action.payload),
+        ...state.guests.slice(action.payload + 1)
+      ];
+      return { ...state, guests: removed_guests };
     case REPLACED_RSVPS:
       return {
         ...state,
         event: action.payload,
-        selectedRsvps: action.payload.guestsRSVP
+        selectedRsvps: action.payload.guestsRSVP,
+        guests: LOAD.NOTHING
       };
     default:
       return state;

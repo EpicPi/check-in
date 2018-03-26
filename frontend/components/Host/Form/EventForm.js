@@ -230,7 +230,7 @@ class EventForm extends Component {
           </div>
         );
       case EVENT_TYPES.OPEN:
-        return <RsvpInput />;
+        return <RsvpInput guests={this.state.rsvps} />;
     }
   }
 

@@ -6,22 +6,28 @@ import {
   editEvent,
   getRsvps,
   replaceRsvps,
-  resetSignupCode
+  replaceAllRsvps,
+  removeGuest
 } from '../../../actions';
 import { LOAD } from '../../../helpers/Enums';
 
 class RsvpInput extends Component {
   constructor(props) {
     super(props);
-    this.getRSVPsOutput = this.getRSVPsOutput.bind(this);
+    RsvpInput.getRSVPsOutput = RsvpInput.getRSVPsOutput.bind(this);
     this.handleFile = this.handleFile.bind(this);
-
+    // this.removeGuest = this.removeGuest.bind(this);
+    this.props.getRsvps(this.props.event);
     this.state = {
       rsvps: ''
     };
   }
 
-  getRSVPsOutput(props) {
+  removeGuest(i, event) {
+    this.props.removeGuest(i);
+  }
+
+  static getRSVPsOutput(props) {
     switch (props.rsvps) {
       case LOAD.LOADING:
         return <h6>LOADING</h6>;
@@ -29,7 +35,22 @@ class RsvpInput extends Component {
         return;
       default:
         let items = props.rsvps.map((guest, i) => (
-          <div key={i}>{guest.name}</div>
+          <div className="row" key={i}>
+            <div className="col-md-6">
+              <input type="text" value={guest} />
+              <button
+                type="button"
+                className="close"
+                name={i}
+                aria-label="Close"
+                onClick={this.removeGuest.bind(this, i)}
+              >
+                <span aria-hidden="true" name={i}>
+                  &times;
+                </span>
+              </button>
+            </div>
+          </div>
         ));
         return items;
     }
@@ -42,7 +63,7 @@ class RsvpInput extends Component {
       let reader = new FileReader();
       reader.onloadend = function(evt) {
         // console.log(evt.target.result);
-        props.replaceRsvps(props.event, evt.target.result);
+        props.replaceAllRsvps(props.event, evt.target.result.split(/\r?\n/));
       };
       reader.readAsText(document.querySelector('#files').files[0]);
     } else {
@@ -51,7 +72,26 @@ class RsvpInput extends Component {
   }
 
   render() {
-    this.state.rsvps = this.getRSVPsOutput(this.props);
+    // this.state.rsvps = RsvpInput.getRSVPsOutput(this.props);
+    const items = !this.props.rsvps
+      ? ''
+      : this.props.rsvps.map((guest, i) => (
+          <div className="row" key={i}>
+            <div className="col-md-6">
+              <input type="text" value={guest} />
+              <button
+                type="button"
+                className="close"
+                aria-label="Close"
+                onClick={this.removeGuest.bind(this, i)}
+              >
+                <span aria-hidden="true" name={i}>
+                  &times;
+                </span>
+              </button>
+            </div>
+          </div>
+        ));
     return (
       <div className="row">
         <div className="col-md-12">
@@ -64,7 +104,7 @@ class RsvpInput extends Component {
           <output id="output" />
           <div>
             RSVP List:
-            {this.state.rsvps}
+            {items}
           </div>
         </div>
       </div>
@@ -75,14 +115,16 @@ class RsvpInput extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    rsvps: state.event.selectedRsvps
+    rsvps: state.event.guests
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     getRsvps: getRsvps,
-    replaceRsvps: replaceRsvps
+    replaceRsvps: replaceRsvps,
+    replaceAllRsvps: replaceAllRsvps,
+    removeGuest: removeGuest
   };
 };
 

@@ -43,7 +43,7 @@ router.post('/replace', async (req, res) => {
   event.guestsRSVP = [];
   if (event) {
     // split based on end of line
-    let rsvps = req.body.rsvps.split(/\r?\n/);
+    let rsvps = req.body.rsvps;
     for (let ind in rsvps) {
       const guest = await User({
         name: rsvps[ind]
