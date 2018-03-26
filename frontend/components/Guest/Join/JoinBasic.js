@@ -19,7 +19,9 @@ class JoinBasic extends Component {
     return (
       <div>
         <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
-        <button onClick={this.handleConfirm}>confirm</button>
+        <button onClick={this.handleConfirm} className="btn btn-success">
+          Confirm
+        </button>
       </div>
     );
   }
