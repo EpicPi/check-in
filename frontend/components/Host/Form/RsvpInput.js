@@ -38,12 +38,13 @@ class RsvpInput extends Component {
     let props = this.props;
     // Check for the various File API support.
     if (window.File && window.FileReader && window.FileList && window.Blob) {
+      let file = document.querySelector('#files').files[0];
       let reader = new FileReader();
       reader.onloadend = function(evt) {
         // console.log(evt.target.result);
         props.replaceAllRsvps(props.event, evt.target.result.split(/\r?\n/));
       };
-      reader.readAsText(document.querySelector('#files').files[0]);
+      reader.readAsText(file);
     } else {
       alert('Please add RSVPs manually');
     }

@@ -95,7 +95,7 @@ class BasicDetail extends Component {
   render() {
     return (
       <div>
-        basic
+        Basic
         <div className="row">
           <div className="col-md-12">
             <br />
