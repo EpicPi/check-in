@@ -14,12 +14,10 @@ import {
   dateTimeToDateString,
   dateStringToHours,
   dateStringToDate,
-  timeInputFormat,
-  getCurrentTime,
   getCurrentDate
 } from '../../../helpers/Time';
 import { resetSignupCode } from '../../../actions/index';
-import { clearGuests, getRsvps, updateRsvps } from '../../../actions';
+import { clearGuests, updateRsvps } from '../../../actions';
 
 const initialState = {
   eventName: '',

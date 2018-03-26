@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  checkSignupCode,
-  createEvent,
-  editEvent,
-  getRsvps,
-  replaceRsvps,
   replaceAllRsvps,
   removeGuest,
   changeGuest,
   addGuest,
   clearGuests
 } from '../../../actions';
+
 import { LOAD } from '../../../helpers/Enums';
 
 class RsvpInput extends Component {
   constructor(props) {
     super(props);
     this.handleFile = this.handleFile.bind(this);
-    // this.props.getRsvps(this.props.event);
   }
 
   removeGuest(i, e) {
@@ -55,29 +50,30 @@ class RsvpInput extends Component {
   }
 
   render() {
-    const guests = !this.props.rsvps
-      ? ''
-      : this.props.rsvps.map((guest, i) => (
-          <div className="row" key={i}>
-            <div className="col-md-6">
-              <input
-                type="text"
-                value={guest}
-                onChange={this.changeGuest.bind(this, i)}
-              />
-              <button
-                type="button"
-                className="close"
-                aria-label="Close"
-                onClick={this.removeGuest.bind(this, i)}
-              >
-                <span aria-hidden="true" name={i}>
-                  &times;
-                </span>
-              </button>
+    const guests =
+      this.props.guests === LOAD.NOTHING
+        ? ''
+        : this.props.guests.map((guest, i) => (
+            <div className="row" key={i}>
+              <div className="col-md-6">
+                <input
+                  type="text"
+                  value={guest}
+                  onChange={this.changeGuest.bind(this, i)}
+                />
+                <button
+                  type="button"
+                  className="close"
+                  aria-label="Close"
+                  onClick={this.removeGuest.bind(this, i)}
+                >
+                  <span aria-hidden="true" name={i}>
+                    &times;
+                  </span>
+                </button>
+              </div>
             </div>
-          </div>
-        ));
+          ));
 
     return (
       <div className="row">
@@ -106,14 +102,12 @@ class RsvpInput extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    rsvps: state.event.guests
+    guests: state.event.guests
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getRsvps: getRsvps,
-    replaceRsvps: replaceRsvps,
     replaceAllRsvps: replaceAllRsvps,
     removeGuest: removeGuest,
     changeGuest: changeGuest,
