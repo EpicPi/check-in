@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactFileReader from 'react-file-reader';
+import GuestItem from '../Detail/GuestItem';
 import {
   createEvent,
   checkSignupCode,
@@ -7,7 +9,7 @@ import {
 } from '../../../actions/index';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES, LOAD } from '../../../helpers/Enums';
 
 import {
   dateTimeToDateString,
@@ -50,6 +52,8 @@ class EventForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getSelectOutput = this.getSelectOutput.bind(this);
+    this.getRSVPsOutput = this.getRSVPsOutput.bind(this);
+    this.handleFile = this.handleFile.bind(this);
 
     if (this.props.add) this.state = initialState;
     else
@@ -74,7 +78,8 @@ class EventForm extends Component {
           date: dateStringToDate(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode
+        checkinCode: this.props.event.checkinCode,
+        rsvps: this.getRSVPsOutput(this.props)
       };
   }
 
@@ -188,6 +193,14 @@ class EventForm extends Component {
     this.props.history.push('/host');
   }
 
+  handleFile(files) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      console.log(reader.result);
+    };
+    reader.readAsText(files[0]);
+  }
+
   getCheckCodeOutput() {
     if (this.state.code === this.props.event.code)
       // if editing and you dont change
@@ -201,6 +214,19 @@ class EventForm extends Component {
         return <h3>Code is avaliable</h3>;
       case CHECK_CODE.CHECKING:
         return <h3>checking</h3>;
+    }
+  }
+
+  getRSVPsOutput(props) {
+    switch (props.rsvps) {
+      case LOAD.LOADING:
+        return <h6>LOADING</h6>;
+      case LOAD.NOTHING:
+        return;
+      default:
+        return props.rsvps.map((guest, i) => (
+          <GuestItem history={props.history} key={i} guest={guest} />
+        ));
     }
   }
 
@@ -231,9 +257,15 @@ class EventForm extends Component {
         return (
           <div className="row">
             <div className="col-md-12">
+              <ReactFileReader
+                handleFiles={this.handleFile}
+                fileTypes={'.csv, .txt'}
+              >
+                <button className="btn">Upload RSVP List</button>
+              </ReactFileReader>
               <div>
-                Input file:
-                <input type="file" id="fileInput" />
+                RSVP List:
+                {this.state.rsvps}
               </div>
             </div>
           </div>
@@ -398,7 +430,8 @@ class EventForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    checkCode: state.host.checkCode
+    checkCode: state.host.checkCode,
+    rsvps: state.event.selectedRsvps
   };
 };
 
