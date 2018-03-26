@@ -1,6 +1,7 @@
 import {
   ADD_GUEST,
   CHANGE_GUEST,
+  CLEAR_GUEST,
   GET_ATTENDS,
   GET_RSVPS,
   GOT_ATTENDS,
@@ -56,6 +57,8 @@ export default function(state = eventInitial, action) {
     case ADD_GUEST:
       let add_guest = [...state.guests, ''];
       return { ...state, guests: add_guest };
+    case CLEAR_GUEST:
+      return { ...state, guests: [] };
     case REPLACED_RSVPS:
       return {
         ...state,

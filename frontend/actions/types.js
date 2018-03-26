@@ -40,6 +40,7 @@ export const REPLACE_ALL_RSVPS = 'replace_all_rsvps';
 export const REMOVE_GUEST = 'remove_guest';
 export const CHANGE_GUEST = 'change_guest';
 export const ADD_GUEST = 'add_guest';
+export const CLEAR_GUEST = 'clear_guest';
 
 // open event types
 export const OPEN_GET_EVENT = 'open_get_event';
