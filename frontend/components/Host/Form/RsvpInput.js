@@ -7,7 +7,8 @@ import {
   getRsvps,
   replaceRsvps,
   replaceAllRsvps,
-  removeGuest
+  removeGuest,
+  changeGuest
 } from '../../../actions';
 import { LOAD } from '../../../helpers/Enums';
 
@@ -23,8 +24,12 @@ class RsvpInput extends Component {
     };
   }
 
-  removeGuest(i, event) {
+  removeGuest(i, e) {
     this.props.removeGuest(i);
+  }
+
+  changeGuest(i, e) {
+    this.props.changeGuest(i, e.target.value);
   }
 
   static getRSVPsOutput(props) {
@@ -78,7 +83,11 @@ class RsvpInput extends Component {
       : this.props.rsvps.map((guest, i) => (
           <div className="row" key={i}>
             <div className="col-md-6">
-              <input type="text" value={guest} />
+              <input
+                type="text"
+                value={guest}
+                onChange={this.changeGuest.bind(this, i)}
+              />
               <button
                 type="button"
                 className="close"
@@ -124,7 +133,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     getRsvps: getRsvps,
     replaceRsvps: replaceRsvps,
     replaceAllRsvps: replaceAllRsvps,
-    removeGuest: removeGuest
+    removeGuest: removeGuest,
+    changeGuest: changeGuest
   };
 };
 

@@ -1,4 +1,5 @@
 import {
+  CHANGE_GUEST,
   GET_ATTENDS,
   GET_RSVPS,
   GOT_ATTENDS,
@@ -44,6 +45,13 @@ export default function(state = eventInitial, action) {
         ...state.guests.slice(action.payload + 1)
       ];
       return { ...state, guests: removed_guests };
+    case CHANGE_GUEST:
+      let change_guests = [
+        ...state.guests.slice(0, action.payload.ind),
+        action.payload.guest,
+        ...state.guests.slice(action.payload.ind + 1)
+      ];
+      return { ...state, guests: change_guests };
     case REPLACED_RSVPS:
       return {
         ...state,
