@@ -8,8 +8,8 @@ import {
   GOT_RSVPS,
   REMOVE_GUEST,
   REPLACE_ALL_RSVPS,
-  REPLACE_RSVPS,
-  REPLACED_RSVPS,
+  UPDATE_RSVPS,
+  UPDATED_RSVPS,
   RESET_EVENT,
   SELECT_EVENT
 } from '../actions/types';
@@ -39,7 +39,7 @@ export default function(state = eventInitial, action) {
       return eventInitial;
     case REPLACE_ALL_RSVPS:
       return { ...state, guests: action.payload };
-    case REPLACE_RSVPS:
+    case UPDATE_RSVPS:
       return { ...state, guests: LOAD.LOADING };
     case REMOVE_GUEST:
       let removed_guests = [
@@ -59,7 +59,7 @@ export default function(state = eventInitial, action) {
       return { ...state, guests: add_guest };
     case CLEAR_GUEST:
       return { ...state, guests: [] };
-    case REPLACED_RSVPS:
+    case UPDATED_RSVPS:
       return {
         ...state,
         event: action.payload,

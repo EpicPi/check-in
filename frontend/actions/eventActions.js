@@ -3,8 +3,8 @@ import {
   GET_RSVPS,
   GOT_ATTENDS,
   GOT_RSVPS,
-  REPLACE_RSVPS,
-  REPLACED_RSVPS,
+  UPDATE_RSVPS,
+  UPDATED_RSVPS,
   RESET_EVENT,
   SELECT_EVENT,
   REPLACE_ALL_RSVPS,
@@ -38,13 +38,13 @@ export const getAttends = event => async dispatch => {
   dispatch({ type: GOT_ATTENDS, payload: res.data });
 };
 
-export const replaceRsvps = (event, rsvps) => async dispatch => {
-  dispatch({ type: REPLACE_RSVPS });
+export const updateRsvps = (event, rsvps) => async dispatch => {
+  dispatch({ type: UPDATE_RSVPS });
   const res = await axios.post(
-    '/api/event/replace',
+    '/api/event/update',
     qs.stringify({ id: event._id, rsvps: rsvps })
   );
-  dispatch({ type: REPLACED_RSVPS, payload: res.data });
+  dispatch({ type: UPDATED_RSVPS, payload: res.data });
 };
 
 export const replaceAllRsvps = (event, rsvps) => dispatch => {

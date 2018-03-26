@@ -9,7 +9,8 @@ import {
   replaceAllRsvps,
   removeGuest,
   changeGuest,
-  addGuest
+  addGuest,
+  clearGuests
 } from '../../../actions';
 import { LOAD } from '../../../helpers/Enums';
 
@@ -31,6 +32,11 @@ class RsvpInput extends Component {
   addGuest(e) {
     e.preventDefault();
     this.props.addGuest();
+  }
+
+  deleteGuests(e) {
+    e.preventDefault();
+    this.props.clearGuests();
   }
 
   handleFile() {
@@ -84,6 +90,12 @@ class RsvpInput extends Component {
             <button className="btn btn-info" onClick={this.addGuest.bind(this)}>
               Add
             </button>
+            <button
+              className="btn btn-danger"
+              onClick={this.deleteGuests.bind(this)}
+            >
+              Delete All
+            </button>
           </div>
         </div>
       </div>
@@ -105,7 +117,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     replaceAllRsvps: replaceAllRsvps,
     removeGuest: removeGuest,
     changeGuest: changeGuest,
-    addGuest: addGuest
+    addGuest: addGuest,
+    clearGuests: clearGuests
   };
 };
 

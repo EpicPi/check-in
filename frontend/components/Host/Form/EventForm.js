@@ -19,7 +19,7 @@ import {
   getCurrentDate
 } from '../../../helpers/Time';
 import { resetSignupCode } from '../../../actions/index';
-import { clearGuests, getRsvps } from '../../../actions';
+import { clearGuests, getRsvps, updateRsvps } from '../../../actions';
 
 const initialState = {
   eventName: '',
@@ -53,8 +53,10 @@ class EventForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getSelectOutput = this.getSelectOutput.bind(this);
 
-    if (this.props.add) this.state = initialState;
-    else {
+    if (this.props.add) {
+      this.state = initialState;
+      this.props.clearGuests();
+    } else {
       this.state = {
         eventName: this.props.event.name,
         code: this.props.event.code,
@@ -186,6 +188,11 @@ class EventForm extends Component {
 
     if (this.props.add) this.props.addEvent(event);
     else this.props.editEvent(event);
+
+    // if type open, replace RSVP list
+    if (this.state.type === EVENT_TYPES.OPEN) {
+      this.props.updateRsvps(this.props.event, this.props.guests);
+    }
 
     this.setState(initialState);
 
@@ -404,7 +411,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
     resetEvent: resetSignupCode,
-    clearGuests: clearGuests
+    clearGuests: clearGuests,
+    updateRsvps: updateRsvps
   };
 };
 

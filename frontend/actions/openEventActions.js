@@ -3,8 +3,8 @@ import {
   OPEN_GET_EVENT,
   OPEN_GOT_EVENT,
   OPEN_JOIN_EVENT,
-  REPLACE_RSVPS,
-  REPLACED_RSVPS
+  UPDATE_RSVPS,
+  UPDATED_RSVPS
 } from './types';
 import axios from 'axios/index';
 

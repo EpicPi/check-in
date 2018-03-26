@@ -2,8 +2,8 @@ import {
   OPEN_GET_EVENT,
   OPEN_GOT_EVENT,
   OPEN_JOIN_EVENT,
-  REPLACE_RSVPS,
-  REPLACED_RSVPS
+  UPDATE_RSVPS,
+  UPDATED_RSVPS
 } from '../actions/types';
 import { LOAD } from '../helpers/Enums';
 import { openInitial } from './initialState';
