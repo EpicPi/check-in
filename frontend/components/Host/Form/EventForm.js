@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactFileReader from 'react-file-reader';
-import GuestItem from '../Detail/GuestItem';
-import { replaceRsvps } from '../../../actions/index';
+import RsvpInput from './RsvpInput';
 import {
   createEvent,
   checkSignupCode,
@@ -44,8 +42,7 @@ const initialState = {
     date: getCurrentDate()
   },
   type: EVENT_TYPES.BASIC,
-  checkinCode: '',
-  rsvps: ''
+  checkinCode: ''
 };
 
 class EventForm extends Component {
@@ -55,10 +52,6 @@ class EventForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getSelectOutput = this.getSelectOutput.bind(this);
-    this.getRSVPsOutput = this.getRSVPsOutput.bind(this);
-    this.handleFile = this.handleFile.bind(this);
-
-    this.props.getRsvps(this.props.event);
 
     if (this.props.add) this.state = initialState;
     else
@@ -83,8 +76,7 @@ class EventForm extends Component {
           date: dateStringToDate(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode,
-        rsvps: this.getRSVPsOutput(this.props)
+        checkinCode: this.props.event.checkinCode
       };
   }
 
@@ -214,36 +206,6 @@ class EventForm extends Component {
     }
   }
 
-  getRSVPsOutput(props) {
-    switch (props.rsvps) {
-      case LOAD.LOADING:
-        return <h6>LOADING</h6>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        let items = props.rsvps.map((guest, i) => (
-          <div key={i}>{guest.name}</div>
-        ));
-        return items;
-    }
-  }
-
-  handleFile() {
-    // this.props.replaceRsvps(this.props.event, document.querySelector('#files').files[0]);
-    let props = this.props;
-    // Check for the various File API support.
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-      let reader = new FileReader();
-      reader.onloadend = function(evt) {
-        // console.log(evt.target.result);
-        props.replaceRsvps(props.event, evt.target.result);
-      };
-      reader.readAsText(document.querySelector('#files').files[0]);
-    } else {
-      alert('Please add RSVPs manually');
-    }
-  }
-
   getSelectOutput() {
     switch (this.state.type) {
       case EVENT_TYPES.BASIC:
@@ -268,23 +230,7 @@ class EventForm extends Component {
           </div>
         );
       case EVENT_TYPES.OPEN:
-        return (
-          <div className="row">
-            <div className="col-md-12">
-              <input
-                type="file"
-                id="files"
-                name="files[]"
-                onChange={this.handleFile}
-              />
-              <output id="output" />
-              <div>
-                RSVP List:
-                {this.state.rsvps}
-              </div>
-            </div>
-          </div>
-        );
+        return <RsvpInput />;
     }
   }
 
@@ -445,8 +391,7 @@ class EventForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    checkCode: state.host.checkCode,
-    rsvps: state.event.selectedRsvps
+    checkCode: state.host.checkCode
   };
 };
 
@@ -455,9 +400,7 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
-    resetEvent: resetSignupCode,
-    getRsvps: getRsvps,
-    replaceRsvps: replaceRsvps
+    resetEvent: resetSignupCode
   };
 };
 

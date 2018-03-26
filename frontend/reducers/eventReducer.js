@@ -31,6 +31,14 @@ export default function(state = eventInitial, action) {
       return { ...state, selectedAttends: action.payload };
     case RESET_EVENT:
       return eventInitial;
+    case REPLACE_RSVPS:
+      return { ...state, event: LOAD.LOADING };
+    case REPLACED_RSVPS:
+      return {
+        ...state,
+        event: action.payload,
+        selectedRsvps: action.payload.guestsRSVP
+      };
     default:
       return state;
   }

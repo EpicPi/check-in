@@ -23,10 +23,6 @@ export default function(state = openInitial, action) {
         ...state,
         event: LOAD.NOTHING
       };
-    case REPLACE_RSVPS:
-      return { ...state, event: LOAD.LOADING };
-    case REPLACED_RSVPS:
-      return { ...state, event: action.payload };
     default:
       return state;
   }
