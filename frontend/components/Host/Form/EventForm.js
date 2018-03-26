@@ -391,7 +391,8 @@ class EventForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    checkCode: state.host.checkCode
+    checkCode: state.host.checkCode,
+    guests: state.event.guests
   };
 };
 

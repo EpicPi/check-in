@@ -8,20 +8,16 @@ import {
   replaceRsvps,
   replaceAllRsvps,
   removeGuest,
-  changeGuest
+  changeGuest,
+  addGuest
 } from '../../../actions';
 import { LOAD } from '../../../helpers/Enums';
 
 class RsvpInput extends Component {
   constructor(props) {
     super(props);
-    RsvpInput.getRSVPsOutput = RsvpInput.getRSVPsOutput.bind(this);
     this.handleFile = this.handleFile.bind(this);
-    // this.removeGuest = this.removeGuest.bind(this);
     this.props.getRsvps(this.props.event);
-    this.state = {
-      rsvps: ''
-    };
   }
 
   removeGuest(i, e) {
@@ -32,33 +28,9 @@ class RsvpInput extends Component {
     this.props.changeGuest(i, e.target.value);
   }
 
-  static getRSVPsOutput(props) {
-    switch (props.rsvps) {
-      case LOAD.LOADING:
-        return <h6>LOADING</h6>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        let items = props.rsvps.map((guest, i) => (
-          <div className="row" key={i}>
-            <div className="col-md-6">
-              <input type="text" value={guest} />
-              <button
-                type="button"
-                className="close"
-                name={i}
-                aria-label="Close"
-                onClick={this.removeGuest.bind(this, i)}
-              >
-                <span aria-hidden="true" name={i}>
-                  &times;
-                </span>
-              </button>
-            </div>
-          </div>
-        ));
-        return items;
-    }
+  addGuest(e) {
+    e.preventDefault();
+    this.props.addGuest();
   }
 
   handleFile() {
@@ -77,8 +49,7 @@ class RsvpInput extends Component {
   }
 
   render() {
-    // this.state.rsvps = RsvpInput.getRSVPsOutput(this.props);
-    const items = !this.props.rsvps
+    const guests = !this.props.rsvps
       ? ''
       : this.props.rsvps.map((guest, i) => (
           <div className="row" key={i}>
@@ -101,19 +72,18 @@ class RsvpInput extends Component {
             </div>
           </div>
         ));
+
     return (
       <div className="row">
         <div className="col-md-12">
-          <input
-            type="file"
-            id="files"
-            name="files[]"
-            onChange={this.handleFile}
-          />
+          <input type="file" id="files" onChange={this.handleFile} />
           <output id="output" />
           <div>
             RSVP List:
-            {items}
+            {guests}
+            <button className="btn btn-info" onClick={this.addGuest.bind(this)}>
+              Add
+            </button>
           </div>
         </div>
       </div>
@@ -134,7 +104,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     replaceRsvps: replaceRsvps,
     replaceAllRsvps: replaceAllRsvps,
     removeGuest: removeGuest,
-    changeGuest: changeGuest
+    changeGuest: changeGuest,
+    addGuest: addGuest
   };
 };
 

@@ -9,7 +9,8 @@ import {
   SELECT_EVENT,
   REPLACE_ALL_RSVPS,
   REMOVE_GUEST,
-  CHANGE_GUEST
+  CHANGE_GUEST,
+  ADD_GUEST
 } from './types';
 import * as axios from 'axios';
 import * as qs from 'qs';
@@ -56,6 +57,14 @@ export const removeGuest = ind => dispatch => {
 export const changeGuest = (ind, guest) => dispatch => {
   dispatch({ type: CHANGE_GUEST, payload: { ind: ind, guest: guest } });
 };
+
+export const addGuest = () => dispatch => {
+  dispatch({ type: ADD_GUEST });
+};
+
+// export const clearGuests = () => dispatch => {
+//    dispatch({ type: });
+// };
 
 export const resetEvent = () => dispatch => {
   dispatch({ type: RESET_EVENT });
