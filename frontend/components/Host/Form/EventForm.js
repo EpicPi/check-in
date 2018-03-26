@@ -271,13 +271,6 @@ class EventForm extends Component {
         return (
           <div className="row">
             <div className="col-md-12">
-              {/*<ReactFileReader*/}
-              {/*handleFiles={this.handleFile}*/}
-              {/*fileTypes={'.csv .txt'}*/}
-              {/*>*/}
-              {/*<button className="btn">Upload RSVP List</button>*/}
-              {/*</ReactFileReader>*/}
-
               <input
                 type="file"
                 id="files"
@@ -285,10 +278,10 @@ class EventForm extends Component {
                 onChange={this.handleFile}
               />
               <output id="output" />
-              {/*<div>*/}
-              {/*RSVP List:*/}
-              {/*{this.state.rsvps}*/}
-              {/*</div>*/}
+              <div>
+                RSVP List:
+                {this.state.rsvps}
+              </div>
             </div>
           </div>
         );
