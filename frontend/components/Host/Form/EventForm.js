@@ -19,7 +19,7 @@ import {
   getCurrentDate
 } from '../../../helpers/Time';
 import { resetSignupCode } from '../../../actions/index';
-import { getRsvps } from '../../../actions';
+import { clearGuests, getRsvps } from '../../../actions';
 
 const initialState = {
   eventName: '',
@@ -54,7 +54,7 @@ class EventForm extends Component {
     this.getSelectOutput = this.getSelectOutput.bind(this);
 
     if (this.props.add) this.state = initialState;
-    else
+    else {
       this.state = {
         eventName: this.props.event.name,
         code: this.props.event.code,
@@ -78,6 +78,7 @@ class EventForm extends Component {
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode
       };
+    }
   }
 
   componentWillUpdate(props, state) {
@@ -88,6 +89,7 @@ class EventForm extends Component {
 
   componentWillUnmount() {
     this.props.resetEvent();
+    this.props.clearGuests();
   }
 
   handleGeneral(e) {
@@ -401,7 +403,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
-    resetEvent: resetSignupCode
+    resetEvent: resetSignupCode,
+    clearGuests: clearGuests
   };
 };
 

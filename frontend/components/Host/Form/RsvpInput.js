@@ -17,7 +17,7 @@ class RsvpInput extends Component {
   constructor(props) {
     super(props);
     this.handleFile = this.handleFile.bind(this);
-    this.props.getRsvps(this.props.event);
+    // this.props.getRsvps(this.props.event);
   }
 
   removeGuest(i, e) {
