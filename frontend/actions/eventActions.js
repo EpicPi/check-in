@@ -32,15 +32,6 @@ export const getAttends = event => async dispatch => {
   dispatch({ type: GOT_ATTENDS, payload: res.data });
 };
 
-export const replaceRsvps = (event, rsvps) => async dispatch => {
-  dispatch({ type: REPLACE_RSVPS });
-  const res = await axios.post(
-    '/api/event/replace',
-    qs.stringify({ id: event._id, rsvps: rsvps })
-  );
-  dispatch({ type: REPLACED_RSVPS, payload: res.data });
-};
-
 export const resetEvent = () => dispatch => {
   dispatch({ type: RESET_EVENT });
 };

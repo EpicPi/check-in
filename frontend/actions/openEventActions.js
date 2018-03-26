@@ -1,5 +1,11 @@
 import * as qs from 'qs';
-import { OPEN_GET_EVENT, OPEN_GOT_EVENT, OPEN_JOIN_EVENT } from './types';
+import {
+  OPEN_GET_EVENT,
+  OPEN_GOT_EVENT,
+  OPEN_JOIN_EVENT,
+  REPLACE_RSVPS,
+  REPLACED_RSVPS
+} from './types';
 import axios from 'axios/index';
 
 export const openGetEvent = code => async dispatch => {
@@ -17,4 +23,13 @@ export const openJoinEvent = (code, id) => async dispatch => {
   );
   // TODO: checkCode successfully joined or not
   dispatch({ type: OPEN_JOIN_EVENT, payload: res.data });
+};
+
+export const replaceRsvps = (event, rsvps) => async dispatch => {
+  dispatch({ type: REPLACE_RSVPS });
+  const res = await axios.post(
+    '/api/open/replace',
+    qs.stringify({ id: event._id, rsvps: rsvps })
+  );
+  dispatch({ type: REPLACED_RSVPS, payload: res.data });
 };

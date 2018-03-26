@@ -231,7 +231,7 @@ class EventForm extends Component {
   handleFile(files) {
     let reader = new FileReader();
     reader.onload = function(e) {
-      this.props.replaceRsvp(reader.result);
+      // this.props.replaceRsvp(this.props.event, reader.result);
     };
     reader.readAsText(files[0]);
   }
@@ -447,8 +447,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
     resetEvent: resetSignupCode,
-    getRsvps: getRsvps,
-    replaceRsvps: replaceRsvps
+    getRsvps: getRsvps
+    // replaceRsvps: replaceRsvps
   };
 };
 

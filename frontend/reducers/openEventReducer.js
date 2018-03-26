@@ -1,7 +1,9 @@
 import {
   OPEN_GET_EVENT,
   OPEN_GOT_EVENT,
-  OPEN_JOIN_EVENT
+  OPEN_JOIN_EVENT,
+  REPLACE_RSVPS,
+  REPLACED_RSVPS
 } from '../actions/types';
 import { LOAD } from '../helpers/Enums';
 import { openInitial } from './initialState';
@@ -21,6 +23,11 @@ export default function(state = openInitial, action) {
         ...state,
         event: LOAD.NOTHING
       };
+    case REPLACE_RSVPS:
+      return { ...state, selectedRsvps: LOAD.LOADING };
+    case REPLACED_RSVPS:
+      return { ...state, selectedRsvps: action.payload };
+
     default:
       return state;
   }

@@ -8,7 +8,16 @@ router.get('/get_event', async (req, res) => {
     type: 'open',
     code: req.query.code.toUpperCase()
   });
-  res.send(event);
+  if (event) {
+    res.send(event);
+  } else {
+    console.error(
+      '[ERR] Event was not found. Passed in code: ' +
+        req.body.code +
+        ' in /open/get_event'
+    );
+  }
+  // res.send(event);
 });
 
 router.post('/join', async (req, res) => {
@@ -25,6 +34,19 @@ router.post('/join', async (req, res) => {
         req.body.id +
         ' in /open/join'
     );
+});
+
+router.post('/replace', async (req, res) => {
+  const event = await Event.findById(req.body.id);
+  if (event) {
+    // TODO
+  } else {
+    console.error(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /event/replace'
+    );
+  }
 });
 
 module.exports = router;
