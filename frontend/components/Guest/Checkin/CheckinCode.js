@@ -17,7 +17,8 @@ class CheckinCode extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.checkCode === CHECK_CHECKIN.SUCCESS) {
+    console.log(this.props.check);
+    if (this.props.check === CHECK_CHECKIN.SUCCESS) {
       alert('checked in');
       this.props.history.push('/guest');
       this.props.checkin(this.props.event);
@@ -38,7 +39,7 @@ class CheckinCode extends Component {
   }
 
   getCheckCheckInOutput() {
-    switch (this.props.checkCode) {
+    switch (this.props.check) {
       case CHECK_CHECKIN.FAIL:
         return <h3>Code was not valid</h3>;
       case CHECK_CHECKIN.CHECKING:
@@ -90,7 +91,7 @@ class CheckinCode extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    checkCode: state.guest.checkCode
+    check: state.guest.checkCode
   };
 };
 const mapDispatchToProps = () => {
