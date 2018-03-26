@@ -37,7 +37,7 @@ export function getCurrentDate() {
   let now = new Date();
   return dateInputFormat(now);
 }
-export function isEVentActive(event) {
+export function isEventActive(event) {
   let now = new Date();
   return (
     now < new Date(event.dates.checkinEnd) &&

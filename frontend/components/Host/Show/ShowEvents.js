@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { hostGetEvents } from '../../../actions/index';
 import EventItem from './EventItem';
 import { LOAD } from '../../../helpers/Enums';
-import { isEVentActive, isEventClosed } from '../../../helpers/Time';
+import { isEventActive, isEventClosed } from '../../../helpers/Time';
 
 class ShowEvents extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class ShowEvents extends Component {
       default:
         if (
           props.events.filter(
-            event => !isEVentActive(event) && !isEventClosed(event)
+            event => !isEventActive(event) && !isEventClosed(event)
           ).length > 0
         )
           return (
@@ -50,7 +50,7 @@ class ShowEvents extends Component {
                   <ul className="event-list">
                     {props.events
                       .filter(
-                        event => !isEVentActive(event) && !isEventClosed(event)
+                        event => !isEventActive(event) && !isEventClosed(event)
                       )
                       .map((event, i) => (
                         <EventItem
@@ -75,7 +75,7 @@ class ShowEvents extends Component {
       case LOAD.NOTHING:
         return;
       default:
-        if (props.events.filter(event => isEVentActive(event)).length > 0)
+        if (props.events.filter(event => isEventActive(event)).length > 0)
           return (
             <div>
               <h3>CheckIn Active</h3>
@@ -83,7 +83,7 @@ class ShowEvents extends Component {
                 <div className="col-md-12">
                   <ul className="event-list">
                     {props.events
-                      .filter(event => isEVentActive(event))
+                      .filter(event => isEventActive(event))
                       .map((event, i) => (
                         <EventItem
                           history={props.history}
