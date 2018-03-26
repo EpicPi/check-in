@@ -24,10 +24,9 @@ export default function(state = openInitial, action) {
         event: LOAD.NOTHING
       };
     case REPLACE_RSVPS:
-      return { ...state, selectedRsvps: LOAD.LOADING };
+      return { ...state, event: LOAD.LOADING };
     case REPLACED_RSVPS:
-      return { ...state, selectedRsvps: action.payload };
-
+      return { ...state, event: action.payload };
     default:
       return state;
   }

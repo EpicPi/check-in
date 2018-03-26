@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactFileReader from 'react-file-reader';
 import GuestItem from '../Detail/GuestItem';
+import { replaceRsvps } from '../../../actions/index';
 import {
   createEvent,
   checkSignupCode,
@@ -214,7 +215,6 @@ class EventForm extends Component {
   }
 
   getRSVPsOutput(props) {
-    console.log(props.rsvps);
     switch (props.rsvps) {
       case LOAD.LOADING:
         return <h6>LOADING</h6>;
@@ -228,12 +228,20 @@ class EventForm extends Component {
     }
   }
 
-  handleFile(files) {
-    let reader = new FileReader();
-    reader.onload = function(e) {
-      // this.props.replaceRsvp(this.props.event, reader.result);
-    };
-    reader.readAsText(files[0]);
+  handleFile() {
+    // this.props.replaceRsvps(this.props.event, document.querySelector('#files').files[0]);
+    let props = this.props;
+    // Check for the various File API support.
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      let reader = new FileReader();
+      reader.onloadend = function(evt) {
+        // console.log(evt.target.result);
+        props.replaceRsvps(props.event, evt.target.result);
+      };
+      reader.readAsText(document.querySelector('#files').files[0]);
+    } else {
+      alert('Please add RSVPs manually');
+    }
   }
 
   getSelectOutput() {
@@ -263,16 +271,24 @@ class EventForm extends Component {
         return (
           <div className="row">
             <div className="col-md-12">
-              <ReactFileReader
-                handleFiles={this.handleFile}
-                fileTypes={'.csv, .txt'}
-              >
-                <button className="btn">Upload RSVP List</button>
-              </ReactFileReader>
-              <div>
-                RSVP List:
-                {this.state.rsvps}
-              </div>
+              {/*<ReactFileReader*/}
+              {/*handleFiles={this.handleFile}*/}
+              {/*fileTypes={'.csv .txt'}*/}
+              {/*>*/}
+              {/*<button className="btn">Upload RSVP List</button>*/}
+              {/*</ReactFileReader>*/}
+
+              <input
+                type="file"
+                id="files"
+                name="files[]"
+                onChange={this.handleFile}
+              />
+              <output id="output" />
+              {/*<div>*/}
+              {/*RSVP List:*/}
+              {/*{this.state.rsvps}*/}
+              {/*</div>*/}
             </div>
           </div>
         );
@@ -447,8 +463,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
     resetEvent: resetSignupCode,
-    getRsvps: getRsvps
-    // replaceRsvps: replaceRsvps
+    getRsvps: getRsvps,
+    replaceRsvps: replaceRsvps
   };
 };
 

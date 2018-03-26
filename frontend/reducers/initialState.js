@@ -24,5 +24,6 @@ export const eventInitial = {
 };
 
 export const openInitial = {
-  event: LOAD.NOTHING
+  event: LOAD.NOTHING,
+  selectedRsvps: LOAD.NOTHING
 };
