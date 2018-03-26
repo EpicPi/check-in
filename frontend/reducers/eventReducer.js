@@ -3,6 +3,8 @@ import {
   GET_RSVPS,
   GOT_ATTENDS,
   GOT_RSVPS,
+  REPLACE_RSVPS,
+  REPLACED_RSVPS,
   RESET_EVENT,
   SELECT_EVENT
 } from '../actions/types';
@@ -27,6 +29,10 @@ export default function(state = eventInitial, action) {
       };
     case GOT_ATTENDS:
       return { ...state, selectedAttends: action.payload };
+    case REPLACE_RSVPS:
+      return { ...state, selectedRsvps: LOAD.LOADING };
+    case REPLACED_RSVPS:
+      return { ...state, selectedRsvps: action.payload };
     case RESET_EVENT:
       return eventInitial;
     default:

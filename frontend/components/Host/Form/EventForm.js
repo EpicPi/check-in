@@ -20,6 +20,7 @@ import {
   getCurrentDate
 } from '../../../helpers/Time';
 import { resetSignupCode } from '../../../actions/index';
+import { getRsvps } from '../../../actions';
 
 const initialState = {
   eventName: '',
@@ -42,7 +43,8 @@ const initialState = {
     date: getCurrentDate()
   },
   type: EVENT_TYPES.BASIC,
-  checkinCode: ''
+  checkinCode: '',
+  rsvps: ''
 };
 
 class EventForm extends Component {
@@ -54,6 +56,8 @@ class EventForm extends Component {
     this.getSelectOutput = this.getSelectOutput.bind(this);
     this.getRSVPsOutput = this.getRSVPsOutput.bind(this);
     this.handleFile = this.handleFile.bind(this);
+
+    this.props.getRsvps(this.props.event);
 
     if (this.props.add) this.state = initialState;
     else
@@ -193,14 +197,6 @@ class EventForm extends Component {
     this.props.history.push('/host');
   }
 
-  handleFile(files) {
-    let reader = new FileReader();
-    reader.onload = function(e) {
-      console.log(reader.result);
-    };
-    reader.readAsText(files[0]);
-  }
-
   getCheckCodeOutput() {
     if (this.state.code === this.props.event.code)
       // if editing and you dont change
@@ -218,16 +214,26 @@ class EventForm extends Component {
   }
 
   getRSVPsOutput(props) {
+    console.log(props.rsvps);
     switch (props.rsvps) {
       case LOAD.LOADING:
         return <h6>LOADING</h6>;
       case LOAD.NOTHING:
         return;
       default:
-        return props.rsvps.map((guest, i) => (
-          <GuestItem history={props.history} key={i} guest={guest} />
+        let items = props.rsvps.map((guest, i) => (
+          <div key={i}>{guest.name}</div>
         ));
+        return items;
     }
+  }
+
+  handleFile(files) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      this.props.replaceRsvp(reader.result);
+    };
+    reader.readAsText(files[0]);
   }
 
   getSelectOutput() {
@@ -440,7 +446,9 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
-    resetEvent: resetSignupCode
+    resetEvent: resetSignupCode,
+    getRsvps: getRsvps,
+    replaceRsvps: replaceRsvps
   };
 };
 
