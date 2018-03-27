@@ -13,13 +13,18 @@ import TimePicker from '../../../helpers/TimePicker';
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
-  dateTimeToDateString,
   dateStringToHours,
   dateStringToDate,
   getCurrentDate,
   dateToString,
   dateTimeToDate
 } from '../../../helpers/Time';
+import {
+  checkinEndTimeError,
+  checkinOpenTimeError,
+  codeTakenError,
+  rsvpEndTimeError
+} from '../../../assets/text/';
 
 const initialState = {
   eventName: '',
@@ -115,7 +120,7 @@ class EventForm extends Component {
       this.props.checkCode !== CHECK_CODE.AVAILABLE &&
       this.state.code !== this.props.event.code
     ) {
-      alert('Please enter a different code');
+      alert(codeTakenError);
       return;
     }
     const rsvpEnd = dateTimeToDate(
@@ -136,21 +141,15 @@ class EventForm extends Component {
     );
 
     if (rsvpEnd < rsvpStart) {
-      alert(
-        'Please make sure your rsvp end time is after your rsvp start time'
-      );
+      alert(rsvpEndTimeError);
       return;
     }
     if (checkinEnd < checkinStart) {
-      alert(
-        'Please make sure your checkin end time is after your checkin start time'
-      );
+      alert(checkinEndTimeError);
       return;
     }
     if (checkinStart < rsvpStart) {
-      alert(
-        'Please make sure your checkin start time is after your rsvp start time'
-      );
+      alert(checkinOpenTimeError);
       return;
     }
 
