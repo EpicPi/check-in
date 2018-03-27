@@ -29,4 +29,6 @@ router.post('/check_in', async (req, res) => {
     );
 });
 
+router.post('/create_users', async (req, res) => {});
+
 module.exports = router;

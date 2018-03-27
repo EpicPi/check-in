@@ -6,6 +6,10 @@ const userSchema = new Schema({
   hostEvents: [],
   guestEvents: [],
   name: String,
+  open: {
+    guest: Boolean,
+    created: []
+  },
   extra: Schema.Types.Mixed
 });
 

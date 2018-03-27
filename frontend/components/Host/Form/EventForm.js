@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import RsvpInput from './RsvpInput';
+import OpenForm from './OpenForm';
+import CodeForm from './CodeForm';
 import {
   createEvent,
   checkSignupCode,
@@ -219,25 +220,13 @@ class EventForm extends Component {
         return;
       case EVENT_TYPES.CODE:
         return (
-          <div className="row">
-            <div className="col-md-12">
-              <label>
-                Check In Code:
-                <div>
-                  <input
-                    type="text"
-                    name="checkinCode"
-                    value={this.state.checkinCode}
-                    onChange={this.handleGeneral}
-                    required
-                  />
-                </div>
-              </label>
-            </div>
-          </div>
+          <CodeForm
+            handleGeneral={this.handleGeneral}
+            checkinCode={this.state.checkinCode}
+          />
         );
       case EVENT_TYPES.OPEN:
-        return <RsvpInput guests={this.state.rsvps} />;
+        return <OpenForm guests={this.state.rsvps} />;
     }
   }
 
