@@ -13,11 +13,11 @@ import TimePicker from '../../../helpers/TimePicker';
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
-  dateStringToHours,
-  dateStringToDate,
   getCurrentDate,
   dateToString,
-  dateTimeToDate
+  dateTimeToDate,
+  timeInputFormat,
+  dateInputFormat
 } from '../../../helpers/Time';
 import {
   checkinEndTimeError,
@@ -67,20 +67,20 @@ class EventForm extends Component {
         code: this.props.event.code,
         info: this.props.event.info,
         rsvpStart: {
-          time: dateStringToHours(this.props.event.dates.rsvpStart),
-          date: dateStringToDate(this.props.event.dates.rsvpStart)
+          time: timeInputFormat(this.props.event.dates.rsvpStart),
+          date: dateInputFormat(this.props.event.dates.rsvpStart)
         },
         rsvpEnd: {
-          time: dateStringToHours(this.props.event.dates.rsvpEnd),
-          date: dateStringToDate(this.props.event.dates.rsvpEnd)
+          time: timeInputFormat(this.props.event.dates.rsvpEnd),
+          date: dateInputFormat(this.props.event.dates.rsvpEnd)
         },
         checkinStart: {
-          time: dateStringToHours(this.props.event.dates.checkinStart),
-          date: dateStringToDate(this.props.event.dates.checkinStart)
+          time: timeInputFormat(this.props.event.dates.checkinStart),
+          date: dateInputFormat(this.props.event.dates.checkinStart)
         },
         checkinEnd: {
-          time: dateStringToHours(this.props.event.dates.checkinEnd),
-          date: dateStringToDate(this.props.event.dates.checkinEnd)
+          time: timeInputFormat(this.props.event.dates.checkinEnd),
+          date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode
