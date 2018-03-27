@@ -25,7 +25,7 @@ class JoinEvent extends Component {
   }
 
   handleCodeInput(e) {
-    this.setState({ code: e.target.value });
+    this.setState({ code: e.target.value.toUpperCase() });
   }
 
   handleSubmit(e) {

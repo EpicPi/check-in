@@ -34,6 +34,13 @@ export const GOT_RSVPS = 'got_rsvps';
 export const GET_ATTENDS = 'get_attends';
 export const GOT_ATTENDS = 'got_attends';
 export const RESET_EVENT = 'reset_event';
+export const UPDATE_RSVPS = 'update_rsvps';
+export const UPDATED_RSVPS = 'updated_rsvps';
+export const REPLACE_ALL_RSVPS = 'replace_all_rsvps';
+export const REMOVE_GUEST = 'remove_guest';
+export const CHANGE_GUEST = 'change_guest';
+export const ADD_GUEST = 'add_guest';
+export const CLEAR_GUEST = 'clear_guest';
 
 // open event types
 export const OPEN_GET_EVENT = 'open_get_event';

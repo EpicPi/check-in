@@ -1,5 +1,11 @@
 import * as qs from 'qs';
-import { OPEN_GET_EVENT, OPEN_GOT_EVENT, OPEN_JOIN_EVENT } from './types';
+import {
+  OPEN_GET_EVENT,
+  OPEN_GOT_EVENT,
+  OPEN_JOIN_EVENT,
+  UPDATE_RSVPS,
+  UPDATED_RSVPS
+} from './types';
 import axios from 'axios/index';
 
 export const openGetEvent = code => async dispatch => {

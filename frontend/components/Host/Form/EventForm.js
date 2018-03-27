@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RsvpInput from './RsvpInput';
 import {
   createEvent,
   checkSignupCode,
@@ -7,17 +8,16 @@ import {
 } from '../../../actions/index';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES, LOAD } from '../../../helpers/Enums';
 
 import {
   dateTimeToDateString,
   dateStringToHours,
   dateStringToDate,
-  timeInputFormat,
-  getCurrentTime,
   getCurrentDate
 } from '../../../helpers/Time';
 import { resetSignupCode } from '../../../actions/index';
+import { clearGuests, updateRsvps } from '../../../actions';
 
 const initialState = {
   eventName: '',
@@ -51,8 +51,10 @@ class EventForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getSelectOutput = this.getSelectOutput.bind(this);
 
-    if (this.props.add) this.state = initialState;
-    else
+    if (this.props.add) {
+      this.state = initialState;
+      this.props.clearGuests();
+    } else {
       this.state = {
         eventName: this.props.event.name,
         code: this.props.event.code,
@@ -76,6 +78,7 @@ class EventForm extends Component {
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode
       };
+    }
   }
 
   componentWillUpdate(props, state) {
@@ -86,10 +89,15 @@ class EventForm extends Component {
 
   componentWillUnmount() {
     this.props.resetEvent();
+    this.props.clearGuests();
   }
 
   handleGeneral(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    let value = e.target.value;
+    if (e.target.name === 'code' || e.target.name === 'checkinCode') {
+      value = value.toUpperCase();
+    }
+    this.setState({ [e.target.name]: value });
   }
 
   handleTimeChange(name, time, date) {
@@ -179,6 +187,11 @@ class EventForm extends Component {
     if (this.props.add) this.props.addEvent(event);
     else this.props.editEvent(event);
 
+    // if type open, replace RSVP list
+    if (this.state.type === EVENT_TYPES.OPEN) {
+      this.props.updateRsvps(this.props.event, this.props.guests);
+    }
+
     this.setState(initialState);
 
     this.props.history.push('/host');
@@ -223,6 +236,8 @@ class EventForm extends Component {
             </div>
           </div>
         );
+      case EVENT_TYPES.OPEN:
+        return <RsvpInput guests={this.state.rsvps} />;
     }
   }
 
@@ -383,7 +398,8 @@ class EventForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    checkCode: state.host.checkCode
+    checkCode: state.host.checkCode,
+    guests: state.event.guests
   };
 };
 
@@ -392,7 +408,9 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
-    resetEvent: resetSignupCode
+    resetEvent: resetSignupCode,
+    clearGuests: clearGuests,
+    updateRsvps: updateRsvps
   };
 };
 
