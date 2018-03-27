@@ -23,33 +23,10 @@ import {
   checkinEndTimeError,
   checkinOpenTimeError,
   codeTakenError,
-  rsvpEndTimeError
-} from '../../../assets/text/';
-
-const initialState = {
-  eventName: '',
-  code: '',
-  info: '',
-  rsvpStart: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  rsvpEnd: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  checkinStart: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  checkinEnd: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  type: EVENT_TYPES.BASIC,
-  checkinCode: '',
-  openRsvp: []
-};
+  rsvpEndTimeError,
+  codeAvailable,
+  codeUnavaliableError
+} from '../../../assets/text';
 
 class EventForm extends Component {
   constructor(props) {
@@ -60,9 +37,32 @@ class EventForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
 
-    if (this.props.add) {
-      this.state = initialState;
-    } else {
+    if (this.props.add)
+      this.state = {
+        eventName: '',
+        code: '',
+        info: '',
+        rsvpStart: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        rsvpEnd: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        checkinStart: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        checkinEnd: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        type: EVENT_TYPES.BASIC,
+        checkinCode: '',
+        openRsvp: []
+      };
+    else
       this.state = {
         eventName: this.props.event.name,
         code: this.props.event.code,
@@ -87,13 +87,16 @@ class EventForm extends Component {
         checkinCode: this.props.event.checkinCode,
         openRsvp: this.props.event.open.guestsRSVP
       };
-    }
   }
 
   componentWillUpdate(props, state) {
     // if editing and you changed from initial or if you are creating
     if (state.code !== props.event.code && state.code !== this.state.code)
       props.hostCheckCode(state.code);
+  }
+
+  componentWillUnmount() {
+    this.props.resetSignup();
   }
 
   handleGeneral(e) {
@@ -188,9 +191,9 @@ class EventForm extends Component {
       case CHECK_CODE.NOTHING_TO_CHECK:
         return '';
       case CHECK_CODE.TAKEN:
-        return <h3>sorry code is taken</h3>;
+        return <h3>{codeUnavaliableError}</h3>;
       case CHECK_CODE.AVAILABLE:
-        return <h3>Code is avaliable</h3>;
+        return <h3>{codeAvailable}</h3>;
       case CHECK_CODE.CHECKING:
         return <h3>checking</h3>;
     }
@@ -378,7 +381,7 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
-    resetEvent: resetSignupCode
+    resetSignup: resetSignupCode
   };
 };
 

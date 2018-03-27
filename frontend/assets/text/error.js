@@ -5,3 +5,4 @@ export const checkinEndTimeError =
 export const checkinOpenTimeError =
   'Please make sure your checkin start time is after your rsvp start time';
 export const codeTakenError = 'Please enter a different code';
+export const codeUnavaliableError = 'Sorry, code is not available';

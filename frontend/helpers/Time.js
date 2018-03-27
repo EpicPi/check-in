@@ -9,7 +9,7 @@ export function dateStringToDate(date) {
 }
 
 export function dateTimeToDate(date, time) {
-  return new Date(date + ' ' + time).toUTCString();
+  return new Date(date + ' ' + time);
 }
 
 export function dateToString(date) {
