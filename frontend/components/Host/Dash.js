@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import CreateEvent from './CreateEvent';
 import ShowEvents from './Show/ShowEvents';
 import BasicDetail from './Detail/BasicDetail';
-import EditEvent from './Detail/EditEvent';
+import EditEvent from './EditEvent';
 import { connect } from 'react-redux';
 import ActiveDetail from './Detail/ActiveDetail';
 import ClosedDetail from './Detail/ClosedDetail';

@@ -47,7 +47,8 @@ const initialState = {
     date: getCurrentDate()
   },
   type: EVENT_TYPES.BASIC,
-  checkinCode: ''
+  checkinCode: '',
+  openRsvp: []
 };
 
 class EventForm extends Component {
@@ -55,12 +56,12 @@ class EventForm extends Component {
     super(props);
     this.handleGeneral = this.handleGeneral.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
 
     if (this.props.add) {
       this.state = initialState;
-      this.props.clearGuests();
     } else {
       this.state = {
         eventName: this.props.event.name,
@@ -83,7 +84,8 @@ class EventForm extends Component {
           date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode
+        checkinCode: this.props.event.checkinCode,
+        openRsvp: this.props.event.open.guestsRSVP
       };
     }
   }
@@ -176,15 +178,12 @@ class EventForm extends Component {
       this.props.updateRsvps(this.props.event, this.props.guests);
     }
 
-    // this.setState(initialState);
-
     this.props.history.push('/host');
   }
 
   getCheckCodeOutput() {
-    if (this.state.code === this.props.event.code)
-      // if editing and you dont change
-      return;
+    // if editing and you dont change code from the original
+    if (this.state.code === this.props.event.code) return;
     switch (this.props.checkCode) {
       case CHECK_CODE.NOTHING_TO_CHECK:
         return '';
@@ -209,7 +208,7 @@ class EventForm extends Component {
           />
         );
       case EVENT_TYPES.OPEN:
-        return <OpenForm guests={this.state.rsvps} />;
+        return <OpenForm rsvps={this.state.openRsvp} />;
     }
   }
 
@@ -369,7 +368,8 @@ class EventForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    checkCode: state.host.checkCode
+    checkCode: state.host.checkCode,
+    event: state.event.selected
   };
 };
 
