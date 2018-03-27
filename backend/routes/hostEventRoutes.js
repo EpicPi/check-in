@@ -46,6 +46,8 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
+    if (req.body.type === 'open')
+      event.open.guestsRSVP = req.body.open.guestsRSVP;
     event.save();
     res.send(event);
   } else

@@ -6,6 +6,11 @@ const eventSchema = new Schema({
   code: { type: String, required: true },
   guestsRSVP: [],
   guestsAttend: [],
+  open: {
+    guestsRSVP: [],
+    guestsAttend: [],
+    walkin: []
+  },
   dates: {
     rsvpStart: { type: String },
     rsvpEnd: { type: String },
