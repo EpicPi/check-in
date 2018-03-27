@@ -9,7 +9,10 @@ router.post('/rsvp', async (req, res) => {
   const event = await Event.findById(req.body.id);
 
   if (event) {
-    const pOut = event.guestsRSVP.map(async id => User.findById(id));
+    let pOut = event.guestsRSVP.map(async id => User.findById(id));
+    pOut = pOut.concat(
+      event.open.guestsRSVP.map(async id => User.findById(id))
+    );
     const out = await Promise.all(pOut);
     res.send(out);
   } else
@@ -23,7 +26,10 @@ router.post('/rsvp', async (req, res) => {
 router.post('/attend', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
-    const pOut = event.guestsAttend.map(async id => User.findById(id));
+    let pOut = event.guestsAttend.map(async id => User.findById(id));
+    pOut = pOut.concat(
+      event.open.guestsAttend.map(async id => User.findById(id))
+    );
     const out = await Promise.all(pOut);
     res.send(out);
   } else

@@ -5,20 +5,21 @@ import CodeForm from './CodeForm';
 import {
   createEvent,
   checkSignupCode,
-  editEvent
-} from '../../../actions/index';
+  editEvent,
+  resetSignupCode
+} from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES, LOAD } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
   dateTimeToDateString,
   dateStringToHours,
   dateStringToDate,
-  getCurrentDate
+  getCurrentDate,
+  dateToString,
+  dateTimeToDate
 } from '../../../helpers/Time';
-import { resetSignupCode } from '../../../actions/index';
-import { clearGuests, updateRsvps } from '../../../actions';
 
 const initialState = {
   eventName: '',
@@ -50,7 +51,7 @@ class EventForm extends Component {
     this.handleGeneral = this.handleGeneral.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
-    this.getSelectOutput = this.getSelectOutput.bind(this);
+    this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
 
     if (this.props.add) {
       this.state = initialState;
@@ -83,21 +84,18 @@ class EventForm extends Component {
   }
 
   componentWillUpdate(props, state) {
+    // if editing and you changed from initial or if you are creating
     if (state.code !== props.event.code && state.code !== this.state.code)
-      // if editing and you dont change
       props.hostCheckCode(state.code);
-  }
-
-  componentWillUnmount() {
-    this.props.resetEvent();
-    this.props.clearGuests();
   }
 
   handleGeneral(e) {
     let value = e.target.value;
-    if (e.target.name === 'code' || e.target.name === 'checkinCode') {
-      value = value.toUpperCase();
-    }
+    this.setState({ [e.target.name]: value });
+  }
+
+  handleUpperCase(e) {
+    let value = e.target.value.toUpperCase();
     this.setState({ [e.target.name]: value });
   }
 
@@ -120,40 +118,38 @@ class EventForm extends Component {
       alert('Please enter a different code');
       return;
     }
-    const rsvpEnd = new Date(
-      dateTimeToDateString(this.state.rsvpEnd.date, this.state.rsvpEnd.time)
+    const rsvpEnd = dateTimeToDate(
+      this.state.rsvpEnd.date,
+      this.state.rsvpEnd.time
     );
-    const rsvpStart = new Date(
-      dateTimeToDateString(this.state.rsvpStart.date, this.state.rsvpStart.time)
+    const rsvpStart = dateTimeToDate(
+      this.state.rsvpStart.date,
+      this.state.rsvpStart.time
     );
-    const checkinStart = new Date(
-      dateTimeToDateString(
-        this.state.checkinStart.date,
-        this.state.checkinStart.time
-      )
+    const checkinStart = dateTimeToDate(
+      this.state.checkinStart.date,
+      this.state.checkinStart.time
     );
-    const checkinEnd = new Date(
-      dateTimeToDateString(
-        this.state.checkinEnd.date,
-        this.state.checkinEnd.time
-      )
+    const checkinEnd = dateTimeToDate(
+      this.state.checkinEnd.date,
+      this.state.checkinEnd.time
     );
 
     if (rsvpEnd < rsvpStart) {
       alert(
-        'please make sure your rsvp end time is after your rsvp start time'
+        'Please make sure your rsvp end time is after your rsvp start time'
       );
       return;
     }
     if (checkinEnd < checkinStart) {
       alert(
-        'please make sure your checkin end time is after your checkin start time'
+        'Please make sure your checkin end time is after your checkin start time'
       );
       return;
     }
     if (checkinStart < rsvpStart) {
       alert(
-        'please make sure your checkin start time is after your rsvp start time'
+        'Please make sure your checkin start time is after your rsvp start time'
       );
       return;
     }
@@ -163,22 +159,10 @@ class EventForm extends Component {
       name: this.state.eventName,
       code: this.state.code,
       dates: {
-        rsvpStart: dateTimeToDateString(
-          this.state.rsvpStart.date,
-          this.state.rsvpStart.time
-        ),
-        rsvpEnd: dateTimeToDateString(
-          this.state.rsvpEnd.date,
-          this.state.rsvpEnd.time
-        ),
-        checkinStart: dateTimeToDateString(
-          this.state.checkinStart.date,
-          this.state.checkinStart.time
-        ),
-        checkinEnd: dateTimeToDateString(
-          this.state.checkinEnd.date,
-          this.state.checkinEnd.time
-        )
+        rsvpStart: dateToString(rsvpStart),
+        rsvpEnd: dateToString(rsvpEnd),
+        checkinStart: dateToString(checkinStart),
+        checkinEnd: dateToString(checkinEnd)
       },
       type: this.state.type,
       checkinCode: this.state.checkinCode,
@@ -193,7 +177,7 @@ class EventForm extends Component {
       this.props.updateRsvps(this.props.event, this.props.guests);
     }
 
-    this.setState(initialState);
+    // this.setState(initialState);
 
     this.props.history.push('/host');
   }
@@ -214,14 +198,14 @@ class EventForm extends Component {
     }
   }
 
-  getSelectOutput() {
+  getEventTypeOutput() {
     switch (this.state.type) {
       case EVENT_TYPES.BASIC:
         return;
       case EVENT_TYPES.CODE:
         return (
           <CodeForm
-            handleGeneral={this.handleGeneral}
+            handleInput={this.handleUpperCase}
             checkinCode={this.state.checkinCode}
           />
         );
@@ -262,7 +246,7 @@ class EventForm extends Component {
                       type="text"
                       name="code"
                       value={this.state.code}
-                      onChange={this.handleGeneral}
+                      onChange={this.handleUpperCase}
                       required
                       className="form-control"
                       autoComplete="off"
@@ -354,7 +338,7 @@ class EventForm extends Component {
                   </div>
                 </div>
 
-                {this.getSelectOutput()}
+                {this.getEventTypeOutput()}
 
                 <br />
                 <br />
@@ -386,9 +370,7 @@ class EventForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    event: state.event.selected,
-    checkCode: state.host.checkCode,
-    guests: state.event.guests
+    checkCode: state.host.checkCode
   };
 };
 
@@ -397,9 +379,7 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     hostCheckCode: checkSignupCode,
     editEvent: editEvent,
-    resetEvent: resetSignupCode,
-    clearGuests: clearGuests,
-    updateRsvps: updateRsvps
+    resetEvent: resetSignupCode
   };
 };
 

@@ -8,8 +8,12 @@ export function dateStringToDate(date) {
   return dateInputFormat(date);
 }
 
-export function dateTimeToDateString(date, time) {
+export function dateTimeToDate(date, time) {
   return new Date(date + ' ' + time).toUTCString();
+}
+
+export function dateToString(date) {
+  return date.toUTCString();
 }
 
 //formats time nicely

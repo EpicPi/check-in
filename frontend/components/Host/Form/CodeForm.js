@@ -12,7 +12,7 @@ class CodeForm extends Component {
                 type="text"
                 name="checkinCode"
                 value={this.props.checkinCode}
-                onChange={this.props.handleGeneral}
+                onChange={this.props.handleInput}
                 required
               />
             </div>

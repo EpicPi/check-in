@@ -10,13 +10,13 @@ import {
 
 import { LOAD } from '../../../helpers/Enums';
 
-class RsvpInput extends Component {
+class OpenForm extends Component {
   constructor(props) {
     super(props);
     this.handleFile = this.handleFile.bind(this);
   }
 
-  removeGuest(i, e) {
+  removeGuest(i) {
     this.props.removeGuest(i);
   }
 
@@ -136,4 +136,4 @@ const mapDispatchToProps = (/* dispatch */) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(RsvpInput);
+export default connect(mapStateToProps, mapDispatchToProps())(OpenForm);
