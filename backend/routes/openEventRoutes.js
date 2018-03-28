@@ -33,7 +33,7 @@ router.post('/check_in', async (req, res) => {
 router.post('/rsvp', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
-    const pOut = event.openRsvp.guestsRSVP.map(async id => User.findById(id));
+    const pOut = event.open.guestsRSVP.map(async id => User.findById(id));
     const out = await Promise.all(pOut);
     res.send(out);
   } else

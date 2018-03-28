@@ -6,6 +6,7 @@ const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
 const mapOpenUsers = async openUsers => {
+  if (!openUsers) return [];
   const pOut = openUsers.map(async el => {
     let usr;
     if (el._id) {
@@ -36,7 +37,7 @@ router.post('/add_event', async (req, res) => {
     type: req.body.type,
     checkinCode: req.body.checkinCode.toUpperCase(),
     info: req.body.info,
-    openRsvp: {
+    open: {
       guestsRSVP: await mapOpenUsers(req.body.openRsvp),
       guestsAttend: [],
       walkin: []
@@ -58,7 +59,12 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
-    event.openRsvp.guestsRSVP = await mapOpenUsers(req.body.openRsvp);
+    const newOpenUsers = await mapOpenUsers(req.body.openRsvp);
+    const removedUsers = event.open.guestsRSVP.filter(
+      el => !newOpenUsers.includes(el)
+    );
+    removedUsers.forEach(async el => await User.findById(el).remove());
+    event.open.guestsRSVP = newOpenUsers;
     event.save();
     res.send(event);
   } else

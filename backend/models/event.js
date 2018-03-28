@@ -6,7 +6,7 @@ const eventSchema = new Schema({
   code: { type: String, required: true },
   guestsRSVP: [],
   guestsAttend: [],
-  openRsvp: {
+  open: {
     guestsRSVP: [],
     guestsAttend: [],
     walkin: []
