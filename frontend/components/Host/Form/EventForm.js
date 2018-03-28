@@ -60,7 +60,7 @@ class EventForm extends Component {
         },
         type: EVENT_TYPES.BASIC,
         checkinCode: '',
-        openRsvp: []
+        open: []
       };
     else
       this.state = {
@@ -85,7 +85,7 @@ class EventForm extends Component {
         },
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode,
-        openRsvp: this.props.event.open.guestsRSVP
+        open: []
       };
   }
 
@@ -379,8 +379,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     addEvent: createEvent,
-    hostCheckCode: checkSignupCode,
     editEvent: editEvent,
+    hostCheckCode: checkSignupCode,
     resetSignup: resetSignupCode
   };
 };

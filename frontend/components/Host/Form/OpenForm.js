@@ -5,7 +5,9 @@ import {
   removeGuest,
   changeGuest,
   addGuest,
-  clearGuests
+  clearGuests,
+  getOpenRsvp,
+  updateOpenRsvp
 } from '../../../actions';
 
 import { LOAD } from '../../../helpers/Enums';
@@ -14,24 +16,45 @@ class OpenForm extends Component {
   constructor(props) {
     super(props);
     this.handleFile = this.handleFile.bind(this);
+    this.getGuestsOutput = this.getGuestsOutput.bind(this);
+    this.removeGuest = this.removeGuest.bind(this);
+    this.addGuest = this.addGuest.bind(this);
+    this.deleteGuests = this.deleteGuests.bind(this);
+    this.changeGuest = this.changeGuest.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getOpenRsvp(this.props.event);
+  }
+
+  componentWillReceiveProps(next) {
+    this.setState({ open: next.open });
   }
 
   removeGuest(i) {
-    this.props.removeGuest(i);
+    open = this.props.open.slice();
+    open.splice(i, 1);
+    this.props.updateOpenRsvp(open);
   }
 
-  changeGuest(i, e) {
-    this.props.changeGuest(i, e.target.value);
+  changeGuest(i, e, guest) {
+    open = this.props.open.slice();
+    // guest.name = e.target.value();
+    console.log(this.props.open);
+    open[i].name = e.target.value;
+    this.props.updateOpenRsvp(open);
   }
 
   addGuest(e) {
     e.preventDefault();
-    this.props.addGuest();
+    open = this.props.open.slice();
+    open.push({ name: '' });
+    this.props.updateOpenRsvp(open);
   }
 
   deleteGuests(e) {
     e.preventDefault();
-    this.props.clearGuests();
+    this.props.updateOpenRsvp([]);
   }
 
   handleFile() {
@@ -50,36 +73,42 @@ class OpenForm extends Component {
     }
   }
 
-  render() {
-    const guests =
-      this.props.guests === LOAD.NOTHING
-        ? ''
-        : this.props.guests.map((guest, i) => (
-            <div className="form-group row" key={i}>
-              <label className="col-md-2 col-form-label">Name</label>
-              <div className="col-md-4">
-                <input
-                  className="form-group"
-                  type="text"
-                  value={guest}
-                  onChange={this.changeGuest.bind(this, i)}
-                />
-              </div>
-              <div className="col-md-1">
-                <button
-                  type="button"
-                  className="close"
-                  aria-label="Close"
-                  onClick={this.removeGuest.bind(this, i)}
-                >
-                  <span aria-hidden="true" name={i}>
-                    &times;
-                  </span>
-                </button>
-              </div>
+  getGuestsOutput() {
+    switch (this.props.open) {
+      case LOAD.LOADING:
+        return '';
+      case LOAD.NOTHING:
+        return '';
+      default:
+        return this.props.open.map((guest, i) => (
+          <div className="form-group row" key={i}>
+            <label className="col-md-2 col-form-label">Name</label>
+            <div className="col-md-4">
+              <input
+                className="form-group"
+                type="text"
+                value={guest.name}
+                onChange={event => this.changeGuest(i, event, guest)}
+              />
             </div>
-          ));
+            <div className="col-md-1">
+              <button
+                type="button"
+                className="close"
+                aria-label="Close"
+                onClick={event => this.removeGuest(i, event)}
+              >
+                <span aria-hidden="true" name={i}>
+                  &times;
+                </span>
+              </button>
+            </div>
+          </div>
+        ));
+    }
+  }
 
+  render() {
     return (
       <div className="row">
         <div className="col-md-12">
@@ -93,22 +122,16 @@ class OpenForm extends Component {
             <div className="row">
               <div className="col-md-12">RSVP List:</div>
             </div>
-            {guests}
+            {this.getGuestsOutput()}
           </div>
           <div className="row">
             <div className="col-md-3">
-              <button
-                className="btn btn-info"
-                onClick={this.addGuest.bind(this)}
-              >
+              <button className="btn btn-info" onClick={this.addGuest}>
                 Add
               </button>
             </div>
             <div className="col-md-3">
-              <button
-                className="btn btn-danger"
-                onClick={this.deleteGuests.bind(this)}
-              >
+              <button className="btn btn-danger" onClick={this.deleteGuests}>
                 Delete All
               </button>
             </div>
@@ -122,17 +145,14 @@ class OpenForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    guests: state.event.guests
+    open: state.event.openRsvp
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    replaceAllRsvps: replaceAllRsvps,
-    removeGuest: removeGuest,
-    changeGuest: changeGuest,
-    addGuest: addGuest,
-    clearGuests: clearGuests
+    getOpenRsvp: getOpenRsvp,
+    updateOpenRsvp: updateOpenRsvp
   };
 };
 

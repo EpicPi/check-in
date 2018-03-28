@@ -21,7 +21,7 @@ export const eventInitial = {
   selected: {},
   selectedRsvps: LOAD.NOTHING,
   selectedAttends: LOAD.NOTHING,
-  guests: LOAD.NOTHING
+  openRsvp: LOAD.NOTHING
 };
 
 export const openInitial = {

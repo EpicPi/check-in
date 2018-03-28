@@ -1,8 +1,11 @@
 import * as qs from 'qs';
 import {
   OPEN_GET_EVENT,
+  OPEN_GET_RSVP,
   OPEN_GOT_EVENT,
+  OPEN_GOT_RSVP,
   OPEN_JOIN_EVENT,
+  OPEN_UPDATE_RSVP,
   UPDATE_RSVPS,
   UPDATED_RSVPS
 } from './types';
@@ -23,4 +26,20 @@ export const openJoinEvent = (code, id) => async dispatch => {
   );
   // TODO: checkCode successfully joined or not
   dispatch({ type: OPEN_JOIN_EVENT, payload: res.data });
+};
+
+export const getOpenRsvp = event => async disptch => {
+  if (!event._id) disptch({ type: OPEN_GOT_RSVP, payload: [] });
+  else {
+    disptch({ type: OPEN_GET_RSVP });
+    const res = await axios.post(
+      '/api/open/rsvp',
+      qs.stringify({ id: event._id })
+    );
+    disptch({ type: OPEN_GOT_RSVP, payload: res.data });
+  }
+};
+
+export const updateOpenRsvp = update => async dispatch => {
+  dispatch({ type: OPEN_UPDATE_RSVP, payload: update });
 };
