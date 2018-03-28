@@ -3,6 +3,7 @@ const router = require('express').Router();
 require('../models/event');
 require('../models/user');
 const Event = mongoose.model('events');
+const User = mongoose.model('users');
 
 router.get('/get_event', async (req, res) => {
   const event = await Event.findOne({

@@ -5,7 +5,7 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
-const mapOpenUsers = async (event, openUsers) => {
+const mapOpenUsers = async openUsers => {
   const pOut = openUsers.map(async el => {
     let usr;
     if (el._id) {
@@ -18,10 +18,12 @@ const mapOpenUsers = async (event, openUsers) => {
         open: true
       });
     }
-    usr.save();
-    return usr;
+    await usr.save();
+    return usr.id;
   });
-  return await Promise.all(pOut);
+  const out = await Promise.all(pOut);
+  console.log(out);
+  return out;
 };
 
 router.post('/add_event', async (req, res) => {
@@ -35,7 +37,7 @@ router.post('/add_event', async (req, res) => {
     checkinCode: req.body.checkinCode.toUpperCase(),
     info: req.body.info,
     openRsvp: {
-      guestsRSVP: mapOpenUsers(req.body.openRsvp),
+      guestsRSVP: await mapOpenUsers(req.body.openRsvp),
       guestsAttend: [],
       walkin: []
     }
@@ -56,7 +58,7 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
-    event.openRsvp.guestsRSVP = mapOpenUsers(req.body.openRsvp);
+    event.openRsvp.guestsRSVP = await mapOpenUsers(req.body.openRsvp);
     event.save();
     res.send(event);
   } else

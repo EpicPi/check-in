@@ -137,7 +137,7 @@ class OpenForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    openRsvp: state.openRsvp.openRsvp
+    openRsvp: state.open.openRsvp
   };
 };
 

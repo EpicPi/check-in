@@ -176,11 +176,6 @@ class EventForm extends Component {
     if (this.props.add) this.props.addEvent(event);
     else this.props.editEvent(event);
 
-    // if type openRsvp, replace RSVP list
-    if (this.state.type === EVENT_TYPES.OPEN) {
-      this.props.updateRsvps(this.props.event, this.props.guests);
-    }
-
     this.props.history.push('/host');
   }
 
@@ -373,7 +368,7 @@ const mapStateToProps = state => {
   return {
     checkCode: state.host.checkCode,
     event: state.event.selected,
-    openRsvp: state.openRsvp.openRsvp
+    openRsvp: state.open.openRsvp
   };
 };
 
