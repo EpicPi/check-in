@@ -40,12 +40,6 @@ export default function(state = eventInitial, action) {
       return { ...state, selectedAttends: action.payload };
     case RESET_EVENT:
       return eventInitial;
-    case OPEN_GET_RSVP:
-      return { ...state, openRsvp: LOAD.LOADING };
-    case OPEN_GOT_RSVP:
-      return { ...state, openRsvp: action.payload };
-    case OPEN_UPDATE_RSVP:
-      return { ...state, openRsvp: action.payload };
     default:
       return state;
   }

@@ -20,11 +20,10 @@ export const hostInitial = {
 export const eventInitial = {
   selected: {},
   selectedRsvps: LOAD.NOTHING,
-  selectedAttends: LOAD.NOTHING,
-  openRsvp: LOAD.NOTHING
+  selectedAttends: LOAD.NOTHING
 };
 
 export const openInitial = {
   event: LOAD.NOTHING,
-  selectedRsvps: LOAD.NOTHING
+  openRsvp: LOAD.NOTHING
 };

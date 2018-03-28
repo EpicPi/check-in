@@ -59,8 +59,7 @@ class EventForm extends Component {
           date: getCurrentDate()
         },
         type: EVENT_TYPES.BASIC,
-        checkinCode: '',
-        open: []
+        checkinCode: ''
       };
     else
       this.state = {
@@ -84,8 +83,7 @@ class EventForm extends Component {
           date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode,
-        open: []
+        checkinCode: this.props.event.checkinCode
       };
   }
 
@@ -211,7 +209,7 @@ class EventForm extends Component {
           />
         );
       case EVENT_TYPES.OPEN:
-        return <OpenForm rsvps={this.state.openRsvp} />;
+        return <OpenForm />;
     }
   }
 
