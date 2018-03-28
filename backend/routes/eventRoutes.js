@@ -10,7 +10,6 @@ router.post('/rsvp', async (req, res) => {
 
   if (event) {
     let pOut = event.guestsRSVP.map(async id => User.findById(id));
-    console.log(event.openRsvp);
     pOut = pOut.concat(
       event.open.guestsRSVP.map(async id => User.findById(id))
     );

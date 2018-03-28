@@ -23,7 +23,6 @@ const mapOpenUsers = async openUsers => {
     return usr.id;
   });
   const out = await Promise.all(pOut);
-  console.log(out);
   return out;
 };
 
