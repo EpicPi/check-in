@@ -13,7 +13,7 @@ import axios from 'axios/index';
 
 export const openGetEvent = code => async dispatch => {
   dispatch({ type: OPEN_GET_EVENT });
-  const res = await axios.get('/api/open/get_event', {
+  const res = await axios.get('/api/openRsvp/get_event', {
     params: { code: code }
   });
   dispatch({ type: OPEN_GOT_EVENT, payload: res.data });
@@ -21,7 +21,7 @@ export const openGetEvent = code => async dispatch => {
 
 export const openJoinEvent = (code, id) => async dispatch => {
   const res = await axios.post(
-    '/api/open/join',
+    '/api/openRsvp/join',
     qs.stringify({ code: code, id: id })
   );
   // TODO: checkCode successfully joined or not
@@ -33,7 +33,7 @@ export const getOpenRsvp = event => async disptch => {
   else {
     disptch({ type: OPEN_GET_RSVP });
     const res = await axios.post(
-      '/api/open/rsvp',
+      '/api/openRsvp/rsvp',
       qs.stringify({ id: event._id })
     );
     disptch({ type: OPEN_GOT_RSVP, payload: res.data });

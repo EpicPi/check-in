@@ -25,14 +25,14 @@ router.post('/check_in', async (req, res) => {
     console.error(
       '[ERR] Event was not found. Passed in id: ' +
         req.body.id +
-        ' in /open/join'
+        ' in /openRsvp/join'
     );
 });
 
 router.post('/rsvp', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
-    const pOut = event.open.guestsRSVP.map(async id => User.findById(id));
+    const pOut = event.openRsvp.guestsRSVP.map(async id => User.findById(id));
     const out = await Promise.all(pOut);
     res.send(out);
   } else

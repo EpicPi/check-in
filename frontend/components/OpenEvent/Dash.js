@@ -84,7 +84,7 @@ class OpenEventDash extends Component {
 
 const mapStateToProps = state => {
   return {
-    event: state.open.event
+    event: state.openRsvp.event
   };
 };
 

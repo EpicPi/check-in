@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  replaceAllRsvps,
-  removeGuest,
-  changeGuest,
-  addGuest,
-  clearGuests,
-  getOpenRsvp,
-  updateOpenRsvp
-} from '../../../actions';
+import { getOpenRsvp, updateOpenRsvp } from '../../../actions';
 
 import { LOAD } from '../../../helpers/Enums';
 
@@ -28,26 +20,26 @@ class OpenForm extends Component {
   }
 
   componentWillReceiveProps(next) {
-    this.setState({ open: next.open });
+    this.setState({ openRsvp: next.openRsvp });
   }
 
   removeGuest(i) {
-    open = this.props.open.slice();
+    open = this.props.openRsvp.slice();
     open.splice(i, 1);
     this.props.updateOpenRsvp(open);
   }
 
   changeGuest(i, e, guest) {
-    open = this.props.open.slice();
+    open = this.props.openRsvp.slice();
     // guest.name = e.target.value();
-    console.log(this.props.open);
+    console.log(this.props.openRsvp);
     open[i].name = e.target.value;
     this.props.updateOpenRsvp(open);
   }
 
   addGuest(e) {
     e.preventDefault();
-    open = this.props.open.slice();
+    open = this.props.openRsvp.slice();
     open.push({ name: '' });
     this.props.updateOpenRsvp(open);
   }
@@ -74,13 +66,13 @@ class OpenForm extends Component {
   }
 
   getGuestsOutput() {
-    switch (this.props.open) {
+    switch (this.props.openRsvp) {
       case LOAD.LOADING:
         return '';
       case LOAD.NOTHING:
         return '';
       default:
-        return this.props.open.map((guest, i) => (
+        return this.props.openRsvp.map((guest, i) => (
           <div className="form-group row" key={i}>
             <label className="col-md-2 col-form-label">Name</label>
             <div className="col-md-4">
@@ -145,7 +137,7 @@ class OpenForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    open: state.open.openRsvp
+    openRsvp: state.openRsvp.openRsvp
   };
 };
 

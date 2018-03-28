@@ -27,6 +27,7 @@ import {
   codeAvailable,
   codeUnavaliableError
 } from '../../../assets/text';
+import { getOpenRsvp } from '../../../actions';
 
 class EventForm extends Component {
   constructor(props) {
@@ -168,13 +169,14 @@ class EventForm extends Component {
       },
       type: this.state.type,
       checkinCode: this.state.checkinCode,
-      info: this.state.info
+      info: this.state.info,
+      openRsvp: this.props.openRsvp
     };
 
     if (this.props.add) this.props.addEvent(event);
     else this.props.editEvent(event);
 
-    // if type open, replace RSVP list
+    // if type openRsvp, replace RSVP list
     if (this.state.type === EVENT_TYPES.OPEN) {
       this.props.updateRsvps(this.props.event, this.props.guests);
     }
@@ -346,14 +348,14 @@ class EventForm extends Component {
                     type="submit"
                     value="Submit"
                     className="btn btn-primary p"
-                    style={{ marginRight: '5px' }}
+                    style={{ marginRight: '5px', marginBottom: '30px' }}
                   >
                     Submit
                   </button>
                   <button
                     className="btn btn-danger"
                     onClick={() => this.props.history.push('/host')}
-                    style={{ marginLeft: '5px' }}
+                    style={{ marginLeft: '5px', marginBottom: '30px' }}
                   >
                     Cancel
                   </button>
@@ -370,7 +372,8 @@ class EventForm extends Component {
 const mapStateToProps = state => {
   return {
     checkCode: state.host.checkCode,
-    event: state.event.selected
+    event: state.event.selected,
+    openRsvp: state.openRsvp.openRsvp
   };
 };
 

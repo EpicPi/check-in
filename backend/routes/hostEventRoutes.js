@@ -5,6 +5,25 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
+const mapOpenUsers = async (event, openUsers) => {
+  const pOut = openUsers.map(async el => {
+    let usr;
+    if (el._id) {
+      usr = await User.findById(el._id);
+      usr.name = el.name;
+      usr.open = true;
+    } else {
+      usr = User({
+        name: el.name,
+        open: true
+      });
+    }
+    usr.save();
+    return usr;
+  });
+  return await Promise.all(pOut);
+};
+
 router.post('/add_event', async (req, res) => {
   const event = await Event({
     name: req.body.name,
@@ -14,13 +33,19 @@ router.post('/add_event', async (req, res) => {
     guestsAttend: [],
     type: req.body.type,
     checkinCode: req.body.checkinCode.toUpperCase(),
-    info: req.body.info
+    info: req.body.info,
+    openRsvp: {
+      guestsRSVP: mapOpenUsers(req.body.openRsvp),
+      guestsAttend: [],
+      walkin: []
+    }
   }).save();
   const user = await User.findById(req.user.id);
   user.hostEvents.push(event.id);
   user.save();
   res.send(event);
 });
+
 router.post('/edit_event', async (req, res) => {
   const event = await Event.findById(req.body._id);
   if (event) {
@@ -31,8 +56,7 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
-    if (req.body.type === 'open')
-      event.open.guestsRSVP = req.body.open.guestsRSVP;
+    event.openRsvp.guestsRSVP = mapOpenUsers(req.body.openRsvp);
     event.save();
     res.send(event);
   } else
@@ -42,10 +66,6 @@ router.post('/edit_event', async (req, res) => {
         ' in /guest/checkin'
     );
 });
-
-const mapOpenUsers = function(event, openUsers) {
-  return false;
-};
 
 router.post('/remove_event', async (req, res) => {
   const user = await User.findById(req.user.id);
