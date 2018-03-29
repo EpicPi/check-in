@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 import { findEvent, joinEvent, resetJoinFind } from '../../../actions/index';
 import { JOIN_FIND } from '../../../helpers/Enums';
 import JoinBasic from './JoinBasic';
+import {
+  alreadyJoinedError,
+  checkingCode,
+  joinCodeLabel,
+  joinFailError,
+  submitButton
+} from '../../../assets/text';
 
 class JoinEvent extends Component {
   constructor(props) {
@@ -36,13 +43,13 @@ class JoinEvent extends Component {
   getJoinFindOutput(props) {
     switch (props.joinFind) {
       case JOIN_FIND.FAIL:
-        return <h3>Couldn't find, please check code</h3>;
+        return <h3>{joinFailError}</h3>;
       case JOIN_FIND.SUCCESS:
         return <JoinBasic history={this.props.history} />;
       case JOIN_FIND.CHECKING:
-        return <h3>Checking code</h3>;
+        return <h3>{checkingCode}</h3>;
       case JOIN_FIND.ALREADY_JOINED:
-        return <h3>You already RSVPed for this event!</h3>;
+        return <h3>{alreadyJoinedError}</h3>;
       default:
         return '';
     }
@@ -56,7 +63,9 @@ class JoinEvent extends Component {
             <div className="col-md-12">
               <form className="form" onSubmit={this.handleSubmit}>
                 <div className="form-group row">
-                  <label className="col-md-3 col-form-label">Code</label>
+                  <label className="col-md-3 col-form-label">
+                    {joinCodeLabel}
+                  </label>
                   <div className="col-md-9">
                     <input
                       className="form-control"
@@ -75,7 +84,7 @@ class JoinEvent extends Component {
                   type="submit"
                   value="Submit"
                 >
-                  Submit
+                  {submitButton}
                 </button>
               </form>
               <div className="form-group row">

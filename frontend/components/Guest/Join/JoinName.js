@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { joinEvent, resetJoinFind } from '../../../actions/index';
+import { confirmationPrompt } from '../../../assets/text';
 
 class JoinName extends Component {
   constructor(props) {
@@ -28,11 +29,11 @@ class JoinName extends Component {
         <br />
         <div className="form-group row">
           <label className="col-md-12 col-form-label col-form-label-lg">
-            Please confirm RSVP for {this.props.eventToJoin.name}
+            {confirmationPrompt + this.props.eventToJoin.name}
           </label>
         </div>
         <div className="form-group row">
-          <label className="col-md-3 col-form-label">GT username:</label>
+          <label className="col-md-3 col-form-label">Name:</label>
           <div className="col-md-9">
             <input
               className="form-control"

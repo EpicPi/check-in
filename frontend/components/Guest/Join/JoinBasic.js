@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { joinEvent, resetJoinFind } from '../../../actions/index';
+import { confirmationPrompt, confirmButton } from '../../../assets/text';
 
 class JoinBasic extends Component {
   constructor(props) {
@@ -18,9 +19,9 @@ class JoinBasic extends Component {
   render() {
     return (
       <div>
-        <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
+        <h3>{confirmationPrompt + this.props.eventToJoin.name}</h3>
         <button onClick={this.handleConfirm} className="btn btn-success">
-          Confirm
+          {confirmButton}
         </button>
       </div>
     );
