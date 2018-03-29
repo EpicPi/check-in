@@ -156,6 +156,7 @@ class EventForm extends Component {
       alert(checkinOpenTimeError);
       return;
     }
+    console.log(this.props.openRsvp);
 
     const event = {
       ...this.props.event,

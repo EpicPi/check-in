@@ -20,7 +20,7 @@ class ActiveDetail extends Component {
   }
 
   componentDidMount() {
-    let timer = setInterval(this.tick, 5000);
+    let timer = setInterval(this.tick, 7000);
     this.setState({ timer });
   }
 

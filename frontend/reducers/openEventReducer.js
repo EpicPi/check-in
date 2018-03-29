@@ -27,7 +27,7 @@ export default function(state = openInitial, action) {
         event: LOAD.NOTHING
       };
     case OPEN_GET_RSVP:
-      return { ...state, openRsvp: LOAD.LOADING };
+      return { ...state, openRsvp: [] };
     case OPEN_GOT_RSVP:
       return { ...state, openRsvp: action.payload };
     case OPEN_UPDATE_RSVP:

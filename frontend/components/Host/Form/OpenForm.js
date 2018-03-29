@@ -70,7 +70,7 @@ class OpenForm extends Component {
       case LOAD.LOADING:
         return '';
       case LOAD.NOTHING:
-        return '';
+        return ''; //not needed?
       default:
         return this.props.openRsvp.map((guest, i) => (
           <div className="form-group row" key={i}>
