@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getOpenRsvp, updateOpenRsvp } from '../../../actions';
-
+import parse from 'csv-parse/lib/sync';
 import { LOAD } from '../../../helpers/Enums';
 
 class OpenForm extends Component {
@@ -11,8 +11,17 @@ class OpenForm extends Component {
     this.getGuestsOutput = this.getGuestsOutput.bind(this);
     this.removeGuest = this.removeGuest.bind(this);
     this.addGuest = this.addGuest.bind(this);
+    this.addGuestsFromFile = this.addGuestsFromFile.bind(this);
     this.deleteGuests = this.deleteGuests.bind(this);
     this.changeGuest = this.changeGuest.bind(this);
+    const that = this;
+    this.reader = new FileReader();
+    this.reader.onloadend = function(evt) {
+      const input = evt.target.result;
+      const records = parse(input);
+      records.splice(0, 1);
+      that.addGuestsFromFile(records);
+    };
   }
 
   componentDidMount() {
@@ -44,25 +53,20 @@ class OpenForm extends Component {
     this.props.updateOpenRsvp(open);
   }
 
+  addGuestsFromFile(ppl) {
+    open = this.props.openRsvp.slice();
+    ppl.forEach(person => open.push({ name: person[0] + ' ' + person[1] }));
+    this.props.updateOpenRsvp(open);
+  }
+
   deleteGuests(e) {
     e.preventDefault();
     this.props.updateOpenRsvp([]);
   }
 
-  handleFile() {
-    let props = this.props;
-    // Check for the various File API support.
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-      let file = document.querySelector('#files').files[0];
-      let reader = new FileReader();
-      reader.onloadend = function(evt) {
-        // console.log(evt.target.result);
-        props.replaceAllRsvps(props.event, evt.target.result.split(/\r?\n/));
-      };
-      reader.readAsText(file);
-    } else {
-      alert('Please add RSVPs manually');
-    }
+  handleFile(e) {
+    const file = e.target.files[0];
+    this.reader.readAsText(file);
   }
 
   getGuestsOutput() {

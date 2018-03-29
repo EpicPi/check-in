@@ -95,7 +95,6 @@ class ClosedDetail extends Component {
   render() {
     return (
       <div>
-        closed
         <div className="row">
           <div className="col-md-12">
             <br />
