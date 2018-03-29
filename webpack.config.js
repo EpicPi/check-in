@@ -11,13 +11,13 @@ const common = {
       { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(png|jp(e*)g|svg)$/,
         use: [
-          'file-loader',
           {
-            loader: 'image-webpack-loader',
+            loader: 'url-loader',
             options: {
-              bypassOnDebug: true
+              limit: 8000, // Convert images < 8kb to base64 strings
+              name: 'images/[hash]-[name].[ext]'
             }
           }
         ]
