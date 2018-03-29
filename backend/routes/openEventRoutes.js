@@ -17,7 +17,7 @@ router.get('/get_event', async (req, res) => {
 router.post('/check_in', async (req, res) => {
   const event = await Event.findById(req.body.event);
   if (event) {
-    event.guestsAttend.push(req.body.id);
+    event.guestsAttend.push(req.body.guest);
     event.save();
   } else
     console.error(

@@ -20,10 +20,10 @@ export const openGetEvent = code => async dispatch => {
   dispatch(getOpenRsvp(res.data));
 };
 
-export const openCheckin = (event, id) => async dispatch => {
+export const openCheckin = (event, guest) => async dispatch => {
   const res = await axios.post(
     '/api/open/check_in',
-    qs.stringify({ event: event._id, id: id })
+    qs.stringify({ event: event._id, id: guest._id })
   );
   // dispatch({ type: OPEN_JOIN_EVENT, payload:  });
 };
@@ -36,7 +36,6 @@ export const openWalkin = (event, name) => async dispatch => {
 };
 
 export const getOpenRsvp = event => async disptch => {
-  console.log('getting');
   if (!event._id) disptch({ type: OPEN_GOT_RSVP, payload: [] });
   else {
     disptch({ type: OPEN_GET_RSVP });
