@@ -85,6 +85,7 @@ router.post('/remove_event', async (req, res) => {
   user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
   user.save();
   const event = await Event.findById(req.body._id);
+  event.open.guestsRSVP.forEach(async el => await User.findById(el).remove());
   event.remove();
 });
 
