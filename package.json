@@ -10,7 +10,7 @@
     "precommit": "lint-staged",
     "build": "webpack --mode production",
     "dev": "concurrently -k \"npm run frontend\" \"npm run backend\"",
-    "frontend": "webpack-dev-server",
+    "frontend": "webpack-dev-server --mode development --open",
     "backend": "nodemon server.js",
     "deploy": "./scripts/deploy.sh",
     "test":

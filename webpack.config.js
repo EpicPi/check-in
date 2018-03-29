@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 const isDevServer = process.argv.find(v => v.includes('webpack-dev-server'));
-
 const common = {
   //common
   entry: ['./frontend/index'],
@@ -64,12 +63,12 @@ if (isDevServer) {
         'process.env': {
           NODE_ENV: JSON.stringify('production')
         }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
       })
+      // new webpack.optimize.UglifyJsPlugin({
+      //   compress: {
+      //     warnings: false
+      //   }
+      // })
     ]
   });
 }
