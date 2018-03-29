@@ -76,31 +76,31 @@ class OpenForm extends Component {
         return 'LOADING';
       default:
         if (this.props.openRsvp.length === 0) return <br />;
-        return this.props.openRsvp.map((guest, i) => (
-          <div className="form-group row" key={i}>
-            <label className="col-md-2 col-form-label">Name</label>
-            <div className="col-md-4">
-              <input
-                className="form-group"
-                type="text"
-                value={guest.name}
-                onChange={event => this.changeGuest(i, event, guest)}
-              />
-            </div>
-            <div className="col-md-1">
-              <button
-                type="button"
-                className="close"
-                aria-label="Close"
-                onClick={event => this.removeGuest(i, event)}
-              >
-                <span aria-hidden="true" name={i}>
-                  &times;
-                </span>
-              </button>
-            </div>
+        return (
+          <div>
+            <br />
+            {this.props.openRsvp.map((guest, i) => (
+              <div className="form-group row" key={i}>
+                <div className="col-md-3">
+                  <input
+                    className="form-group"
+                    type="text"
+                    value={guest.name}
+                    onChange={event => this.changeGuest(i, event, guest)}
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="close"
+                  style={{ marginBottom: '15px', marginLeft: '5px' }}
+                  onClick={event => this.removeGuest(i, event)}
+                >
+                  <span>&times;</span>
+                </button>
+              </div>
+            ))}
           </div>
-        ));
+        );
     }
   }
 
@@ -114,7 +114,6 @@ class OpenForm extends Component {
           <p className="fakeLink">
             {'http://eventensure.com/event/' + this.props.code}
           </p>
-          <br />
         </div>
       );
     }
@@ -125,6 +124,7 @@ class OpenForm extends Component {
       <div className="row">
         <div className="col-md-12">
           {this.getUrlOutPut()}
+          <br />
           <input
             className="form-group"
             type="file"
@@ -132,6 +132,7 @@ class OpenForm extends Component {
             onChange={this.handleFile}
           />
           <div>
+            <br />
             <div className="row">
               <div className="col-md-12">RSVP List:</div>
             </div>
