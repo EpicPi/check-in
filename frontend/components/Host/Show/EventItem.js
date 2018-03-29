@@ -22,8 +22,8 @@ class EventItem extends Component {
     else this.props.history.push('/host/event/basic');
   }
 
-  handleRemove(event) {
-    this.props.removeEvent(event);
+  handleRemove() {
+    this.props.removeEvent(this.props.event);
   }
 
   getOpenEventOutput() {

@@ -211,6 +211,10 @@ class EventForm extends Component {
       case EVENT_TYPES.OPEN:
         return (
           <div>
+            <CodeForm
+              handleInput={this.handleUpperCase}
+              checkinCode={this.state.checkinCode}
+            />
             <OpenForm code={this.state.code} />
             <br />
             <br />
