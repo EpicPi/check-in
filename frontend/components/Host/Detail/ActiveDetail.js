@@ -11,7 +11,7 @@ class ActiveDetail extends Component {
     this.handleEditClick = this.handleEditClick.bind(this);
     this.tick = this.tick.bind(this);
     this.getTypeSpecificOutput = this.getTypeSpecificOutput.bind(this);
-
+    this.getMessage = this.getMessage.bind(this);
     //gotta make the call to load them
     this.props.getAttends(this.props.event);
     this.props.getRsvps(this.props.event);
@@ -83,6 +83,7 @@ class ActiveDetail extends Component {
           );
     }
   }
+
   getTypeSpecificOutput() {
     switch (this.props.event.type) {
       case EVENT_TYPES.BASIC:
@@ -119,6 +120,21 @@ class ActiveDetail extends Component {
     }
   }
 
+  getMessage() {
+    if (
+      this.props.attends.constructor === Array &&
+      this.props.rsvps.constructor === Array
+    ) {
+      const ids = this.props.rsvps.map(person => person._id);
+      return (
+        this.props.attends.filter(el => ids.includes(el.id)).length +
+        ' out of ' +
+        this.props.rsvps.length +
+        ' people havesigned in'
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -130,8 +146,7 @@ class ActiveDetail extends Component {
           </div>
         </div>
         {this.getTypeSpecificOutput()}
-        {this.props.attends.length} out of {this.props.rsvps.length} people have
-        signed in
+        {this.getMessage()}
         {this.state.notSignedIn}
         <br />
         <div className="center-block text-center">
