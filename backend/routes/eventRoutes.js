@@ -26,10 +26,7 @@ router.post('/rsvp', async (req, res) => {
 router.post('/attend', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
-    let pOut = event.guestsAttend.map(async id => User.findById(id));
-    pOut = pOut.concat(
-      event.open.guestsAttend.map(async id => User.findById(id))
-    );
+    const pOut = event.guestsAttend.map(async id => User.findById(id));
     const out = await Promise.all(pOut);
     res.send(out);
   } else
@@ -41,3 +38,4 @@ router.post('/attend', async (req, res) => {
 });
 
 module.exports = router;
+//5abc4dec3183a126b636b60c

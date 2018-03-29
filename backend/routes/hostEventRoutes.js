@@ -38,7 +38,6 @@ router.post('/add_event', async (req, res) => {
     info: req.body.info,
     open: {
       guestsRSVP: await mapOpenUsers(req.body.openRsvp),
-      guestsAttend: [],
       walkin: []
     }
   }).save();
@@ -62,13 +61,13 @@ router.post('/edit_event', async (req, res) => {
     const removedUsers = event.open.guestsRSVP.filter(
       el => !newOpenUsers.includes(el)
     );
-    removedUsers.forEach(async el => {
-      if (event.open.guestsAttend.includes(el)) {
-        const index = event.open.guestsAttend.indexOf(el);
-        event.open.guestsAttend = event.open.guestsAttend.splice(index, 1);
-      }
-      User.findById(el).remove();
-    });
+    event.guestsAttend = event.guestsAttend.filter(
+      el => !removedUsers.includes(el)
+    );
+    for (let i = 0; i < removedUsers.length; i++) {
+      const el = removedUsers[i];
+      await User.findById(el).remove();
+    }
     event.open.guestsRSVP = newOpenUsers;
     event.save();
     res.send(event);
