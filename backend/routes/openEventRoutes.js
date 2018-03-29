@@ -20,7 +20,24 @@ router.post('/check_in', async (req, res) => {
     code: req.body.code.toUpperCase()
   });
   if (event) {
-    event.guestsAttend.push(req.body.name);
+    event.guestsAttend.push(req.body.id);
+    event.save();
+  } else
+    console.error(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /openRsvp/join'
+    );
+});
+
+router.post('/walk_in', async (req, res) => {
+  const event = await Event.findOne({
+    type: 'open',
+    code: req.body.code.toUpperCase()
+  });
+  if (event) {
+    const walk = await User({ name: req.body.name }).save();
+    event.guestsAttend.push(walk.id);
     event.save();
   } else
     console.error(
