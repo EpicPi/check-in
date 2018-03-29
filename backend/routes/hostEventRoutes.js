@@ -64,7 +64,7 @@ router.post('/edit_event', async (req, res) => {
     event.guestsAttend = event.guestsAttend.filter(
       el => !removedUsers.includes(el)
     );
-    removedUsers.forEach(el => User.findById(el).remove());
+    removedUsers.forEach(async el => await User.findById(el).remove());
     event.open.guestsRSVP = newOpenUsers;
     event.save();
     res.send(event);
