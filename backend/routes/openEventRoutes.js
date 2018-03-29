@@ -15,10 +15,7 @@ router.get('/get_event', async (req, res) => {
 });
 
 router.post('/check_in', async (req, res) => {
-  const event = await Event.findOne({
-    type: 'open',
-    code: req.body.code.toUpperCase()
-  });
+  const event = await Event.findById(req.body.event);
   if (event) {
     event.guestsAttend.push(req.body.id);
     event.save();
@@ -31,10 +28,7 @@ router.post('/check_in', async (req, res) => {
 });
 
 router.post('/walk_in', async (req, res) => {
-  const event = await Event.findOne({
-    type: 'open',
-    code: req.body.code.toUpperCase()
-  });
+  const event = await Event.findById(req.body.event);
   if (event) {
     const walk = await User({ name: req.body.name }).save();
     event.guestsAttend.push(walk.id);

@@ -108,7 +108,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     findEvent: findEvent,
-    joinEvent: joinEvent,
+    checkin: joinEvent,
     resetJoin: resetJoinFind
   };
 };

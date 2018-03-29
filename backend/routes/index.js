@@ -16,6 +16,6 @@ router.use('/auth', auth);
 router.use('/host', checkUser, host);
 router.use('/guest', checkUser, guest);
 router.use('/event', checkUser, event);
-router.use('/openRsvp', open);
+router.use('/open', open);
 
 module.exports = router;

@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openGetEvent, openCheckin, openJoinEvent } from '../../actions/';
+import {
+  openGetEvent,
+  openCheckin,
+  openWalkin,
+  getOpenRsvp
+} from '../../actions';
 import { LOAD } from '../../helpers/Enums';
 
 class OpenEventDash extends Component {
   constructor(props) {
     super(props);
-    if (this.props.event === LOAD.NOTHING)
-      this.props.getEvent(this.props.match.params.id);
+    this.props.getEvent(this.props.match.params.id);
     this.getEventOutput = this.getEventOutput.bind(this);
+    this.getRsvpOutput = this.getRsvpOutput.bind(this);
     this.handleGeneral = this.handleGeneral.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      id: ''
+      name: ''
     };
-  }
-
-  componentWillMount() {
-    this.props.getEvent(this.props.match.params.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ out: this.getEventOutput(nextProps) });
   }
 
   handleGeneral(e) {
@@ -31,33 +28,34 @@ class OpenEventDash extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    this.props.joinEvent(this.props.event.code, this.state.id);
-
-    this.setState({ id: '' });
+    this.props.walkin(this.props.event, this.state.name);
     this.props.history.push('/');
   }
 
-  getEventOutput(props) {
-    switch (props.event) {
+  getRsvpOutput() {
+    return <div>{/*{this.props.rsvps}*/}</div>;
+  }
+
+  getEventOutput() {
+    switch (this.props.event) {
       case LOAD.LOADING:
         return <h3>LOADING</h3>;
       case LOAD.NOTHING:
-        return <h3>Event with ID {props.match.params.id} does not exist!</h3>;
+        return <h3>Event with this url does not exist!</h3>;
       default:
         return (
           <div>
             <div>
-              <div>Event: {props.event.name}</div>
-              <div>Event Code: {props.event.code}</div>
-              <div>Info: {props.event.info}</div>
+              <div>Event: {this.props.event.name}</div>
+              <div>Info: {this.props.event.info}</div>
             </div>
             <form onSubmit={this.handleSubmit} id="open-checkin">
               <label>
-                GTID:
+                Name:
+                {this.getRsvpOutput()}
                 <input
                   type="text"
-                  name="id"
+                  name="name"
                   value={this.state.id}
                   onChange={this.handleGeneral}
                   required
@@ -73,10 +71,9 @@ class OpenEventDash extends Component {
   }
 
   render() {
-    const out = this.getEventOutput(this.props);
     return (
       <div className="container-fluid container">
-        <div>{out}</div>
+        <div>{this.getEventOutput()}</div>
       </div>
     );
   }
@@ -84,14 +81,17 @@ class OpenEventDash extends Component {
 
 const mapStateToProps = state => {
   return {
-    event: state.openRsvp.event
+    event: state.event.selected,
+    rsvps: state.open.openRsvp
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     getEvent: openGetEvent,
-    joinEvent: openJoinEvent
+    getRsvps: getOpenRsvp,
+    checkin: openCheckin,
+    walkin: openWalkin
   };
 };
 

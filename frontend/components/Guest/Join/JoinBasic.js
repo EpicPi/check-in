@@ -12,7 +12,7 @@ class JoinBasic extends Component {
 
   handleConfirm(e) {
     e.preventDefault();
-    this.props.joinEvent(this.props.eventToJoin);
+    this.props.checkin(this.props.eventToJoin);
     this.props.history.push('/guest');
   }
 
@@ -36,7 +36,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    joinEvent: joinEvent,
+    checkin: joinEvent,
     resetJoin: resetJoinFind
   };
 };

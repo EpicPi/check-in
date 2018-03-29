@@ -14,7 +14,9 @@ import {
   SELECT_EVENT,
   OPEN_GET_RSVP,
   OPEN_GOT_RSVP,
-  OPEN_UPDATE_RSVP
+  OPEN_UPDATE_RSVP,
+  OPEN_GET_EVENT,
+  OPEN_GOT_EVENT
 } from '../actions/types';
 import { eventInitial } from './initialState';
 import { LOAD } from '../helpers/Enums';
@@ -40,6 +42,13 @@ export default function(state = eventInitial, action) {
       return { ...state, selectedAttends: action.payload };
     case RESET_EVENT:
       return eventInitial;
+    case OPEN_GET_EVENT:
+      return { ...state, selected: LOAD.LOADING };
+    case OPEN_GOT_EVENT:
+      return {
+        ...state,
+        selected: action.payload ? action.payload : LOAD.NOTHING
+      };
     default:
       return state;
   }

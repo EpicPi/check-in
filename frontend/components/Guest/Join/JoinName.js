@@ -15,7 +15,7 @@ class JoinName extends Component {
 
   handleConfirm(e) {
     e.preventDefault();
-    this.props.joinEvent(this.props.eventToJoin, this.state.name);
+    this.props.checkin(this.props.eventToJoin, this.state.name);
     this.props.history.push('/guest');
   }
 
@@ -65,7 +65,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    joinEvent: joinEvent,
+    checkin: joinEvent,
     resetJoin: resetJoinFind
   };
 };

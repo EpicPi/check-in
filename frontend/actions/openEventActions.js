@@ -13,27 +13,35 @@ import axios from 'axios/index';
 
 export const openGetEvent = code => async dispatch => {
   dispatch({ type: OPEN_GET_EVENT });
-  const res = await axios.get('/api/openRsvp/get_event', {
+  const res = await axios.get('/api/open/get_event', {
     params: { code: code }
   });
   dispatch({ type: OPEN_GOT_EVENT, payload: res.data });
+  dispatch(getOpenRsvp(res.data));
 };
 
-export const openJoinEvent = (code, id) => async dispatch => {
+export const openCheckin = (event, id) => async dispatch => {
   const res = await axios.post(
-    '/api/openRsvp/join',
-    qs.stringify({ code: code, id: id })
+    '/api/open/check_in',
+    qs.stringify({ event: event._id, id: id })
   );
-  // TODO: checkCode successfully joined or not
-  dispatch({ type: OPEN_JOIN_EVENT, payload: res.data });
+  // dispatch({ type: OPEN_JOIN_EVENT, payload:  });
+};
+
+export const openWalkin = (event, name) => async dispatch => {
+  const res = await axios.post(
+    '/api/open/walk_in',
+    qs.stringify({ event: event._id, name: name })
+  );
 };
 
 export const getOpenRsvp = event => async disptch => {
+  console.log('getting');
   if (!event._id) disptch({ type: OPEN_GOT_RSVP, payload: [] });
   else {
     disptch({ type: OPEN_GET_RSVP });
     const res = await axios.post(
-      '/api/openRsvp/rsvp',
+      '/api/open/rsvp',
       qs.stringify({ id: event._id })
     );
     disptch({ type: OPEN_GOT_RSVP, payload: res.data });
