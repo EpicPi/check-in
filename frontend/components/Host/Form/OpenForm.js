@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getOpenRsvp, updateOpenRsvp } from '../../../actions';
 import parse from 'csv-parse/lib/sync';
 import { LOAD } from '../../../helpers/Enums';
+import { openEventUrl } from '../../../assets/text';
 
 class OpenForm extends Component {
   constructor(props) {
@@ -111,9 +112,7 @@ class OpenForm extends Component {
           <br />
           Give the following checkin link to your guests:
           <br />
-          <p className="fakeLink">
-            {'http://eventensure.com/event/' + this.props.code}
-          </p>
+          <p className="fakeLink">{openEventUrl + this.props.code}</p>
         </div>
       );
     }

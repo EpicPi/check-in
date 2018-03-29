@@ -1,5 +1,6 @@
 //host
 export const codeAvailable = 'Code is available';
+export const openEventUrl = 'http://eventensure.com/event/';
 
 //guest
 export const checkingCode = 'Checking code';

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { isEventActive, isEventClosed } from '../../../helpers/Time';
 import { EVENT_TYPES } from '../../../helpers/Enums';
+import { openEventUrl } from '../../../assets/text';
 
 class EventItem extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class EventItem extends Component {
         <div className="row">
           <div className="col-md-12">
             <span className="fakeLink">
-              {'http://eventensure.com/event/' + this.props.event.code}
+              {openEventUrl + this.props.event.code}
             </span>
           </div>
         </div>
