@@ -182,10 +182,12 @@ class BasicDetail extends Component {
               href={this.state.uriAttend}
               download={this.props.event.name + '_attends.csv'}
             >
-              download csv
+              Download csv
             </button>
           </div>
         </div>
+        <br />
+        <br />
       </div>
     );
   }

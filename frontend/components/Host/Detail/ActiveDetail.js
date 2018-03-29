@@ -60,12 +60,15 @@ class ActiveDetail extends Component {
               <br />
               <p>The following have not signed in:</p>
               {ppl.map((guest, i) => (
-                <GuestItem
-                  history={props.history}
-                  key={i}
-                  guest={guest}
-                  manualCheckin={true}
-                />
+                <div>
+                  <GuestItem
+                    history={props.history}
+                    key={i}
+                    guest={guest}
+                    manualCheckin={true}
+                  />
+                  <br />
+                </div>
               ))}
             </div>
           );
