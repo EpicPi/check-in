@@ -7,14 +7,14 @@ export const authInitial = {
 
 export const guestInitial = {
   events: LOAD.NOTHING,
-  joinFind: JOIN_FIND.NOTHING_TO_CHECK,
+  joinFind: JOIN_FIND.NOTHING,
   eventToJoin: { name: 'erger', code: 'fwwfe' },
-  checkCode: CHECK_CHECKIN.NOTHING_TO_CHECK
+  checkCode: CHECK_CHECKIN.NOTHING
 };
 
 export const hostInitial = {
   events: LOAD.NOTHING,
-  checkCode: CHECK_CODE.NOTHING_TO_CHECK
+  checkCode: CHECK_CODE.NOTHING
 };
 
 export const eventInitial = {

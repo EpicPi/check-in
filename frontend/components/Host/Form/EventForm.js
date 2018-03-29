@@ -183,7 +183,7 @@ class EventForm extends Component {
     // if editing and you dont change code from the original
     if (this.state.code === this.props.event.code) return;
     switch (this.props.checkCode) {
-      case CHECK_CODE.NOTHING_TO_CHECK:
+      case CHECK_CODE.NOTHING:
         return '';
       case CHECK_CODE.TAKEN:
         return <h3>{codeUnavaliableError}</h3>;
