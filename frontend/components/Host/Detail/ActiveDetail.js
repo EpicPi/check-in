@@ -31,6 +31,7 @@ class ActiveDetail extends Component {
   componentWillUnmount() {
     clearInterval(this.state.timer);
   }
+
   componentWillReceiveProps(props) {
     this.setState({
       notSignedIn: this.getNotSignedInOutput(props)
@@ -92,15 +93,24 @@ class ActiveDetail extends Component {
         signed in
         {this.state.notSignedIn}
         <br />
-        <button onClick={this.handleEditClick} className="btn btn-info">
-          Edit Event
-        </button>
-        <button
-          onClick={() => this.props.history.push('/host/event/basic')}
-          className="btn btn-info"
-        >
-          More Info
-        </button>
+        <div className="center-block text-center">
+          <button
+            style={{ marginRight: '5px' }}
+            onClick={this.handleEditClick}
+            className="btn btn-info"
+          >
+            Edit Event
+          </button>
+          <button
+            style={{ marginLeft: '5px' }}
+            onClick={() => this.props.history.push('/host/event/basic')}
+            className="btn btn-info"
+          >
+            More Info
+          </button>
+        </div>
+        <br />
+        <br />
       </div>
     );
   }

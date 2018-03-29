@@ -201,13 +201,21 @@ class EventForm extends Component {
         return;
       case EVENT_TYPES.CODE:
         return (
-          <CodeForm
-            handleInput={this.handleUpperCase}
-            checkinCode={this.state.checkinCode}
-          />
+          <div>
+            <CodeForm
+              handleInput={this.handleUpperCase}
+              checkinCode={this.state.checkinCode}
+            />
+          </div>
         );
       case EVENT_TYPES.OPEN:
-        return <OpenForm />;
+        return (
+          <div>
+            <OpenForm code={this.state.code} />
+            <br />
+            <br />
+          </div>
+        );
     }
   }
 
@@ -337,24 +345,22 @@ class EventForm extends Component {
 
                 {this.getEventTypeOutput()}
 
-                <br />
-                <br />
                 <div className="center-block text-center">
                   <button
                     type="submit"
                     value="Submit"
-                    className="btn btn-primary p"
-                    style={{ marginRight: '5px', marginBottom: '30px' }}
+                    className="btn btn-primary buttonLeft"
                   >
                     Submit
                   </button>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger buttonRight"
                     onClick={() => this.props.history.push('/host')}
-                    style={{ marginLeft: '5px', marginBottom: '30px' }}
                   >
                     Cancel
                   </button>
+                  <br />
+                  <br />
                 </div>
               </form>
             </div>

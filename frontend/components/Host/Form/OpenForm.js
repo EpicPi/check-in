@@ -14,6 +14,7 @@ class OpenForm extends Component {
     this.addGuestsFromFile = this.addGuestsFromFile.bind(this);
     this.deleteGuests = this.deleteGuests.bind(this);
     this.changeGuest = this.changeGuest.bind(this);
+    this.getUrlOutPut = this.getUrlOutPut.bind(this);
     const that = this;
     this.reader = new FileReader();
     this.reader.onloadend = function(evt) {
@@ -104,10 +105,27 @@ class OpenForm extends Component {
     }
   }
 
+  getUrlOutPut() {
+    if (this.props.code) {
+      return (
+        <div>
+          <br />
+          Give the following checkin link to your guests:
+          <br />
+          <p className="fakeLink">
+            {'http://eventensure.com/event/' + this.props.code}
+          </p>
+          <br />
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="row">
         <div className="col-md-12">
+          {this.getUrlOutPut()}
           <input
             className="form-group"
             type="file"
