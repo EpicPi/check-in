@@ -73,10 +73,9 @@ class OpenForm extends Component {
   getGuestsOutput() {
     switch (this.props.openRsvp) {
       case LOAD.LOADING:
-        return '';
-      case LOAD.NOTHING:
-        return ''; //not needed?
+        return 'LOADING';
       default:
+        if (this.props.openRsvp.length === 0) return <br />;
         return this.props.openRsvp.map((guest, i) => (
           <div className="form-group row" key={i}>
             <label className="col-md-2 col-form-label">Name</label>
