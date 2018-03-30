@@ -23,7 +23,7 @@ export const openGetEvent = code => async dispatch => {
 export const openCheckin = (event, guest) => async dispatch => {
   const res = await axios.post(
     '/api/open/check_in',
-    qs.stringify({ event: event._id, id: guest._id })
+    qs.stringify({ event: event._id, guest: guest })
   );
   // dispatch({ type: OPEN_JOIN_EVENT, payload:  });
 };

@@ -5,17 +5,14 @@ import {
   openCheckin,
   openWalkin,
   getOpenRsvp,
-  checkin,
   resetCheckin,
   checkCheckinCode
 } from '../../actions';
-import { CHECK_CHECKIN, EVENT_TYPES, LOAD } from '../../helpers/Enums';
+import { CHECK_CHECKIN, LOAD } from '../../helpers/Enums';
 import { isEventActive } from '../../helpers/Time';
 import {
-  checkedInMessage,
   checkInCodeLabel,
   checkingCheckin,
-  confirmButton,
   invalidCodeError
 } from '../../assets/text';
 
@@ -100,7 +97,7 @@ class OpenEventDash extends Component {
 
   getRsvpOutput() {
     return this.props.rsvps.map(guest => (
-      <option value={guest} key={guest._id}>
+      <option value={guest._id} key={guest._id}>
         {guest.name}
       </option>
     ));
@@ -143,7 +140,7 @@ class OpenEventDash extends Component {
                 className="form-control"
                 type="text"
                 name="code"
-                value={this.state.checkinCode}
+                // value={this.state.checkinCode}
                 onChange={this.handleCheckInCodeInput}
                 required
               />
@@ -170,12 +167,12 @@ class OpenEventDash extends Component {
               <label className="col-md-2 col-form-label">Name</label>
               <div className="col-md-3">
                 <select
-                  value={this.state.guest.name}
                   onChange={this.handleGeneral}
                   name="guest"
                   className="form-control"
+                  value={this.state.guest}
                 >
-                  <option value={null} key={1} />
+                  <option value={12} key={1} />
                   {this.getRsvpOutput()}
                 </select>
               </div>
