@@ -120,7 +120,7 @@ class ActiveDetail extends Component {
         ' out of ' +
         (this.props.rsvps.length +
           this.props.attends.filter(el => !ids.includes(el._id)).length) +
-        ' people havesigned in'
+        ' people have signed in'
       );
     }
   }
