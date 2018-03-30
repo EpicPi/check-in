@@ -12,17 +12,14 @@ class ActiveDetail extends Component {
     this.tick = this.tick.bind(this);
     this.getTypeSpecificOutput = this.getTypeSpecificOutput.bind(this);
     this.getMessage = this.getMessage.bind(this);
+    this.getNotSignedInOutput = this.getNotSignedInOutput.bind(this);
     //gotta make the call to load them
     this.props.getAttends(this.props.event);
     this.props.getRsvps(this.props.event);
-
-    this.state = {
-      notSignedIn: this.getNotSignedInOutput(this.props)
-    };
   }
 
   componentDidMount() {
-    let timer = setInterval(this.tick, 7000);
+    let timer = setInterval(this.tick, 1000);
     this.setState({ timer });
   }
 
@@ -34,38 +31,30 @@ class ActiveDetail extends Component {
     clearInterval(this.state.timer);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
-      notSignedIn: this.getNotSignedInOutput(props)
-    });
-  }
-
   handleEditClick() {
     this.props.history.push('/host/edit');
   }
 
-  getNotSignedInOutput(props) {
-    switch (props.rsvps) {
+  getNotSignedInOutput() {
+    switch (this.props.rsvps) {
       case LOAD.LOADING:
         return <h6>LOADING</h6>;
       case LOAD.NOTHING:
         return;
       default:
-        const ids = props.attends.map(person => person._id);
+        const ids = this.props.attends.map(person => person._id);
 
-        const ppl = props.rsvps.filter(person => {
+        const ppl = this.props.rsvps.filter(person => {
           return !ids.includes(person._id);
         });
         if (ppl.length > 0)
           return (
             <div>
               <br />
-              <p>The following have not signed in:</p>
               {ppl.map((guest, i) => (
-                <div>
+                <div key={i}>
                   <GuestItem
-                    history={props.history}
-                    key={i}
+                    history={this.props.history}
                     guest={guest}
                     manualCheckin={true}
                   />
@@ -127,9 +116,10 @@ class ActiveDetail extends Component {
     ) {
       const ids = this.props.rsvps.map(person => person._id);
       return (
-        this.props.attends.filter(el => ids.includes(el.id)).length +
+        this.props.attends.length +
         ' out of ' +
-        this.props.rsvps.length +
+        (this.props.rsvps.length +
+          this.props.attends.filter(el => !ids.includes(el._id)).length) +
         ' people havesigned in'
       );
     }
@@ -147,7 +137,8 @@ class ActiveDetail extends Component {
         </div>
         {this.getTypeSpecificOutput()}
         {this.getMessage()}
-        {this.state.notSignedIn}
+        <p>The following have not signed in:</p>
+        {this.getNotSignedInOutput()}
         <br />
         <div className="center-block text-center">
           <button

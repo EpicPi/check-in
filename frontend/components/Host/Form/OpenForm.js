@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOpenRsvp, updateOpenRsvp } from '../../../actions';
+import { getOpenRsvp, getOpenRsvpFull, updateOpenRsvp } from '../../../actions';
 import parse from 'csv-parse/lib/sync';
 import { LOAD } from '../../../helpers/Enums';
 import { openEventUrl } from '../../../assets/text';
@@ -164,7 +164,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getOpenRsvp: getOpenRsvp,
+    getOpenRsvp: getOpenRsvpFull,
     updateOpenRsvp: updateOpenRsvp
   };
 };

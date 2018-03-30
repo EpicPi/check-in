@@ -34,13 +34,24 @@ export const openWalkin = (event, name) => async dispatch => {
     qs.stringify({ event: event._id, name: name })
   );
 };
-
+//only returns the not signed in ones
 export const getOpenRsvp = event => async disptch => {
   if (!event._id) disptch({ type: OPEN_GOT_RSVP, payload: [] });
   else {
     disptch({ type: OPEN_GET_RSVP });
     const res = await axios.post(
       '/api/open/rsvp',
+      qs.stringify({ id: event._id })
+    );
+    disptch({ type: OPEN_GOT_RSVP, payload: res.data });
+  }
+};
+export const getOpenRsvpFull = event => async disptch => {
+  if (!event._id) disptch({ type: OPEN_GOT_RSVP, payload: [] });
+  else {
+    disptch({ type: OPEN_GET_RSVP });
+    const res = await axios.post(
+      '/api/open/rsvp_full',
       qs.stringify({ id: event._id })
     );
     disptch({ type: OPEN_GOT_RSVP, payload: res.data });

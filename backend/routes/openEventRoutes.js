@@ -44,8 +44,11 @@ router.post('/walk_in', async (req, res) => {
 router.post('/rsvp', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
-    const pOut = event.open.guestsRSVP.map(async id => User.findById(id));
-    const out = await Promise.all(pOut);
+    let out = event.open.guestsRSVP.filter(
+      id => !event.guestsAttend.includes(id)
+    );
+    out = out.map(async id => User.findById(id));
+    out = await Promise.all(out);
     res.send(out);
   } else
     console.error(
@@ -54,5 +57,17 @@ router.post('/rsvp', async (req, res) => {
         ' in /event/rsvp'
     );
 });
-
+router.post('/rsvp_full', async (req, res) => {
+  const event = await Event.findById(req.body.id);
+  if (event) {
+    let out = event.open.guestsRSVP.map(async id => User.findById(id));
+    out = await Promise.all(out);
+    res.send(out);
+  } else
+    console.error(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body.id +
+        ' in /event/rsvp'
+    );
+});
 module.exports = router;

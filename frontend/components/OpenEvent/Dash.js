@@ -6,7 +6,8 @@ import {
   openWalkin,
   getOpenRsvp,
   resetCheckin,
-  checkCheckinCode
+  checkCheckinCode,
+  getAttends
 } from '../../actions';
 import { CHECK_CHECKIN, LOAD } from '../../helpers/Enums';
 import { isEventActive } from '../../helpers/Time';
@@ -191,6 +192,7 @@ const mapStateToProps = state => {
   return {
     event: state.event.selected,
     rsvps: state.open.openRsvp,
+    attends: state.event.attends,
     check: state.guest.checkCode
   };
 };
@@ -199,6 +201,7 @@ const mapDispatchToProps = (/* dispatch */) => {
   return {
     getEvent: openGetEvent,
     getRsvps: getOpenRsvp,
+    getAttends: getAttends,
     checkin: openCheckin,
     walkin: openWalkin,
     checkCode: checkCheckinCode,
