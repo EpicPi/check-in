@@ -11,4 +11,10 @@ export const codeUnavaliableError = 'Sorry, code is not available';
 //guest errors
 export const joinFailError = "Couldn't find, please check code";
 export const alreadyJoinedError = 'You already RSVPed for this event!';
-export const invalidCodeError = 'Code was not valid';
+export const invalidCodeError = 'You have entered the incorrect check in code';
+
+//open errors
+export const eventClosedError = 'Sorry, this event is currently closed';
+
+export const noNameEnteredError = 'Please write your name';
+export const noNameSelectedError = 'Please select a name';

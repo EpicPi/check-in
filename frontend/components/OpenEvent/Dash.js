@@ -14,7 +14,10 @@ import { isEventActive } from '../../helpers/Time';
 import {
   checkInCodeLabel,
   checkingCheckin,
-  invalidCodeError
+  eventClosedError,
+  invalidCodeError,
+  noNameEnteredError,
+  noNameSelectedError
 } from '../../assets/text';
 
 class OpenEventDash extends Component {
@@ -45,18 +48,25 @@ class OpenEventDash extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  isAllowed() {
+    if (!isEventActive(this.props.event)) {
+      alert(eventClosedError);
+      return false;
+    }
+    if (this.props.check !== CHECK_CHECKIN.SUCCESS) {
+      alert(invalidCodeError);
+      return false;
+    }
+    return true;
+  }
+
   handleWalkin(e) {
     e.preventDefault();
     if (this.state.name === '') {
-      alert('please write your name');
-      return;
+      alert(noNameEnteredError);
+      return false;
     }
-    if (!isEventActive(this.props.event)) {
-      alert('Sorry, this event is currently closed');
-      return;
-    }
-    if (this.props.check !== CHECK_CHECKIN.SUCCESS) {
-      alert('You have entered the incorrect check in code');
+    if (!this.isAllowed()) {
       return;
     }
     this.props.walkin(this.props.event, this.state.name);
@@ -65,15 +75,10 @@ class OpenEventDash extends Component {
 
   handleCheckin() {
     if (this.state.guest.name === '') {
-      alert('please choose a person');
+      alert(noNameSelectedError);
       return;
     }
-    if (!isEventActive(this.props.event)) {
-      alert('Sorry, this event is currently closed');
-      return;
-    }
-    if (this.props.check !== CHECK_CHECKIN.SUCCESS) {
-      alert('You have entered the incorrect check in code');
+    if (!this.isAllowed()) {
       return;
     }
     this.props.checkin(this.props.event, this.state.guest);
