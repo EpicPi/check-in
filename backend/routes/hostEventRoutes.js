@@ -5,6 +5,27 @@ require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
+const mapOpenUsers = async openUsers => {
+  if (!openUsers) return [];
+  const pOut = openUsers.map(async el => {
+    let usr;
+    if (el._id) {
+      usr = await User.findById(el._id);
+      usr.name = el.name;
+      usr.open = true;
+    } else {
+      usr = User({
+        name: el.name,
+        open: true
+      });
+    }
+    await usr.save();
+    return usr.id;
+  });
+  const out = await Promise.all(pOut);
+  return out;
+};
+
 router.post('/add_event', async (req, res) => {
   const event = await Event({
     name: req.body.name,
@@ -14,26 +35,16 @@ router.post('/add_event', async (req, res) => {
     guestsAttend: [],
     type: req.body.type,
     checkinCode: req.body.checkinCode.toUpperCase(),
-    info: req.body.info
+    info: req.body.info,
+    open: {
+      guestsRSVP: await mapOpenUsers(req.body.openRsvp),
+      walkin: []
+    }
   }).save();
   const user = await User.findById(req.user.id);
   user.hostEvents.push(event.id);
   user.save();
   res.send(event);
-});
-
-router.post('/remove_event', async (req, res) => {
-  const user = await User.findById(req.user.id);
-  user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
-  user.save();
-  await Event.findById(req.body._id).remove();
-});
-
-router.get('/get_events', async (req, res) => {
-  const user = await User.findById(req.user.id);
-  const pOut = user.hostEvents.map(async id => Event.findById(id));
-  const out = await Promise.all(pOut);
-  res.send(out);
 });
 
 router.post('/edit_event', async (req, res) => {
@@ -46,6 +57,15 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
+    const newOpenUsers = await mapOpenUsers(req.body.openRsvp);
+    const removedUsers = event.open.guestsRSVP.filter(
+      el => !newOpenUsers.includes(el)
+    );
+    event.guestsAttend = event.guestsAttend.filter(
+      el => !removedUsers.includes(el)
+    );
+    removedUsers.forEach(async el => await User.findById(el).remove());
+    event.open.guestsRSVP = newOpenUsers;
     event.save();
     res.send(event);
   } else
@@ -54,6 +74,22 @@ router.post('/edit_event', async (req, res) => {
         req.body.id +
         ' in /guest/checkin'
     );
+});
+
+router.post('/remove_event', async (req, res) => {
+  const user = await User.findById(req.user.id);
+  user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
+  user.save();
+  const event = await Event.findById(req.body._id);
+  event.open.guestsRSVP.forEach(async el => await User.findById(el).remove());
+  event.remove();
+});
+
+router.get('/get_events', async (req, res) => {
+  const user = await User.findById(req.user.id);
+  const pOut = user.hostEvents.map(async id => Event.findById(id));
+  const out = await Promise.all(pOut);
+  res.send(out);
 });
 
 router.post('/check_code', async (req, res) => {

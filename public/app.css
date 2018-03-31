@@ -92,3 +92,15 @@
 .guest-join {
   margin: 10px;
 }
+
+.buttonLeft {
+  margin-right: 5px;
+}
+.buttonRight {
+  margin-left: 5px;
+}
+.fakeLink {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}

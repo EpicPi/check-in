@@ -4,6 +4,13 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { CHECK_CHECKIN } from '../../../helpers/Enums';
 import { resetCheckin } from '../../../actions';
+import {
+  checkedInMessage,
+  checkInCodeLabel,
+  checkingCheckin,
+  confirmButton,
+  invalidCodeError
+} from '../../../assets/text';
 
 class CheckinCode extends Component {
   constructor(props) {
@@ -19,7 +26,7 @@ class CheckinCode extends Component {
   componentDidUpdate() {
     console.log(this.props.check);
     if (this.props.check === CHECK_CHECKIN.SUCCESS) {
-      alert('checked in');
+      alert(checkedInMessage);
       this.props.history.push('/guest');
       this.props.checkin(this.props.event);
     }
@@ -41,9 +48,9 @@ class CheckinCode extends Component {
   getCheckCheckInOutput() {
     switch (this.props.check) {
       case CHECK_CHECKIN.FAIL:
-        return <h3>Code was not valid</h3>;
+        return <h3>{invalidCodeError}</h3>;
       case CHECK_CHECKIN.CHECKING:
-        return <h3>Checking</h3>;
+        return <h3>{checkingCheckin}</h3>;
       default:
         return;
     }
@@ -55,7 +62,9 @@ class CheckinCode extends Component {
         <div className="col-md-12">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group row">
-              <label className="col-md-3 col-form-label">Check In Code</label>
+              <label className="col-md-3 col-form-label">
+                {checkInCodeLabel}
+              </label>
               <div className="col-md-9">
                 <input
                   className="form-control"
@@ -74,7 +83,7 @@ class CheckinCode extends Component {
                   type="submit"
                   value="submit"
                 >
-                  Confirm
+                  {confirmButton}
                 </button>
               </div>
             </div>

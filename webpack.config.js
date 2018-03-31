@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 const isDevServer = process.argv.find(v => v.includes('webpack-dev-server'));
-
 const common = {
   //common
   entry: ['./frontend/index'],
@@ -11,13 +10,13 @@ const common = {
       { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.s?css$/, loader: 'style-loader!css-loader!sass-loader' },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(png|jp(e*)g|svg)$/,
         use: [
-          'file-loader',
           {
-            loader: 'image-webpack-loader',
+            loader: 'url-loader',
             options: {
-              bypassOnDebug: true
+              limit: 8000, // Convert images < 8kb to base64 strings
+              name: 'images/[hash]-[name].[ext]'
             }
           }
         ]
@@ -63,11 +62,6 @@ if (isDevServer) {
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production')
-        }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
         }
       })
     ]

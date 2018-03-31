@@ -1,102 +1,110 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import RsvpInput from './RsvpInput';
+import OpenForm from './OpenForm';
+import CodeForm from './CodeForm';
 import {
   createEvent,
   checkSignupCode,
-  editEvent
-} from '../../../actions/index';
+  editEvent,
+  resetSignupCode
+} from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES, LOAD } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
-  dateTimeToDateString,
-  dateStringToHours,
-  dateStringToDate,
-  getCurrentDate
+  getCurrentDate,
+  dateToString,
+  dateTimeToDate,
+  timeInputFormat,
+  dateInputFormat
 } from '../../../helpers/Time';
-import { resetSignupCode } from '../../../actions/index';
-import { clearGuests, updateRsvps } from '../../../actions';
-
-const initialState = {
-  eventName: '',
-  code: '',
-  info: '',
-  rsvpStart: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  rsvpEnd: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  checkinStart: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  checkinEnd: {
-    time: '00:00',
-    date: getCurrentDate()
-  },
-  type: EVENT_TYPES.BASIC,
-  checkinCode: ''
-};
+import {
+  checkinEndTimeError,
+  checkinOpenTimeError,
+  codeTakenError,
+  rsvpEndTimeError,
+  codeAvailable,
+  codeUnavaliableError
+} from '../../../assets/text';
+import { getOpenRsvp } from '../../../actions';
 
 class EventForm extends Component {
   constructor(props) {
     super(props);
     this.handleGeneral = this.handleGeneral.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
-    this.getSelectOutput = this.getSelectOutput.bind(this);
+    this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
 
-    if (this.props.add) {
-      this.state = initialState;
-      this.props.clearGuests();
-    } else {
+    if (this.props.add)
+      this.state = {
+        eventName: '',
+        code: '',
+        info: '',
+        rsvpStart: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        rsvpEnd: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        checkinStart: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        checkinEnd: {
+          time: '00:00',
+          date: getCurrentDate()
+        },
+        type: EVENT_TYPES.BASIC,
+        checkinCode: ''
+      };
+    else
       this.state = {
         eventName: this.props.event.name,
         code: this.props.event.code,
         info: this.props.event.info,
         rsvpStart: {
-          time: dateStringToHours(this.props.event.dates.rsvpStart),
-          date: dateStringToDate(this.props.event.dates.rsvpStart)
+          time: timeInputFormat(this.props.event.dates.rsvpStart),
+          date: dateInputFormat(this.props.event.dates.rsvpStart)
         },
         rsvpEnd: {
-          time: dateStringToHours(this.props.event.dates.rsvpEnd),
-          date: dateStringToDate(this.props.event.dates.rsvpEnd)
+          time: timeInputFormat(this.props.event.dates.rsvpEnd),
+          date: dateInputFormat(this.props.event.dates.rsvpEnd)
         },
         checkinStart: {
-          time: dateStringToHours(this.props.event.dates.checkinStart),
-          date: dateStringToDate(this.props.event.dates.checkinStart)
+          time: timeInputFormat(this.props.event.dates.checkinStart),
+          date: dateInputFormat(this.props.event.dates.checkinStart)
         },
         checkinEnd: {
-          time: dateStringToHours(this.props.event.dates.checkinEnd),
-          date: dateStringToDate(this.props.event.dates.checkinEnd)
+          time: timeInputFormat(this.props.event.dates.checkinEnd),
+          date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode
       };
-    }
   }
 
   componentWillUpdate(props, state) {
+    // if editing and you changed from initial or if you are creating
     if (state.code !== props.event.code && state.code !== this.state.code)
-      // if editing and you dont change
       props.hostCheckCode(state.code);
   }
 
   componentWillUnmount() {
-    this.props.resetEvent();
-    this.props.clearGuests();
+    this.props.resetSignup();
   }
 
   handleGeneral(e) {
     let value = e.target.value;
-    if (e.target.name === 'code' || e.target.name === 'checkinCode') {
-      value = value.toUpperCase();
-    }
+    this.setState({ [e.target.name]: value });
+  }
+
+  handleUpperCase(e) {
+    let value = e.target.value.toUpperCase();
     this.setState({ [e.target.name]: value });
   }
 
@@ -116,128 +124,102 @@ class EventForm extends Component {
       this.props.checkCode !== CHECK_CODE.AVAILABLE &&
       this.state.code !== this.props.event.code
     ) {
-      alert('Please enter a different code');
+      alert(codeTakenError);
       return;
     }
-    const rsvpEnd = new Date(
-      dateTimeToDateString(this.state.rsvpEnd.date, this.state.rsvpEnd.time)
+    const rsvpEnd = dateTimeToDate(
+      this.state.rsvpEnd.date,
+      this.state.rsvpEnd.time
     );
-    const rsvpStart = new Date(
-      dateTimeToDateString(this.state.rsvpStart.date, this.state.rsvpStart.time)
+    const rsvpStart = dateTimeToDate(
+      this.state.rsvpStart.date,
+      this.state.rsvpStart.time
     );
-    const checkinStart = new Date(
-      dateTimeToDateString(
-        this.state.checkinStart.date,
-        this.state.checkinStart.time
-      )
+    const checkinStart = dateTimeToDate(
+      this.state.checkinStart.date,
+      this.state.checkinStart.time
     );
-    const checkinEnd = new Date(
-      dateTimeToDateString(
-        this.state.checkinEnd.date,
-        this.state.checkinEnd.time
-      )
+    const checkinEnd = dateTimeToDate(
+      this.state.checkinEnd.date,
+      this.state.checkinEnd.time
     );
 
     if (rsvpEnd < rsvpStart) {
-      alert(
-        'please make sure your rsvp end time is after your rsvp start time'
-      );
+      alert(rsvpEndTimeError);
       return;
     }
     if (checkinEnd < checkinStart) {
-      alert(
-        'please make sure your checkin end time is after your checkin start time'
-      );
+      alert(checkinEndTimeError);
       return;
     }
     if (checkinStart < rsvpStart) {
-      alert(
-        'please make sure your checkin start time is after your rsvp start time'
-      );
+      alert(checkinOpenTimeError);
       return;
     }
+    console.log(this.props.openRsvp);
 
     const event = {
       ...this.props.event,
       name: this.state.eventName,
       code: this.state.code,
       dates: {
-        rsvpStart: dateTimeToDateString(
-          this.state.rsvpStart.date,
-          this.state.rsvpStart.time
-        ),
-        rsvpEnd: dateTimeToDateString(
-          this.state.rsvpEnd.date,
-          this.state.rsvpEnd.time
-        ),
-        checkinStart: dateTimeToDateString(
-          this.state.checkinStart.date,
-          this.state.checkinStart.time
-        ),
-        checkinEnd: dateTimeToDateString(
-          this.state.checkinEnd.date,
-          this.state.checkinEnd.time
-        )
+        rsvpStart: dateToString(rsvpStart),
+        rsvpEnd: dateToString(rsvpEnd),
+        checkinStart: dateToString(checkinStart),
+        checkinEnd: dateToString(checkinEnd)
       },
       type: this.state.type,
       checkinCode: this.state.checkinCode,
-      info: this.state.info
+      info: this.state.info,
+      openRsvp: this.props.openRsvp
     };
 
     if (this.props.add) this.props.addEvent(event);
     else this.props.editEvent(event);
 
-    // if type open, replace RSVP list
-    if (this.state.type === EVENT_TYPES.OPEN) {
-      this.props.updateRsvps(this.props.event, this.props.guests);
-    }
-
-    this.setState(initialState);
-
     this.props.history.push('/host');
   }
 
   getCheckCodeOutput() {
-    if (this.state.code === this.props.event.code)
-      // if editing and you dont change
-      return;
+    // if editing and you dont change code from the original
+    if (this.state.code === this.props.event.code) return;
     switch (this.props.checkCode) {
-      case CHECK_CODE.NOTHING_TO_CHECK:
+      case CHECK_CODE.NOTHING:
         return '';
       case CHECK_CODE.TAKEN:
-        return <h3>sorry code is taken</h3>;
+        return <h3>{codeUnavaliableError}</h3>;
       case CHECK_CODE.AVAILABLE:
-        return <h3>Code is avaliable</h3>;
+        return <h3>{codeAvailable}</h3>;
       case CHECK_CODE.CHECKING:
         return <h3>checking</h3>;
     }
   }
 
-  getSelectOutput() {
+  getEventTypeOutput() {
     switch (this.state.type) {
       case EVENT_TYPES.BASIC:
         return;
       case EVENT_TYPES.CODE:
         return (
-          <div className="row">
-            <div className="col-md-12">
-              <label>
-                Check In Code:
-                <div>
-                  <input
-                    type="text"
-                    name="checkinCode"
-                    value={this.state.checkinCode}
-                    onChange={this.handleGeneral}
-                    required
-                  />
-                </div>
-              </label>
-            </div>
+          <div>
+            <CodeForm
+              handleInput={this.handleUpperCase}
+              checkinCode={this.state.checkinCode}
+            />
           </div>
         );
       case EVENT_TYPES.OPEN:
-        return <RsvpInput guests={this.state.rsvps} />;
+        return (
+          <div>
+            <CodeForm
+              handleInput={this.handleUpperCase}
+              checkinCode={this.state.checkinCode}
+            />
+            <OpenForm code={this.state.code} />
+            <br />
+            <br />
+          </div>
+        );
     }
   }
 
@@ -273,7 +255,7 @@ class EventForm extends Component {
                       type="text"
                       name="code"
                       value={this.state.code}
-                      onChange={this.handleGeneral}
+                      onChange={this.handleUpperCase}
                       required
                       className="form-control"
                       autoComplete="off"
@@ -365,26 +347,24 @@ class EventForm extends Component {
                   </div>
                 </div>
 
-                {this.getSelectOutput()}
+                {this.getEventTypeOutput()}
 
-                <br />
-                <br />
                 <div className="center-block text-center">
                   <button
                     type="submit"
                     value="Submit"
-                    className="btn btn-primary p"
-                    style={{ marginRight: '5px' }}
+                    className="btn btn-primary buttonLeft"
                   >
                     Submit
                   </button>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger buttonRight"
                     onClick={() => this.props.history.push('/host')}
-                    style={{ marginLeft: '5px' }}
                   >
                     Cancel
                   </button>
+                  <br />
+                  <br />
                 </div>
               </form>
             </div>
@@ -397,20 +377,18 @@ class EventForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    event: state.event.selected,
     checkCode: state.host.checkCode,
-    guests: state.event.guests
+    event: state.event.selected,
+    openRsvp: state.open.openRsvp
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     addEvent: createEvent,
-    hostCheckCode: checkSignupCode,
     editEvent: editEvent,
-    resetEvent: resetSignupCode,
-    clearGuests: clearGuests,
-    updateRsvps: updateRsvps
+    hostCheckCode: checkSignupCode,
+    resetSignup: resetSignupCode
   };
 };
 

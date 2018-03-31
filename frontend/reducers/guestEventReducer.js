@@ -24,7 +24,7 @@ export default function(state = guestInitial, action) {
         ...state,
         events: [...state.events, action.payload],
         eventToJoin: null,
-        joinFind: JOIN_FIND.NOTHING_TO_CHECK
+        joinFind: JOIN_FIND.NOTHING
       };
     case GUEST_FIND_EVENT:
       return { ...state, joinFind: JOIN_FIND.CHECKING };
@@ -44,7 +44,7 @@ export default function(state = guestInitial, action) {
       }
       return { ...state, joinFind: jf, eventToJoin: toJoin };
     case GUEST_RESET_JOIN_FIND:
-      return { ...state, joinFind: JOIN_FIND.NOTHING_TO_CHECK };
+      return { ...state, joinFind: JOIN_FIND.NOTHING };
     case GUEST_CHECKIN:
       return state;
     case GUEST_CHECK_CHECKIN_CODE:
@@ -55,7 +55,7 @@ export default function(state = guestInitial, action) {
         checkCode: action.payload ? CHECK_CHECKIN.SUCCESS : CHECK_CHECKIN.FAIL
       };
     case GUEST_RESET_CHECKIN_CODE:
-      return { ...state, checkCode: CHECK_CHECKIN.NOTHING_TO_CHECK };
+      return { ...state, checkCode: CHECK_CHECKIN.NOTHING };
     default:
       return state;
   }

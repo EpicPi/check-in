@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GuestItem from './GuestItem';
 import { getAttends, getRsvps } from '../../../actions/index';
-import { LOAD } from '../../../helpers/Enums';
+import { EVENT_TYPES, LOAD } from '../../../helpers/Enums';
+import { openEventUrl } from '../../../assets/text';
 
 class BasicDetail extends Component {
   constructor(props) {
     super(props);
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.getTypeSpecificOutput = this.getTypeSpecificOutput.bind(this);
 
     //gotta make the call to load them
     this.props.getAttends(this.props.event);
@@ -92,10 +94,44 @@ class BasicDetail extends Component {
     }
   }
 
+  getTypeSpecificOutput() {
+    switch (this.props.event.type) {
+      case EVENT_TYPES.BASIC:
+        return;
+      case EVENT_TYPES.CODE:
+        return (
+          <div className="row">
+            <label className="col-md-2 ">Checkin Code</label>
+            <div className="col-md-9">
+              <div>{this.props.event.checkinCode}</div>
+            </div>
+          </div>
+        );
+      case EVENT_TYPES.OPEN:
+        return (
+          <div>
+            <div className="row">
+              <label className="col-md-2 ">Checkin Code</label>
+              <div className="col-md-9">
+                <div>{this.props.event.checkinCode}</div>
+              </div>
+            </div>
+            <div className="row">
+              <label className="col-md-2 ">Checkin Url</label>
+              <div className="col-md-9">
+                <div className="fakeLink">
+                  {openEventUrl + this.props.event.code}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+    }
+  }
+
   render() {
     return (
       <div>
-        Basic
         <div className="row">
           <div className="col-md-12">
             <br />
@@ -104,7 +140,7 @@ class BasicDetail extends Component {
           </div>
         </div>
         <div className="row">
-          <label className="col-md-2 ">Code</label>
+          <label className="col-md-2 ">Join Code</label>
           <div className="col-md-9">
             <div>{this.props.event.code}</div>
           </div>
@@ -147,6 +183,7 @@ class BasicDetail extends Component {
             </div>
           </div>
         </div>
+        {this.getTypeSpecificOutput()}
         <br />
         <button onClick={this.handleEditClick} className="btn btn-info">
           Edit Event
@@ -183,10 +220,12 @@ class BasicDetail extends Component {
               href={this.state.uriAttend}
               download={this.props.event.name + '_attends.csv'}
             >
-              download csv
+              Download csv
             </button>
           </div>
         </div>
+        <br />
+        <br />
       </div>
     );
   }

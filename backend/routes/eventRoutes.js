@@ -9,7 +9,10 @@ router.post('/rsvp', async (req, res) => {
   const event = await Event.findById(req.body.id);
 
   if (event) {
-    const pOut = event.guestsRSVP.map(async id => User.findById(id));
+    let pOut = event.guestsRSVP.map(async id => User.findById(id));
+    pOut = pOut.concat(
+      event.open.guestsRSVP.map(async id => User.findById(id))
+    );
     const out = await Promise.all(pOut);
     res.send(out);
   } else
@@ -34,31 +37,5 @@ router.post('/attend', async (req, res) => {
     );
 });
 
-/**
- * replaces the current guestsRSVP with the given rsvp
- * creates list of new users with name
- */
-router.post('/update', async (req, res) => {
-  const event = await Event.findById(req.body.id);
-  event.guestsRSVP = [];
-  if (event) {
-    // split based on end of line
-    let rsvps = req.body.rsvps;
-    for (let ind in rsvps) {
-      const guest = await User({
-        name: rsvps[ind]
-      }).save();
-      event.guestsRSVP.push(guest);
-    }
-    event.save();
-    res.send(event);
-  } else {
-    console.error(
-      '[ERR] Event was not found. Passed in id: ' +
-        req.body.id +
-        ' in /event/replace'
-    );
-  }
-});
-
 module.exports = router;
+//5abc4dec3183a126b636b60c

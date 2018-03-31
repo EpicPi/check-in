@@ -1,8 +1,11 @@
 import * as qs from 'qs';
 import {
   OPEN_GET_EVENT,
+  OPEN_GET_RSVP,
   OPEN_GOT_EVENT,
+  OPEN_GOT_RSVP,
   OPEN_JOIN_EVENT,
+  OPEN_UPDATE_RSVP,
   UPDATE_RSVPS,
   UPDATED_RSVPS
 } from './types';
@@ -14,13 +17,47 @@ export const openGetEvent = code => async dispatch => {
     params: { code: code }
   });
   dispatch({ type: OPEN_GOT_EVENT, payload: res.data });
+  dispatch(getOpenRsvp(res.data));
 };
 
-export const openJoinEvent = (code, id) => async dispatch => {
+export const openCheckin = (event, guest) => async dispatch => {
   const res = await axios.post(
-    '/api/open/join',
-    qs.stringify({ code: code, id: id })
+    '/api/open/check_in',
+    qs.stringify({ event: event._id, guest: guest })
   );
-  // TODO: checkCode successfully joined or not
-  dispatch({ type: OPEN_JOIN_EVENT, payload: res.data });
+  // dispatch({ type: OPEN_JOIN_EVENT, payload:  });
+};
+
+export const openWalkin = (event, name) => async dispatch => {
+  const res = await axios.post(
+    '/api/open/walk_in',
+    qs.stringify({ event: event._id, name: name })
+  );
+};
+//only returns the not signed in ones
+export const getOpenRsvp = event => async disptch => {
+  if (!event._id) disptch({ type: OPEN_GOT_RSVP, payload: [] });
+  else {
+    disptch({ type: OPEN_GET_RSVP });
+    const res = await axios.post(
+      '/api/open/rsvp',
+      qs.stringify({ id: event._id })
+    );
+    disptch({ type: OPEN_GOT_RSVP, payload: res.data });
+  }
+};
+export const getOpenRsvpFull = event => async disptch => {
+  if (!event._id) disptch({ type: OPEN_GOT_RSVP, payload: [] });
+  else {
+    disptch({ type: OPEN_GET_RSVP });
+    const res = await axios.post(
+      '/api/open/rsvp_full',
+      qs.stringify({ id: event._id })
+    );
+    disptch({ type: OPEN_GOT_RSVP, payload: res.data });
+  }
+};
+
+export const updateOpenRsvp = update => async dispatch => {
+  dispatch({ type: OPEN_UPDATE_RSVP, payload: update });
 };

@@ -42,7 +42,10 @@ export const CHANGE_GUEST = 'change_guest';
 export const ADD_GUEST = 'add_guest';
 export const CLEAR_GUEST = 'clear_guest';
 
-// open event types
+// openRsvp event types
 export const OPEN_GET_EVENT = 'open_get_event';
 export const OPEN_GOT_EVENT = 'open_got_event';
 export const OPEN_JOIN_EVENT = 'open_join_event';
+export const OPEN_GET_RSVP = 'open_get_rsvp';
+export const OPEN_GOT_RSVP = 'open_got_rsvp';
+export const OPEN_UPDATE_RSVP = 'open_update_rsvp';

@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  dateInputFormat,
-  dateStringToDate,
-  dateStringToHours,
-  timeInputFormat
-} from './Time';
+import { dateInputFormat, timeInputFormat } from './Time';
 
 // const TODAY = new Date().toISOString().slice(0,10);
 

@@ -51,7 +51,7 @@ export default function(state = hostInitial, action) {
         checkCode: action.payload ? CHECK_CODE.AVAILABLE : CHECK_CODE.TAKEN
       };
     case HOST_RESET_SIGNUP_EVENT:
-      return { ...state, checkCode: CHECK_CODE.NOTHING_TO_CHECK };
+      return { ...state, checkCode: CHECK_CODE.NOTHING };
     case HOST_CHECKIN:
       return state;
     default:

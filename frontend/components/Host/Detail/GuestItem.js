@@ -25,8 +25,7 @@ class GuestItem extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-2">Name</div>
-        <div className="col-md-5">{this.props.guest.name}</div>
+        <div className="col-md-3">{this.props.guest.name}</div>
         {this.getManualCheckinOutput()}
         <br />
       </div>

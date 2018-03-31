@@ -12,10 +12,10 @@ class CheckIn extends Component {
 
   getCheckinScreen() {
     switch (this.props.event.type) {
-      case EVENT_TYPE.CODE:
-        return <CheckinCode history={this.props.history} />;
-      default:
+      case EVENT_TYPE.BASIC:
         return <CheckinBasic history={this.props.history} />;
+      default:
+        return <CheckinCode history={this.props.history} />;
     }
   }
   render() {

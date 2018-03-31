@@ -11,7 +11,12 @@ import {
   UPDATE_RSVPS,
   UPDATED_RSVPS,
   RESET_EVENT,
-  SELECT_EVENT
+  SELECT_EVENT,
+  OPEN_GET_RSVP,
+  OPEN_GOT_RSVP,
+  OPEN_UPDATE_RSVP,
+  OPEN_GET_EVENT,
+  OPEN_GOT_EVENT
 } from '../actions/types';
 import { eventInitial } from './initialState';
 import { LOAD } from '../helpers/Enums';
@@ -37,34 +42,12 @@ export default function(state = eventInitial, action) {
       return { ...state, selectedAttends: action.payload };
     case RESET_EVENT:
       return eventInitial;
-    case REPLACE_ALL_RSVPS:
-      return { ...state, guests: action.payload };
-    case UPDATE_RSVPS:
-      return { ...state, guests: LOAD.LOADING };
-    case REMOVE_GUEST:
-      let removed_guests = [
-        ...state.guests.slice(0, action.payload),
-        ...state.guests.slice(action.payload + 1)
-      ];
-      return { ...state, guests: removed_guests };
-    case CHANGE_GUEST:
-      let change_guests = [
-        ...state.guests.slice(0, action.payload.ind),
-        action.payload.guest,
-        ...state.guests.slice(action.payload.ind + 1)
-      ];
-      return { ...state, guests: change_guests };
-    case ADD_GUEST:
-      let add_guest = [...state.guests, ''];
-      return { ...state, guests: add_guest };
-    case CLEAR_GUEST:
-      return { ...state, guests: [] };
-    case UPDATED_RSVPS:
+    case OPEN_GET_EVENT:
+      return { ...state, selected: LOAD.LOADING };
+    case OPEN_GOT_EVENT:
       return {
         ...state,
-        event: action.payload,
-        selectedRsvps: action.payload.guestsRSVP,
-        guests: LOAD.NOTHING
+        selected: action.payload ? action.payload : LOAD.NOTHING
       };
     default:
       return state;

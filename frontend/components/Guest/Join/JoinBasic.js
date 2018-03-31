@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { joinEvent, resetJoinFind } from '../../../actions/index';
+import { confirmationPrompt, confirmButton } from '../../../assets/text';
 
 class JoinBasic extends Component {
   constructor(props) {
@@ -11,16 +12,16 @@ class JoinBasic extends Component {
 
   handleConfirm(e) {
     e.preventDefault();
-    this.props.joinEvent(this.props.eventToJoin);
+    this.props.checkin(this.props.eventToJoin);
     this.props.history.push('/guest');
   }
 
   render() {
     return (
       <div>
-        <h3>Please confirm RSVP for {this.props.eventToJoin.name}</h3>
+        <h3>{confirmationPrompt + this.props.eventToJoin.name}</h3>
         <button onClick={this.handleConfirm} className="btn btn-success">
-          Confirm
+          {confirmButton}
         </button>
       </div>
     );
@@ -35,7 +36,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    joinEvent: joinEvent,
+    checkin: joinEvent,
     resetJoin: resetJoinFind
   };
 };
