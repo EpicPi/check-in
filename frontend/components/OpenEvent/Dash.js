@@ -35,7 +35,7 @@ class OpenEventDash extends Component {
 
     this.state = {
       name: '',
-      guest: { name: '' },
+      guest: '0',
       checkinCode: ''
     };
   }
@@ -74,7 +74,8 @@ class OpenEventDash extends Component {
   }
 
   handleCheckin() {
-    if (this.state.guest.name === '') {
+    console.log(this.state.guest);
+    if (this.state.guest === '0') {
       alert(noNameSelectedError);
       return;
     }
@@ -178,7 +179,7 @@ class OpenEventDash extends Component {
                   className="form-control"
                   value={this.state.guest}
                 >
-                  <option value={12} key={1} />
+                  <option value={'0'} key={1} />
                   {this.getRsvpOutput()}
                 </select>
               </div>
