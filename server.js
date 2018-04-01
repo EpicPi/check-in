@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
-require('./backend/models/user');
+require('./backend/models');
 require('./backend/services/passport');
 const keys = require('./backend/config/keys');
 const api = require('./backend/routes/');

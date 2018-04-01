@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const router = require('express').Router();
-require('../models/event');
-require('../models/user');
 const Event = mongoose.model('events');
 const User = mongoose.model('users');
 

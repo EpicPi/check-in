@@ -5,7 +5,7 @@ const groupSchema = new Schema({
   name: String,
   code: String,
   events: [],
-  hosts: []
+  users: []
 });
 
 mongoose.model('groups', groupSchema);
