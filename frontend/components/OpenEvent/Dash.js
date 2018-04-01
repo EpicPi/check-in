@@ -20,7 +20,7 @@ import {
   noNameSelectedError
 } from '../../assets/text';
 
-class OpenEventDash extends Component {
+class Dash extends Component {
   constructor(props) {
     super(props);
     this.props.getEvent(this.props.match.params.id);
@@ -134,6 +134,28 @@ class OpenEventDash extends Component {
     );
   }
 
+  getCheckinOutput() {
+    return (
+      <div className="form-group row">
+        <label className="col-md-2 col-form-label">Name</label>
+        <div className="col-md-3">
+          <select
+            onChange={this.handleGeneral}
+            name="guest"
+            className="form-control"
+            value={this.state.guest}
+          >
+            <option value={'0'} key={1} />
+            {this.getRsvpOutput()}
+          </select>
+        </div>
+        <button className="btn btn-success" onClick={this.handleCheckin}>
+          Submit
+        </button>
+      </div>
+    );
+  }
+
   getCodeOutput() {
     return (
       <div className="container-fluid container">
@@ -170,23 +192,7 @@ class OpenEventDash extends Component {
             <h3 style={{ marginTop: '20px' }}>{this.props.event.name}</h3>
             <br />
             {this.getCodeOutput()}
-            <div className="form-group row">
-              <label className="col-md-2 col-form-label">Name</label>
-              <div className="col-md-3">
-                <select
-                  onChange={this.handleGeneral}
-                  name="guest"
-                  className="form-control"
-                  value={this.state.guest}
-                >
-                  <option value={'0'} key={1} />
-                  {this.getRsvpOutput()}
-                </select>
-              </div>
-              <button className="btn btn-success" onClick={this.handleCheckin}>
-                Submit
-              </button>
-            </div>
+            {this.getCheckinOutput()}
             {this.getWalkinOutput()}
           </div>
         );
@@ -215,4 +221,4 @@ const mapDispatchToProps = (/* dispatch */) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(OpenEventDash);
+export default connect(mapStateToProps, mapDispatchToProps())(Dash);
