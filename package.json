@@ -79,7 +79,7 @@
     "file-loader": "^1.1.11",
     "husky": "^0.14.3",
     "ignore-styles": "^5.0.1",
-    "lint-staged": "^7.0.0",
+    "lint-staged": "^7.0.2",
     "mocha": "^5.0.5",
     "nodemon": "^1.11.0",
     "prettier": "^1.11.1",

@@ -38,4 +38,3 @@ router.post('/attend', async (req, res) => {
 });
 
 module.exports = router;
-//5abc4dec3183a126b636b60c

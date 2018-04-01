@@ -7,8 +7,7 @@ const userSchema = new Schema({
   guestEvents: [],
   name: String,
   open: Boolean,
-  createdUsers: [],
-  extra: Schema.Types.Mixed
+  createdUsers: []
 });
 
 mongoose.model('users', userSchema);
