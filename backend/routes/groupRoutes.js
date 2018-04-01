@@ -6,7 +6,7 @@ const Group = mongoose.model('groups');
 
 router.post('/join', async (req, res) => {
   const user = await User.findById(req.user.id);
-  const group = await Group.findOne({ code: req.body.code });
+  const group = await Group.findById(req.body.id);
   if (group) {
     group.users.push(user.id);
     group.save();
@@ -22,7 +22,7 @@ router.post('/join', async (req, res) => {
 
 router.post('/check', async (req, res) => {
   const group = await Group.findOne({ code: req.body.code });
-  res.send(!!group);
+  res.send(group);
 });
 
 module.exports = router;
