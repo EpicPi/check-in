@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('./authRoutes');
-const host = require('./hostEventRoutes');
-const guest = require('./guestEventRoutes');
+const host = require('./hostRoutes');
+const guest = require('./guestRoutes');
 const event = require('./eventRoutes');
-const open = require('./openEventRoutes');
+const open = require('./openRoutes');
 const group = require('./groupRoutes');
 
 const checkUser = (req, res, next) => {

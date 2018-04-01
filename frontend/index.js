@@ -4,9 +4,7 @@ import { configureStore } from './store/configureStore';
 import Root from './components/Root/Root';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import './assets/stylesheets/base.scss';
-
 import '../public/app.css';
 
 const store = configureStore();

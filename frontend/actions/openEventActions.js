@@ -4,10 +4,7 @@ import {
   OPEN_GET_RSVP,
   OPEN_GOT_EVENT,
   OPEN_GOT_RSVP,
-  OPEN_JOIN_EVENT,
-  OPEN_UPDATE_RSVP,
-  UPDATE_RSVPS,
-  UPDATED_RSVPS
+  OPEN_UPDATE_RSVP
 } from './types';
 import axios from 'axios/index';
 import { openRoot } from './index';
@@ -26,7 +23,6 @@ export const openCheckin = (event, guest) => async dispatch => {
     openRoot + 'check_in',
     qs.stringify({ event: event._id, guest: guest })
   );
-  // dispatch({ type: OPEN_JOIN_EVENT, payload:  });
 };
 
 export const openWalkin = (event, name) => async dispatch => {

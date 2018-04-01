@@ -7,7 +7,7 @@ const cookieSession = require('cookie-session');
 
 require('./backend/models');
 require('./backend/services');
-const keys = require('./backend/config');
+const keys = require('./backend/keys');
 const api = require('./backend/routes');
 
 const PORT = process.env.PORT || 8080;

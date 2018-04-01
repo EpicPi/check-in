@@ -1,24 +1,14 @@
 import {
-  OPEN_GET_EVENT,
   OPEN_GET_RSVP,
-  OPEN_GOT_EVENT,
   OPEN_GOT_RSVP,
   OPEN_JOIN_EVENT,
-  OPEN_UPDATE_RSVP,
-  UPDATE_RSVPS,
-  UPDATED_RSVPS
+  OPEN_UPDATE_RSVP
 } from '../actions/types';
 import { LOAD } from '../helpers/Enums';
 import { openInitial } from './initialState';
 
 export default function(state = openInitial, action) {
   switch (action.type) {
-    // TODO: checkCode openEventActions.js
-    case OPEN_JOIN_EVENT:
-      return {
-        ...state,
-        event: LOAD.NOTHING
-      };
     case OPEN_GET_RSVP:
       return { ...state, openRsvp: [] };
     case OPEN_GOT_RSVP:

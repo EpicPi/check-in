@@ -4,7 +4,6 @@ import {
   openGetEvent,
   openCheckin,
   openWalkin,
-  getOpenRsvp,
   resetCheckin,
   checkCheckinCode,
   getAttends,
