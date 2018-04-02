@@ -15,9 +15,12 @@ import {
   checkInCodeLabel,
   checkingCheckin,
   eventClosedError,
+  eventNoExistError,
   invalidCodeError,
   noNameEnteredError,
-  noNameSelectedError
+  noNameSelectedError,
+  submitButton,
+  walkinPrompmt
 } from '../../assets/text';
 
 class Dash extends Component {
@@ -113,7 +116,7 @@ class Dash extends Component {
   getWalkinOutput() {
     return (
       <div>
-        <h5>Don't see your name? Add yourself as a walkin!</h5>
+        <h5>{walkinPrompmt}</h5>
         <form onSubmit={this.handleWalkin} id="open-checkin">
           <div className="form-group row">
             <label className="col-md-2 col-form-label">Name</label>
@@ -128,7 +131,7 @@ class Dash extends Component {
               />
             </div>
             <button type="submit" value="Submit" className="btn btn-success">
-              Submit
+              {submitButton}
             </button>
           </div>
         </form>
@@ -168,7 +171,6 @@ class Dash extends Component {
               className="form-control"
               type="text"
               name="code"
-              // value={this.state.checkinCode}
               onChange={this.handleCheckInCodeInput}
               required
             />
@@ -183,7 +185,7 @@ class Dash extends Component {
       case LOAD.LOADING:
         return <h3>LOADING</h3>;
       case LOAD.NOTHING:
-        return <h3>Event with this url does not exist!</h3>;
+        return <h3>{eventNoExistError}</h3>;
       default:
         return (
           <div className="container-fluid container">
