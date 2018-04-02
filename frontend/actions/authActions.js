@@ -1,9 +1,9 @@
 import { FETCH_USER, RESET_USER_TYPE, SET_USER_TYPE } from './types';
 import axios from 'axios/index';
-import { authRoot } from './index';
+import { authRoute } from './index';
 
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get(authRoot + 'current_user');
+  const res = await axios.get(authRoute + 'current_user');
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 

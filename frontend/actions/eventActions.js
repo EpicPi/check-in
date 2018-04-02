@@ -15,7 +15,7 @@ import {
 } from './types';
 import * as axios from 'axios';
 import * as qs from 'qs';
-import { eventRoot } from './index';
+import { eventRoute } from './index';
 
 export const selectEvent = event => async dispatch => {
   dispatch({ type: SELECT_EVENT, payload: event });
@@ -24,7 +24,7 @@ export const selectEvent = event => async dispatch => {
 export const getRsvps = event => async dispatch => {
   dispatch({ type: GET_RSVPS });
   const res = await axios.post(
-    eventRoot + 'rsvp',
+    eventRoute + 'rsvp',
     qs.stringify({ id: event._id })
   );
   dispatch({ type: GOT_RSVPS, payload: res.data });
@@ -33,7 +33,7 @@ export const getRsvps = event => async dispatch => {
 export const getAttends = event => async dispatch => {
   dispatch({ type: GET_ATTENDS });
   const res = await axios.post(
-    eventRoot + 'attend',
+    eventRoute + 'attend',
     qs.stringify({ id: event._id })
   );
   dispatch({ type: GOT_ATTENDS, payload: res.data });

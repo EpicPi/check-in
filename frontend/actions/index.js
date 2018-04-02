@@ -4,8 +4,9 @@ export * from './guestActions';
 export * from './eventActions';
 export * from './openActions';
 
-export const authRoot = '/api/auth/';
-export const hostRoot = '/api/host/';
-export const guestRoot = '/api/guest/';
-export const eventRoot = '/api/event/';
-export const openRoot = '/api/open/';
+export const authRoute = '/api/auth/';
+export const hostRoute = '/api/host/';
+export const guestRoute = '/api/guest/';
+export const eventRoute = '/api/event/';
+export const openRoute = '/api/open/';
+export const groupRoute = '/api/group/';
