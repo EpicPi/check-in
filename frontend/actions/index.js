@@ -1,8 +1,8 @@
 export * from './authActions';
-export * from './hostEventActions';
-export * from './guestEventActions';
+export * from './hostActions';
+export * from './guestActions';
 export * from './eventActions';
-export * from './openEventActions';
+export * from './openActions';
 
 export const authRoot = '/api/auth/';
 export const hostRoot = '/api/host/';

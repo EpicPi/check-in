@@ -203,7 +203,7 @@ class Dash extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    rsvps: state.open.openRsvp,
+    rsvps: state.event.selectedRsvps,
     attends: state.event.attends,
     check: state.guest.checkCode
   };

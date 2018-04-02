@@ -156,7 +156,6 @@ class EventForm extends Component {
       alert(checkinOpenTimeError);
       return;
     }
-    console.log(this.props.openRsvp);
 
     const event = {
       ...this.props.event,
@@ -379,7 +378,7 @@ const mapStateToProps = state => {
   return {
     checkCode: state.host.checkCode,
     event: state.event.selected,
-    openRsvp: state.open.openRsvp
+    openRsvp: state.event.selectedRsvps
   };
 };
 
