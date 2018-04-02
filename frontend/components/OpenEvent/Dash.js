@@ -113,22 +113,24 @@ class Dash extends Component {
   getWalkinOutput() {
     return (
       <div>
-        <h5>Don't see your name? </h5>
+        <h5>Don't see your name? Add yourself as a walkin!</h5>
         <form onSubmit={this.handleWalkin} id="open-checkin">
-          <label>
-            <h6>Add yourself as a walkin: </h6>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleGeneral}
-              required
-            />
-          </label>
-          <br />
-          <button type="submit" value="Submit" className="btn btn-success">
-            Submit
-          </button>
+          <div className="form-group row">
+            <label className="col-md-2 col-form-label">Name</label>
+            <div className="col-md-4">
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+                value={this.state.name}
+                onChange={this.handleGeneral}
+                required
+              />
+            </div>
+            <button type="submit" value="Submit" className="btn btn-success">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     );
@@ -138,7 +140,7 @@ class Dash extends Component {
     return (
       <div className="form-group row">
         <label className="col-md-2 col-form-label">Name</label>
-        <div className="col-md-3">
+        <div className="col-md-4">
           <select
             onChange={this.handleGeneral}
             name="guest"
@@ -158,25 +160,21 @@ class Dash extends Component {
 
   getCodeOutput() {
     return (
-      <div className="container-fluid container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group row">
-            <label className="col-md-3 col-form-label">
-              {checkInCodeLabel}
-            </label>
-            <div className="col-md-4">
-              <input
-                className="form-control"
-                type="text"
-                name="code"
-                // value={this.state.checkinCode}
-                onChange={this.handleCheckInCodeInput}
-                required
-              />
-            </div>
+      <form onSubmit={this.handleSubmit}>
+        <div className="form-group row">
+          <label className="col-md-2 col-form-label">{checkInCodeLabel}</label>
+          <div className="col-md-4">
+            <input
+              className="form-control"
+              type="text"
+              name="code"
+              // value={this.state.checkinCode}
+              onChange={this.handleCheckInCodeInput}
+              required
+            />
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     );
   }
 
@@ -193,6 +191,8 @@ class Dash extends Component {
             <br />
             {this.getCodeOutput()}
             {this.getCheckinOutput()}
+            <br />
+            <br />
             {this.getWalkinOutput()}
           </div>
         );
