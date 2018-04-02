@@ -48,3 +48,11 @@ export const OPEN_GOT_EVENT = 'open_got_event';
 export const OPEN_GET_RSVP = 'open_get_rsvp';
 export const OPEN_GOT_RSVP = 'open_got_rsvp';
 export const OPEN_UPDATE_RSVP = 'open_update_rsvp';
+
+//group types
+export const ADD_GROUP = 'add_group';
+export const GET_GROUPS = 'get_group';
+export const GOT_GROUPS = 'got_group';
+export const REMOVE_GROUP = 'remove_group';
+export const CHECK_GROUP_CODE = 'check_group_code';
+export const CHECKED_GROUP_CODE = 'checked_group_code';

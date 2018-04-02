@@ -1,6 +1,14 @@
 import axios from 'axios/index';
 import * as qs from 'qs';
 import { groupRoute } from './index';
+import {
+  ADD_GROUP,
+  CHECK_GROUP_CODE,
+  CHECKED_GROUP_CODE,
+  GET_GROUPS,
+  GOT_GROUPS,
+  REMOVE_GROUP
+} from './types';
 
 export const createGroup = group => async dispatch => {
   const group2 = await axios.post(
