@@ -15,7 +15,7 @@ export const openGetEvent = code => async dispatch => {
     params: { code: code }
   });
   dispatch({ type: OPEN_GOT_EVENT, payload: res.data });
-  dispatch(getOpenRsvp(res.data));
+  dispatch(getOpenRsvpFull(res.data));
 };
 
 export const openCheckin = (event, guest) => async dispatch => {

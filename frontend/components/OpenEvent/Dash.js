@@ -74,7 +74,6 @@ class Dash extends Component {
   }
 
   handleCheckin() {
-    console.log(this.state.guest);
     if (this.state.guest === '0') {
       alert(noNameSelectedError);
       return;
@@ -103,11 +102,12 @@ class Dash extends Component {
   }
 
   getRsvpOutput() {
-    return this.props.rsvps.map(guest => (
-      <option value={guest._id} key={guest._id}>
-        {guest.name}
-      </option>
-    ));
+    if (this.props.rsvps.constructor === Array && this.props.rsvps)
+      return this.props.rsvps.map(guest => (
+        <option value={guest._id} key={guest._id}>
+          {guest.name}
+        </option>
+      ));
   }
 
   getWalkinOutput() {
