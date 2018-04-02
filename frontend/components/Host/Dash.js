@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import ActiveDetail from './Detail/ActiveDetail';
 import ClosedDetail from './Detail/ClosedDetail';
 
-class HostDash extends Component {
+class Dash extends Component {
   render() {
     return (
       <div className="container container-fluid">
@@ -30,4 +30,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(HostDash);
+export default connect(mapStateToProps, mapDispatchToProps())(Dash);

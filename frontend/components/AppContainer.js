@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-
+import { hot } from 'react-hot-loader';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './Header';
 
+import Header from './Header';
 import HostDash from './Host/Dash';
 import Land from './Land';
 import GuestDash from './Guest/Dash';
-import EventDash from './OpenEvent/Dash';
+import EventDash from './Open/Dash';
+import GroupDash from './Group/Dash';
+
 import requireAuth from '../helpers/requireAuth';
-import { hot } from 'react-hot-loader';
 
 class AppContainer extends Component {
   render() {
@@ -24,6 +25,7 @@ class AppContainer extends Component {
                   <Route exact path="/event/:id" component={EventDash} />
                   <Route path="/host" component={requireAuth(HostDash)} />
                   <Route path="/guest" component={requireAuth(GuestDash)} />
+                  <Route path="/group" component={requireAuth(GroupDash)} />
                   <Route component={Land} />
                 </Switch>
               </div>
