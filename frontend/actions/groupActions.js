@@ -15,7 +15,7 @@ export const createGroup = group => async dispatch => {
     groupRoute + 'add_group',
     qs.stringify(group)
   );
-  dispatch({ type: ADD_GROUP, payload: group });
+  dispatch({ type: ADD_GROUP, payload: group2 });
 };
 
 export const getGroups = () => async dispatch => {
