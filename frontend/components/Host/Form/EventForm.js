@@ -10,7 +10,7 @@ import {
 } from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES, LOAD } from '../../../helpers/Enums';
 
 import {
   getCurrentDate,
@@ -28,6 +28,7 @@ import {
   codeUnavaliableError
 } from '../../../assets/text';
 import { getOpenRsvp } from '../../../actions';
+import { getGroups } from '../../../actions/groupActions';
 
 class EventForm extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class EventForm extends Component {
     this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
+    this.getGroupOutput = this.getGroupOutput.bind(this);
 
     if (this.props.add)
       this.state = {
@@ -60,7 +62,8 @@ class EventForm extends Component {
           date: getCurrentDate()
         },
         type: EVENT_TYPES.BASIC,
-        checkinCode: ''
+        checkinCode: '',
+        group: '0'
       };
     else
       this.state = {
@@ -170,7 +173,8 @@ class EventForm extends Component {
       type: this.state.type,
       checkinCode: this.state.checkinCode,
       info: this.state.info,
-      openRsvp: this.props.openRsvp
+      openRsvp: this.props.openRsvp,
+      group: this.state.group
     };
 
     if (this.props.add) this.props.addEvent(event);
@@ -219,6 +223,22 @@ class EventForm extends Component {
             <br />
           </div>
         );
+    }
+  }
+
+  getGroupOutput() {
+    switch (this.props.groups) {
+      case LOAD.NOTHING:
+        this.props.getGroups();
+        return;
+      case LOAD.LOADING:
+        return <h3>LOADING</h3>;
+      default:
+        return this.props.groups.map(group => (
+          <option value={group._id} key={group._id}>
+            {group.name}
+          </option>
+        ));
     }
   }
 
@@ -329,6 +349,23 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
+                  <label className="col-md-2 col-form-label">Group</label>
+                  <div className="col-md-4">
+                    <select
+                      onChange={this.handleGeneral}
+                      name="group"
+                      className="form-control"
+                      value={this.state.group}
+                    >
+                      <option value={'0'} key={1}>
+                        None
+                      </option>
+                      {this.getGroupOutput()}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-group row">
                   <label className="col-md-2 col-form-label">
                     Check-in Type
                   </label>
@@ -378,7 +415,8 @@ const mapStateToProps = state => {
   return {
     checkCode: state.host.checkCode,
     event: state.event.selected,
-    openRsvp: state.event.selectedRsvps
+    openRsvp: state.event.selectedRsvps,
+    groups: state.group.groups
   };
 };
 
@@ -387,7 +425,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     editEvent: editEvent,
     hostCheckCode: checkSignupCode,
-    resetSignup: resetSignupCode
+    resetSignup: resetSignupCode,
+    getGroups: getGroups
   };
 };
 
