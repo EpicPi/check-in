@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
+const Group = mongoose.model('groups');
 
 const mapOpenUsers = async openUsers => {
   if (!openUsers) return [];
@@ -37,11 +38,17 @@ router.post('/add_event', async (req, res) => {
     open: {
       guestsRSVP: await mapOpenUsers(req.body.openRsvp),
       walkin: []
-    }
+    },
+    group: req.body.group
   }).save();
   const user = await User.findById(req.user.id);
   user.hostEvents.push(event.id);
   user.save();
+  const group = await Group.findById(req.body.group);
+  if (group) {
+    group.events.push(event.id);
+    group.save();
+  }
   res.send(event);
 });
 
@@ -55,6 +62,8 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
+
+    //open users
     const newOpenUsers = await mapOpenUsers(req.body.openRsvp);
     const removedUsers = event.open.guestsRSVP.filter(
       el => !newOpenUsers.includes(el)
@@ -64,6 +73,20 @@ router.post('/edit_event', async (req, res) => {
     );
     removedUsers.forEach(async el => await User.findById(el).remove());
     event.open.guestsRSVP = newOpenUsers;
+
+    //group
+    if (event.id !== req.body.group) {
+      const group = await Group.findById(event.id);
+      if (group) {
+        group.events = group.events.filter(el => el.id !== req.body.group);
+        group.save();
+      }
+      if (group2) {
+        const group2 = await Group.findById(req.body.group);
+        group2.events.push(event.id);
+        group2.save();
+      }
+    }
     event.save();
     res.send(event);
   } else

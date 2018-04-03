@@ -9,6 +9,7 @@ class ShowEvents extends Component {
   constructor(props) {
     super(props);
     this.handleCreate = this.handleCreate.bind(this);
+    this.handleGroup = this.handleGroup.bind(this);
 
     if (this.props.events === LOAD.NOTHING) this.props.getEvents();
     this.state = {
@@ -28,6 +29,10 @@ class ShowEvents extends Component {
 
   handleCreate() {
     this.props.history.push('/host/create');
+  }
+
+  handleGroup() {
+    this.props.history.push('/group');
   }
 
   getEventsOutput(props) {
@@ -141,7 +146,13 @@ class ShowEvents extends Component {
                 className="btn btn-lg btn-info"
                 onClick={this.handleCreate}
               >
-                create
+                Create Event
+              </button>
+              <button
+                className="btn btn-lg btn-info"
+                onClick={this.handleGroup}
+              >
+                Groups
               </button>
             </div>
           </div>

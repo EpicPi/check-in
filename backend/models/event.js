@@ -18,7 +18,8 @@ const eventSchema = new Schema({
   },
   type: { type: String, required: true },
   checkinCode: { type: String },
-  info: { type: String }
+  info: { type: String },
+  group: String
 });
 
 mongoose.model('events', eventSchema);
