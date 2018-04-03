@@ -65,4 +65,18 @@ router.post('/remove_group', async (req, res) => {
   group.remove();
 });
 
+router.post('/get_events', async (req, res) => {
+  const group = Group.findById(req.body.id);
+  if (group) {
+    let out = group.events.map(async el => await Event.findById(el));
+    out = Promise.all(out);
+    res.send(out);
+  } else
+    console.error(
+      '[ERR] Group was not found. Passed in id: ' +
+        req.body.id +
+        ' in /group/get_events'
+    );
+});
+
 module.exports = router;

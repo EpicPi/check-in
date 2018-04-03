@@ -5,6 +5,8 @@ import {
   EDIT_GROUP,
   GET_GROUPS,
   GOT_GROUPS,
+  GROUP_GET_EVENTS,
+  GROUP_GOT_EVENTS,
   REMOVE_GROUP,
   RESET_GROUP,
   RESET_GROUP_CHECK_CODE,
@@ -48,6 +50,10 @@ export default function(state = groupInitial, action) {
       return { ...state, groups: newGroups };
     case RESET_GROUP_CHECK_CODE:
       return { ...state, checkCode: CHECK_CODE.NOTHING };
+    case GROUP_GET_EVENTS:
+      return { ...state, events: LOAD.LOADING };
+    case GROUP_GOT_EVENTS:
+      return { ...state, events: action.payload };
     default:
       return state;
   }

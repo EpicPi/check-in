@@ -40,5 +40,6 @@ export const eventInitial = {
 export const groupInitial = {
   groups: LOAD.NOTHING,
   selected: {},
-  checkCode: CHECK_CODE.NOTHING
+  checkCode: CHECK_CODE.NOTHING,
+  events: LOAD.NOTHING
 };

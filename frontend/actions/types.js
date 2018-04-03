@@ -60,3 +60,5 @@ export const RESET_GROUP = 'reset_group';
 export const SELECT_GROUP = 'select_group';
 export const EDIT_GROUP = 'edit_group';
 export const RESET_GROUP_CHECK_CODE = 'reset_group_check_code';
+export const GROUP_GET_EVENTS = 'group_get_events';
+export const GROUP_GOT_EVENTS = 'group_got_events';
