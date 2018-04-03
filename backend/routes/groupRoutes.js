@@ -53,24 +53,24 @@ router.post('edit_group', async (req, res) => {
 router.get('/get_groups', async (req, res) => {
   const user = await User.findById(req.user.id);
   const out = user.hostGroups.map(id => Group.findById(id));
-  console.log(out);
-  res.send(Promise.all(out));
+  res.send(await Promise.all(out));
 });
 
 router.post('/remove_group', async (req, res) => {
-  const group = Group.findById(req.body.id);
-  let users = group.users.forEach(async id => {
+  const group = await Group.findById(req.body.id);
+  group.users.forEach(async id => {
     const user = await User.findById(id);
     user.hostGroups.filter(el => el !== req.body.id);
+    user.save();
   });
   group.remove();
 });
 
 router.post('/get_events', async (req, res) => {
-  const group = Group.findById(req.body.id);
+  const group = await Group.findById(req.body.id);
   if (group) {
     let out = group.events.map(async el => await Event.findById(el));
-    out = Promise.all(out);
+    out = await Promise.all(out);
     res.send(out);
   } else
     console.error(

@@ -32,7 +32,7 @@ export default function(state = groupInitial, action) {
     case CHECKED_GROUP_CODE:
       return {
         ...state,
-        checkCode: action.payload ? CHECK_CODE.AVAILABLE : action.payload
+        checkCode: action.payload ? action.payload : CHECK_CODE.AVAILABLE
       };
     case RESET_GROUP:
       return { ...state, selected: groupInitial.selected };

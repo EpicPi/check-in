@@ -26,13 +26,12 @@ class ShowGroups extends Component {
         if (this.props.groups.constructor === Array)
           return (
             <div>
-              <h3>Open</h3>
               <div className="row">
                 <div className="col-md-12">
                   <ul className="event-list">
                     {this.props.groups.map((group, i) => (
                       <GroupItem
-                        history={props.history}
+                        history={this.props.history}
                         key={i}
                         group={group}
                       />
@@ -40,7 +39,6 @@ class ShowGroups extends Component {
                   </ul>
                 </div>
               </div>
-              <hr />
             </div>
           );
     }

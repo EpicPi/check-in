@@ -13,6 +13,7 @@ class GroupForm extends Component {
   constructor(props) {
     super(props);
     this.handleGeneral = this.handleGeneral.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     if (this.props.add)
       this.state = {
         name: '',
@@ -27,7 +28,7 @@ class GroupForm extends Component {
   componentWillUpdate(props, state) {
     // if editing and you changed from initial or if you are creating
     if (state.code !== props.selected.code && state.code !== this.state.code)
-      props.checkCode(state.code);
+      props.check(state.code);
   }
 
   componentWillUnmount() {

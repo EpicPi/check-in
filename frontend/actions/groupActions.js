@@ -36,12 +36,12 @@ export const getGroups = () => async dispatch => {
 
 export const removeGroup = group => dispatch => {
   dispatch({ type: REMOVE_GROUP, payload: group });
-  axios.post(groupRoute + 'remove_group', qs.stringify({ id: group.id }));
+  axios.post(groupRoute + 'remove_group', qs.stringify({ id: group._id }));
 };
 
 export const joinGroup = group => async dispatch => {
   dispatch({ type: ADD_GROUP, payload: group });
-  await axios.post(groupRoute + 'join', qs.stringify({ id: group.id }));
+  await axios.post(groupRoute + 'join', qs.stringify({ id: group._id }));
 };
 
 export const checkGroupCode = code => async dispatch => {

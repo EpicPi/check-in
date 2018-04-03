@@ -9,7 +9,7 @@ class GroupItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
-    this.props.selectEvent(this.props.group);
+    this.props.selectGroup(this.props.group);
     this.props.history.push('/group/detail');
   }
 
