@@ -10,8 +10,8 @@ import {
   HOST_RESET_SIGNUP_EVENT,
   HOST_CHECKIN
 } from '../actions/types';
-import { hostInitial } from './initialState';
 import { CHECK_CODE, LOAD } from '../helpers/Enums';
+import { hostInitial } from './index';
 
 export default function(state = hostInitial, action) {
   switch (action.type) {

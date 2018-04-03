@@ -11,8 +11,8 @@ import {
   OPEN_GOT_EVENT,
   OPEN_UPDATE_RSVP
 } from '../actions/types';
-import { eventInitial } from './initialState';
 import { LOAD } from '../helpers/Enums';
+import { eventInitial } from './index';
 
 export default function(state = eventInitial, action) {
   switch (action.type) {

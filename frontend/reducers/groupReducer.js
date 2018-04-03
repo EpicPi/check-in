@@ -1,4 +1,3 @@
-import { groupInitial } from './initialState';
 import {
   ADD_GROUP,
   CHECK_GROUP_CODE,
@@ -12,6 +11,7 @@ import {
   SELECT_GROUP
 } from '../actions/types';
 import { CHECK_CODE, LOAD } from '../helpers/Enums';
+import { groupInitial } from './index';
 
 export default function(state = groupInitial, action) {
   switch (action.type) {

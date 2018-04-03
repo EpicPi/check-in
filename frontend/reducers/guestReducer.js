@@ -11,7 +11,7 @@ import {
   GUEST_RESET_CHECKIN_CODE
 } from '../actions/types';
 import { CHECK_CHECKIN, JOIN_FIND, LOAD } from '../helpers/Enums';
-import { guestInitial } from './initialState';
+import { guestInitial } from './index';
 
 export default function(state = guestInitial, action) {
   switch (action.type) {

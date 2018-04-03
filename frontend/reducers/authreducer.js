@@ -1,5 +1,5 @@
 import { FETCH_USER, RESET_USER_TYPE, SET_USER_TYPE } from '../actions/types';
-import { authInitial } from './initialState';
+import { authInitial } from './index';
 
 export default function(state = authInitial, action) {
   switch (action.type) {
