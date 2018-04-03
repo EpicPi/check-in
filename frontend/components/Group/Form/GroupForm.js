@@ -1,24 +1,58 @@
 import { connect } from 'react-redux';
 import { Component } from 'react';
-import { submitButton } from '../../../assets/text';
-import { checkGroupCode } from '../../../actions/groupActions';
+import { codeTakenError, submitButton } from '../../../assets/text';
+import {
+  checkGroupCode,
+  createGroup,
+  editGroup,
+  resetGroupcheckCode
+} from '../../../actions/groupActions';
+import { CHECK_CODE } from '../../../helpers/Enums';
 
 class GroupForm extends Component {
   constructor(props) {
     super(props);
     this.handleGeneral = this.handleGeneral.bind(this);
-    this.state = {
-      name: '',
-      code: ''
-    };
+    if (this.props.add)
+      this.state = {
+        name: '',
+        code: ''
+      };
+    else
+      this.state = {
+        name: this.props.selected.name,
+        code: this.props.selected.code
+      };
   }
-  //todo verify group code valiable
+  componentWillUpdate(props, state) {
+    // if editing and you changed from initial or if you are creating
+    if (state.code !== props.selected.code && state.code !== this.state.code)
+      props.checkCode(state.code);
+  }
+
+  componentWillUnmount() {
+    this.props.resetCode();
+  }
   handleGeneral(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    if (
+      this.props.checkCode !== CHECK_CODE.AVAILABLE &&
+      this.state.code !== this.props.selected.code
+    ) {
+      alert(codeTakenError);
+      return;
+    }
+    const group = {
+      ...this.props.group,
+      name: this.state.name,
+      code: this.state.code
+    };
+    if (this.props.add) this.props.addGroup(group);
+    else this.props.editGroup(group);
   }
 
   render() {
@@ -63,12 +97,18 @@ class GroupForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    checkCode: state.group.checkCode,
+    selected: state.group.selected
+  };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    checkCode: checkGroupCode
+    check: checkGroupCode,
+    addGroup: createGroup,
+    editGroup: editGroup,
+    resetCode: resetGroupcheckCode
   };
 };
 

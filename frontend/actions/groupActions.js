@@ -9,6 +9,7 @@ import {
   GOT_GROUPS,
   REMOVE_GROUP,
   RESET_GROUP,
+  RESET_GROUP_CHECK_CODE,
   SELECT_GROUP
 } from './types';
 
@@ -18,6 +19,11 @@ export const createGroup = group => async dispatch => {
     qs.stringify(group)
   );
   dispatch({ type: ADD_GROUP, payload: group2 });
+};
+
+export const editGroup = group => dispatch => {
+  dispatch({ type: EDIT_GROUP, payload: { group: group } });
+  axios.post(groupRoute + 'edit_group', qs.stringify(group));
 };
 
 export const getGroups = () => async dispatch => {
@@ -44,6 +50,10 @@ export const checkGroupCode = code => async dispatch => {
 
 export const resetGroup = () => dispatch => {
   dispatch({ type: RESET_GROUP });
+};
+
+export const resetGroupcheckCode = () => dispatch => {
+  dispatch({ type: RESET_GROUP_CHECK_CODE });
 };
 
 export const selectGroup = group => dispatch => {
