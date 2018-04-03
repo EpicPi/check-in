@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { Component } from 'react';
 import { submitButton } from '../../../assets/text';
-import { checkGroupCode } from '../../../actions/groupActions';
+import { checkGroupCode, joinGroup } from '../../../actions/groupActions';
+import { CHECK_CODE } from '../../../helpers/Enums';
 
 class JoinGroup extends Component {
   constructor(props) {
@@ -18,8 +19,11 @@ class JoinGroup extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    if (0) {
+    if (!this.props.checkCode.id) {
+      alert('Group not found');
+      return;
     }
+    this.props.join(this.props.checkCode);
   }
   render() {
     return (
@@ -48,12 +52,15 @@ class JoinGroup extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    checkCode: state.group.checkCode
+  };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    checkCode: checkGroupCode
+    check: checkGroupCode,
+    join: joinGroup
   };
 };
 

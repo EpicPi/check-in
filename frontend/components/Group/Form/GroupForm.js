@@ -53,6 +53,8 @@ class GroupForm extends Component {
     };
     if (this.props.add) this.props.addGroup(group);
     else this.props.editGroup(group);
+
+    this.props.history.push('/group');
   }
 
   render() {

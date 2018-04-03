@@ -1,70 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hostGetEvents } from '../../../actions/index';
-import EventItem from './EventItem';
 import { LOAD } from '../../../helpers/Enums';
-import { isEventActive, isEventClosed } from '../../../helpers/Time';
+import { getGroups } from '../../../actions/groupActions';
+import GroupItem from './GroupItem';
 
 class ShowGroups extends Component {
   constructor(props) {
     super(props);
     this.handleCreate = this.handleCreate.bind(this);
-
-    if (this.props.events === LOAD.NOTHING) this.props.getEvents();
-    this.state = {
-      out: this.getEventsOutput(this.props),
-      active: this.getActiveEventsOutput(this.props),
-      closed: this.getClosedEventsOutput(this.props)
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      out: this.getEventsOutput(nextProps),
-      active: this.getActiveEventsOutput(nextProps),
-      closed: this.getClosedEventsOutput(nextProps)
-    });
+    this.getGroupsOutput = this.getGroupsOutput.bind(this);
+    if (this.props.groups === LOAD.NOTHING) this.props.getGroups();
   }
 
   handleCreate() {
     this.props.history.push('/group/create');
   }
 
-  getEventsOutput(props) {
+  getGroupsOutput() {
     switch (props.events) {
       case LOAD.LOADING:
         return <h3>LOADING</h3>;
       case LOAD.NOTHING:
         return;
       default:
-        if (
-          props.events.filter(
-            event => !isEventActive(event) && !isEventClosed(event)
-          ).length > 0
-        )
-          return (
-            <div>
-              <h3>Open</h3>
-              <div className="row">
-                <div className="col-md-12">
-                  <ul className="event-list">
-                    {props.events
-                      .filter(
-                        event => !isEventActive(event) && !isEventClosed(event)
-                      )
-                      .map((event, i) => (
-                        <EventItem
-                          history={props.history}
-                          key={i}
-                          event={event}
-                        />
-                      ))}
-                  </ul>
-                </div>
+        return (
+          <div>
+            <h3>Open</h3>
+            <div className="row">
+              <div className="col-md-12">
+                <ul className="event-list">
+                  {this.props.groups.map((group, i) => (
+                    <GroupItem history={props.history} key={i} group={group} />
+                  ))}
+                </ul>
               </div>
-              <hr />
             </div>
-          );
+            <hr />
+          </div>
+        );
     }
   }
 
@@ -83,9 +56,7 @@ class ShowGroups extends Component {
             </div>
           </div>
           <hr />
-          {this.state.active}
-          {this.state.out}
-          {this.state.closed}
+          {this.getGroupsOutput()}
         </div>
       </div>
     );
@@ -94,13 +65,13 @@ class ShowGroups extends Component {
 
 const mapStateToProps = state => {
   return {
-    events: state.host.events
+    groups: state.group.groups
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getEvents: hostGetEvents
+    getGroups: getGroups
   };
 };
 

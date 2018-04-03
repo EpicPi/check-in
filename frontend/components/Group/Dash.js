@@ -13,7 +13,7 @@ class Dash extends Component {
       <div>
         <Route exact path="/group" component={ShowGroups} />
         <Route exact path="/group/join" component={JoinGroup} />
-        <Route exact path="/group/event" component={GroupDetail} />
+        <Route exact path="/group/detail" component={GroupDetail} />
         <Route exact path="/group/create" component={CreateGroup} />
         <Route exact path="/group/edit" component={EditGroup} />
       </div>
