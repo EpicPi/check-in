@@ -56,3 +56,5 @@ export const GOT_GROUPS = 'got_group';
 export const REMOVE_GROUP = 'remove_group';
 export const CHECK_GROUP_CODE = 'check_group_code';
 export const CHECKED_GROUP_CODE = 'checked_group_code';
+export const RESET_GROUP = 'reset_group';
+export const SELECT_GROUP = 'select_group';

@@ -1,11 +1,22 @@
 import { connect } from 'react-redux';
 import { Component } from 'react';
+import GroupForm from './GroupForm';
 
 class EditGroup extends Component {
-  constructor(props) {
-    super(props);
+  render() {
+    return (
+      <div>
+        <div className="row">
+          <div className="col-md-12">
+            <br />
+            <h2 className="text-left">Edit Group</h2>
+            <br />
+          </div>
+        </div>
+        <GroupForm history={this.props.history} add={false} />
+      </div>
+    );
   }
-  render() {}
 }
 
 const mapStateToProps = state => {

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ShowGroups from './Show/ShowGroups';
+import JoinGroup from './Form/JoinGroup';
+import GroupDetail from './Show/GroupDetail';
+import CreateGroup from './Form/CreateGroup';
+import EditGroup from './Form/EditGroup';
 
 class Dash extends Component {
   render() {

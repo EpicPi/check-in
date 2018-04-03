@@ -7,7 +7,9 @@ import {
   CHECKED_GROUP_CODE,
   GET_GROUPS,
   GOT_GROUPS,
-  REMOVE_GROUP
+  REMOVE_GROUP,
+  RESET_GROUP,
+  SELECT_GROUP
 } from './types';
 
 export const createGroup = group => async dispatch => {
@@ -38,4 +40,12 @@ export const checkGroupCode = code => async dispatch => {
   dispatch({ type: CHECK_GROUP_CODE });
   const res = axios.post(groupRoute + 'check', qs.stringify({ code: code }));
   dispatch({ type: CHECKED_GROUP_CODE, payload: res });
+};
+
+export const resetGroup = () => dispatch => {
+  dispatch({ type: RESET_GROUP });
+};
+
+export const selectGroup = group => dispatch => {
+  dispatch({ type: SELECT_GROUP, payload: group });
 };

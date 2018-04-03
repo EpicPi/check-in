@@ -8,7 +8,7 @@ export const authInitial = {
 export const guestInitial = {
   events: LOAD.NOTHING,
   joinFind: JOIN_FIND.NOTHING,
-  eventToJoin: { name: 'erger', code: 'fwwfe' },
+  eventToJoin: {},
   checkCode: CHECK_CHECKIN.NOTHING
 };
 
@@ -23,6 +23,8 @@ export const eventInitial = {
   selectedAttends: LOAD.NOTHING
 };
 
-export const openInitial = {
-  openRsvp: []
+export const groupInitial = {
+  groups: LOAD.NOTHING,
+  selected: {},
+  checkCode: CHECK_CODE.NOTHING
 };
