@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { getGroupEvents } from '../../../actions/groupActions';
 
 class GroupDetail extends Component {

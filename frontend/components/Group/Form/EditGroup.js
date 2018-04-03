@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import GroupForm from './GroupForm';
 
 class EditGroup extends Component {

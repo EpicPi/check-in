@@ -53,6 +53,7 @@ router.post('edit_group', async (req, res) => {
 router.get('/get_groups', async (req, res) => {
   const user = await User.findById(req.user.id);
   const out = user.hostGroups.map(id => Group.findById(id));
+  console.log(out);
   res.send(Promise.all(out));
 });
 

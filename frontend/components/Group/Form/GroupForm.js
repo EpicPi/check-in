@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { codeTakenError, submitButton } from '../../../assets/text';
 import {
   checkGroupCode,

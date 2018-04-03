@@ -17,27 +17,32 @@ class ShowGroups extends Component {
   }
 
   getGroupsOutput() {
-    switch (props.events) {
+    switch (this.props.events) {
       case LOAD.LOADING:
         return <h3>LOADING</h3>;
       case LOAD.NOTHING:
         return;
       default:
-        return (
-          <div>
-            <h3>Open</h3>
-            <div className="row">
-              <div className="col-md-12">
-                <ul className="event-list">
-                  {this.props.groups.map((group, i) => (
-                    <GroupItem history={props.history} key={i} group={group} />
-                  ))}
-                </ul>
+        if (this.props.groups.constructor === Array)
+          return (
+            <div>
+              <h3>Open</h3>
+              <div className="row">
+                <div className="col-md-12">
+                  <ul className="event-list">
+                    {this.props.groups.map((group, i) => (
+                      <GroupItem
+                        history={props.history}
+                        key={i}
+                        group={group}
+                      />
+                    ))}
+                  </ul>
+                </div>
               </div>
+              <hr />
             </div>
-            <hr />
-          </div>
-        );
+          );
     }
   }
 

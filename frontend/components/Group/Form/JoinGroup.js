@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { submitButton } from '../../../assets/text';
 import { checkGroupCode, joinGroup } from '../../../actions/groupActions';
-import { CHECK_CODE } from '../../../helpers/Enums';
 
 class JoinGroup extends Component {
   constructor(props) {

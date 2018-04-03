@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { removeGroup, selectGroup } from '../../../actions/groupActions';
-import { isEventActive, isEventClosed } from '../../../helpers/Time';
 
 class GroupItem extends Component {
   constructor(props) {
