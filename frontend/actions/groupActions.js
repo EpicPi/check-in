@@ -46,7 +46,10 @@ export const joinGroup = group => async dispatch => {
 
 export const checkGroupCode = code => async dispatch => {
   dispatch({ type: CHECK_GROUP_CODE });
-  const res = axios.post(groupRoute + 'check', qs.stringify({ code: code }));
+  const res = await axios.post(
+    groupRoute + 'check',
+    qs.stringify({ code: code })
+  );
   dispatch({ type: CHECKED_GROUP_CODE, payload: res.data });
 };
 
@@ -64,7 +67,7 @@ export const selectGroup = group => dispatch => {
 
 export const getGroupEvents = group => async dispatch => {
   dispatch({ type: GROUP_GET_EVENTS });
-  const res = axios.post(
+  const res = await axios.post(
     groupRoute + 'get_events',
     qs.stringify({ id: group._id })
   );

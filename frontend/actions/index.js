@@ -3,6 +3,7 @@ export * from './hostActions';
 export * from './guestActions';
 export * from './eventActions';
 export * from './openActions';
+export * from './groupActions';
 
 export const authRoute = '/api/auth/';
 export const hostRoute = '/api/host/';

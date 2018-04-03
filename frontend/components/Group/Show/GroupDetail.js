@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { getGroupEvents } from '../../../actions/groupActions';
+import { selectEvent } from '../../../actions';
 
 class GroupDetail extends Component {
   constructor(props) {
@@ -13,13 +14,15 @@ class GroupDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    group: state.group.selected
+    group: state.group.selected,
+    events: state.group.events
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getEvents: getGroupEvents
+    getEvents: getGroupEvents,
+    selectEvent: selectEvent
   };
 };
 

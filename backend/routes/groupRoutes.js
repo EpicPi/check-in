@@ -60,7 +60,7 @@ router.post('/remove_group', async (req, res) => {
   const group = await Group.findById(req.body.id);
   group.users.forEach(async id => {
     const user = await User.findById(id);
-    user.hostGroups.filter(el => el !== req.body.id);
+    user.hostGroups = user.hostGroups.filter(el => el !== req.body.id);
     user.save();
   });
   group.remove();
