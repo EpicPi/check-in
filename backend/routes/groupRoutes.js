@@ -35,6 +35,7 @@ router.post('/add_group', async (req, res) => {
   }).save();
   user.hostGroups.push(group.id);
   user.save();
+  res.send(group);
 });
 
 router.post('edit_group', async (req, res) => {

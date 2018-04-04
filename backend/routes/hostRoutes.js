@@ -5,7 +5,7 @@ const Event = mongoose.model('events');
 const Group = mongoose.model('groups');
 
 const mapOpenUsers = async openUsers => {
-  if (!openUsers) return [];
+  if (!openUsers || openUsers.constructor !== Array) return [];
   const pOut = openUsers.map(async el => {
     let usr;
     if (el._id) {
@@ -44,15 +44,18 @@ router.post('/add_event', async (req, res) => {
   const user = await User.findById(req.user.id);
   user.hostEvents.push(event.id);
   user.save();
-  const group = await Group.findById(req.body.group);
-  if (group) {
-    group.events.push(event.id);
-    group.save();
+  if (req.body.group) {
+    const group = await Group.findById(req.body.group);
+    if (group) {
+      group.events.push(event.id);
+      group.save();
+    }
   }
   res.send(event);
 });
 
 router.post('/edit_event', async (req, res) => {
+  console.log(req.body);
   const event = await Event.findById(req.body._id);
   if (event) {
     //only want to update the editable values
@@ -75,16 +78,21 @@ router.post('/edit_event', async (req, res) => {
     event.open.guestsRSVP = newOpenUsers;
 
     //group
-    if (event.id !== req.body.group) {
-      const group = await Group.findById(event.id);
-      if (group) {
-        group.events = group.events.filter(el => el.id !== req.body.group);
-        group.save();
+    if (event.group !== req.body.group) {
+      console.log('group stuff');
+      if (event.group) {
+        const group = await Group.findById(event.group);
+        if (group) {
+          group.events = group.events.filter(el => el.id !== req.body.group);
+          group.save();
+        }
       }
-      if (group2) {
+      if (req.body.group) {
         const group2 = await Group.findById(req.body.group);
-        group2.events.push(event.id);
-        group2.save();
+        if (group2) {
+          group2.events.push(event.id);
+          group2.save();
+        }
       }
     }
     event.save();

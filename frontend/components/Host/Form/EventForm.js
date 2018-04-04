@@ -63,7 +63,7 @@ class EventForm extends Component {
         },
         type: EVENT_TYPES.BASIC,
         checkinCode: '',
-        group: '0'
+        group: ''
       };
     else
       this.state = {
@@ -357,14 +357,14 @@ class EventForm extends Component {
                       className="form-control"
                       value={this.state.group}
                     >
-                      <option value={'0'} key={1}>
+                      <option value={''} key={1}>
                         None
                       </option>
                       {this.getGroupOutput()}
                     </select>
                   </div>
                 </div>
-
+                {this.state.group}
                 <div className="form-group row">
                   <label className="col-md-2 col-form-label">
                     Check-in Type

@@ -16,11 +16,8 @@ import {
 } from './types';
 
 export const createGroup = group => async dispatch => {
-  const group2 = await axios.post(
-    groupRoute + 'add_group',
-    qs.stringify(group)
-  );
-  dispatch({ type: ADD_GROUP, payload: group2 });
+  const res = await axios.post(groupRoute + 'add_group', qs.stringify(group));
+  dispatch({ type: ADD_GROUP, payload: res.data });
 };
 
 export const editGroup = group => dispatch => {
