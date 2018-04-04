@@ -58,13 +58,21 @@ router.get('/get_groups', async (req, res) => {
 });
 
 router.post('/remove_group', async (req, res) => {
+  console.log(req.body.id);
   const group = await Group.findById(req.body.id);
-  group.users.forEach(async id => {
-    const user = await User.findById(id);
-    user.hostGroups = user.hostGroups.filter(el => el !== req.body.id);
-    user.save();
-  });
-  group.remove();
+  if (group) {
+    group.users.forEach(async id => {
+      const user = await User.findById(id);
+      user.hostGroups = user.hostGroups.filter(el => el !== req.body.id);
+      user.save();
+    });
+    group.remove();
+  } else
+    console.error(
+      '[ERR] Group was not found. Passed in code: ' +
+        req.body.id +
+        ' in /group/remove_group'
+    );
 });
 
 router.post('/get_events', async (req, res) => {
