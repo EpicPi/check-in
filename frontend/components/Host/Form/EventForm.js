@@ -27,7 +27,6 @@ import {
   codeAvailable,
   codeUnavaliableError
 } from '../../../assets/text';
-import { getOpenRsvp } from '../../../actions';
 import { getGroups } from '../../../actions/groupActions';
 
 class EventForm extends Component {
@@ -39,6 +38,9 @@ class EventForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
     this.getGroupOutput = this.getGroupOutput.bind(this);
+
+    this.props.resetSignup();
+    this.props.getGroups();
 
     if (this.props.add)
       this.state = {
@@ -87,7 +89,8 @@ class EventForm extends Component {
           date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode
+        checkinCode: this.props.event.checkinCode,
+        group: this.props.event.group
       };
   }
 
@@ -95,10 +98,6 @@ class EventForm extends Component {
     // if editing and you changed from initial or if you are creating
     if (state.code !== props.event.code && state.code !== this.state.code)
       props.hostCheckCode(state.code);
-  }
-
-  componentWillUnmount() {
-    this.props.resetSignup();
   }
 
   handleGeneral(e) {
@@ -188,7 +187,7 @@ class EventForm extends Component {
     if (this.state.code === this.props.event.code) return;
     switch (this.props.checkCode) {
       case CHECK_CODE.NOTHING:
-        return '';
+        return;
       case CHECK_CODE.TAKEN:
         return <h3>{codeUnavaliableError}</h3>;
       case CHECK_CODE.AVAILABLE:
@@ -229,10 +228,9 @@ class EventForm extends Component {
   getGroupOutput() {
     switch (this.props.groups) {
       case LOAD.NOTHING:
-        this.props.getGroups();
         return;
       case LOAD.LOADING:
-        return <h3>LOADING</h3>;
+        return;
       default:
         return this.props.groups.map(group => (
           <option value={group._id} key={group._id}>

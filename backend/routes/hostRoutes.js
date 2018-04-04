@@ -55,7 +55,6 @@ router.post('/add_event', async (req, res) => {
 });
 
 router.post('/edit_event', async (req, res) => {
-  console.log(req.body);
   const event = await Event.findById(req.body._id);
   if (event) {
     //only want to update the editable values
@@ -83,7 +82,7 @@ router.post('/edit_event', async (req, res) => {
       if (event.group) {
         const group = await Group.findById(event.group);
         if (group) {
-          group.events = group.events.filter(el => el.id !== req.body.group);
+          group.events = group.events.filter(el => el !== event.id);
           group.save();
         }
       }
@@ -95,6 +94,7 @@ router.post('/edit_event', async (req, res) => {
         }
       }
     }
+    event.group = req.body.group;
     event.save();
     res.send(event);
   } else
