@@ -65,7 +65,16 @@ class EventForm extends Component {
         },
         type: EVENT_TYPES.BASIC,
         checkinCode: '',
-        group: ''
+        group: '',
+        repeats: {
+          monday: false,
+          tuesday: false,
+          wednesday: false,
+          thursday: false,
+          friday: false,
+          saturday: false,
+          sunday: false
+        }
       };
     else
       this.state = {
@@ -90,7 +99,8 @@ class EventForm extends Component {
         },
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode,
-        group: this.props.event.group
+        group: this.props.event.group,
+        repeats: this.props.event.repeats
       };
   }
 
@@ -116,6 +126,13 @@ class EventForm extends Component {
         time: time ? time : this.state[name].time,
         date: date ? date : this.state[name].date
       }
+    });
+  }
+
+  handleCheckbox(e) {
+    let temp = { ...this.state.repeats, [e.target.name]: e.target.checked };
+    this.setState({
+      repeats: temp
     });
   }
 
@@ -241,6 +258,34 @@ class EventForm extends Component {
   }
 
   render() {
+    const days = [
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday'
+    ];
+    const repeatOut = days.map(day => {
+      return (
+        <div className="form-check form-check-inline" key={day}>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            name={day}
+            id={day}
+            checked={this.state.repeats[day]}
+            value={this.state.repeats[day]}
+            onChange={this.handleCheckbox.bind(this)}
+            style={{ width: '20px', height: '20px' }}
+          />
+          <label className="form-check-label">
+            {day.charAt(0).toUpperCase()}
+          </label>
+        </div>
+      );
+    });
     return (
       <div className="host-create-event row">
         <div className="container-fluid">
@@ -363,6 +408,10 @@ class EventForm extends Component {
                   </div>
                 </div>
                 {this.state.group}
+                <div className="form-group row">
+                  <label className="col-md-2 col-form-label">Repeat</label>
+                  <div className="col-md-10">{repeatOut}</div>
+                </div>
                 <div className="form-group row">
                   <label className="col-md-2 col-form-label">
                     Check-in Type

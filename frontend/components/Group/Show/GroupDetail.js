@@ -8,7 +8,7 @@ class GroupDetail extends Component {
     super(props);
   }
   render() {
-    return <div />;
+    return <div>group detail</div>;
   }
 }
 
