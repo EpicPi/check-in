@@ -39,7 +39,8 @@ router.post('/add_event', async (req, res) => {
       guestsRSVP: await mapOpenUsers(req.body.openRsvp),
       walkin: []
     },
-    group: req.body.group
+    group: req.body.group,
+    repeats: req.body.repeats
   }).save();
   const user = await User.findById(req.user.id);
   user.hostEvents.push(event.id);
@@ -64,6 +65,7 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
+    event.repeats = req.body.repeats;
 
     //open users
     const newOpenUsers = await mapOpenUsers(req.body.openRsvp);

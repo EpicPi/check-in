@@ -100,7 +100,16 @@ class EventForm extends Component {
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode,
         group: this.props.event.group,
-        repeats: this.props.event.repeats
+        // TODO: clean this up
+        repeats: {
+          monday: this.props.event.repeats['monday'] === 'true',
+          tuesday: this.props.event.repeats['tuesday'] === 'true',
+          wednesday: this.props.event.repeats['wednesday'] === 'true',
+          thursday: this.props.event.repeats['thursday'] === 'true',
+          friday: this.props.event.repeats['friday'] === 'true',
+          saturday: this.props.event.repeats['saturday'] === 'true',
+          sunday: this.props.event.repeats['sunday'] === 'true'
+        }
       };
   }
 
@@ -130,7 +139,10 @@ class EventForm extends Component {
   }
 
   handleCheckbox(e) {
-    let temp = { ...this.state.repeats, [e.target.name]: e.target.checked };
+    let temp = {
+      ...this.state.repeats,
+      [e.target.name]: !this.state.repeats[e.target.name]
+    };
     this.setState({
       repeats: temp
     });
@@ -190,7 +202,8 @@ class EventForm extends Component {
       checkinCode: this.state.checkinCode,
       info: this.state.info,
       openRsvp: this.props.openRsvp,
-      group: this.state.group
+      group: this.state.group,
+      repeats: this.state.repeats
     };
 
     if (this.props.add) this.props.addEvent(event);
@@ -271,11 +284,11 @@ class EventForm extends Component {
       return (
         <div className="form-check form-check-inline" key={day}>
           <input
+            defaultChecked={this.state.repeats[day]}
             className="form-check-input"
             type="checkbox"
             name={day}
             id={day}
-            checked={this.state.repeats[day]}
             value={this.state.repeats[day]}
             onChange={this.handleCheckbox.bind(this)}
             style={{ width: '20px', height: '20px' }}
