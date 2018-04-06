@@ -101,15 +101,7 @@ class EventForm extends Component {
         checkinCode: this.props.event.checkinCode,
         group: this.props.event.group,
         // TODO: clean this up
-        repeats: {
-          monday: this.props.event.repeats['monday'] === 'true',
-          tuesday: this.props.event.repeats['tuesday'] === 'true',
-          wednesday: this.props.event.repeats['wednesday'] === 'true',
-          thursday: this.props.event.repeats['thursday'] === 'true',
-          friday: this.props.event.repeats['friday'] === 'true',
-          saturday: this.props.event.repeats['saturday'] === 'true',
-          sunday: this.props.event.repeats['sunday'] === 'true'
-        }
+        repeats: this.props.event.repeats
       };
   }
 
