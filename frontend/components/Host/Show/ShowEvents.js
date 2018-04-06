@@ -141,13 +141,15 @@ class ShowEvents extends Component {
       <div className="row host-show">
         <div className="container-fluid">
           <div className="row btn-create">
-            <div className="col-md-12">
+            <div className="col-md-6 text-center">
               <button
                 className="btn btn-lg btn-info"
                 onClick={this.handleCreate}
               >
                 Create Event
               </button>
+            </div>
+            <div className="col-md-6 text-center">
               <button
                 className="btn btn-lg btn-info"
                 onClick={this.handleGroup}
