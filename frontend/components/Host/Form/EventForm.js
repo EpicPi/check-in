@@ -38,6 +38,7 @@ class EventForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
     this.getGroupOutput = this.getGroupOutput.bind(this);
+    this.getRepeatsOut = this.getRepeatsOut.bind(this);
 
     this.props.resetSignup();
     this.props.getGroups();
@@ -262,8 +263,8 @@ class EventForm extends Component {
     }
   }
 
-  render() {
-    const repeatOut = DAYS.map(day => {
+  getRepeatsOut() {
+    return DAYS.map(day => {
       return (
         <div className="form-check form-check-inline" key={day}>
           <input
@@ -282,6 +283,9 @@ class EventForm extends Component {
         </div>
       );
     });
+  }
+
+  render() {
     return (
       <div className="host-create-event row">
         <div className="container-fluid">
@@ -406,7 +410,7 @@ class EventForm extends Component {
                 {this.state.group}
                 <div className="form-group row">
                   <label className="col-md-2 col-form-label">Repeat</label>
-                  <div className="col-md-10">{repeatOut}</div>
+                  <div className="col-md-10">{this.getRepeatsOut()}</div>
                 </div>
                 <div className="form-group row">
                   <label className="col-md-2 col-form-label">
