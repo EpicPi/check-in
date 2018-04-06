@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GuestItem from './GuestItem';
 import { getAttends, getRsvps } from '../../../actions/index';
-import { EVENT_TYPES, LOAD } from '../../../helpers/Enums';
+import { EVENT_TYPES, LOAD, DAYS } from '../../../helpers/Enums';
 import { openEventUrl } from '../../../assets/text';
 
 class BasicDetail extends Component {
@@ -132,28 +132,20 @@ class BasicDetail extends Component {
 
   getRepeatsOutput() {
     const repeats = this.props.event.repeats;
-    const days = [
-      'sunday',
-      'monday',
-      'tuesday',
-      'wednesday',
-      'thursday',
-      'friday',
-      'saturday'
-    ];
     let hasRepeats = false;
-    const repeatOut = days.map(day => {
+    const repeatOut = DAYS.map(day => {
       if (repeats[day]) hasRepeats = true;
       return (
         <div className="form-check form-check-inline" key={day}>
           <input
-            defaultChecked={repeats[day]}
             className="form-check-input"
             type="checkbox"
             name={day}
             id={day}
             value={repeats[day]}
+            checked={repeats[day]}
             style={{ width: '20px', height: '20px' }}
+            readOnly={true}
           />
           <label className="form-check-label">
             {day.charAt(0).toUpperCase()}

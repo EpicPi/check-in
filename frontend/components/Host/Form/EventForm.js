@@ -10,7 +10,7 @@ import {
 } from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES, LOAD } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES, LOAD, DAYS } from '../../../helpers/Enums';
 
 import {
   getCurrentDate,
@@ -263,16 +263,7 @@ class EventForm extends Component {
   }
 
   render() {
-    const days = [
-      'sunday',
-      'monday',
-      'tuesday',
-      'wednesday',
-      'thursday',
-      'friday',
-      'saturday'
-    ];
-    const repeatOut = days.map(day => {
+    const repeatOut = DAYS.map(day => {
       return (
         <div className="form-check form-check-inline" key={day}>
           <input
