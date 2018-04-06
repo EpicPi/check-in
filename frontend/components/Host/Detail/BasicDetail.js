@@ -10,6 +10,7 @@ class BasicDetail extends Component {
     super(props);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.getTypeSpecificOutput = this.getTypeSpecificOutput.bind(this);
+    this.getRepeatsOutput = this.getRepeatsOutput.bind(this);
 
     //gotta make the call to load them
     this.props.getAttends(this.props.event);
@@ -129,6 +130,49 @@ class BasicDetail extends Component {
     }
   }
 
+  getRepeatsOutput() {
+    const repeats = this.props.event.repeats;
+    const days = [
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday'
+    ];
+    let hasRepeats = false;
+    const repeatOut = days.map(day => {
+      if (repeats[day]) hasRepeats = true;
+      return (
+        <div className="form-check form-check-inline" key={day}>
+          <input
+            defaultChecked={repeats[day]}
+            className="form-check-input"
+            type="checkbox"
+            name={day}
+            id={day}
+            value={repeats[day]}
+            style={{ width: '20px', height: '20px' }}
+          />
+          <label className="form-check-label">
+            {day.charAt(0).toUpperCase()}
+          </label>
+        </div>
+      );
+    });
+
+    if (!hasRepeats) {
+      return;
+    }
+    return (
+      <div className="row">
+        <label className="col-md-2">Repeats</label>
+        <div className="col-md-9">{repeatOut}</div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -184,6 +228,7 @@ class BasicDetail extends Component {
           </div>
         </div>
         {this.getTypeSpecificOutput()}
+        {this.getRepeatsOutput()}
         <br />
         <button onClick={this.handleEditClick} className="btn btn-info">
           Edit Event
