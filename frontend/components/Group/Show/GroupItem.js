@@ -5,17 +5,19 @@ import { removeGroup, selectGroup } from '../../../actions/groupActions';
 class GroupItem extends Component {
   constructor(props) {
     super(props);
-    this.handleRemove = this.handleRemove.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
+
   handleClick() {
     this.props.selectGroup(this.props.group);
     this.props.history.push('/group/detail');
   }
 
-  handleRemove() {
-    this.props.removeGroup(this.props.group);
+  handleLeave() {
+    this.props.leave(this.props.group);
   }
+
   render() {
     return (
       <div className="host-event list-group-item bg-light text-dark">
@@ -33,7 +35,7 @@ class GroupItem extends Component {
                 onClick={this.handleRemove}
                 className="btn btn-danger btn-event"
               >
-                Remove
+                Leave
               </button>
             </span>
           </div>
@@ -50,7 +52,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     selectGroup: selectGroup,
-    removeGroup: removeGroup
+    leave: leaveGroup
   };
 };
 

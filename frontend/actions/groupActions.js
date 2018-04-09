@@ -9,6 +9,7 @@ import {
   GOT_GROUPS,
   GROUP_GET_EVENTS,
   GROUP_GOT_EVENTS,
+  LEAVE_GROUP,
   REMOVE_GROUP,
   RESET_GROUP,
   RESET_GROUP_CHECK_CODE,
@@ -69,4 +70,9 @@ export const getGroupEvents = group => async dispatch => {
     qs.stringify({ id: group._id })
   );
   dispatch({ type: GROUP_GOT_EVENTS, payload: res.data });
+};
+
+export const leaveGroup = group => async dispatch => {
+  dispatch({ type: LEAVE_GROUP, payload: group });
+  axios.post(groupRoute + 'leave', qs.stringify({ id: group._id }));
 };

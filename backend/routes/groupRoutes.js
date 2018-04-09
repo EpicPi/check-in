@@ -58,7 +58,6 @@ router.get('/get_groups', async (req, res) => {
 });
 
 router.post('/remove_group', async (req, res) => {
-  console.log(req.body.id);
   const group = await Group.findById(req.body.id);
   if (group) {
     group.users.forEach(async id => {
@@ -67,6 +66,26 @@ router.post('/remove_group', async (req, res) => {
       user.save();
     });
     group.events.forEach(async id => {
+      const event = await Event.findById(id);
+      event.group = '';
+      event.save();
+    });
+    group.remove();
+  } else
+    console.error(
+      '[ERR] Group was not found. Passed in code: ' +
+        req.body.id +
+        ' in /group/remove_group'
+    );
+});
+router.post('/leave', async (req, res) => {
+  const group = await Group.findById(req.body.id);
+  const user = await User.findById(req.user.id);
+  if (group) {
+    user.hostGroups = user.hostGroups.filter(el => el !== req.body.id);
+    user.save();
+    group.events.forEach(async id => {
+      // if(user.)
       const event = await Event.findById(id);
       event.group = '';
       event.save();

@@ -7,6 +7,7 @@ import {
   GOT_GROUPS,
   GROUP_GET_EVENTS,
   GROUP_GOT_EVENTS,
+  LEAVE_GROUP,
   REMOVE_GROUP,
   RESET_GROUP,
   RESET_GROUP_CHECK_CODE,
@@ -54,6 +55,10 @@ export default function(state = groupInitial, action) {
       return { ...state, events: LOAD.LOADING };
     case GROUP_GOT_EVENTS:
       return { ...state, events: action.payload };
+    case LEAVE_GROUP:
+      newGroups = state.groups.slice();
+      newGroups = newGroups.filter(el => el._id !== action.payload._id);
+      return { ...state, groups: newGroups };
     default:
       return state;
   }
