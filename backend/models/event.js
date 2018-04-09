@@ -5,7 +5,12 @@ const eventSchema = new Schema({
   name: { type: String, required: true },
   code: { type: String, required: true },
   guestsRSVP: [],
-  guestsAttend: [],
+  guestsAttend: [
+    {
+      guest: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
+      timestamp: { type: Date, default: Date.now }
+    }
+  ],
   open: {
     guestsRSVP: [],
     walkin: []

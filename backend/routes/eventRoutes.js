@@ -24,7 +24,13 @@ router.post('/rsvp', async (req, res) => {
 router.post('/attend', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
-    const pOut = event.guestsAttend.map(async id => User.findById(id));
+    const pOut = event.guestsAttend.map(async guest => {
+      if (typeof guest === 'string' || guest instanceof String) {
+        return User.findById(guest);
+      } else {
+        return User.findById(guest.guest);
+      }
+    });
     const out = await Promise.all(pOut);
     res.send(out);
   } else
