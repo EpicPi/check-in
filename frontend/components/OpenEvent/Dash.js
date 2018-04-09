@@ -70,6 +70,7 @@ class OpenEventDash extends Component {
       return;
     }
     this.props.walkin(this.props.event, this.state.name);
+    alert('You have checked in!');
     this.props.history.push('/');
   }
 
@@ -83,6 +84,7 @@ class OpenEventDash extends Component {
       return;
     }
     this.props.checkin(this.props.event, this.state.guest);
+    alert('You have checked in!');
     this.props.history.push('/');
   }
 
