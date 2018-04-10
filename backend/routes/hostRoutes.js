@@ -101,6 +101,12 @@ router.get('/get_events', async (req, res) => {
   res.send(out);
 });
 
+router.get('/get_groups', async (req, res) => {
+  const user = await User.findById(req.user.id);
+  const out = user.hostGroups.map(id => Group.findById(id));
+  res.send(await Promise.all(out));
+});
+
 router.post('/check_code', async (req, res) => {
   const event = await Event.findOne({ code: req.body.code.toUpperCase() });
   if (req.body.code !== '')

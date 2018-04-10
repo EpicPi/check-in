@@ -20,12 +20,12 @@ router.post('/join', async (req, res) => {
     );
 });
 
-router.post('/check', async (req, res) => {
+router.post('/check_code', async (req, res) => {
   const group = await Group.findOne({ code: req.body.code });
   res.send(group);
 });
 
-router.post('/add_group', async (req, res) => {
+router.post('/create', async (req, res) => {
   const user = await User.findById(req.user.id);
   const group = await Group({
     name: req.body.name,
@@ -38,7 +38,7 @@ router.post('/add_group', async (req, res) => {
   res.send(group);
 });
 
-router.post('edit_group', async (req, res) => {
+router.post('edit', async (req, res) => {
   const group = await Group.findById(req.body.id);
   if (group) {
     group.name = req.body.name;
@@ -49,12 +49,6 @@ router.post('edit_group', async (req, res) => {
         req.body.code +
         ' in /group/edit_group'
     );
-});
-
-router.get('/get_groups', async (req, res) => {
-  const user = await User.findById(req.user.id);
-  const out = user.hostGroups.map(id => Group.findById(id));
-  res.send(await Promise.all(out));
 });
 
 router.post('/leave', async (req, res) => {

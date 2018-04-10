@@ -1,4 +1,6 @@
 import {
+  GET_GROUPS,
+  GOT_GROUPS,
   HOST_ADD_EVENT,
   HOST_CHECK_SIGNUP_CODE,
   HOST_CHECKED_SIGNUP_CODE,
@@ -12,7 +14,7 @@ import {
 } from './types';
 import axios from 'axios/index';
 import * as qs from 'qs';
-import { hostRoute } from './index';
+import { groupRoute, hostRoute } from './index';
 
 export const createEvent = event => async dispatch => {
   dispatch({ type: HOST_ADD_EVENT, payload: event });
@@ -62,4 +64,10 @@ export const hostCheckIn = (event, guest) => dispatch => {
     qs.stringify({ event: event._id, guest: guest._id })
   );
   dispatch({ type: HOST_CHECKIN });
+};
+
+export const hostGetGroups = () => async dispatch => {
+  dispatch({ type: GET_GROUPS });
+  const res = await axios.get(hostRoute + 'get_groups');
+  dispatch({ type: GOT_GROUPS, payload: res.data });
 };

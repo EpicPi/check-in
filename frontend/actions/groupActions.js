@@ -26,12 +26,6 @@ export const editGroup = group => dispatch => {
   axios.post(groupRoute + 'edit_group', qs.stringify(group));
 };
 
-export const getGroups = () => async dispatch => {
-  dispatch({ type: GET_GROUPS });
-  const res = await axios.get(groupRoute + 'get_groups');
-  dispatch({ type: GOT_GROUPS, payload: res.data });
-};
-
 export const removeGroup = group => dispatch => {
   dispatch({ type: REMOVE_GROUP, payload: group });
   axios.post(groupRoute + 'remove_group', qs.stringify({ id: group._id }));

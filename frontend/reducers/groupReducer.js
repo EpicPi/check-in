@@ -18,16 +18,6 @@ import { groupInitial } from './index';
 
 export default function(state = groupInitial, action) {
   switch (action.type) {
-    case ADD_GROUP:
-      return { ...state, groups: [...state.groups, action.payload] };
-    case GET_GROUPS:
-      return { ...state, groups: LOAD.LOADING };
-    case GOT_GROUPS:
-      return { ...state, groups: action.payload };
-    case REMOVE_GROUP:
-      let newGroups = state.groups.slice();
-      newGroups = newGroups.filter(el => el._id !== action.payload._id);
-      return { ...state, groups: newGroups };
     case CHECK_GROUP_CODE:
       return { ...state, checkCode: CHECK_CODE.CHECKING };
     case CHECKED_GROUP_CODE:

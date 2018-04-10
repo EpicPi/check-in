@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { LOAD } from '../../../helpers/Enums';
 import { getGroups } from '../../../actions/groupActions';
 import GroupItem from './GroupItem';
+import { hostGetGroups } from '../../../actions';
 
 class ShowGroups extends Component {
   constructor(props) {
@@ -81,13 +82,13 @@ class ShowGroups extends Component {
 
 const mapStateToProps = state => {
   return {
-    groups: state.group.groups
+    groups: state.host.groups
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getGroups: getGroups
+    getGroups: hostGetGroups
   };
 };
 
