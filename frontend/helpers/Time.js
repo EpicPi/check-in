@@ -43,10 +43,19 @@ export function getCurrentDate() {
 }
 export function isEventActive(event) {
   let now = new Date();
-  return (
-    now < new Date(event.dates.checkinEnd) &&
-    now > new Date(event.dates.checkinStart)
-  );
+  let isRepeat = false;
+  for (let prop in event.repeats) {
+    isRepeat = !!(event.repeats[prop] || isRepeat);
+  }
+  let isActive = false;
+  if (isRepeat) {
+    // TODO
+  } else {
+    isActive =
+      now < new Date(event.dates.checkinEnd) &&
+      now > new Date(event.dates.checkinStart);
+  }
+  return isActive;
 }
 export function isEventClosed(event) {
   let now = new Date();
