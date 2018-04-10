@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Select from 'react-select';
 import {
   openGetEvent,
   openCheckin,
@@ -32,10 +33,12 @@ class OpenEventDash extends Component {
     this.getCheckCheckInOutput = this.getCheckCheckInOutput.bind(this);
     this.handleCheckInCodeInput = this.handleCheckInCodeInput.bind(this);
     this.getCodeOutput = this.getCodeOutput.bind(this);
+    this.getCheckinOutput = this.getCheckinOutput.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       name: '',
-      guest: '0',
+      guest: null,
       checkinCode: ''
     };
   }
@@ -75,8 +78,7 @@ class OpenEventDash extends Component {
   }
 
   handleCheckin() {
-    console.log(this.state.guest);
-    if (this.state.guest === '0') {
+    if (!this.state.guest) {
       alert(noNameSelectedError);
       return;
     }
@@ -142,20 +144,25 @@ class OpenEventDash extends Component {
     );
   }
 
+  handleChange(guest) {
+    this.setState({ guest: guest });
+  }
+
   getCheckinOutput() {
     return (
       <div className="form-group row">
         <label className="col-md-2 col-form-label">Name</label>
         <div className="col-md-8">
-          <select
-            onChange={this.handleGeneral}
-            name="guest"
-            className="form-control"
+          <Select
+            name="form-field-name"
             value={this.state.guest}
-          >
-            <option value={'0'} key={1} />
-            {this.getRsvpOutput()}
-          </select>
+            onChange={this.handleChange}
+            searchable={true}
+            options={this.props.rsvps}
+            valueKey={'_id'}
+            labelKey={'name'}
+            autoFocus
+          />
           <br />
         </div>
         <div className="col-md-2">
