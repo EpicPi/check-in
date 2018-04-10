@@ -1,0 +1,106 @@
+/** {*/
+/*margin: 10px;*/
+/*}*/
+
+.bgColor {
+  background-color: #0379ae;
+}
+.mainColor {
+  background: #d1e6ea;
+}
+.accentColor {
+  background-color: #ff9a3d;
+}
+.bgText {
+  color: #0379ae;
+}
+.mainText {
+  color: #d1e6ea;
+}
+.accentText {
+  color: #ff9a3d;
+}
+.app {
+  /*margin: 10px;*/
+  /*background-color: black;*/
+}
+
+.nav-text a {
+  color: white;
+  vertical-align: bottom !important;
+}
+
+/**
+    Land.js
+ */
+.landing {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.landing button.btn-selection {
+  margin: 10px;
+}
+
+/**
+    HostShowEvent.js
+ */
+.host-show {
+  margin: 10px;
+}
+.host-show ul {
+  padding: 0;
+}
+
+/**
+    EventItem.js
+ */
+.host-event {
+  margin: 10px 0 10px 0;
+}
+
+.host-event button {
+  margin: 0 5px 0 5px;
+}
+
+/**
+    GuestShowEvent.js
+ */
+.guest-show {
+  margin: 10px;
+}
+.guest-show ul {
+  padding: 0;
+}
+
+/**
+    EventItem.js
+ */
+.guest-event {
+  margin: 10px 0 10px 0;
+}
+
+.guest-event button {
+  margin: 0 5px 0 5px;
+}
+
+/**
+    JoinEvent.js
+ */
+.guest-join {
+  margin: 10px;
+}
+
+.buttonLeft {
+  margin-right: 5px;
+}
+.buttonRight {
+  margin-left: 5px;
+}
+.fakeLink {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
