@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Select from 'react-select';
 import {
   openGetEvent,
   openCheckin,
@@ -35,10 +36,12 @@ class Dash extends Component {
     this.getCheckCheckInOutput = this.getCheckCheckInOutput.bind(this);
     this.handleCheckInCodeInput = this.handleCheckInCodeInput.bind(this);
     this.getCodeOutput = this.getCodeOutput.bind(this);
+    this.getCheckinOutput = this.getCheckinOutput.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       name: '',
-      guest: '0',
+      guest: null,
       checkinCode: ''
     };
   }
@@ -73,11 +76,12 @@ class Dash extends Component {
       return;
     }
     this.props.walkin(this.props.event, this.state.name);
+    alert('You have checked in!');
     this.props.history.push('/');
   }
 
   handleCheckin() {
-    if (this.state.guest === '0') {
+    if (!this.state.guest) {
       alert(noNameSelectedError);
       return;
     }
@@ -85,6 +89,7 @@ class Dash extends Component {
       return;
     }
     this.props.checkin(this.props.event, this.state.guest);
+    alert('You have checked in!');
     this.props.history.push('/');
   }
 
@@ -120,7 +125,7 @@ class Dash extends Component {
         <form onSubmit={this.handleWalkin} id="open-checkin">
           <div className="form-group row">
             <label className="col-md-2 col-form-label">Name</label>
-            <div className="col-md-4">
+            <div className="col-md-8">
               <input
                 type="text"
                 name="name"
@@ -129,13 +134,69 @@ class Dash extends Component {
                 onChange={this.handleGeneral}
                 required
               />
+              <br />
             </div>
-            <button type="submit" value="Submit" className="btn btn-success">
-              {submitButton}
-            </button>
+
+            <div className="col-md-2">
+              <button type="submit" value="Submit" className="btn btn-success">
+                Submit
+              </button>
+            </div>
           </div>
         </form>
       </div>
+    );
+  }
+
+  handleChange(guest) {
+    this.setState({ guest: guest });
+  }
+
+  getCheckinOutput() {
+    return (
+      <div className="form-group row">
+        <label className="col-md-2 col-form-label">Name</label>
+        <div className="col-md-8">
+          <Select
+            name="form-field-name"
+            value={this.state.guest}
+            onChange={this.handleChange}
+            searchable={true}
+            options={this.props.rsvps}
+            valueKey={'_id'}
+            labelKey={'name'}
+            autoFocus
+          />
+          <br />
+        </div>
+        <div className="col-md-2">
+          <button className="btn btn-success" onClick={this.handleCheckin}>
+            Submit
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  getCodeOutput() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <div className="form-group row">
+          <label className="col-md-2 col-form-label">{checkInCodeLabel}</label>
+          <div className="col-md-8">
+            <input
+              className="form-control"
+              type="text"
+              name="code"
+              // value={this.state.checkinCode}
+              onChange={this.handleCheckInCodeInput}
+              required
+            />
+            >>>>>>>
+            5dbee73ff7fc94568bd9556b3c378d0933cee6a5:frontend/components/OpenEvent/Dash.js
+          </div>
+        </div>
+      </form>
     );
   }
 

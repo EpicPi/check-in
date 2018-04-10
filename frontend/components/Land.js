@@ -91,7 +91,7 @@ class Land extends Component {
                 <br />
                 <div className="col-md-offset-2 col-md-8 mx-auto text-center">
                   <p>
-                    We are ambitious computer science student at Georgia Tech
+                    We are ambitious computer science students at Georgia Tech
                     solving the frustrating problems that comes from event
                     RSVPs, so that you can focus on the actual event!
                   </p>
