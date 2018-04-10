@@ -16,26 +16,6 @@ import {
   SELECT_GROUP
 } from './types';
 
-export const createGroup = group => async dispatch => {
-  const res = await axios.post(groupRoute + 'add_group', qs.stringify(group));
-  dispatch({ type: ADD_GROUP, payload: res.data });
-};
-
-export const editGroup = group => dispatch => {
-  dispatch({ type: EDIT_GROUP, payload: { group: group } });
-  axios.post(groupRoute + 'edit_group', qs.stringify(group));
-};
-
-export const removeGroup = group => dispatch => {
-  dispatch({ type: REMOVE_GROUP, payload: group });
-  axios.post(groupRoute + 'remove_group', qs.stringify({ id: group._id }));
-};
-
-export const joinGroup = group => async dispatch => {
-  dispatch({ type: ADD_GROUP, payload: group });
-  await axios.post(groupRoute + 'join', qs.stringify({ id: group._id }));
-};
-
 export const checkGroupCode = code => async dispatch => {
   dispatch({ type: CHECK_GROUP_CODE });
   const res = await axios.post(
@@ -64,9 +44,4 @@ export const getGroupEvents = group => async dispatch => {
     qs.stringify({ id: group._id })
   );
   dispatch({ type: GROUP_GOT_EVENTS, payload: res.data });
-};
-
-export const leaveGroup = group => async dispatch => {
-  dispatch({ type: LEAVE_GROUP, payload: group });
-  axios.post(groupRoute + 'leave', qs.stringify({ id: group._id }));
 };

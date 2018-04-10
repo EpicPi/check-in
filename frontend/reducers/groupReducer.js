@@ -29,26 +29,14 @@ export default function(state = groupInitial, action) {
       return { ...state, selected: groupInitial.selected };
     case SELECT_GROUP:
       return { ...state, selected: action.payload };
-    case EDIT_GROUP:
-      newGroups = state.groups.slice();
-      newGroups = newGroups.map(el => {
-        if (el._id !== action.payload.group._id) {
-          return el;
-        } else {
-          return action.payload.group;
-        }
-      });
-      return { ...state, groups: newGroups };
+
     case RESET_GROUP_CHECK_CODE:
       return { ...state, checkCode: CHECK_CODE.NOTHING };
     case GROUP_GET_EVENTS:
       return { ...state, events: LOAD.LOADING };
     case GROUP_GOT_EVENTS:
       return { ...state, events: action.payload };
-    case LEAVE_GROUP:
-      newGroups = state.groups.slice();
-      newGroups = newGroups.filter(el => el._id !== action.payload._id);
-      return { ...state, groups: newGroups };
+
     default:
       return state;
   }

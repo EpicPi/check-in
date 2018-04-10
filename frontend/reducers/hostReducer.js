@@ -12,7 +12,9 @@ import {
   REMOVE_GROUP,
   GOT_GROUPS,
   GET_GROUPS,
-  ADD_GROUP
+  ADD_GROUP,
+  EDIT_GROUP,
+  LEAVE_GROUP
 } from '../actions/types';
 import { CHECK_CODE, LOAD } from '../helpers/Enums';
 import { hostInitial } from './index';
@@ -64,10 +66,22 @@ export default function(state = hostInitial, action) {
       return { ...state, groups: LOAD.LOADING };
     case GOT_GROUPS:
       return { ...state, groups: action.payload };
-    case REMOVE_GROUP:
+    case EDIT_GROUP: {
+      let newGroups = state.groups.slice();
+      newGroups = newGroups.map(el => {
+        if (el._id !== action.payload.group._id) {
+          return el;
+        } else {
+          return action.payload.group;
+        }
+      });
+      return { ...state, groups: newGroups };
+    }
+    case LEAVE_GROUP: {
       let newGroups = state.groups.slice();
       newGroups = newGroups.filter(el => el._id !== action.payload._id);
       return { ...state, groups: newGroups };
+    }
     default:
       return state;
   }

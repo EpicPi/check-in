@@ -1,4 +1,5 @@
 import {
+  ADD_GROUP,
   GET_GROUPS,
   GOT_GROUPS,
   HOST_ADD_EVENT,
@@ -10,7 +11,8 @@ import {
   HOST_GOT_EVENTS,
   HOST_REMOVE_EVENT,
   HOST_REPLACE,
-  HOST_RESET_SIGNUP_EVENT
+  HOST_RESET_SIGNUP_EVENT,
+  LEAVE_GROUP
 } from './types';
 import axios from 'axios/index';
 import * as qs from 'qs';
@@ -22,10 +24,9 @@ export const createEvent = event => async dispatch => {
   dispatch(replaceEvent(event2.data, event));
 };
 
-export const hostGetEvents = () => async dispatch => {
-  dispatch({ type: HOST_GET_EVENTS });
-  const res = await axios.get(hostRoute + 'get_events');
-  dispatch({ type: HOST_GOT_EVENTS, payload: res.data });
+export const editEvent = event => dispatch => {
+  dispatch({ type: HOST_EDIT_EVENT, payload: { event: event } });
+  axios.post(hostRoute + 'edit_event', qs.stringify(event));
 };
 
 export const hostRemoveEvent = event => dispatch => {
@@ -33,16 +34,17 @@ export const hostRemoveEvent = event => dispatch => {
   axios.post(hostRoute + 'remove_event', qs.stringify(event));
 };
 
+export const hostGetEvents = () => async dispatch => {
+  dispatch({ type: HOST_GET_EVENTS });
+  const res = await axios.get(hostRoute + 'get_events');
+  dispatch({ type: HOST_GOT_EVENTS, payload: res.data });
+};
+
 export const replaceEvent = (event, toReplace) => dispatch => {
   dispatch({
     type: HOST_REPLACE,
     payload: { event: event, toReplace: toReplace }
   });
-};
-
-export const editEvent = event => dispatch => {
-  dispatch({ type: HOST_EDIT_EVENT, payload: { event: event } });
-  axios.post(hostRoute + 'edit_event', qs.stringify(event));
 };
 
 export const checkSignupCode = code => async dispatch => {
@@ -70,4 +72,24 @@ export const hostGetGroups = () => async dispatch => {
   dispatch({ type: GET_GROUPS });
   const res = await axios.get(hostRoute + 'get_groups');
   dispatch({ type: GOT_GROUPS, payload: res.data });
+};
+
+export const hostJoinGroup = group => async dispatch => {
+  dispatch({ type: ADD_GROUP, payload: group });
+  await axios.post(hostRoute + 'join', qs.stringify({ id: group._id }));
+};
+
+export const hostCreateGroup = group => async dispatch => {
+  const res = await axios.post(hostRoute + 'add_group', qs.stringify(group));
+  dispatch({ type: ADD_GROUP, payload: res.data });
+};
+
+export const hostEditGroup = group => dispatch => {
+  dispatch({ type: EDIT_GROUP, payload: { group: group } });
+  axios.post(hostRoute + 'edit_group', qs.stringify(group));
+};
+
+export const hostLeaveGroup = group => async dispatch => {
+  dispatch({ type: LEAVE_GROUP, payload: group });
+  axios.post(hostRoute + 'leave', qs.stringify({ id: group._id }));
 };
