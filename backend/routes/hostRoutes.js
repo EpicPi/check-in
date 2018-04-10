@@ -38,8 +38,7 @@ router.post('/add_event', async (req, res) => {
     open: {
       guestsRSVP: await mapOpenUsers(req.body.openRsvp),
       walkin: []
-    },
-    group: req.body.group
+    }
   }).save();
   const user = await User.findById(req.user.id);
   user.hostEvents.push(event.id);
@@ -76,25 +75,6 @@ router.post('/edit_event', async (req, res) => {
     removedUsers.forEach(async el => await User.findById(el).remove());
     event.open.guestsRSVP = newOpenUsers;
 
-    //group
-    if (event.group !== req.body.group) {
-      console.log('group stuff');
-      if (event.group) {
-        const group = await Group.findById(event.group);
-        if (group) {
-          group.events = group.events.filter(el => el !== event.id);
-          group.save();
-        }
-      }
-      if (req.body.group) {
-        const group2 = await Group.findById(req.body.group);
-        if (group2) {
-          group2.events.push(event.id);
-          group2.save();
-        }
-      }
-    }
-    event.group = req.body.group;
     event.save();
     res.send(event);
   } else
