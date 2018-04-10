@@ -25,6 +25,9 @@ router.post('/attend', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
     const pOut = event.guestsAttend.map(async guest => {
+      // TODO: fix this
+      // earlier version only had list of guests
+      // but now it's list of json {guest, timestamp}
       if (typeof guest === 'string' || guest instanceof String) {
         return User.findById(guest);
       } else {
