@@ -57,7 +57,12 @@ class OpenForm extends Component {
 
   addGuestsFromFile(ppl) {
     open = this.props.openRsvp.slice();
-    ppl.forEach(person => open.push({ name: person[0] + ' ' + person[1] }));
+    ppl.forEach(
+      person =>
+        person[1]
+          ? open.push({ name: person[0] + ' ' + person[1] })
+          : open.push({ name: person[0] })
+    );
     this.props.updateOpenRsvp(open);
   }
 
