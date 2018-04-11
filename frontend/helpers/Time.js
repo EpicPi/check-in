@@ -65,7 +65,6 @@ export function isEventActive(event) {
       let end = timeInputFormat(event.dates.checkinEnd);
       let current = timeInputFormat(now);
       isActive = current >= start && current <= end;
-      console.log(start, end, current);
     }
   } else {
     isActive =
