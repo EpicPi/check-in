@@ -41,14 +41,17 @@ export function getCurrentDate() {
   let now = new Date();
   return dateInputFormat(now);
 }
-export function isEventActive(event) {
-  let now = new Date();
+export function isEventRepeat(event) {
   let isRepeat = false;
   for (let prop in event.repeats) {
     isRepeat = !!(event.repeats[prop] || isRepeat);
   }
+  return isRepeat;
+}
+export function isEventActive(event) {
+  let now = new Date();
   let isActive = false;
-  if (isRepeat) {
+  if (isEventRepeat(event)) {
     // FIXME put this in const enum file
     const DAYS_OF_WEEK = [
       'sunday',
@@ -64,6 +67,7 @@ export function isEventActive(event) {
       let start = timeInputFormat(event.dates.checkinStart);
       let end = timeInputFormat(event.dates.checkinEnd);
       let current = timeInputFormat(now);
+      // checking the hr:min format
       isActive = current >= start && current <= end;
     }
   } else {
@@ -73,7 +77,8 @@ export function isEventActive(event) {
   }
   return isActive;
 }
+
 export function isEventClosed(event) {
   let now = new Date();
-  return now > new Date(event.dates.checkinEnd);
+  return now > new Date(event.dates.checkinEnd) && !isEventRepeat(event);
 }
