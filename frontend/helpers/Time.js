@@ -49,7 +49,24 @@ export function isEventActive(event) {
   }
   let isActive = false;
   if (isRepeat) {
-    // TODO
+    // FIXME put this in const enum file
+    const DAYS_OF_WEEK = [
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday'
+    ];
+    // day of week should be same
+    if (event.repeats[DAYS_OF_WEEK[now.getDay()]]) {
+      let start = timeInputFormat(event.dates.checkinStart);
+      let end = timeInputFormat(event.dates.checkinEnd);
+      let current = timeInputFormat(now);
+      isActive = current >= start && current <= end;
+      console.log(start, end, current);
+    }
   } else {
     isActive =
       now < new Date(event.dates.checkinEnd) &&
