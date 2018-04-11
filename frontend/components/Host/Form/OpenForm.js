@@ -80,8 +80,11 @@ class OpenForm extends Component {
     switch (this.props.openRsvp) {
       case LOAD.LOADING:
         return 'LOADING';
+      case LOAD.NOTHING:
+        return;
       default:
         if (this.props.openRsvp.length === 0) return <br />;
+        console.log(this.props.openRsvp);
         return (
           <div>
             <br />
