@@ -21,7 +21,7 @@ export const openGetEvent = code => async dispatch => {
 export const openCheckin = (event, guest) => async dispatch => {
   const res = await axios.post(
     openRoute + 'check_in',
-    qs.stringify({ event: event._id, guest: guest })
+    qs.stringify({ event: event._id, guest: guest._id })
   );
 };
 

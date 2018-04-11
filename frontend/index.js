@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/stylesheets/base.scss';
 import '../public/app.css';
 
+import 'react-select/dist/react-select.css';
+
 const store = configureStore();
 
 render(
