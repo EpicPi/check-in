@@ -84,7 +84,6 @@ class OpenForm extends Component {
         return;
       default:
         if (this.props.openRsvp.length === 0) return <br />;
-        console.log(this.props.openRsvp);
         return (
           <div>
             <br />
