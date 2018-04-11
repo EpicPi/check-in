@@ -36,13 +36,29 @@ router.post('/attend', async (req, res) => {
       }
 
       let isRepeat = await event.isRepeat();
-      console.log(new Date(), isRepeat);
-      // if (event.isRepeat(function(isRepeat) {
-      //   console.log(isRepeat);
-      // }));
+      if (isRepeat) {
+        let temp = null;
+        console.log(event.guestsAttend);
+        for (let ind = 0; ind < event.guestsAttend.length; ind++) {
+          let obj = event.guestsAttend[ind];
+          let date = new Date(obj.timestamp);
+          let now = new Date();
+          // if this user checked in today
+          if (
+            user._id.equals(obj.guest) &&
+            date.getDate() === now.getDate() &&
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear()
+          ) {
+            temp = user;
+          }
+        }
+        user = temp;
+      }
       return user;
     });
-    const out = await Promise.all(pOut);
+    // filter null values
+    const out = await Promise.all(pOut).then(users => users.filter(u => u));
     res.send(out);
   } else
     console.error(
