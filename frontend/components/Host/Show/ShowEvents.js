@@ -14,6 +14,7 @@ class ShowEvents extends Component {
     super(props);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleGroup = this.handleGroup.bind(this);
+    // this.getGeneralOutput = this.getGeneralOutput(this);
 
     if (this.props.events === LOAD.NOTHING) this.props.getEvents();
     this.state = {
@@ -41,56 +42,18 @@ class ShowEvents extends Component {
     this.props.history.push('/group');
   }
 
-  getEventsOutput(props) {
+  getGeneralOutput(props, header, filter) {
     switch (props.events) {
       case LOAD.LOADING:
         return <h3>LOADING</h3>;
       case LOAD.NOTHING:
         return;
       default:
-        let filteredEvents = props.events.filter(
-          event =>
-            !isEventActive(event) &&
-            !isEventClosed(event) &&
-            !isEventRepeat(event)
-        );
-        if (filteredEvents.length > 0)
-          return (
-            <div>
-              <h3>Open</h3>
-              <div className="row">
-                <div className="col-md-12">
-                  <ul className="event-list">
-                    {filteredEvents.map((event, i) => (
-                      <EventItem
-                        history={props.history}
-                        key={i}
-                        event={event}
-                      />
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <hr />
-            </div>
-          );
-    }
-  }
-
-  getRepeatEventsOutput(props) {
-    switch (props.events) {
-      case LOAD.LOADING:
-        return <h3>LOADING</h3>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        let filteredEvents = props.events.filter(
-          event => !isEventActive(event) && isEventRepeat(event)
-        );
+        let filteredEvents = props.events.filter(filter);
         if (filteredEvents.length > 0) {
           return (
             <div>
-              <h3>Repeat Events</h3>
+              <h3>{header}</h3>
               <div className="row">
                 <div className="col-md-12">
                   <ul className="event-list">
@@ -111,65 +74,30 @@ class ShowEvents extends Component {
     }
   }
 
+  getEventsOutput(props) {
+    return this.getGeneralOutput(props, 'Open', function(event) {
+      return (
+        !isEventActive(event) && !isEventClosed(event) && !isEventRepeat(event)
+      );
+    });
+  }
+
+  getRepeatEventsOutput(props) {
+    return this.getGeneralOutput(props, 'Repeat Events', function(event) {
+      return !isEventActive(event) && isEventRepeat(event);
+    });
+  }
+
   getActiveEventsOutput(props) {
-    switch (props.events) {
-      case LOAD.LOADING:
-        return <h3>LOADING</h3>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        let filteredEvents = props.events.filter(event => isEventActive(event));
-        if (filteredEvents.length > 0)
-          return (
-            <div>
-              <h3>CheckIn Active</h3>
-              <div className="row">
-                <div className="col-md-12">
-                  <ul className="event-list">
-                    {filteredEvents.map((event, i) => (
-                      <EventItem
-                        history={props.history}
-                        key={i}
-                        event={event}
-                      />
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <hr />
-            </div>
-          );
-    }
+    return this.getGeneralOutput(props, 'CheckIn Active', function(event) {
+      return isEventActive(event);
+    });
   }
 
   getClosedEventsOutput(props) {
-    switch (props.events) {
-      case LOAD.LOADING:
-        return <h3>LOADING</h3>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        let filteredEvents = props.events.filter(event => isEventClosed(event));
-        if (filteredEvents.length > 0)
-          return (
-            <div>
-              <h3>Closed</h3>
-              <div className="row">
-                <div className="col-md-12">
-                  <ul className="event-list">
-                    {filteredEvents.map((event, i) => (
-                      <EventItem
-                        history={props.history}
-                        key={i}
-                        event={event}
-                      />
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          );
-    }
+    return this.getGeneralOutput(props, 'Closed', function(event) {
+      return isEventClosed(event);
+    });
   }
 
   render() {
