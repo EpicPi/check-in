@@ -38,4 +38,12 @@ const eventSchema = new Schema({
   }
 });
 
+eventSchema.methods.isRepeat = async function() {
+  let isRepeat = false;
+  for (let prop in this.repeats) {
+    isRepeat = !!(this.repeats[prop] || isRepeat);
+  }
+  return isRepeat;
+};
+
 mongoose.model('events', eventSchema);

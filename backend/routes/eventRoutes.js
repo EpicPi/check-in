@@ -28,11 +28,19 @@ router.post('/attend', async (req, res) => {
       // TODO: fix this
       // earlier version only had list of guests
       // but now it's list of json {guest, timestamp}
+      let user = null;
       if (typeof guest === 'string' || guest instanceof String) {
-        return User.findById(guest);
+        user = await User.findById(guest);
       } else {
-        return User.findById(guest.guest);
+        user = await User.findById(guest.guest);
       }
+
+      let isRepeat = await event.isRepeat();
+      console.log(new Date(), isRepeat);
+      // if (event.isRepeat(function(isRepeat) {
+      //   console.log(isRepeat);
+      // }));
+      return user;
     });
     const out = await Promise.all(pOut);
     res.send(out);
