@@ -47,7 +47,7 @@ router.post('edit', async (req, res) => {
     console.error(
       '[ERR] Group was not found. Passed in code: ' +
         req.body.code +
-        ' in /group/edit_group'
+        ' in /group/edit'
     );
 });
 
@@ -55,10 +55,10 @@ router.post('/leave', async (req, res) => {
   const group = await Group.findById(req.body.id);
   const user = await User.findById(req.user.id);
   if (group) {
-    user.hostGroups = user.hostGroups.filter(el => el !== req.body.id);
+    user.hostGroups = user.hostGroups.filter(el => el !== group.id);
     user.save();
 
-    group.users = group.users.filter(el => el !== req.user.id);
+    group.users = group.users.filter(el => el !== user.id);
     if (group.users.length > 0) {
       group.save();
     } else {
@@ -68,7 +68,7 @@ router.post('/leave', async (req, res) => {
     console.error(
       '[ERR] Group was not found. Passed in code: ' +
         req.body.id +
-        ' in /group/remove_group'
+        ' in /group/leave'
     );
 });
 
