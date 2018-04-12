@@ -40,7 +40,6 @@ router.post('/add_event', async (req, res) => {
       walkin: []
     }
   }).save();
-
   if (!req.body.group) {
     const user = await User.findById(req.user.id);
     user.hostEvents.push(event.id);

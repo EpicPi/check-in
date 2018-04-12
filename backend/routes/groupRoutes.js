@@ -43,6 +43,7 @@ router.post('edit', async (req, res) => {
   if (group) {
     group.name = req.body.name;
     group.code = req.body.code;
+    group.save();
   } else
     console.error(
       '[ERR] Group was not found. Passed in code: ' +

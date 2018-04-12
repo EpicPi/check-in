@@ -171,7 +171,7 @@ class EventForm extends Component {
       openRsvp: this.props.openRsvp,
       group: this.props.group._id
     };
-    if (!this.props.group) {
+    if (!this.props.group._id) {
       if (this.props.add) this.props.addEvent(event);
       else this.props.editEvent(event);
       this.props.history.push('/host');
