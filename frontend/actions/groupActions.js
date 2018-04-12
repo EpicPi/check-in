@@ -1,6 +1,6 @@
 import axios from 'axios/index';
 import * as qs from 'qs';
-import { groupRoute } from './index';
+import { groupRoute, hostRoute } from './index';
 import {
   ADD_GROUP,
   CHECK_GROUP_CODE,
@@ -15,6 +15,7 @@ import {
   RESET_GROUP_CHECK_CODE,
   SELECT_GROUP
 } from './types';
+import { replaceEvent } from './hostActions';
 
 export const checkGroupCode = code => async dispatch => {
   dispatch({ type: CHECK_GROUP_CODE });
@@ -44,4 +45,9 @@ export const getGroupEvents = group => async dispatch => {
     qs.stringify({ id: group._id })
   );
   dispatch({ type: GROUP_GOT_EVENTS, payload: res.data });
+};
+
+export const createGroupEvent = event => async dispatch => {
+  const res = await axios.post(hostRoute + 'add_event', qs.stringify(event));
+  dispatch({ type: GROUP_ADD_EVENT, payload: res.data });
 };

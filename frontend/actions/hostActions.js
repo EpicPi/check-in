@@ -75,21 +75,24 @@ export const hostGetGroups = () => async dispatch => {
 };
 
 export const hostJoinGroup = group => async dispatch => {
-  dispatch({ type: ADD_GROUP, payload: group });
-  await axios.post(hostRoute + 'join', qs.stringify({ id: group._id }));
+  const res = await axios.post(
+    groupRoute + 'join',
+    qs.stringify({ id: group._id })
+  );
+  dispatch({ type: ADD_GROUP, payload: res.data });
 };
 
 export const hostCreateGroup = group => async dispatch => {
-  const res = await axios.post(hostRoute + 'add_group', qs.stringify(group));
+  const res = await axios.post(groupRoute + 'create', qs.stringify(group));
   dispatch({ type: ADD_GROUP, payload: res.data });
 };
 
 export const hostEditGroup = group => dispatch => {
   dispatch({ type: EDIT_GROUP, payload: { group: group } });
-  axios.post(hostRoute + 'edit_group', qs.stringify(group));
+  axios.post(groupRoute + 'edit', qs.stringify(group));
 };
 
 export const hostLeaveGroup = group => async dispatch => {
   dispatch({ type: LEAVE_GROUP, payload: group });
-  axios.post(hostRoute + 'leave', qs.stringify({ id: group._id }));
+  axios.post(groupRoute + 'leave', qs.stringify({ id: group._id }));
 };
