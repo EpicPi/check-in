@@ -148,13 +148,13 @@ class ShowEvents extends Component {
           <div className="row btn-create">
             <div className="col-md-12">
               <button
-                className="btn btn-lg btn-info"
+                className="btn btn-lg btn-info buttonLeft"
                 onClick={this.handleCreate}
               >
                 Create Event
               </button>
               <button
-                className="btn btn-lg btn-info"
+                className="btn btn-lg btn-info buttonRight"
                 onClick={this.handleGroup}
               >
                 Groups

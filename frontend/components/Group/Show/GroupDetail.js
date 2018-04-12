@@ -147,13 +147,16 @@ class GroupDetail extends Component {
           <div className="row btn-create">
             <div className="col-md-12">
               <button
-                className="btn btn-lg btn-info"
+                className="btn btn-lg btn-info buttonLeft"
                 onClick={this.handleCreate}
               >
-                Create Event
+                New Event
               </button>
-              <button className="btn btn-lg btn-info" onClick={this.handleEdit}>
-                Edit
+              <button
+                className="btn btn-lg btn-info buttonRight"
+                onClick={this.handleEdit}
+              >
+                Edit Group
               </button>
             </div>
           </div>
