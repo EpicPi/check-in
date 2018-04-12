@@ -8,6 +8,7 @@ import {
   resetGroupcheckCode
 } from '../../../actions/groupActions';
 import { CHECK_CODE } from '../../../helpers/Enums';
+import { hostCreateGroup, hostEditGroup } from '../../../actions';
 
 class GroupForm extends Component {
   constructor(props) {
@@ -109,8 +110,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     check: checkGroupCode,
-    addGroup: createGroup,
-    editGroup: editGroup,
+    addGroup: hostCreateGroup,
+    editGroup: hostEditGroup,
     resetCode: resetGroupcheckCode
   };
 };

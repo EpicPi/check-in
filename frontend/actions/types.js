@@ -65,3 +65,4 @@ export const GROUP_GET_EVENTS = 'group_get_events';
 export const GROUP_GOT_EVENTS = 'group_got_events';
 export const GROUP_ADD_EVENT = 'group_add_event';
 export const GROUP_REMOVE_EVENT = 'group_remove_event';
+export const GROUP_EDIT_EVENT = 'group_edit_event';

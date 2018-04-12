@@ -10,7 +10,7 @@ import {
 } from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES, LOAD } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
   getCurrentDate,
@@ -27,7 +27,7 @@ import {
   codeAvailable,
   codeUnavaliableError
 } from '../../../assets/text';
-import { getGroups } from '../../../actions/groupActions';
+import { createGroupEvent, editGroupEvent } from '../../../actions';
 
 class EventForm extends Component {
   constructor(props) {
@@ -64,8 +64,7 @@ class EventForm extends Component {
           date: getCurrentDate()
         },
         type: EVENT_TYPES.BASIC,
-        checkinCode: '',
-        group: ''
+        checkinCode: ''
       };
     else
       this.state = {
@@ -89,8 +88,7 @@ class EventForm extends Component {
           date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode,
-        group: this.props.event.group
+        checkinCode: this.props.event.checkinCode
       };
   }
 
@@ -173,13 +171,17 @@ class EventForm extends Component {
       checkinCode: this.state.checkinCode,
       info: this.state.info,
       openRsvp: this.props.openRsvp,
-      group: this.state.group
+      group: this.props.group._id
     };
-
-    if (this.props.add) this.props.addEvent(event);
-    else this.props.editEvent(event);
-
-    this.props.history.push('/host');
+    if (!this.props.group) {
+      if (this.props.add) this.props.addEvent(event);
+      else this.props.editEvent(event);
+      this.props.history.push('/host');
+    } else {
+      if (this.props.add) this.props.addGroupEvent(event);
+      else this.props.editGroupEvent(event);
+      this.props.history.push('/group/detail');
+    }
   }
 
   getCheckCodeOutput() {
@@ -222,21 +224,6 @@ class EventForm extends Component {
             <br />
           </div>
         );
-    }
-  }
-
-  getGroupOutput() {
-    switch (this.props.groups) {
-      case LOAD.NOTHING:
-        return;
-      case LOAD.LOADING:
-        return;
-      default:
-        return this.props.groups.map(group => (
-          <option value={group._id} key={group._id}>
-            {group.name}
-          </option>
-        ));
     }
   }
 
@@ -347,23 +334,6 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
-                  <label className="col-md-2 col-form-label">Group</label>
-                  <div className="col-md-4">
-                    <select
-                      onChange={this.handleGeneral}
-                      name="group"
-                      className="form-control"
-                      value={this.state.group}
-                    >
-                      <option value={''} key={1}>
-                        None
-                      </option>
-                      {this.getGroupOutput()}
-                    </select>
-                  </div>
-                </div>
-                {this.state.group}
-                <div className="form-group row">
                   <label className="col-md-2 col-form-label">
                     Check-in Type
                   </label>
@@ -414,7 +384,7 @@ const mapStateToProps = state => {
     checkCode: state.host.checkCode,
     event: state.event.selected,
     openRsvp: state.event.selectedRsvps,
-    groups: state.group.groups
+    group: state.group.selected
   };
 };
 
@@ -424,7 +394,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     editEvent: editEvent,
     hostCheckCode: checkSignupCode,
     resetSignup: resetSignupCode,
-    getGroups: getGroups
+    addGroupEvent: createGroupEvent,
+    editGroupEvent: editGroupEvent
   };
 };
 

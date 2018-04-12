@@ -8,9 +8,11 @@ import {
   GET_GROUPS,
   GOT_GROUPS,
   GROUP_ADD_EVENT,
+  GROUP_EDIT_EVENT,
   GROUP_GET_EVENTS,
   GROUP_GOT_EVENTS,
   GROUP_REMOVE_EVENT,
+  HOST_EDIT_EVENT,
   LEAVE_GROUP,
   REMOVE_GROUP,
   RESET_GROUP,
@@ -56,8 +58,10 @@ export const createGroupEvent = event => async dispatch => {
 
 export const removeGroupEvent = event => async dispatch => {
   dispatch({ type: GROUP_REMOVE_EVENT, payload: event });
-  const res = await axios.post(
-    hostRoute + 'remove_event',
-    qs.stringify({ id: event._id })
-  );
+  axios.post(hostRoute + 'remove_event', qs.stringify(event));
+};
+
+export const editGroupEvent = event => async dispatch => {
+  dispatch({ type: GROUP_EDIT_EVENT, payload: { event: event } });
+  axios.post(hostRoute + 'edit_event', qs.stringify(event));
 };

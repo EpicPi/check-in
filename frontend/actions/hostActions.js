@@ -29,7 +29,7 @@ export const editEvent = event => dispatch => {
   dispatch({ type: HOST_EDIT_EVENT, payload: { event: event } });
   axios.post(hostRoute + 'edit_event', qs.stringify(event));
 };
-
+//fix to not send over entire event
 export const hostRemoveEvent = event => dispatch => {
   dispatch({ type: HOST_REMOVE_EVENT, payload: event });
   axios.post(hostRoute + 'remove_event', qs.stringify(event));

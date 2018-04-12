@@ -4,6 +4,7 @@ import { hostGetEvents } from '../../../actions/index';
 import EventItem from './EventItem';
 import { LOAD } from '../../../helpers/Enums';
 import { isEventActive, isEventClosed } from '../../../helpers/Time';
+import { resetGroup } from '../../../actions';
 
 class ShowEvents extends Component {
   constructor(props) {
@@ -17,6 +18,10 @@ class ShowEvents extends Component {
       active: this.getActiveEventsOutput(this.props),
       closed: this.getClosedEventsOutput(this.props)
     };
+  }
+
+  componentDidMount() {
+    this.props.resetGroup();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -174,7 +179,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getEvents: hostGetEvents
+    getEvents: hostGetEvents,
+    resetGroup: resetGroup
   };
 };
 

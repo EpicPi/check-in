@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { submitButton } from '../../../assets/text';
 import { checkGroupCode, joinGroup } from '../../../actions/groupActions';
+import { hostJoinGroup } from '../../../actions';
 
 class JoinGroup extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     check: checkGroupCode,
-    join: joinGroup
+    join: hostJoinGroup
   };
 };
 

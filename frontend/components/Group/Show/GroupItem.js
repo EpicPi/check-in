@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { removeGroup, selectGroup } from '../../../actions/groupActions';
+import { hostLeaveGroup } from '../../../actions';
 
 class GroupItem extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class GroupItem extends Component {
                 Select
               </button>
               <button
-                onClick={this.handleRemove}
+                onClick={this.handleLeave}
                 className="btn btn-danger btn-event"
               >
                 Leave
@@ -52,7 +53,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     selectGroup: selectGroup,
-    leave: leaveGroup
+    leave: hostLeaveGroup
   };
 };
 
