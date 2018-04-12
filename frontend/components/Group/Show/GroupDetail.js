@@ -12,7 +12,7 @@ class GroupDetail extends Component {
     this.handleCreate = this.handleCreate.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
 
-    if (this.props.events === LOAD.NOTHING) this.props.getEvents();
+    if (props.events === LOAD.NOTHING) props.getEvents(props.group);
     this.state = {
       out: this.getEventsOutput(this.props),
       active: this.getActiveEventsOutput(this.props),

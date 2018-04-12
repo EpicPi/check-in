@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 import { codeTakenError, submitButton } from '../../../assets/text';
 import {
   checkGroupCode,
-  createGroup,
-  editGroup,
   resetGroupcheckCode
 } from '../../../actions/groupActions';
-import { CHECK_CODE } from '../../../helpers/Enums';
+import { CHECK_CODE, JOIN_FIND } from '../../../helpers/Enums';
 import { hostCreateGroup, hostEditGroup } from '../../../actions';
 
 class GroupForm extends Component {
@@ -26,6 +24,7 @@ class GroupForm extends Component {
         code: this.props.selected.code
       };
   }
+
   componentWillUpdate(props, state) {
     // if editing and you changed from initial or if you are creating
     if (state.code !== props.selected.code && state.code !== this.state.code)
@@ -35,6 +34,7 @@ class GroupForm extends Component {
   componentWillUnmount() {
     this.props.resetCode();
   }
+
   handleGeneral(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -42,14 +42,14 @@ class GroupForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (
-      this.props.checkCode !== CHECK_CODE.AVAILABLE &&
+      this.props.checkCode !== JOIN_FIND.FAIL &&
       this.state.code !== this.props.selected.code
     ) {
       alert(codeTakenError);
       return;
     }
     const group = {
-      ...this.props.group,
+      ...this.props.selected,
       name: this.state.name,
       code: this.state.code
     };

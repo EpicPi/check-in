@@ -20,7 +20,7 @@ router.post('/join', async (req, res) => {
     );
 });
 
-router.post('/check_code', async (req, res) => {
+router.post('/check', async (req, res) => {
   const group = await Group.findOne({ code: req.body.code });
   res.send(group);
 });

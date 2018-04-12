@@ -37,10 +37,8 @@ class EventForm extends Component {
     this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
-    this.getGroupOutput = this.getGroupOutput.bind(this);
 
     this.props.resetSignup();
-    this.props.getGroups();
 
     if (this.props.add)
       this.state = {
