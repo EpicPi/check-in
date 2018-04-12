@@ -40,17 +40,25 @@ router.post('/add_event', async (req, res) => {
       walkin: []
     }
   }).save();
-  const user = await User.findById(req.user.id);
-  user.hostEvents.push(event.id);
-  user.save();
-  if (req.body.group) {
+
+  if (!req.body.group) {
+    const user = await User.findById(req.user.id);
+    user.hostEvents.push(event.id);
+    user.save();
+    res.send(event);
+  } else {
     const group = await Group.findById(req.body.group);
     if (group) {
       group.events.push(event.id);
       group.save();
-    }
+      res.send(event);
+    } else
+      console.error(
+        '[ERR] Group was not found. Passed in id: ' +
+          req.body.group +
+          ' in /host/add_event'
+      );
   }
-  res.send(event);
 });
 
 router.post('/edit_event', async (req, res) => {
@@ -81,7 +89,7 @@ router.post('/edit_event', async (req, res) => {
     console.error(
       '[ERR] Event was not found. Passed in id: ' +
         req.body.id +
-        ' in /guest/checkin'
+        ' in /host/edit_event'
     );
 });
 
