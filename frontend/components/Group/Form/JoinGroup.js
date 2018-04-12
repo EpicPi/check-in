@@ -24,6 +24,7 @@ class JoinGroup extends Component {
       return;
     }
     this.props.join(this.props.checkCode);
+    this.props.history.push('/group');
   }
   render() {
     return (
