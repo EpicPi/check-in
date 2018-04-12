@@ -75,12 +75,9 @@ export const hostGetGroups = () => async dispatch => {
   dispatch({ type: GOT_GROUPS, payload: res.data });
 };
 
-export const hostJoinGroup = group => async dispatch => {
-  const res = await axios.post(
-    groupRoute + 'join',
-    qs.stringify({ id: group._id })
-  );
-  dispatch({ type: ADD_GROUP, payload: res.data });
+export const hostJoinGroup = group => dispatch => {
+  dispatch({ type: ADD_GROUP, payload: group });
+  axios.post(groupRoute + 'join', qs.stringify({ id: group._id }));
 };
 
 export const hostCreateGroup = group => async dispatch => {
