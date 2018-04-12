@@ -142,28 +142,42 @@ class GroupDetail extends Component {
 
   render() {
     return (
-      <div className="row host-show">
-        <div className="container-fluid">
-          <div className="row btn-create">
-            <div className="col-md-12">
-              <button
-                className="btn btn-lg btn-info buttonLeft"
-                onClick={this.handleCreate}
-              >
-                New Event
-              </button>
-              <button
-                className="btn btn-lg btn-info buttonRight"
-                onClick={this.handleEdit}
-              >
-                Edit Group
-              </button>
-            </div>
+      <div>
+        <div className="row">
+          <div className="col-md-12">
+            <br />
+            <h2 className="text-left">{this.props.group.name}</h2>
           </div>
-          <hr />
-          {this.state.active}
-          {this.state.out}
-          {this.state.closed}
+        </div>
+        <div className="row">
+          <label className="col-md-2 ">Join Code</label>
+          <div className="col-md-9">
+            <div>{this.props.group.code}</div>
+          </div>
+        </div>
+        <div className="row host-show">
+          <div className="container-fluid">
+            <div className="row btn-create">
+              <div className="col-md-12">
+                <button
+                  className="btn btn-lg btn-info buttonLeft"
+                  onClick={this.handleCreate}
+                >
+                  New Event
+                </button>
+                <button
+                  className="btn btn-lg btn-info buttonRight"
+                  onClick={this.handleEdit}
+                >
+                  Edit Group
+                </button>
+              </div>
+            </div>
+            <hr />
+            {this.state.active}
+            {this.state.out}
+            {this.state.closed}
+          </div>
         </div>
       </div>
     );
