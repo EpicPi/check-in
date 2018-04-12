@@ -7,6 +7,7 @@ import {
   CHECKED_GROUP_CODE,
   GET_GROUPS,
   GOT_GROUPS,
+  GROUP_ADD_EVENT,
   GROUP_GET_EVENTS,
   GROUP_GOT_EVENTS,
   LEAVE_GROUP,
@@ -51,3 +52,5 @@ export const createGroupEvent = event => async dispatch => {
   const res = await axios.post(hostRoute + 'add_event', qs.stringify(event));
   dispatch({ type: GROUP_ADD_EVENT, payload: res.data });
 };
+
+//remove group event

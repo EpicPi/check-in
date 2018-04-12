@@ -32,7 +32,7 @@ export const eventInitial = {
 
 export const groupInitial = {
   selected: {},
-  checkCode: CHECK_CODE.NOTHING,
+  checkCode: JOIN_FIND.NOTHING,
   events: LOAD.NOTHING
 };
 
