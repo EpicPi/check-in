@@ -1,5 +1,6 @@
 import {
   ADD_GROUP,
+  EDIT_GROUP,
   GET_GROUPS,
   GOT_GROUPS,
   HOST_ADD_EVENT,
