@@ -99,7 +99,12 @@ class ActiveDetail extends Component {
               <label className="col-md-2 ">Checkin Url</label>
               <div className="col-md-9">
                 <div className="fakeLink">
-                  {openEventUrl + this.props.event.code}
+                  <a
+                    href={openEventUrl + this.props.event.code}
+                    target="_blank"
+                  >
+                    {openEventUrl + this.props.event.code}
+                  </a>
                 </div>
               </div>
             </div>
