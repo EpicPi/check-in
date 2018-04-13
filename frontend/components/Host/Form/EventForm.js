@@ -9,6 +9,7 @@ import {
   resetSignupCode
 } from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
+import { DAYS } from '../../../helpers/Enums';
 
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
@@ -37,7 +38,6 @@ class EventForm extends Component {
     this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
-    this.getGroupOutput = this.getGroupOutput.bind(this);
     this.getRepeatsOut = this.getRepeatsOut.bind(this);
 
     this.props.resetSignup();
@@ -251,21 +251,6 @@ class EventForm extends Component {
     }
   }
 
-  getGroupOutput() {
-    switch (this.props.groups) {
-      case LOAD.NOTHING:
-        return;
-      case LOAD.LOADING:
-        return;
-      default:
-        return this.props.groups.map(group => (
-          <option value={group._id} key={group._id}>
-            {group.name}
-          </option>
-        ));
-    }
-  }
-
   getRepeatsOut() {
     return DAYS.map(day => {
       return (
@@ -406,7 +391,6 @@ class EventForm extends Component {
                       <option value={''} key={1}>
                         None
                       </option>
-                      {this.getGroupOutput()}
                     </select>
                   </div>
                 </div>

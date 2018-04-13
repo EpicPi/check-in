@@ -32,7 +32,7 @@ router.post('/attend', async (req, res) => {
       if (typeof guest === 'string' || guest instanceof String) {
         user = await User.findById(guest);
       } else {
-        user = await User.findById(guest.guest);
+        user = await User.findById(guest._id);
       }
 
       let isRepeat = await event.isRepeat();
