@@ -27,7 +27,7 @@ import {
   codeAvailable,
   codeUnavaliableError
 } from '../../../assets/text';
-import { getOpenRsvp } from '../../../actions';
+import { createGroupEvent, editGroupEvent } from '../../../actions';
 
 class EventForm extends Component {
   constructor(props) {
@@ -37,6 +37,8 @@ class EventForm extends Component {
     this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
+
+    this.props.resetSignup();
 
     if (this.props.add)
       this.state = {
@@ -92,10 +94,6 @@ class EventForm extends Component {
     // if editing and you changed from initial or if you are creating
     if (state.code !== props.event.code && state.code !== this.state.code)
       props.hostCheckCode(state.code);
-  }
-
-  componentWillUnmount() {
-    this.props.resetSignup();
   }
 
   handleGeneral(e) {
@@ -156,7 +154,6 @@ class EventForm extends Component {
       alert(checkinOpenTimeError);
       return;
     }
-    console.log(this.props.openRsvp);
 
     const event = {
       ...this.props.event,
@@ -171,13 +168,18 @@ class EventForm extends Component {
       type: this.state.type,
       checkinCode: this.state.checkinCode,
       info: this.state.info,
-      openRsvp: this.props.openRsvp
+      openRsvp: this.props.openRsvp,
+      group: this.props.group._id
     };
-
-    if (this.props.add) this.props.addEvent(event);
-    else this.props.editEvent(event);
-
-    this.props.history.push('/host');
+    if (!this.props.group._id) {
+      if (this.props.add) this.props.addEvent(event);
+      else this.props.editEvent(event);
+      this.props.history.push('/host');
+    } else {
+      if (this.props.add) this.props.addGroupEvent(event);
+      else this.props.editGroupEvent(event);
+      this.props.history.push('/group/detail');
+    }
   }
 
   getCheckCodeOutput() {
@@ -185,7 +187,7 @@ class EventForm extends Component {
     if (this.state.code === this.props.event.code) return;
     switch (this.props.checkCode) {
       case CHECK_CODE.NOTHING:
-        return '';
+        return;
       case CHECK_CODE.TAKEN:
         return <h3>{codeUnavaliableError}</h3>;
       case CHECK_CODE.AVAILABLE:
@@ -379,7 +381,8 @@ const mapStateToProps = state => {
   return {
     checkCode: state.host.checkCode,
     event: state.event.selected,
-    openRsvp: state.open.openRsvp
+    openRsvp: state.event.selectedRsvps,
+    group: state.group.selected
   };
 };
 
@@ -388,7 +391,9 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     editEvent: editEvent,
     hostCheckCode: checkSignupCode,
-    resetSignup: resetSignupCode
+    resetSignup: resetSignupCode,
+    addGroupEvent: createGroupEvent,
+    editGroupEvent: editGroupEvent
   };
 };
 

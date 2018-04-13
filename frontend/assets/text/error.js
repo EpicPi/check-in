@@ -15,6 +15,7 @@ export const invalidCodeError = 'You have entered the incorrect check in code';
 
 //open errors
 export const eventClosedError = 'Sorry, this event is currently closed';
+export const eventNoExistError = 'Event with this url does not exist!';
 
 export const noNameEnteredError = 'Please write your name';
 export const noNameSelectedError = 'Please select a name';

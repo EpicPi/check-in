@@ -45,7 +45,24 @@ export const CLEAR_GUEST = 'clear_guest';
 // openRsvp event types
 export const OPEN_GET_EVENT = 'open_get_event';
 export const OPEN_GOT_EVENT = 'open_got_event';
-export const OPEN_JOIN_EVENT = 'open_join_event';
 export const OPEN_GET_RSVP = 'open_get_rsvp';
 export const OPEN_GOT_RSVP = 'open_got_rsvp';
 export const OPEN_UPDATE_RSVP = 'open_update_rsvp';
+
+//group types
+export const ADD_GROUP = 'add_group';
+export const GET_GROUPS = 'get_group';
+export const GOT_GROUPS = 'got_group';
+export const LEAVE_GROUP = 'leave_group';
+export const EDIT_GROUP = 'edit_group';
+
+export const CHECK_GROUP_CODE = 'check_group_code';
+export const CHECKED_GROUP_CODE = 'checked_group_code';
+export const RESET_GROUP = 'reset_group';
+export const SELECT_GROUP = 'select_group';
+export const RESET_GROUP_CHECK_CODE = 'reset_group_check_code';
+export const GROUP_GET_EVENTS = 'group_get_events';
+export const GROUP_GOT_EVENTS = 'group_got_events';
+export const GROUP_ADD_EVENT = 'group_add_event';
+export const GROUP_REMOVE_EVENT = 'group_remove_event';
+export const GROUP_EDIT_EVENT = 'group_edit_event';

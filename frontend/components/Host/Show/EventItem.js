@@ -5,6 +5,7 @@ import React from 'react';
 import { isEventActive, isEventClosed } from '../../../helpers/Time';
 import { EVENT_TYPES } from '../../../helpers/Enums';
 import { openEventUrl } from '../../../assets/text';
+import { removeGroupEvent } from '../../../actions';
 
 class EventItem extends Component {
   constructor(props) {
@@ -24,7 +25,12 @@ class EventItem extends Component {
   }
 
   handleRemove() {
-    this.props.removeEvent(this.props.event);
+    if (!this.props.group) {
+      this.props.removeEvent(this.props.event);
+    } else {
+      this.props.event.group = this.props.group;
+      this.props.removeGroupEvent(this.props.event);
+    }
   }
 
   getOpenEventOutput() {
@@ -75,7 +81,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     selectEvent: selectEvent,
-    removeEvent: hostRemoveEvent
+    removeEvent: hostRemoveEvent,
+    removeGroupEvent: removeGroupEvent
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps())(EventItem);

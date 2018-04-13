@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOpenRsvp, getOpenRsvpFull, updateOpenRsvp } from '../../../actions';
+import { getOpenRsvpFull, updateOpenRsvp } from '../../../actions';
 import parse from 'csv-parse/lib/sync';
 import { LOAD } from '../../../helpers/Enums';
 import { openEventUrl } from '../../../assets/text';
@@ -80,6 +80,8 @@ class OpenForm extends Component {
     switch (this.props.openRsvp) {
       case LOAD.LOADING:
         return 'LOADING';
+      case LOAD.NOTHING:
+        return;
       default:
         if (this.props.openRsvp.length === 0) return <br />;
         return (
@@ -129,6 +131,8 @@ class OpenForm extends Component {
         <div className="col-md-12">
           {this.getUrlOutPut()}
           <br />
+          <label>Choose RSVP file: </label>
+          <br />
           <input
             className="form-group"
             type="file"
@@ -163,7 +167,7 @@ class OpenForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    openRsvp: state.open.openRsvp
+    openRsvp: state.event.selectedRsvps
   };
 };
 

@@ -13,3 +13,6 @@ export const joinCodeLabel = 'Join code';
 //buttons
 export const confirmButton = 'Confirm';
 export const submitButton = 'Submit';
+
+//open
+export const walkinPrompmt = "Don't see your name? Add yourself:";

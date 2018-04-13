@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const router = require('express').Router();
-require('../models/event');
-require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
@@ -38,4 +36,3 @@ router.post('/attend', async (req, res) => {
 });
 
 module.exports = router;
-//5abc4dec3183a126b636b60c

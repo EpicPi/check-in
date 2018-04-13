@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import EventForm from './Form/EventForm';
-import { resetEvent } from '../../actions';
+import EventForm from './EventForm';
+import { resetEvent } from '../../../actions/index';
 import connect from 'react-redux/es/connect/connect';
 
 class CreateEvent extends Component {

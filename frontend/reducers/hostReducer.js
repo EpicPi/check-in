@@ -8,10 +8,16 @@ import {
   HOST_CHECKED_SIGNUP_CODE,
   HOST_GOT_EVENTS,
   HOST_RESET_SIGNUP_EVENT,
-  HOST_CHECKIN
+  HOST_CHECKIN,
+  REMOVE_GROUP,
+  GOT_GROUPS,
+  GET_GROUPS,
+  ADD_GROUP,
+  EDIT_GROUP,
+  LEAVE_GROUP
 } from '../actions/types';
-import { hostInitial } from './initialState';
 import { CHECK_CODE, LOAD } from '../helpers/Enums';
+import { hostInitial } from './index';
 
 export default function(state = hostInitial, action) {
   switch (action.type) {
@@ -54,6 +60,28 @@ export default function(state = hostInitial, action) {
       return { ...state, checkCode: CHECK_CODE.NOTHING };
     case HOST_CHECKIN:
       return state;
+    case ADD_GROUP:
+      return { ...state, groups: [...state.groups, action.payload] };
+    case GET_GROUPS:
+      return { ...state, groups: LOAD.LOADING };
+    case GOT_GROUPS:
+      return { ...state, groups: action.payload };
+    case EDIT_GROUP: {
+      let newGroups = state.groups.slice();
+      newGroups = newGroups.map(el => {
+        if (el._id !== action.payload.group._id) {
+          return el;
+        } else {
+          return action.payload.group;
+        }
+      });
+      return { ...state, groups: newGroups };
+    }
+    case LEAVE_GROUP: {
+      let newGroups = state.groups.slice();
+      newGroups = newGroups.filter(el => el._id !== action.payload._id);
+      return { ...state, groups: newGroups };
+    }
     default:
       return state;
   }
