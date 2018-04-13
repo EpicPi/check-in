@@ -24,7 +24,6 @@ const eventSchema = new Schema({
   type: { type: String, required: true },
   checkinCode: { type: String },
   info: { type: String },
-  group: { type: String },
   repeats: {
     type: {
       monday: { type: Boolean, default: false },
