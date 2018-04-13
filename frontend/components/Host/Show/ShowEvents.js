@@ -8,6 +8,7 @@ import {
   isEventClosed,
   isEventRepeat
 } from '../../../helpers/Time';
+import { resetGroup } from '../../../actions';
 
 class ShowEvents extends Component {
   constructor(props) {
@@ -23,6 +24,10 @@ class ShowEvents extends Component {
       repeats: this.getRepeatEventsOutput(this.props),
       closed: this.getClosedEventsOutput(this.props)
     };
+  }
+
+  componentDidMount() {
+    this.props.resetGroup();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -107,7 +112,7 @@ class ShowEvents extends Component {
           <div className="row btn-create">
             <div className="col-md-6 text-center">
               <button
-                className="btn btn-lg btn-info"
+                className="btn btn-lg btn-info buttonLeft"
                 onClick={this.handleCreate}
               >
                 Create Event
@@ -115,7 +120,7 @@ class ShowEvents extends Component {
             </div>
             <div className="col-md-6 text-center">
               <button
-                className="btn btn-lg btn-info"
+                className="btn btn-lg btn-info buttonRight"
                 onClick={this.handleGroup}
               >
                 Groups
@@ -141,7 +146,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getEvents: hostGetEvents
+    getEvents: hostGetEvents,
+    resetGroup: resetGroup
   };
 };
 

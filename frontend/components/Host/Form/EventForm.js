@@ -10,7 +10,7 @@ import {
 } from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
 
-import { CHECK_CODE, EVENT_TYPES, LOAD, DAYS } from '../../../helpers/Enums';
+import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
 import {
   getCurrentDate,
@@ -27,7 +27,7 @@ import {
   codeAvailable,
   codeUnavaliableError
 } from '../../../assets/text';
-import { getGroups } from '../../../actions/groupActions';
+import { createGroupEvent, editGroupEvent } from '../../../actions';
 
 class EventForm extends Component {
   constructor(props) {
@@ -41,7 +41,6 @@ class EventForm extends Component {
     this.getRepeatsOut = this.getRepeatsOut.bind(this);
 
     this.props.resetSignup();
-    this.props.getGroups();
 
     if (this.props.add)
       this.state = {
@@ -195,14 +194,18 @@ class EventForm extends Component {
       checkinCode: this.state.checkinCode,
       info: this.state.info,
       openRsvp: this.props.openRsvp,
-      group: this.state.group,
+      group: this.props.group._id,
       repeats: this.state.repeats
     };
-
-    if (this.props.add) this.props.addEvent(event);
-    else this.props.editEvent(event);
-
-    this.props.history.push('/host');
+    if (!this.props.group._id) {
+      if (this.props.add) this.props.addEvent(event);
+      else this.props.editEvent(event);
+      this.props.history.push('/host');
+    } else {
+      if (this.props.add) this.props.addGroupEvent(event);
+      else this.props.editGroupEvent(event);
+      this.props.history.push('/group/detail');
+    }
   }
 
   getCheckCodeOutput() {
@@ -464,7 +467,7 @@ const mapStateToProps = state => {
     checkCode: state.host.checkCode,
     event: state.event.selected,
     openRsvp: state.event.selectedRsvps,
-    groups: state.group.groups
+    group: state.group.selected
   };
 };
 
@@ -474,7 +477,8 @@ const mapDispatchToProps = (/* dispatch */) => {
     editEvent: editEvent,
     hostCheckCode: checkSignupCode,
     resetSignup: resetSignupCode,
-    getGroups: getGroups
+    addGroupEvent: createGroupEvent,
+    editGroupEvent: editGroupEvent
   };
 };
 

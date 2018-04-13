@@ -3,17 +3,25 @@ import { connect } from 'react-redux';
 import { LOAD } from '../../../helpers/Enums';
 import { getGroups } from '../../../actions/groupActions';
 import GroupItem from './GroupItem';
+import { hostGetGroups } from '../../../actions';
 
 class ShowGroups extends Component {
   constructor(props) {
     super(props);
     this.handleCreate = this.handleCreate.bind(this);
+    this.handleJoin = this.handleJoin.bind(this);
+
     this.getGroupsOutput = this.getGroupsOutput.bind(this);
+
     if (this.props.groups === LOAD.NOTHING) this.props.getGroups();
   }
 
   handleCreate() {
     this.props.history.push('/group/create');
+  }
+
+  handleJoin() {
+    this.props.history.push('/group/join');
   }
 
   getGroupsOutput() {
@@ -51,10 +59,16 @@ class ShowGroups extends Component {
           <div className="row btn-create">
             <div className="col-md-12">
               <button
-                className="btn btn-lg btn-info"
+                className="btn btn-lg btn-info buttonLeft"
                 onClick={this.handleCreate}
               >
-                create
+                Create
+              </button>
+              <button
+                className="btn btn-lg btn-info buttonRight"
+                onClick={this.handleJoin}
+              >
+                Join
               </button>
             </div>
           </div>
@@ -68,13 +82,13 @@ class ShowGroups extends Component {
 
 const mapStateToProps = state => {
   return {
-    groups: state.group.groups
+    groups: state.host.groups
   };
 };
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getGroups: getGroups
+    getGroups: hostGetGroups
   };
 };
 

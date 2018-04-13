@@ -121,7 +121,7 @@ class Dash extends Component {
   getWalkinOutput() {
     return (
       <div>
-        <h5>Don't see your name? Add it:</h5>
+        <h5>{walkinPrompmt}</h5>
         <form onSubmit={this.handleWalkin} id="open-checkin">
           <div className="form-group row">
             <label className="col-md-2 col-form-label">Name</label>
