@@ -7,7 +7,6 @@ const eventSchema = new Schema({
   guestsRSVP: [],
   guestsAttend: [
     {
-      guest: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
       timestamp: { type: Date, default: Date.now }
     }
   ],
