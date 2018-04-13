@@ -57,7 +57,7 @@ router.post('/attend', async (req, res) => {
       }
       return user;
     });
-    // filter null values
+    // filter null users
     const out = await Promise.all(pOut).then(users => users.filter(u => u));
     res.send(out);
   } else

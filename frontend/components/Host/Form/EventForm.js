@@ -432,6 +432,7 @@ class EventForm extends Component {
 
                 {this.getEventTypeOutput()}
 
+                {/*TODO: make buttons sticky at bottom right */}
                 <div className="center-block text-center">
                   <button
                     type="submit"
