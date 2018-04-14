@@ -4,6 +4,7 @@ import GuestItem from './GuestItem';
 import { getAttends, getRsvps } from '../../../actions/index';
 import { EVENT_TYPES, LOAD, DAYS } from '../../../helpers/Enums';
 import { openEventUrl } from '../../../assets/text';
+import { isEventRepeat } from '../../../helpers/Time';
 
 class BasicDetail extends Component {
   constructor(props) {
@@ -131,10 +132,10 @@ class BasicDetail extends Component {
   }
 
   getRepeatsOutput() {
-    const repeats = this.props.event.repeats;
-    let hasRepeats = false;
+    if (!isEventRepeat(this.props.event)) {
+      return;
+    }
     const repeatOut = DAYS.map(day => {
-      if (repeats[day]) hasRepeats = true;
       return (
         <div className="form-check form-check-inline" key={day}>
           <input
@@ -142,8 +143,8 @@ class BasicDetail extends Component {
             type="checkbox"
             name={day}
             id={day}
-            value={repeats[day]}
-            checked={repeats[day]}
+            value={this.props.event.repeats[day]}
+            checked={this.props.event.repeats[day]}
             style={{ width: '20px', height: '20px' }}
             readOnly={true}
           />
@@ -154,9 +155,6 @@ class BasicDetail extends Component {
       );
     });
 
-    if (!hasRepeats) {
-      return;
-    }
     return (
       <div className="row">
         <label className="col-md-2">Repeats</label>
@@ -212,7 +210,7 @@ class BasicDetail extends Component {
           </div>
         </div>
         <div className="row">
-          <label className="col-md-2 ">Checkin End time</label>
+          <label className="col-md-2">Checkin End time</label>
           <div className="col-md-9">
             <div>
               {new Date(this.props.event.dates.checkinEnd).toLocaleString()}
