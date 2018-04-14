@@ -43,6 +43,7 @@ router.post('/attend', async (req, res) => {
           let date = new Date(obj.timestamp);
           let now = new Date();
           // if this user checked in today
+          // FIXME: better implementation to get the latest event check-in
           if (
             user._id.equals(obj._id) &&
             date.getDate() === now.getDate() &&
