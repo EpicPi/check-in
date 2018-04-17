@@ -16,7 +16,9 @@ class GuestItem extends Component {
     if (this.props.manualCheckin) {
       return (
         <div className="col-md-5">
-          <button onClick={this.manualCheckIn}>manual check In</button>
+          <button className="btn" onClick={this.manualCheckIn}>
+            manual check In
+          </button>
         </div>
       );
     }

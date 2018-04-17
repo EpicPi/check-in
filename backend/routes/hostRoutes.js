@@ -38,6 +38,16 @@ router.post('/add_event', async (req, res) => {
     open: {
       guestsRSVP: await mapOpenUsers(req.body.openRsvp),
       walkin: []
+    },
+    group: req.body.group,
+    repeats: {
+      sunday: req.body.repeats['sunday'] === 'true',
+      monday: req.body.repeats['monday'] === 'true',
+      tuesday: req.body.repeats['tuesday'] === 'true',
+      wednesday: req.body.repeats['wednesday'] === 'true',
+      thursday: req.body.repeats['thursday'] === 'true',
+      friday: req.body.repeats['friday'] === 'true',
+      saturday: req.body.repeats['saturday'] === 'true'
     }
   }).save();
   if (!req.body.group) {
@@ -70,6 +80,15 @@ router.post('/edit_event', async (req, res) => {
     event.checkinCode = req.body.checkinCode.toUpperCase();
     event.info = req.body.info;
     event.type = req.body.type;
+    event.repeats = {
+      sunday: req.body.repeats['sunday'] === 'true',
+      monday: req.body.repeats['monday'] === 'true',
+      tuesday: req.body.repeats['tuesday'] === 'true',
+      wednesday: req.body.repeats['wednesday'] === 'true',
+      thursday: req.body.repeats['thursday'] === 'true',
+      friday: req.body.repeats['friday'] === 'true',
+      saturday: req.body.repeats['saturday'] === 'true'
+    };
 
     //open users
     const newOpenUsers = await mapOpenUsers(req.body.openRsvp);

@@ -192,8 +192,6 @@ class Dash extends Component {
               onChange={this.handleCheckInCodeInput}
               required
             />
-            >>>>>>>
-            5dbee73ff7fc94568bd9556b3c378d0933cee6a5:frontend/components/OpenEvent/Dash.js
           </div>
         </div>
       </form>

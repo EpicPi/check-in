@@ -17,7 +17,7 @@ class CheckinBasic extends Component {
   render() {
     return (
       <button className="btn btn-success" onClick={this.handleCheckin}>
-        Check In
+        Confirm Check In
       </button>
     );
   }

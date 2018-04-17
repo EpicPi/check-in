@@ -9,6 +9,7 @@ import {
   resetSignupCode
 } from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
+import { DAYS } from '../../../helpers/Enums';
 
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
@@ -37,6 +38,7 @@ class EventForm extends Component {
     this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
+    this.getRepeatsOut = this.getRepeatsOut.bind(this);
 
     this.props.resetSignup();
 
@@ -62,7 +64,17 @@ class EventForm extends Component {
           date: getCurrentDate()
         },
         type: EVENT_TYPES.BASIC,
-        checkinCode: ''
+        checkinCode: '',
+        group: '',
+        repeats: {
+          monday: false,
+          tuesday: false,
+          wednesday: false,
+          thursday: false,
+          friday: false,
+          saturday: false,
+          sunday: false
+        }
       };
     else
       this.state = {
@@ -86,7 +98,10 @@ class EventForm extends Component {
           date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode
+        checkinCode: this.props.event.checkinCode,
+        group: this.props.event.group,
+        // TODO: clean this up
+        repeats: this.props.event.repeats
       };
   }
 
@@ -112,6 +127,16 @@ class EventForm extends Component {
         time: time ? time : this.state[name].time,
         date: date ? date : this.state[name].date
       }
+    });
+  }
+
+  handleCheckbox(e) {
+    let temp = {
+      ...this.state.repeats,
+      [e.target.name]: !this.state.repeats[e.target.name]
+    };
+    this.setState({
+      repeats: temp
     });
   }
 
@@ -169,7 +194,8 @@ class EventForm extends Component {
       checkinCode: this.state.checkinCode,
       info: this.state.info,
       openRsvp: this.props.openRsvp,
-      group: this.props.group._id
+      group: this.props.group._id,
+      repeats: this.state.repeats
     };
     if (!this.props.group._id) {
       if (this.props.add) this.props.addEvent(event);
@@ -223,6 +249,28 @@ class EventForm extends Component {
           </div>
         );
     }
+  }
+
+  getRepeatsOut() {
+    return DAYS.map(day => {
+      return (
+        <div className="form-check form-check-inline" key={day}>
+          <input
+            defaultChecked={this.state.repeats[day]}
+            className="form-check-input"
+            type="checkbox"
+            name={day}
+            id={day}
+            value={this.state.repeats[day]}
+            onChange={this.handleCheckbox.bind(this)}
+            style={{ width: '20px', height: '20px' }}
+          />
+          <label className="form-check-label">
+            {day.charAt(0).toUpperCase()}
+          </label>
+        </div>
+      );
+    });
   }
 
   render() {
@@ -332,6 +380,26 @@ class EventForm extends Component {
                 </div>
 
                 <div className="form-group row">
+                  <label className="col-md-2 col-form-label">Group</label>
+                  <div className="col-md-4">
+                    <select
+                      onChange={this.handleGeneral}
+                      name="group"
+                      className="form-control"
+                      value={this.state.group}
+                    >
+                      <option value={''} key={1}>
+                        None
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                {this.state.group}
+                <div className="form-group row">
+                  <label className="col-md-2 col-form-label">Repeat</label>
+                  <div className="col-md-10">{this.getRepeatsOut()}</div>
+                </div>
+                <div className="form-group row">
                   <label className="col-md-2 col-form-label">
                     Check-in Type
                   </label>
@@ -351,6 +419,7 @@ class EventForm extends Component {
 
                 {this.getEventTypeOutput()}
 
+                {/*TODO: make buttons sticky at bottom right */}
                 <div className="center-block text-center">
                   <button
                     type="submit"

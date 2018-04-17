@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { hostGetEvents } from '../../../actions/index';
 import EventItem from './EventItem';
 import { LOAD } from '../../../helpers/Enums';
-import { isEventActive, isEventClosed } from '../../../helpers/Time';
+import {
+  isEventActive,
+  isEventClosed,
+  isEventRepeat
+} from '../../../helpers/Time';
 import { resetGroup } from '../../../actions';
 
 class ShowEvents extends Component {
@@ -11,11 +15,13 @@ class ShowEvents extends Component {
     super(props);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleGroup = this.handleGroup.bind(this);
+    // this.getGeneralOutput = this.getGeneralOutput(this);
 
     if (this.props.events === LOAD.NOTHING) this.props.getEvents();
     this.state = {
       out: this.getEventsOutput(this.props),
       active: this.getActiveEventsOutput(this.props),
+      repeats: this.getRepeatEventsOutput(this.props),
       closed: this.getClosedEventsOutput(this.props)
     };
   }
@@ -28,6 +34,7 @@ class ShowEvents extends Component {
     this.setState({
       out: this.getEventsOutput(nextProps),
       active: this.getActiveEventsOutput(nextProps),
+      repeats: this.getRepeatEventsOutput(nextProps),
       closed: this.getClosedEventsOutput(nextProps)
     });
   }
@@ -40,105 +47,62 @@ class ShowEvents extends Component {
     this.props.history.push('/group');
   }
 
-  getEventsOutput(props) {
+  getGeneralOutput(props, header, filter) {
     switch (props.events) {
       case LOAD.LOADING:
         return <h3>LOADING</h3>;
       case LOAD.NOTHING:
         return;
       default:
-        if (
-          props.events.filter(
-            event => !isEventActive(event) && !isEventClosed(event)
-          ).length > 0
-        )
+        let filteredEvents = props.events.filter(filter);
+        if (filteredEvents.length > 0) {
           return (
             <div>
-              <h3>Open</h3>
+              <h3>{header}</h3>
               <div className="row">
                 <div className="col-md-12">
                   <ul className="event-list">
-                    {props.events
-                      .filter(
-                        event => !isEventActive(event) && !isEventClosed(event)
-                      )
-                      .map((event, i) => (
-                        <EventItem
-                          history={props.history}
-                          key={i}
-                          event={event}
-                        />
-                      ))}
+                    {filteredEvents.map((event, i) => (
+                      <EventItem
+                        history={props.history}
+                        key={i}
+                        event={event}
+                      />
+                    ))}
                   </ul>
                 </div>
               </div>
               <hr />
             </div>
           );
+        }
     }
+  }
+
+  getEventsOutput(props) {
+    return this.getGeneralOutput(props, 'Open', function(event) {
+      return (
+        !isEventActive(event) && !isEventClosed(event) && !isEventRepeat(event)
+      );
+    });
+  }
+
+  getRepeatEventsOutput(props) {
+    return this.getGeneralOutput(props, 'Repeat Events', function(event) {
+      return !isEventActive(event) && isEventRepeat(event);
+    });
   }
 
   getActiveEventsOutput(props) {
-    switch (props.events) {
-      case LOAD.LOADING:
-        return <h3>LOADING</h3>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        if (props.events.filter(event => isEventActive(event)).length > 0)
-          return (
-            <div>
-              <h3>CheckIn Active</h3>
-              <div className="row">
-                <div className="col-md-12">
-                  <ul className="event-list">
-                    {props.events
-                      .filter(event => isEventActive(event))
-                      .map((event, i) => (
-                        <EventItem
-                          history={props.history}
-                          key={i}
-                          event={event}
-                        />
-                      ))}
-                  </ul>
-                </div>
-              </div>
-              <hr />
-            </div>
-          );
-    }
+    return this.getGeneralOutput(props, 'CheckIn Active', function(event) {
+      return isEventActive(event);
+    });
   }
 
   getClosedEventsOutput(props) {
-    switch (props.events) {
-      case LOAD.LOADING:
-        return <h3>LOADING</h3>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        if (props.events.filter(event => isEventClosed(event)).length > 0)
-          return (
-            <div>
-              <h3>Closed</h3>
-              <div className="row">
-                <div className="col-md-12">
-                  <ul className="event-list">
-                    {props.events
-                      .filter(event => isEventClosed(event))
-                      .map((event, i) => (
-                        <EventItem
-                          history={props.history}
-                          key={i}
-                          event={event}
-                        />
-                      ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          );
-    }
+    return this.getGeneralOutput(props, 'Closed', function(event) {
+      return isEventClosed(event);
+    });
   }
 
   render() {
@@ -146,13 +110,15 @@ class ShowEvents extends Component {
       <div className="row host-show">
         <div className="container-fluid">
           <div className="row btn-create">
-            <div className="col-md-12">
+            <div className="col-md-6 text-center">
               <button
                 className="btn btn-lg btn-info buttonLeft"
                 onClick={this.handleCreate}
               >
                 Create Event
               </button>
+            </div>
+            <div className="col-md-6 text-center">
               <button
                 className="btn btn-lg btn-info buttonRight"
                 onClick={this.handleGroup}
@@ -163,6 +129,7 @@ class ShowEvents extends Component {
           </div>
           <hr />
           {this.state.active}
+          {this.state.repeats}
           {this.state.out}
           {this.state.closed}
         </div>

@@ -33,3 +33,13 @@ export const CHECK_CHECKIN = Object.freeze({
   FAIL: 'fail',
   NOTHING_TO_CHECK: 'nothing'
 });
+
+export const DAYS = Object.freeze([
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday'
+]);

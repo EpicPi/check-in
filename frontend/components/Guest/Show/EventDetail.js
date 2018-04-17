@@ -1,14 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { DAYS } from '../../../helpers/Enums';
+import { isEventRepeat } from '../../../helpers/Time';
 
 class EventDetail extends Component {
   constructor(props) {
     super(props);
     this.handleCheckIn = this.handleCheckIn.bind(this);
+    this.getRepeatsOutput = this.getRepeatsOutput.bind(this);
   }
 
   handleCheckIn() {
     this.props.history.push('/guest/checkin');
+  }
+
+  getRepeatsOutput() {
+    if (!isEventRepeat(this.props.event)) {
+      return;
+    }
+    const repeatOut = DAYS.map(day => {
+      return (
+        <div className="form-check form-check-inline" key={day}>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            name={day}
+            id={day}
+            value={this.props.event.repeats[day]}
+            checked={this.props.event.repeats[day]}
+            style={{ width: '20px', height: '20px' }}
+            readOnly={true}
+          />
+          <label className="form-check-label">
+            {day.charAt(0).toUpperCase()}
+          </label>
+        </div>
+      );
+    });
+
+    return (
+      <div className="row">
+        <label className="col-md-3">Repeats</label>
+        <div className="col-md-9">{repeatOut}</div>
+      </div>
+    );
   }
 
   render() {
@@ -27,6 +62,7 @@ class EventDetail extends Component {
               {this.props.event.info}
             </label>
           </div>
+          {this.getRepeatsOutput()}
           <button className="btn btn-success" onClick={this.handleCheckIn}>
             Check In
           </button>

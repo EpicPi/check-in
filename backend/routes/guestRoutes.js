@@ -37,7 +37,7 @@ router.post('/checkin', async (req, res) => {
   if (event) {
     if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {
       //not user already checked-in
-      event.guestsAttend.push(req.user.id);
+      event.guestsAttend.push({ guest: req.user.id, timestamp: new Date() });
       event.save();
       res.send(true);
     } else {

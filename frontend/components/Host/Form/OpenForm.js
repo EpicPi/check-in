@@ -86,27 +86,29 @@ class OpenForm extends Component {
         if (this.props.openRsvp.length === 0) return <br />;
         return (
           <div>
-            <br />
-            {this.props.openRsvp.map((guest, i) => (
-              <div className="form-group row" key={i}>
-                <div className="col-md-3">
-                  <input
-                    className="form-group"
-                    type="text"
-                    value={guest.name}
-                    onChange={event => this.changeGuest(i, event, guest)}
-                  />
+            <div>
+              <br />
+              {this.props.openRsvp.map((guest, i) => (
+                <div className="form-group row" key={i}>
+                  <div className="col-md-3">
+                    <input
+                      className="form-group"
+                      type="text"
+                      value={guest.name}
+                      onChange={event => this.changeGuest(i, event, guest)}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className="close"
+                    style={{ marginBottom: '15px', marginLeft: '5px' }}
+                    onClick={event => this.removeGuest(i, event)}
+                  >
+                    <span>&times;</span>
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className="close"
-                  style={{ marginBottom: '15px', marginLeft: '5px' }}
-                  onClick={event => this.removeGuest(i, event)}
-                >
-                  <span>&times;</span>
-                </button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         );
     }
