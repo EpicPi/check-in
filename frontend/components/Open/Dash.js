@@ -153,29 +153,30 @@ class Dash extends Component {
   }
 
   getCheckinOutput() {
-    return (
-      <div className="form-group row">
-        <label className="col-md-2 col-form-label">Name</label>
-        <div className="col-md-8">
-          <Select
-            name="form-field-name"
-            value={this.state.guest}
-            onChange={this.handleChange}
-            searchable={true}
-            options={this.props.rsvps}
-            valueKey={'_id'}
-            labelKey={'name'}
-            autoFocus
-          />
-          <br />
+    if (this.props.rsvps.constructor === Array)
+      return (
+        <div className="form-group row">
+          <label className="col-md-2 col-form-label">Name</label>
+          <div className="col-md-8">
+            <Select
+              name="form-field-name"
+              value={this.state.guest}
+              onChange={this.handleChange}
+              searchable={true}
+              options={this.props.rsvps}
+              valueKey={'_id'}
+              labelKey={'name'}
+              autoFocus
+            />
+            <br />
+          </div>
+          <div className="col-md-2">
+            <button className="btn btn-success" onClick={this.handleCheckin}>
+              Submit
+            </button>
+          </div>
         </div>
-        <div className="col-md-2">
-          <button className="btn btn-success" onClick={this.handleCheckin}>
-            Submit
-          </button>
-        </div>
-      </div>
-    );
+      );
   }
 
   getCodeOutput() {
@@ -189,47 +190,6 @@ class Dash extends Component {
               type="text"
               name="code"
               // value={this.state.checkinCode}
-              onChange={this.handleCheckInCodeInput}
-              required
-            />
-          </div>
-        </div>
-      </form>
-    );
-  }
-
-  getCheckinOutput() {
-    return (
-      <div className="form-group row">
-        <label className="col-md-2 col-form-label">Name</label>
-        <div className="col-md-4">
-          <select
-            onChange={this.handleGeneral}
-            name="guest"
-            className="form-control"
-            value={this.state.guest}
-          >
-            <option value={'0'} key={1} />
-            {this.getRsvpOutput()}
-          </select>
-        </div>
-        <button className="btn btn-success" onClick={this.handleCheckin}>
-          Submit
-        </button>
-      </div>
-    );
-  }
-
-  getCodeOutput() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group row">
-          <label className="col-md-2 col-form-label">{checkInCodeLabel}</label>
-          <div className="col-md-4">
-            <input
-              className="form-control"
-              type="text"
-              name="code"
               onChange={this.handleCheckInCodeInput}
               required
             />
