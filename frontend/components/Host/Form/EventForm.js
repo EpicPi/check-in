@@ -65,7 +65,6 @@ class EventForm extends Component {
         },
         type: EVENT_TYPES.BASIC,
         checkinCode: '',
-        group: '',
         repeats: {
           monday: false,
           tuesday: false,
@@ -99,8 +98,6 @@ class EventForm extends Component {
         },
         type: this.props.event.type,
         checkinCode: this.props.event.checkinCode,
-        group: this.props.event.group,
-        // TODO: clean this up
         repeats: this.props.event.repeats
       };
   }
@@ -194,7 +191,6 @@ class EventForm extends Component {
       checkinCode: this.state.checkinCode,
       info: this.state.info,
       openRsvp: this.props.openRsvp,
-      group: this.props.group._id,
       repeats: this.state.repeats
     };
     if (!this.props.group._id) {
@@ -378,23 +374,6 @@ class EventForm extends Component {
                     />
                   </div>
                 </div>
-
-                <div className="form-group row">
-                  <label className="col-md-2 col-form-label">Group</label>
-                  <div className="col-md-4">
-                    <select
-                      onChange={this.handleGeneral}
-                      name="group"
-                      className="form-control"
-                      value={this.state.group}
-                    >
-                      <option value={''} key={1}>
-                        None
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                {this.state.group}
                 <div className="form-group row">
                   <label className="col-md-2 col-form-label">Repeat</label>
                   <div className="col-md-10">{this.getRepeatsOut()}</div>
