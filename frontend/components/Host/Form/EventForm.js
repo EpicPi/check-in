@@ -248,6 +248,18 @@ class EventForm extends Component {
   }
 
   getRepeatsOut() {
+    if (!this.state.repeats) {
+      this.state.repeats = {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false
+      };
+    }
+
     return DAYS.map(day => {
       return (
         <div className="form-check form-check-inline" key={day}>
