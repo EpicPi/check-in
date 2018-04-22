@@ -49,7 +49,7 @@ class BasicDetail extends Component {
         props.rsvps.forEach(el => {
           const row = el.name + ',';
           console.log(row);
-          csvContent += row + '\n';
+          csvContent += row + '\r\n';
         });
         console.log(csvContent);
         return csvContent;
@@ -256,7 +256,7 @@ class BasicDetail extends Component {
             <br />
             <a
               className="btn btn-secondary"
-              href={this.state.uriAttend}
+              href={encodeURI(this.state.uriAttend)}
               download={this.props.event.name + '_attends.csv'}
             >
               Download csv
