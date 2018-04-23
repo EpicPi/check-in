@@ -21,8 +21,7 @@ const mapOpenUsers = async openUsers => {
     await usr.save();
     return usr.id;
   });
-  const out = await Promise.all(pOut);
-  return out;
+  return await Promise.all(pOut).then(users => users.filter(el => el));
 };
 
 router.post('/add_event', async (req, res) => {
@@ -95,9 +94,9 @@ router.post('/edit_event', async (req, res) => {
     const removedUsers = event.open.guestsRSVP.filter(
       el => !newOpenUsers.includes(el)
     );
-    event.guestsAttend = event.guestsAttend.filter(
-      el => !removedUsers.includes(el)
-    );
+    // event.guestsAttend = event.guestsAttend.filter(
+    //   el => !removedUsers.includes(el)
+    // );
     removedUsers.forEach(async el => await User.findById(el).remove());
     event.open.guestsRSVP = newOpenUsers;
 
@@ -137,7 +136,7 @@ router.post('/remove_event', async (req, res) => {
 router.get('/get_events', async (req, res) => {
   const user = await User.findById(req.user.id);
   const pOut = user.hostEvents.map(async id => Event.findById(id));
-  const out = await Promise.all(pOut);
+  const out = await Promise.all(pOut).then(events => events.filter(el => el));
   res.send(out);
 });
 
