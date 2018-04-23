@@ -6,6 +6,7 @@ import {
   GET_GROUPS,
   GOT_GROUPS,
   GROUP_ADD_EVENT,
+  GROUP_EDIT_EVENT,
   GROUP_GET_EVENTS,
   GROUP_GOT_EVENTS,
   GROUP_REMOVE_EVENT,
@@ -42,6 +43,18 @@ export default function(state = groupInitial, action) {
     case GROUP_REMOVE_EVENT: {
       let newEvents = state.events.slice();
       newEvents = newEvents.filter(el => el._id !== action.payload._id);
+      return { ...state, events: newEvents };
+    }
+    case GROUP_EDIT_EVENT: {
+      console.log(action.payload.event);
+      let newEvents = state.events.slice();
+      newEvents = newEvents.map(el => {
+        if (el._id !== action.payload.event._id) {
+          return el;
+        } else {
+          return action.payload.event;
+        }
+      });
       return { ...state, events: newEvents };
     }
     default:
