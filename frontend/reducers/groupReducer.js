@@ -29,7 +29,7 @@ export default function(state = groupInitial, action) {
         checkCode: action.payload ? action.payload : JOIN_FIND.FAIL
       };
     case RESET_GROUP:
-      return { ...state, selected: groupInitial.selected };
+      return groupInitial;
     case SELECT_GROUP:
       return { ...state, selected: action.payload };
     case RESET_GROUP_CHECK_CODE:
