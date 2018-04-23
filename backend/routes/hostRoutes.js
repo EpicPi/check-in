@@ -111,25 +111,32 @@ router.post('/edit_event', async (req, res) => {
 
 router.post('/remove_event', async (req, res) => {
   const event = await Event.findById(req.body._id);
-  event.open.guestsRSVP.forEach(async el => await User.findById(el).remove());
-  event.remove();
+  if (event) {
+    event.open.guestsRSVP.forEach(async el => await User.findById(el).remove());
+    event.remove();
 
-  if (!req.body.group) {
-    const user = await User.findById(req.user.id);
-    user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
-    user.save();
-  } else {
-    const group = await Group.findById(req.body.group);
-    if (group) {
-      group.events = group.events.filter(event => req.body._id !== event);
-      group.save();
-    } else
-      console.error(
-        '[ERR] Group was not found. Passed in id: ' +
-          req.body.group +
-          ' in /host/add_event'
-      );
-  }
+    if (!req.body.group) {
+      const user = await User.findById(req.user.id);
+      user.hostEvents = user.hostEvents.filter(event => req.body._id !== event);
+      user.save();
+    } else {
+      const group = await Group.findById(req.body.group);
+      if (group) {
+        group.events = group.events.filter(event => req.body._id !== event);
+        group.save();
+      } else
+        console.error(
+          '[ERR] Group was not found. Passed in id: ' +
+            req.body.group +
+            ' in /host/remove_event'
+        );
+    }
+  } else
+    console.error(
+      '[ERR] Event was not found. Passed in id: ' +
+        req.body._id +
+        ' in /host/remove_event'
+    );
 });
 
 router.get('/get_events', async (req, res) => {

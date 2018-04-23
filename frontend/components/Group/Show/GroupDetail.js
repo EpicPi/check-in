@@ -61,6 +61,7 @@ class GroupDetail extends Component {
                         history={props.history}
                         key={i}
                         event={event}
+                        group={props.group._id}
                       />
                     ))}
                   </ul>

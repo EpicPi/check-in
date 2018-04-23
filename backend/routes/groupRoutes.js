@@ -77,7 +77,7 @@ router.post('/get_events', async (req, res) => {
   const group = await Group.findById(req.body.id);
   if (group) {
     let out = group.events.map(async el => await Event.findById(el));
-    out = await Promise.all(out);
+    out = await Promise.all(out).then(events => events.filter(el => el));
     res.send(out);
   } else
     console.error(
