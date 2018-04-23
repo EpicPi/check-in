@@ -38,7 +38,6 @@ router.post('/add_event', async (req, res) => {
       guestsRSVP: await mapOpenUsers(req.body.openRsvp),
       walkin: []
     },
-    group: req.body.group,
     repeats: {
       sunday: req.body.repeats['sunday'] === 'true',
       monday: req.body.repeats['monday'] === 'true',

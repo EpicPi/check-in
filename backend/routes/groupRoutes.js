@@ -6,7 +6,7 @@ const Group = mongoose.model('groups');
 
 router.post('/join', async (req, res) => {
   const user = await User.findById(req.user.id);
-  const group = await Group.findById(req.body.id);
+  const group = await Group.findById(req.body._id);
   if (group) {
     group.users.push(user.id);
     group.save();
@@ -38,8 +38,8 @@ router.post('/create', async (req, res) => {
   res.send(group);
 });
 
-router.post('edit', async (req, res) => {
-  const group = await Group.findById(req.body.id);
+router.post('/edit', async (req, res) => {
+  const group = await Group.findById(req.body._id);
   if (group) {
     group.name = req.body.name;
     group.code = req.body.code;
@@ -47,7 +47,7 @@ router.post('edit', async (req, res) => {
   } else
     console.error(
       '[ERR] Group was not found. Passed in code: ' +
-        req.body.code +
+        req.body.id +
         ' in /group/edit'
     );
 });

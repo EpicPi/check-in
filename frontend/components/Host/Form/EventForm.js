@@ -191,7 +191,8 @@ class EventForm extends Component {
       checkinCode: this.state.checkinCode,
       info: this.state.info,
       openRsvp: this.props.openRsvp,
-      repeats: this.state.repeats
+      repeats: this.state.repeats,
+      group: this.props.group._id
     };
     if (!this.props.group._id) {
       if (this.props.add) this.props.addEvent(event);
