@@ -48,10 +48,8 @@ class BasicDetail extends Component {
         let csvContent = 'data:text/csv;charset=utf-8,';
         props.rsvps.forEach(el => {
           const row = el.name + ',';
-          console.log(row);
           csvContent += row + '\r\n';
         });
-        console.log(csvContent);
         return csvContent;
     }
   }
@@ -66,10 +64,8 @@ class BasicDetail extends Component {
         let csvContent = 'data:text/csv;charset=utf-8,';
         props.attends.forEach(el => {
           const row = el.name + ',';
-          console.log(row);
           csvContent += row + '\r\n';
         });
-        console.log(csvContent);
         return csvContent;
     }
   }
