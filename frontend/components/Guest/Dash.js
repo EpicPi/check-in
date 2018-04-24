@@ -6,7 +6,7 @@ import EventDetail from './Show/EventDetail';
 import { connect } from 'react-redux';
 import CheckIn from './Checkin/CheckIn';
 
-class GuestDash extends Component {
+class Dash extends Component {
   render() {
     return (
       <div>
@@ -25,4 +25,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = () => {};
 
-export default connect(mapStateToProps, mapDispatchToProps())(GuestDash);
+export default connect(mapStateToProps, mapDispatchToProps())(Dash);

@@ -4,33 +4,30 @@ import {
   OPEN_GET_RSVP,
   OPEN_GOT_EVENT,
   OPEN_GOT_RSVP,
-  OPEN_JOIN_EVENT,
-  OPEN_UPDATE_RSVP,
-  UPDATE_RSVPS,
-  UPDATED_RSVPS
+  OPEN_UPDATE_RSVP
 } from './types';
 import axios from 'axios/index';
+import { openRoute } from './index';
 
 export const openGetEvent = code => async dispatch => {
   dispatch({ type: OPEN_GET_EVENT });
-  const res = await axios.get('/api/open/get_event', {
+  const res = await axios.get(openRoute + 'get_event', {
     params: { code: code }
   });
   dispatch({ type: OPEN_GOT_EVENT, payload: res.data });
-  dispatch(getOpenRsvp(res.data));
+  dispatch(getOpenRsvpFull(res.data));
 };
 
 export const openCheckin = (event, guest) => async dispatch => {
   const res = await axios.post(
-    '/api/open/check_in',
+    openRoute + 'check_in',
     qs.stringify({ event: event._id, guest: guest._id })
   );
-  // dispatch({ type: OPEN_JOIN_EVENT, payload:  });
 };
 
 export const openWalkin = (event, name) => async dispatch => {
   const res = await axios.post(
-    '/api/open/walk_in',
+    openRoute + 'walk_in',
     qs.stringify({ event: event._id, name: name })
   );
 };
@@ -40,7 +37,7 @@ export const getOpenRsvp = event => async disptch => {
   else {
     disptch({ type: OPEN_GET_RSVP });
     const res = await axios.post(
-      '/api/open/rsvp',
+      openRoute + 'rsvp',
       qs.stringify({ id: event._id })
     );
     disptch({ type: OPEN_GOT_RSVP, payload: res.data });
@@ -51,7 +48,7 @@ export const getOpenRsvpFull = event => async disptch => {
   else {
     disptch({ type: OPEN_GET_RSVP });
     const res = await axios.post(
-      '/api/open/rsvp_full',
+      openRoute + 'rsvp_full',
       qs.stringify({ id: event._id })
     );
     disptch({ type: OPEN_GOT_RSVP, payload: res.data });

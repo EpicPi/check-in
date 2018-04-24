@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const router = require('express').Router();
-require('../models/event');
-require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
@@ -13,7 +11,7 @@ router.post('/rsvp', async (req, res) => {
     pOut = pOut.concat(
       event.open.guestsRSVP.map(async id => User.findById(id))
     );
-    const out = await Promise.all(pOut);
+    const out = await Promise.all(pOut).then(users => users.filter(u => u));
     res.send(out);
   } else
     console.error(
@@ -26,8 +24,41 @@ router.post('/rsvp', async (req, res) => {
 router.post('/attend', async (req, res) => {
   const event = await Event.findById(req.body.id);
   if (event) {
-    const pOut = event.guestsAttend.map(async id => User.findById(id));
-    const out = await Promise.all(pOut);
+    const pOut = event.guestsAttend.map(async guest => {
+      // TODO: fix this
+      // earlier version only had list of guests
+      // but now it's list of json {guest, timestamp}
+      let user = null;
+      if (typeof guest === 'string' || guest instanceof String) {
+        user = await User.findById(guest);
+      } else {
+        user = await User.findById(guest._id);
+      }
+
+      let isRepeat = await event.isRepeat();
+      if (isRepeat) {
+        let temp = null;
+        for (let ind = 0; ind < event.guestsAttend.length; ind++) {
+          let obj = event.guestsAttend[ind];
+          let date = new Date(obj.timestamp);
+          let now = new Date();
+          // if this user checked in today
+          // FIXME: better implementation to get the latest event check-in
+          if (
+            user._id.equals(obj._id) &&
+            date.getDate() === now.getDate() &&
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear()
+          ) {
+            temp = user;
+          }
+        }
+        user = temp;
+      }
+      return user;
+    });
+    // filter null users
+    const out = await Promise.all(pOut).then(users => users.filter(u => u));
     res.send(out);
   } else
     console.error(
@@ -38,4 +69,3 @@ router.post('/attend', async (req, res) => {
 });
 
 module.exports = router;
-//5abc4dec3183a126b636b60c

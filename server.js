@@ -1,47 +1,47 @@
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
+
+require('./backend/models');
+require('./backend/services');
+const keys = require('./backend/keys');
+const api = require('./backend/routes');
+
+const PORT = process.env.PORT || 8080;
 const app = express();
 
-const mongoose = require('mongoose');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-
-require('./backend/models/user');
-require('./backend/services/passport');
-const keys = require('./backend/config/keys');
-const api = require('./backend/routes/');
-
-const bodyParser = require('body-parser');
+//mongo
+mongoose.connect(keys.mongoUri);
 
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true // parse things from qs
   })
 );
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
   cookieSession({
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    maxAge: 60 * 60 * 1000, // 1 hour
     keys: [keys.cookieKey]
   })
 );
 
 //authentication
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize()); //lets you use passport
+app.use(passport.session()); // lets you do req.user
 
-//api and frontend routes
+//backend routing
 app.use('/api', api);
+
+//frontend routing
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', (request, response) => {
-  response.sendFile(__dirname + '/public/index.html'); // For React/Redux
+  response.sendFile(__dirname + '/public/index.html');
 });
 
-//mongo
-mongoose.connect(keys.mongoUri);
-
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, error => {
   error
     ? console.error(error)

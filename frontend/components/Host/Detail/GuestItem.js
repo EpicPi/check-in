@@ -16,7 +16,9 @@ class GuestItem extends Component {
     if (this.props.manualCheckin) {
       return (
         <div className="col-md-5">
-          <button onClick={this.manualCheckIn}>manual check In</button>
+          <button className="btn" onClick={this.manualCheckIn}>
+            manual check In
+          </button>
         </div>
       );
     }
@@ -25,7 +27,7 @@ class GuestItem extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-3">{this.props.guest.name}</div>
+        <div className="col-md-6">{this.props.guest.name}</div>
         {this.getManualCheckinOutput()}
         <br />
       </div>

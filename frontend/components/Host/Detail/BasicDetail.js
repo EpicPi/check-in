@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GuestItem from './GuestItem';
 import { getAttends, getRsvps } from '../../../actions/index';
-import { EVENT_TYPES, LOAD } from '../../../helpers/Enums';
+import { EVENT_TYPES, LOAD, DAYS } from '../../../helpers/Enums';
 import { openEventUrl } from '../../../assets/text';
+import { isEventRepeat } from '../../../helpers/Time';
 
 class BasicDetail extends Component {
   constructor(props) {
     super(props);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.getTypeSpecificOutput = this.getTypeSpecificOutput.bind(this);
+    this.getRepeatsOutput = this.getRepeatsOutput.bind(this);
 
     //gotta make the call to load them
     this.props.getAttends(this.props.event);
@@ -45,7 +47,7 @@ class BasicDetail extends Component {
       default:
         let csvContent = 'data:text/csv;charset=utf-8,';
         props.rsvps.forEach(el => {
-          const row = el.name + ',' + el.extra;
+          const row = el.name + ',';
           csvContent += row + '\r\n';
         });
         return csvContent;
@@ -61,7 +63,7 @@ class BasicDetail extends Component {
       default:
         let csvContent = 'data:text/csv;charset=utf-8,';
         props.attends.forEach(el => {
-          const row = el.name + ',' + el.extra;
+          const row = el.name + ',';
           csvContent += row + '\r\n';
         });
         return csvContent;
@@ -129,6 +131,38 @@ class BasicDetail extends Component {
     }
   }
 
+  getRepeatsOutput() {
+    if (!isEventRepeat(this.props.event)) {
+      return;
+    }
+    const repeatOut = DAYS.map(day => {
+      return (
+        <div className="form-check form-check-inline" key={day}>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            name={day}
+            id={day}
+            value={this.props.event.repeats[day]}
+            checked={this.props.event.repeats[day]}
+            style={{ width: '20px', height: '20px' }}
+            readOnly={true}
+          />
+          <label className="form-check-label">
+            {day.charAt(0).toUpperCase()}
+          </label>
+        </div>
+      );
+    });
+
+    return (
+      <div className="row">
+        <label className="col-md-2">Repeats</label>
+        <div className="col-md-9">{repeatOut}</div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -176,7 +210,7 @@ class BasicDetail extends Component {
           </div>
         </div>
         <div className="row">
-          <label className="col-md-2 ">Checkin End time</label>
+          <label className="col-md-2">Checkin End time</label>
           <div className="col-md-9">
             <div>
               {new Date(this.props.event.dates.checkinEnd).toLocaleString()}
@@ -184,6 +218,7 @@ class BasicDetail extends Component {
           </div>
         </div>
         {this.getTypeSpecificOutput()}
+        {this.getRepeatsOutput()}
         <br />
         <button onClick={this.handleEditClick} className="btn btn-info">
           Edit Event
@@ -198,13 +233,13 @@ class BasicDetail extends Component {
 
           <div className="col-md-6 text-left">
             <br />
-            <button
+            <a
               className="btn btn-secondary"
-              href={this.state.uriRsvp}
+              href={encodeURI(this.state.uriRsvp)}
               download={this.props.event.name + '_rsvps.csv'}
             >
               Download csv
-            </button>
+            </a>
           </div>
         </div>
         <br />
@@ -215,13 +250,13 @@ class BasicDetail extends Component {
 
           <div className="col-md-6 text-left">
             <br />
-            <button
+            <a
               className="btn btn-secondary"
-              href={this.state.uriAttend}
+              href={encodeURI(this.state.uriAttend)}
               download={this.props.event.name + '_attends.csv'}
             >
               Download csv
-            </button>
+            </a>
           </div>
         </div>
         <br />

@@ -9,6 +9,7 @@ import {
   resetSignupCode
 } from '../../../actions/';
 import TimePicker from '../../../helpers/TimePicker';
+import { DAYS } from '../../../helpers/Enums';
 
 import { CHECK_CODE, EVENT_TYPES } from '../../../helpers/Enums';
 
@@ -27,7 +28,7 @@ import {
   codeAvailable,
   codeUnavaliableError
 } from '../../../assets/text';
-import { getOpenRsvp } from '../../../actions';
+import { createGroupEvent, editGroupEvent } from '../../../actions';
 
 class EventForm extends Component {
   constructor(props) {
@@ -37,6 +38,9 @@ class EventForm extends Component {
     this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
+    this.getRepeatsOut = this.getRepeatsOut.bind(this);
+
+    this.props.resetSignup();
 
     if (this.props.add)
       this.state = {
@@ -60,7 +64,16 @@ class EventForm extends Component {
           date: getCurrentDate()
         },
         type: EVENT_TYPES.BASIC,
-        checkinCode: ''
+        checkinCode: '',
+        repeats: {
+          monday: false,
+          tuesday: false,
+          wednesday: false,
+          thursday: false,
+          friday: false,
+          saturday: false,
+          sunday: false
+        }
       };
     else
       this.state = {
@@ -84,7 +97,8 @@ class EventForm extends Component {
           date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode
+        checkinCode: this.props.event.checkinCode,
+        repeats: this.props.event.repeats
       };
   }
 
@@ -92,10 +106,6 @@ class EventForm extends Component {
     // if editing and you changed from initial or if you are creating
     if (state.code !== props.event.code && state.code !== this.state.code)
       props.hostCheckCode(state.code);
-  }
-
-  componentWillUnmount() {
-    this.props.resetSignup();
   }
 
   handleGeneral(e) {
@@ -114,6 +124,16 @@ class EventForm extends Component {
         time: time ? time : this.state[name].time,
         date: date ? date : this.state[name].date
       }
+    });
+  }
+
+  handleCheckbox(e) {
+    let temp = {
+      ...this.state.repeats,
+      [e.target.name]: !this.state.repeats[e.target.name]
+    };
+    this.setState({
+      repeats: temp
     });
   }
 
@@ -156,7 +176,6 @@ class EventForm extends Component {
       alert(checkinOpenTimeError);
       return;
     }
-    console.log(this.props.openRsvp);
 
     const event = {
       ...this.props.event,
@@ -171,13 +190,19 @@ class EventForm extends Component {
       type: this.state.type,
       checkinCode: this.state.checkinCode,
       info: this.state.info,
-      openRsvp: this.props.openRsvp
+      openRsvp: this.props.openRsvp,
+      repeats: this.state.repeats,
+      group: this.props.group._id
     };
-
-    if (this.props.add) this.props.addEvent(event);
-    else this.props.editEvent(event);
-
-    this.props.history.push('/host');
+    if (!this.props.group._id) {
+      if (this.props.add) this.props.addEvent(event);
+      else this.props.editEvent(event);
+      this.props.history.push('/host');
+    } else {
+      if (this.props.add) this.props.addGroupEvent(event);
+      else this.props.editGroupEvent(event);
+      this.props.history.push('/group/detail');
+    }
   }
 
   getCheckCodeOutput() {
@@ -185,7 +210,7 @@ class EventForm extends Component {
     if (this.state.code === this.props.event.code) return;
     switch (this.props.checkCode) {
       case CHECK_CODE.NOTHING:
-        return '';
+        return;
       case CHECK_CODE.TAKEN:
         return <h3>{codeUnavaliableError}</h3>;
       case CHECK_CODE.AVAILABLE:
@@ -221,6 +246,40 @@ class EventForm extends Component {
           </div>
         );
     }
+  }
+
+  getRepeatsOut() {
+    if (!this.state.repeats) {
+      this.state.repeats = {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false
+      };
+    }
+
+    return DAYS.map(day => {
+      return (
+        <div className="form-check form-check-inline" key={day}>
+          <input
+            defaultChecked={this.state.repeats[day]}
+            className="form-check-input"
+            type="checkbox"
+            name={day}
+            id={day}
+            value={this.state.repeats[day]}
+            onChange={this.handleCheckbox.bind(this)}
+            style={{ width: '20px', height: '20px' }}
+          />
+          <label className="form-check-label">
+            {day.charAt(0).toUpperCase()}
+          </label>
+        </div>
+      );
+    });
   }
 
   render() {
@@ -328,7 +387,10 @@ class EventForm extends Component {
                     />
                   </div>
                 </div>
-
+                <div className="form-group row">
+                  <label className="col-md-2 col-form-label">Repeat</label>
+                  <div className="col-md-10">{this.getRepeatsOut()}</div>
+                </div>
                 <div className="form-group row">
                   <label className="col-md-2 col-form-label">
                     Check-in Type
@@ -349,6 +411,7 @@ class EventForm extends Component {
 
                 {this.getEventTypeOutput()}
 
+                {/*TODO: make buttons sticky at bottom right */}
                 <div className="center-block text-center">
                   <button
                     type="submit"
@@ -379,7 +442,8 @@ const mapStateToProps = state => {
   return {
     checkCode: state.host.checkCode,
     event: state.event.selected,
-    openRsvp: state.open.openRsvp
+    openRsvp: state.event.selectedRsvps,
+    group: state.group.selected
   };
 };
 
@@ -388,7 +452,9 @@ const mapDispatchToProps = (/* dispatch */) => {
     addEvent: createEvent,
     editEvent: editEvent,
     hostCheckCode: checkSignupCode,
-    resetSignup: resetSignupCode
+    resetSignup: resetSignupCode,
+    addGroupEvent: createGroupEvent,
+    editGroupEvent: editGroupEvent
   };
 };
 

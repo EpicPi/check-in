@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EventForm from './Form/EventForm';
+import EventForm from './EventForm';
 
 class EditEvent extends Component {
   render() {

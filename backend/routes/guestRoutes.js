@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 const router = require('express').Router();
-require('../models/event');
-require('../models/user');
 const User = mongoose.model('users');
 const Event = mongoose.model('events');
 
 router.get('/get_events', async (req, res) => {
   const user = await User.findById(req.user.id);
   const pOut = user.guestEvents.map(async id => Event.findById(id));
-  let out = await Promise.all(pOut);
+  let out = await Promise.all(pOut).then(events => events.filter(el => el));
   out = out.filter(obj => obj !== null);
   res.send(out);
 });
@@ -39,7 +37,7 @@ router.post('/checkin', async (req, res) => {
   if (event) {
     if (!event.guestsAttend.filter(guest => guest === req.user.id).length) {
       //not user already checked-in
-      event.guestsAttend.push(req.user.id);
+      event.guestsAttend.push({ guest: req.user.id, timestamp: new Date() });
       event.save();
       res.send(true);
     } else {

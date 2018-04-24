@@ -36,41 +36,45 @@ class ActiveDetail extends Component {
   }
 
   getNotSignedInOutput() {
-    switch (this.props.rsvps) {
-      case LOAD.LOADING:
-        return <h6>LOADING</h6>;
-      case LOAD.NOTHING:
-        return;
-      default:
-        const ids = this.props.attends.map(person => person._id);
+    if (
+      this.props.attends === LOAD.LOADING ||
+      this.props.rsvps === LOAD.LOADING
+    )
+      return <h6>LOADING</h6>;
+    if (
+      this.props.attends === LOAD.NOTHING ||
+      this.props.rsvps === LOAD.NOTHING
+    )
+      return;
+    const ids = this.props.attends.map(person => person._id);
 
-        const ppl = this.props.rsvps.filter(person => {
-          return !ids.includes(person._id);
-        });
-        if (ppl.length > 0)
-          return (
-            <div>
+    const ppl = this.props.rsvps.filter(person => {
+      return !ids.includes(person._id);
+    });
+
+    if (ppl.length > 0)
+      return (
+        <div>
+          <br />
+          {ppl.map((guest, i) => (
+            <div key={i}>
+              <GuestItem
+                history={this.props.history}
+                guest={guest}
+                manualCheckin={true}
+              />
               <br />
-              {ppl.map((guest, i) => (
-                <div key={i}>
-                  <GuestItem
-                    history={this.props.history}
-                    guest={guest}
-                    manualCheckin={true}
-                  />
-                  <br />
-                </div>
-              ))}
             </div>
-          );
-        else
-          return (
-            <div>
-              <br />
-              Everyone Checked in!
-            </div>
-          );
-    }
+          ))}
+        </div>
+      );
+    else
+      return (
+        <div>
+          <br />
+          Everyone Checked in!
+        </div>
+      );
   }
 
   getTypeSpecificOutput() {
@@ -99,7 +103,12 @@ class ActiveDetail extends Component {
               <label className="col-md-2 ">Checkin Url</label>
               <div className="col-md-9">
                 <div className="fakeLink">
-                  {openEventUrl + this.props.event.code}
+                  <a
+                    href={openEventUrl + this.props.event.code}
+                    target="_blank"
+                  >
+                    {openEventUrl + this.props.event.code}
+                  </a>
                 </div>
               </div>
             </div>

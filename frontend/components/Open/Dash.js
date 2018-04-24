@@ -5,10 +5,10 @@ import {
   openGetEvent,
   openCheckin,
   openWalkin,
-  getOpenRsvp,
   resetCheckin,
   checkCheckinCode,
-  getAttends
+  getAttends,
+  getOpenRsvpFull
 } from '../../actions';
 import { CHECK_CHECKIN, LOAD } from '../../helpers/Enums';
 import { isEventActive } from '../../helpers/Time';
@@ -16,12 +16,15 @@ import {
   checkInCodeLabel,
   checkingCheckin,
   eventClosedError,
+  eventNoExistError,
   invalidCodeError,
   noNameEnteredError,
-  noNameSelectedError
+  noNameSelectedError,
+  submitButton,
+  walkinPrompmt
 } from '../../assets/text';
 
-class OpenEventDash extends Component {
+class Dash extends Component {
   constructor(props) {
     super(props);
     this.props.getEvent(this.props.match.params.id);
@@ -107,17 +110,18 @@ class OpenEventDash extends Component {
   }
 
   getRsvpOutput() {
-    return this.props.rsvps.map(guest => (
-      <option value={guest._id} key={guest._id}>
-        {guest.name}
-      </option>
-    ));
+    if (this.props.rsvps.constructor === Array && this.props.rsvps)
+      return this.props.rsvps.map(guest => (
+        <option value={guest._id} key={guest._id}>
+          {guest.name}
+        </option>
+      ));
   }
 
   getWalkinOutput() {
     return (
       <div>
-        <h5>Don't see your name? Add it:</h5>
+        <h5>{walkinPrompmt}</h5>
         <form onSubmit={this.handleWalkin} id="open-checkin">
           <div className="form-group row">
             <label className="col-md-2 col-form-label">Name</label>
@@ -149,29 +153,30 @@ class OpenEventDash extends Component {
   }
 
   getCheckinOutput() {
-    return (
-      <div className="form-group row">
-        <label className="col-md-2 col-form-label">Name</label>
-        <div className="col-md-8">
-          <Select
-            name="form-field-name"
-            value={this.state.guest}
-            onChange={this.handleChange}
-            searchable={true}
-            options={this.props.rsvps}
-            valueKey={'_id'}
-            labelKey={'name'}
-            autoFocus
-          />
-          <br />
+    if (this.props.rsvps.constructor === Array)
+      return (
+        <div className="form-group row">
+          <label className="col-md-2 col-form-label">Name</label>
+          <div className="col-md-8">
+            <Select
+              name="form-field-name"
+              value={this.state.guest}
+              onChange={this.handleChange}
+              searchable={true}
+              options={this.props.rsvps}
+              valueKey={'_id'}
+              labelKey={'name'}
+              autoFocus
+            />
+            <br />
+          </div>
+          <div className="col-md-2">
+            <button className="btn btn-success" onClick={this.handleCheckin}>
+              Submit
+            </button>
+          </div>
         </div>
-        <div className="col-md-2">
-          <button className="btn btn-success" onClick={this.handleCheckin}>
-            Submit
-          </button>
-        </div>
-      </div>
-    );
+      );
   }
 
   getCodeOutput() {
@@ -199,7 +204,7 @@ class OpenEventDash extends Component {
       case LOAD.LOADING:
         return <h3>LOADING</h3>;
       case LOAD.NOTHING:
-        return <h3>Event with this url does not exist!</h3>;
+        return <h3>{eventNoExistError}</h3>;
       default:
         return (
           <div className="container-fluid container">
@@ -219,7 +224,7 @@ class OpenEventDash extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    rsvps: state.open.openRsvp,
+    rsvps: state.event.selectedRsvps,
     attends: state.event.attends,
     check: state.guest.checkCode
   };
@@ -228,7 +233,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (/* dispatch */) => {
   return {
     getEvent: openGetEvent,
-    getRsvps: getOpenRsvp,
+    getRsvps: getOpenRsvpFull,
     getAttends: getAttends,
     checkin: openCheckin,
     walkin: openWalkin,
@@ -237,4 +242,4 @@ const mapDispatchToProps = (/* dispatch */) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(OpenEventDash);
+export default connect(mapStateToProps, mapDispatchToProps())(Dash);

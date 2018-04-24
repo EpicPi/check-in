@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const router = require('express').Router();
-require('../models/event');
-require('../models/user');
 const Event = mongoose.model('events');
 const User = mongoose.model('users');
 
@@ -16,9 +14,20 @@ router.get('/get_event', async (req, res) => {
 
 router.post('/check_in', async (req, res) => {
   const event = await Event.findById(req.body.event);
+
   if (event) {
-    event.guestsAttend.push(req.body.guest);
-    event.save();
+    if (
+      event.guestsAttend.filter(obj => obj.id === req.body.guest).length === 0
+    ) {
+      event.guestsAttend.push(req.body.guest);
+      event.save();
+    } else {
+      console.log(
+        '[MSG] RSVP was already checked in. Passed in guest id: ' +
+          req.body.guest +
+          ' in /openRsvp/check_in'
+      );
+    }
   } else
     console.error(
       '[ERR] Event was not found. Passed in id: ' +

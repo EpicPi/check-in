@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getOpenRsvp, getOpenRsvpFull, updateOpenRsvp } from '../../../actions';
+import { getOpenRsvpFull, updateOpenRsvp } from '../../../actions';
 import parse from 'csv-parse/lib/sync';
 import { LOAD } from '../../../helpers/Enums';
 import { openEventUrl } from '../../../assets/text';
@@ -80,31 +80,35 @@ class OpenForm extends Component {
     switch (this.props.openRsvp) {
       case LOAD.LOADING:
         return 'LOADING';
+      case LOAD.NOTHING:
+        return;
       default:
         if (this.props.openRsvp.length === 0) return <br />;
         return (
           <div>
-            <br />
-            {this.props.openRsvp.map((guest, i) => (
-              <div className="form-group row" key={i}>
-                <div className="col-md-3">
-                  <input
-                    className="form-group"
-                    type="text"
-                    value={guest.name}
-                    onChange={event => this.changeGuest(i, event, guest)}
-                  />
+            <div>
+              <br />
+              {this.props.openRsvp.map((guest, i) => (
+                <div className="form-group row" key={i}>
+                  <div className="col-md-3">
+                    <input
+                      className="form-group"
+                      type="text"
+                      value={guest.name}
+                      onChange={event => this.changeGuest(i, event, guest)}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className="close"
+                    style={{ marginBottom: '15px', marginLeft: '5px' }}
+                    onClick={event => this.removeGuest(i, event)}
+                  >
+                    <span>&times;</span>
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className="close"
-                  style={{ marginBottom: '15px', marginLeft: '5px' }}
-                  onClick={event => this.removeGuest(i, event)}
-                >
-                  <span>&times;</span>
-                </button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         );
     }
@@ -128,6 +132,8 @@ class OpenForm extends Component {
       <div className="row">
         <div className="col-md-12">
           {this.getUrlOutPut()}
+          <br />
+          <label>Choose RSVP file: </label>
           <br />
           <input
             className="form-group"
@@ -163,7 +169,7 @@ class OpenForm extends Component {
 const mapStateToProps = state => {
   return {
     event: state.event.selected,
-    openRsvp: state.open.openRsvp
+    openRsvp: state.event.selectedRsvps
   };
 };
 
