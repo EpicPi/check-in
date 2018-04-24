@@ -47,7 +47,7 @@ class BasicDetail extends Component {
       default:
         let csvContent = 'data:text/csv;charset=utf-8,';
         props.rsvps.forEach(el => {
-          const row = el.name + ',' + el.extra;
+          const row = el.name + ',';
           csvContent += row + '\r\n';
         });
         return csvContent;
@@ -63,7 +63,7 @@ class BasicDetail extends Component {
       default:
         let csvContent = 'data:text/csv;charset=utf-8,';
         props.attends.forEach(el => {
-          const row = el.name + ',' + el.extra;
+          const row = el.name + ',';
           csvContent += row + '\r\n';
         });
         return csvContent;
@@ -233,13 +233,13 @@ class BasicDetail extends Component {
 
           <div className="col-md-6 text-left">
             <br />
-            <button
+            <a
               className="btn btn-secondary"
-              href={this.state.uriRsvp}
+              href={encodeURI(this.state.uriRsvp)}
               download={this.props.event.name + '_rsvps.csv'}
             >
               Download csv
-            </button>
+            </a>
           </div>
         </div>
         <br />
@@ -250,13 +250,13 @@ class BasicDetail extends Component {
 
           <div className="col-md-6 text-left">
             <br />
-            <button
+            <a
               className="btn btn-secondary"
-              href={this.state.uriAttend}
+              href={encodeURI(this.state.uriAttend)}
               download={this.props.event.name + '_attends.csv'}
             >
               Download csv
-            </button>
+            </a>
           </div>
         </div>
         <br />

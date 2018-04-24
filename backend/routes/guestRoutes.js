@@ -6,7 +6,7 @@ const Event = mongoose.model('events');
 router.get('/get_events', async (req, res) => {
   const user = await User.findById(req.user.id);
   const pOut = user.guestEvents.map(async id => Event.findById(id));
-  let out = await Promise.all(pOut);
+  let out = await Promise.all(pOut).then(events => events.filter(el => el));
   out = out.filter(obj => obj !== null);
   res.send(out);
 });

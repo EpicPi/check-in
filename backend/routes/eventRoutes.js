@@ -11,7 +11,7 @@ router.post('/rsvp', async (req, res) => {
     pOut = pOut.concat(
       event.open.guestsRSVP.map(async id => User.findById(id))
     );
-    const out = await Promise.all(pOut);
+    const out = await Promise.all(pOut).then(users => users.filter(u => u));
     res.send(out);
   } else
     console.error(

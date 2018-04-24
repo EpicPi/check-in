@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { LOAD } from '../../../helpers/Enums';
 import { getGroups } from '../../../actions/groupActions';
 import GroupItem from './GroupItem';
-import { hostGetGroups } from '../../../actions';
+import { hostGetGroups, resetGroup } from '../../../actions';
 
 class ShowGroups extends Component {
   constructor(props) {
@@ -14,6 +14,8 @@ class ShowGroups extends Component {
     this.getGroupsOutput = this.getGroupsOutput.bind(this);
 
     if (this.props.groups === LOAD.NOTHING) this.props.getGroups();
+
+    this.props.resetGroup();
   }
 
   handleCreate() {
@@ -57,13 +59,15 @@ class ShowGroups extends Component {
       <div className="row host-show">
         <div className="container-fluid">
           <div className="row btn-create">
-            <div className="col-md-12">
+            <div className="col-md-6 text-center">
               <button
                 className="btn btn-lg btn-info buttonLeft"
                 onClick={this.handleCreate}
               >
                 Create
               </button>
+            </div>
+            <div className="col-md-6 text-center">
               <button
                 className="btn btn-lg btn-info buttonRight"
                 onClick={this.handleJoin}
@@ -88,7 +92,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (/* dispatch */) => {
   return {
-    getGroups: hostGetGroups
+    getGroups: hostGetGroups,
+    resetGroup: resetGroup
   };
 };
 
