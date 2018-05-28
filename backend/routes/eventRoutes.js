@@ -34,27 +34,6 @@ router.post('/attend', async (req, res) => {
       } else {
         user = await User.findById(guest._id);
       }
-
-      let isRepeat = await event.isRepeat();
-      if (isRepeat) {
-        let temp = null;
-        for (let ind = 0; ind < event.guestsAttend.length; ind++) {
-          let obj = event.guestsAttend[ind];
-          let date = new Date(obj.timestamp);
-          let now = new Date();
-          // if this user checked in today
-          // FIXME: better implementation to get the latest event check-in
-          if (
-            user._id.equals(obj._id) &&
-            date.getDate() === now.getDate() &&
-            date.getMonth() === now.getMonth() &&
-            date.getFullYear() === now.getFullYear()
-          ) {
-            temp = user;
-          }
-        }
-        user = temp;
-      }
       return user;
     });
     // filter null users
