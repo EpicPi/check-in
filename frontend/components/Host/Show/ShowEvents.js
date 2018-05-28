@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import { hostGetEvents } from '../../../actions/index';
 import EventItem from './EventItem';
 import { LOAD } from '../../../helpers/Enums';
-import {
-  isEventActive,
-  isEventClosed,
-  isEventRepeat
-} from '../../../helpers/Time';
+import { isEventActive, isEventClosed } from '../../../helpers/Time';
 import { resetGroup } from '../../../actions';
 
 class ShowEvents extends Component {
@@ -21,7 +17,6 @@ class ShowEvents extends Component {
     this.state = {
       out: this.getEventsOutput(this.props),
       active: this.getActiveEventsOutput(this.props),
-      repeats: this.getRepeatEventsOutput(this.props),
       closed: this.getClosedEventsOutput(this.props)
     };
   }
@@ -34,7 +29,6 @@ class ShowEvents extends Component {
     this.setState({
       out: this.getEventsOutput(nextProps),
       active: this.getActiveEventsOutput(nextProps),
-      repeats: this.getRepeatEventsOutput(nextProps),
       closed: this.getClosedEventsOutput(nextProps)
     });
   }
@@ -81,15 +75,7 @@ class ShowEvents extends Component {
 
   getEventsOutput(props) {
     return this.getGeneralOutput(props, 'Open', function(event) {
-      return (
-        !isEventActive(event) && !isEventClosed(event) && !isEventRepeat(event)
-      );
-    });
-  }
-
-  getRepeatEventsOutput(props) {
-    return this.getGeneralOutput(props, 'Repeat Events', function(event) {
-      return !isEventActive(event) && isEventRepeat(event);
+      return !isEventActive(event) && !isEventClosed(event);
     });
   }
 
@@ -129,7 +115,6 @@ class ShowEvents extends Component {
           </div>
           <hr />
           {this.state.active}
-          {this.state.repeats}
           {this.state.out}
           {this.state.closed}
         </div>

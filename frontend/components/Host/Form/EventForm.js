@@ -38,7 +38,6 @@ class EventForm extends Component {
     this.handleUpperCase = this.handleUpperCase.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.getEventTypeOutput = this.getEventTypeOutput.bind(this);
-    this.getRepeatsOut = this.getRepeatsOut.bind(this);
 
     this.props.resetSignup();
 
@@ -64,16 +63,7 @@ class EventForm extends Component {
           date: getCurrentDate()
         },
         type: EVENT_TYPES.BASIC,
-        checkinCode: '',
-        repeats: {
-          monday: false,
-          tuesday: false,
-          wednesday: false,
-          thursday: false,
-          friday: false,
-          saturday: false,
-          sunday: false
-        }
+        checkinCode: ''
       };
     else
       this.state = {
@@ -97,8 +87,7 @@ class EventForm extends Component {
           date: dateInputFormat(this.props.event.dates.checkinEnd)
         },
         type: this.props.event.type,
-        checkinCode: this.props.event.checkinCode,
-        repeats: this.props.event.repeats
+        checkinCode: this.props.event.checkinCode
       };
   }
 
@@ -124,16 +113,6 @@ class EventForm extends Component {
         time: time ? time : this.state[name].time,
         date: date ? date : this.state[name].date
       }
-    });
-  }
-
-  handleCheckbox(e) {
-    let temp = {
-      ...this.state.repeats,
-      [e.target.name]: !this.state.repeats[e.target.name]
-    };
-    this.setState({
-      repeats: temp
     });
   }
 
@@ -191,7 +170,6 @@ class EventForm extends Component {
       checkinCode: this.state.checkinCode,
       info: this.state.info,
       openRsvp: this.props.openRsvp,
-      repeats: this.state.repeats,
       group: this.props.group._id
     };
     if (!this.props.group._id) {
@@ -246,40 +224,6 @@ class EventForm extends Component {
           </div>
         );
     }
-  }
-
-  getRepeatsOut() {
-    if (!this.state.repeats) {
-      this.state.repeats = {
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false,
-        saturday: false,
-        sunday: false
-      };
-    }
-
-    return DAYS.map(day => {
-      return (
-        <div className="form-check form-check-inline" key={day}>
-          <input
-            defaultChecked={this.state.repeats[day]}
-            className="form-check-input"
-            type="checkbox"
-            name={day}
-            id={day}
-            value={this.state.repeats[day]}
-            onChange={this.handleCheckbox.bind(this)}
-            style={{ width: '20px', height: '20px' }}
-          />
-          <label className="form-check-label">
-            {day.charAt(0).toUpperCase()}
-          </label>
-        </div>
-      );
-    });
   }
 
   render() {
@@ -386,10 +330,6 @@ class EventForm extends Component {
                       handleChange={this.handleTimeChange}
                     />
                   </div>
-                </div>
-                <div className="form-group row">
-                  <label className="col-md-2 col-form-label">Repeat</label>
-                  <div className="col-md-10">{this.getRepeatsOut()}</div>
                 </div>
                 <div className="form-group row">
                   <label className="col-md-2 col-form-label">

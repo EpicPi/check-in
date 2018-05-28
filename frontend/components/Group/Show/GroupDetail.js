@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 import { getGroupEvents } from '../../../actions/groupActions';
 import { selectEvent } from '../../../actions';
 import { LOAD } from '../../../helpers/Enums';
-import {
-  isEventActive,
-  isEventClosed,
-  isEventRepeat
-} from '../../../helpers/Time';
+import { isEventActive, isEventClosed } from '../../../helpers/Time';
 import EventItem from '../../Host/Show/EventItem';
 
 class GroupDetail extends Component {
@@ -28,7 +24,6 @@ class GroupDetail extends Component {
     this.setState({
       out: this.getEventsOutput(nextProps),
       active: this.getActiveEventsOutput(nextProps),
-      repeats: this.getRepeatEventsOutput(nextProps),
       closed: this.getClosedEventsOutput(nextProps)
     });
   }
@@ -76,15 +71,7 @@ class GroupDetail extends Component {
 
   getEventsOutput(props) {
     return this.getGeneralOutput(props, 'Open', function(event) {
-      return (
-        !isEventActive(event) && !isEventClosed(event) && !isEventRepeat(event)
-      );
-    });
-  }
-
-  getRepeatEventsOutput(props) {
-    return this.getGeneralOutput(props, 'Repeat Events', function(event) {
-      return !isEventActive(event) && isEventRepeat(event);
+      return !isEventActive(event) && !isEventClosed(event);
     });
   }
 
