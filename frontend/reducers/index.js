@@ -36,7 +36,7 @@ export const groupInitial = {
   events: LOAD.NOTHING
 };
 
-//this has to be at teh bottom cause code dependency reasons
+//this has to be at the bottom cause code dependency reasons
 export default combineReducers({
   auth: authreducer,
   host: hostEventReducer,
