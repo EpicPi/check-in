@@ -7,7 +7,7 @@ import groupReducer from './groupReducer';
 import { CHECK_CHECKIN, CHECK_CODE, JOIN_FIND, LOAD } from '../helpers/Enums';
 
 export const authInitial = {
-  user: null,
+  user: {},
   userType: null
 };
 

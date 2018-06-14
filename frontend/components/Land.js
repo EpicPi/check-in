@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { resetUserType, setUserType } from '../actions';
 import { connect } from 'react-redux';
 import React from 'react';
@@ -6,7 +7,7 @@ import { USER } from '../helpers/Enums';
 
 import '../../public/app.css';
 
-class Land extends Component {
+export class Land extends Component {
   constructor(props) {
     super(props);
     this.props.resetUserType();
@@ -24,7 +25,7 @@ class Land extends Component {
   }
 
   render() {
-    const buttons = !this.props.user ? (
+    const buttons = !this.props.user._id ? (
       <a
         href={'/api/auth/google/get'}
         className="btn btn-lg btn-success"
@@ -124,6 +125,12 @@ class Land extends Component {
     );
   }
 }
+
+Land.propTypes = {
+  user: PropTypes.object.isRequired,
+  setUserType: PropTypes.func.isRequired,
+  resetUserType: PropTypes.func.isRequired
+};
 
 function mapStateToProps(state) {
   return {
