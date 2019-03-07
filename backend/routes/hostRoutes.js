@@ -78,7 +78,7 @@ router.post('/edit_event', async (req, res) => {
     // event.guestsAttend = event.guestsAttend.filter(
     //   el => !removedUsers.includes(el)
     // );
-    removedUsers.forEach(async el => await User.findById(el).remove());
+    removedUsers.forEach(async el => await User.findById(el).deleteOne());
     event.open.guestsRSVP = newOpenUsers;
 
     event.save();
@@ -94,8 +94,10 @@ router.post('/edit_event', async (req, res) => {
 router.post('/remove_event', async (req, res) => {
   const event = await Event.findById(req.body._id);
   if (event) {
-    event.open.guestsRSVP.forEach(async el => await User.findById(el).remove());
-    event.remove();
+    event.open.guestsRSVP.forEach(
+      async el => await User.findById(el).deleteOne()
+    );
+    event.deleteOne();
 
     if (!req.body.group) {
       const user = await User.findById(req.user.id);

@@ -63,7 +63,7 @@ router.post('/leave', async (req, res) => {
     if (group.users.length > 0) {
       group.save();
     } else {
-      group.remove();
+      group.deleteOne()();
     }
   } else
     console.error(

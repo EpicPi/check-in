@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 //mongo
-mongoose.connect(keys.mongoUri);
+mongoose.connect(keys.mongoUri, { useNewUrlParser: true });
 
 app.use(
   bodyParser.urlencoded({
