@@ -24,3 +24,6 @@ yarn-error.log*
 
 /public/hot/
 /public/bundle.js
+
+#secret
+/scripts/init.sh
