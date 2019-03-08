@@ -118,6 +118,7 @@ class Land extends Component {
                 </div>
               </div>
             </div>
+            V2
           </section>
         </div>
       </div>

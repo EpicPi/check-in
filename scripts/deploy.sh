@@ -2,8 +2,8 @@
 
 SECONDS=0
 base=$(dirname $0)/../
-pem=~/.ssh/eventensure.pem
-url=ubuntu@ec2-52-207-19-214.compute-1.amazonaws.com
+pem=/media/pi/Data/CS/securityKeys/eventensure.pem
+url=ubuntu@ec2-54-152-110-162.compute-1.amazonaws.com
 dest="${url}:~/"
 
 echo "This script deploys the EventEnsure app to the ec2 instance located at ${url}"
